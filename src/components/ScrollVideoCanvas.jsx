@@ -248,10 +248,10 @@ const ScrollVideoCanvas = () => {
           Mobile: column layout — canvas on top, text below
           Desktop: 12-col grid — text left, canvas right
         */}
-        <div className="flex flex-col-reverse lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-center w-full">
+        <div className="flex w-full flex-col-reverse items-center justify-center gap-6 text-center lg:grid lg:grid-cols-12 lg:gap-12 lg:text-left">
         
           {/* Text Side */}
-          <div className="lg:col-span-5 flex flex-col justify-center relative z-10 w-full">
+          <div className="relative z-10 flex w-full flex-col items-center justify-center lg:col-span-5 lg:items-start">
             <div className="canvas-text-overlay w-full relative">
               <div className="overlay-slide slide-1">
                 <span className="text-[10px] sm:text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-1.5 sm:mb-2">AERODYNAMICS</span>
@@ -272,8 +272,8 @@ const ScrollVideoCanvas = () => {
           </div>
 
           {/* Canvas/Drone Side */}
-          <div className="lg:col-span-7 flex justify-center items-center z-10 w-full">
-            <div ref={canvasContainerRef} className="relative w-full aspect-square sm:aspect-[4/3] max-w-[320px] sm:max-w-[480px] lg:max-w-[640px] overflow-hidden">
+          <div className="z-10 flex w-full items-center justify-center lg:col-span-7">
+            <div ref={canvasContainerRef} className="relative mx-auto aspect-square w-full max-w-[280px] overflow-hidden sm:aspect-[4/3] sm:max-w-[480px] lg:max-w-[640px]">
               <canvas ref={canvasRef} className="scroll-canvas w-full h-full object-cover" />
             </div>
           </div>
