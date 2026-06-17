@@ -1,0 +1,383 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+@font-face {
+  font-family: 'Nasalization';
+  src: url('https://www.killisbird.com/assets/fonts/Nasalization%20Rg.woff2') format('woff2'),
+    url('https://www.killisbird.com/assets/fonts/Nasalization%20Rg.woff') format('woff'),
+    url('https://www.killisbird.com/assets/fonts/Nasalization%20Rg.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════ */
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #ffffff;
+    color: #111111;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    color: #111111;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  ::selection {
+    background: #f97316;
+    color: #fff;
+  }
+
+  section {
+    position: relative;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   COMPONENTS
+═══════════════════════════════════════════ */
+@layer components {
+
+  /* ── Section wrapper ────────────────────── */
+  .section {
+    @apply w-full px-6 md:px-8;
+    padding-top: clamp(80px, 10vw, 140px);
+    padding-bottom: clamp(80px, 10vw, 140px);
+  }
+
+  .section-sm {
+    @apply w-full px-6 md:px-8;
+    padding-top: clamp(60px, 8vw, 100px);
+    padding-bottom: clamp(60px, 8vw, 100px);
+  }
+
+  .container {
+    max-width: 1280px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  /* ── Eyebrow ────────────────────────────── */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #f97316;
+    margin-bottom: 1rem;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: #f97316;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ── Orange bar divider ─────────────────── */
+  .divider-bar {
+    width: 48px;
+    height: 3px;
+    background: #f97316;
+    border-radius: 2px;
+  }
+
+  /* ── Background watermark text ──────────── */
+  .watermark {
+    position: absolute;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.03);
+    user-select: none;
+    pointer-events: none;
+    line-height: 0.85;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  /* ── Buttons ────────────────────────────── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f97316;
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 14px 32px;
+    border-radius: 0px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.25);
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #ea580c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(249, 115, 22, 0.35);
+  }
+
+  .btn-primary svg {
+    transition: transform 0.3s ease;
+  }
+
+  .btn-primary:hover svg {
+    transform: translateX(3px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: #111111;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 13px 32px;
+    border-radius: 0px;
+    border: 1.5px solid #262626;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .btn-secondary:hover {
+    border-color: #f97316;
+    color: #f97316;
+  }
+
+  .btn-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    color: #f97316;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 14px 32px;
+    border-radius: 0px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-white:hover {
+    background: #fff7ed;
+    transform: translateY(-2px);
+  }
+
+  .btn-white svg {
+    transition: transform 0.3s ease;
+  }
+
+  .btn-white:hover svg {
+    transform: translateX(3px);
+  }
+
+  /* ── Card ───────────────────────────────── */
+  .card {
+    background: #fff;
+    border: 1px solid #E5E7EB;
+    border-radius: 0px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: #f97316;
+    box-shadow: 0 12px 40px rgba(249, 115, 22, 0.15);
+  }
+
+  .card:hover .card-img img {
+    transform: scale(1.05);
+  }
+
+  .card:hover .card-arrow {
+    transform: translateX(4px);
+    color: #f97316;
+  }
+
+  .card-img {
+    overflow: hidden;
+  }
+
+  .card-img img {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    width: 100%;
+    object-fit: cover;
+  }
+
+  /* ── Image with orange accent block ────── */
+  .img-accent {
+    position: relative;
+  }
+
+  .img-accent::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: -16px;
+    bottom: -16px;
+    background: #fff7ed;
+    border-radius: 0px;
+    z-index: -1;
+  }
+
+  .img-accent img {
+    border-radius: 0px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  /* ── Orange section ─────────────────────── */
+  .section-orange {
+    background: #f97316;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-orange h2,
+  .section-orange h3,
+  .section-orange h4 {
+    color: #fff;
+  }
+
+  .section-orange .eyebrow {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .section-orange .eyebrow::before {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  /* ── Grid pattern overlay ───────────────── */
+  .grid-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, currentColor 1px, transparent 1px),
+      linear-gradient(to bottom, currentColor 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* ── Stat number ────────────────────────── */
+  .stat-number {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    color: #f97316;
+    line-height: 1;
+  }
+
+  /* ── Quote ──────────────────────────────── */
+  .quote-mark {
+    font-family: Georgia, serif;
+    font-size: 5rem;
+    line-height: 0.5;
+    color: #f97316;
+    opacity: 0.12;
+    font-weight: 900;
+    user-select: none;
+    display: block;
+  }
+
+  /* ── Accent left border ─────────────────── */
+  .accent-left {
+    border-left: 3px solid #f97316;
+    padding-left: 1.25rem;
+  }
+
+  /* ── Stock image ────────────────────────── */
+  .stock-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0px;
+  }
+
+  .scroll-stack-root {
+    isolation: isolate;
+  }
+
+  .scroll-stack-card {
+    transform-origin: top center;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    will-change: transform, filter;
+  }
+
+  .scroll-reveal-text .word {
+    margin-right: 0.03em;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════ */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #f97316, #fdba74);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
