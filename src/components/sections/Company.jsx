@@ -171,11 +171,11 @@ const Company = () => {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -right-4 bottom-8 bg-white border border-border/80 rounded-none px-6 py-4 shadow-lg z-10 group"
+                className="relative mx-auto mt-4 w-[min(100%,260px)] bg-white border border-border/80 rounded-none px-5 py-3 shadow-md z-10 group sm:absolute sm:-right-4 sm:bottom-8 sm:mt-0 sm:w-auto sm:px-6 sm:py-4 sm:shadow-lg"
               >
                 <CornerBrackets color="#f97316" size="6px" thickness="1.5px" hoverShift />
                 <p className="text-muted text-xs font-medium">Starting from</p>
-                <p className="font-heading font-bold text-skyroot text-xl mt-0.5">Custom Quote</p>
+                <p className="font-heading font-bold text-skyroot text-lg mt-0.5 sm:text-xl">Custom Quote</p>
               </motion.div>
             </div>
 

@@ -22,7 +22,15 @@ const darkenColor = (hex, percent) => {
   return `#${((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1).toUpperCase()}`;
 };
 
-const Folder = ({ color = '#FF6A00', size = 1, items = [], className = '', onToggle }) => {
+const Folder = ({
+  color = '#FF6A00',
+  size = 1,
+  items = [],
+  className = '',
+  paperClassName = '',
+  transparentPapers = false,
+  onToggle
+}) => {
   const maxItems = 3;
   const papers = items.slice(0, maxItems);
 
@@ -130,11 +138,11 @@ const Folder = ({ color = '#FF6A00', size = 1, items = [], className = '', onTog
                   !open
                     ? 'translate-y-[10%] -translate-x-1/2 group-hover:translate-y-0'
                     : 'hover:scale-110'
-                } ${sizeClasses}`}
+                } ${sizeClasses} ${paperClassName}`}
                 style={{
                   transform: !open ? undefined : transformStyle,
-                  backgroundColor: index === 0 ? paper1 : index === 1 ? paper2 : paper3,
-                  borderRadius: '10px'
+                  backgroundColor: transparentPapers ? 'transparent' : index === 0 ? paper1 : index === 1 ? paper2 : paper3,
+                  borderRadius: transparentPapers ? 0 : '10px'
                 }}
               >
                 {item}

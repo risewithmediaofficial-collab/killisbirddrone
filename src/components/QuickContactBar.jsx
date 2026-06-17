@@ -32,12 +32,13 @@ const QuickContactBar = () => {
   return (
     <motion.div
       whileHover={{ y: -2 }}
-      className="fixed bottom-4 right-4 z-[70] origin-bottom-right scale-[0.72] md:bottom-10 md:right-10 md:scale-100"
+      className="fixed bottom-3 right-3 z-[70] origin-bottom-right scale-[0.48] md:bottom-10 md:right-10 md:scale-90"
     >
       <Folder
         color="#f97316"
         size={1}
-        className="drop-shadow-[0_22px_55px_rgba(249,115,22,0.28)]"
+        className="drop-shadow-[0_12px_30px_rgba(249,115,22,0.22)]"
+        transparentPapers
         items={quickLinks.map(item => (
           <a
             key={item.id}
@@ -45,12 +46,12 @@ const QuickContactBar = () => {
             target={item.id === 'whatsapp' ? '_blank' : undefined}
             rel={item.id === 'whatsapp' ? 'noreferrer' : undefined}
             onClick={event => event.stopPropagation()}
-            className="group flex h-full w-full flex-col items-center justify-center gap-1 border border-slate-200/80 bg-white/98 px-2 py-1.5 text-center shadow-[0_12px_28px_rgba(15,23,42,0.14)] md:gap-1.5 md:px-3 md:py-2"
+            className="group flex h-full w-full flex-col items-center justify-center gap-1 bg-transparent px-1 py-1 text-center"
           >
             <span className={`flex items-center justify-center transition-transform duration-300 group-hover:scale-105 ${item.className}`}>
-              <item.Icon sx={{ fontSize: 18 }} />
+              <item.Icon sx={{ fontSize: 20 }} />
             </span>
-            <span className="text-[7px] font-bold uppercase tracking-[0.16em] text-black/68 md:text-[8px] md:tracking-[0.22em]">
+            <span className="text-[8px] font-bold uppercase tracking-[0.18em] text-black/70">
               {item.label}
             </span>
           </a>
