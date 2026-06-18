@@ -1,4 +1,4 @@
-// src/components/sections/Hero.jsx
+﻿// src/components/sections/Hero.jsx
 import React, { useRef, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -14,13 +14,13 @@ const IMG = {
 const HeroBackground = () => {
   const ref = useParallax(35);
   return (
-    <div ref={ref} className="absolute inset-0 w-full h-[130%] z-0">
+    <div ref={ref} className="absolute inset-0 z-0 h-[130%] w-full">
       <SmartImage
         src={IMG.hero}
         alt="UAV drone flying over landscape"
         loading="eager"
         fetchPriority="high"
-        className="w-full h-full object-cover"
+        className="h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-black/65" />
     </div>
@@ -42,12 +42,12 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative h-screen bg-black overflow-hidden flex items-center justify-center pt-[72px]">
+    <section ref={heroRef} className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black px-4 pt-[76px] sm:px-6">
       <HeroBackground />
-      <div className="grid-pattern text-white/5 absolute inset-0 z-10" />
+      <div className="grid-pattern absolute inset-0 z-10 text-white/5" />
 
-      <div className="relative z-20 max-w-4xl mx-auto px-6 md:px-8 text-center flex flex-col items-center">
-        <div className="hero-eyebrow eyebrow text-skyroot justify-center">
+      <div className="relative z-20 mx-auto flex max-w-4xl flex-col items-center px-2 text-center sm:px-6 md:px-8">
+        <div className="hero-eyebrow eyebrow justify-center text-skyroot max-sm:mb-3 max-sm:text-[10px]">
           Imagine · Ideate · Innovate
         </div>
 
@@ -60,32 +60,32 @@ const Hero = () => {
             { text: 'Innovation' },
             { text: 'Delivered.', className: 'text-white/70' }
           ]}
-          className="hero-heading mb-6"
-          textClassName="font-heading font-bold text-white leading-[1.1] text-center"
-          textStyle={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.8rem)', letterSpacing: '-0.02em' }}
+          className="hero-heading mb-4 sm:mb-6"
+          textClassName="font-heading font-bold text-center text-white leading-[1.04]"
+          textStyle={{ fontSize: 'clamp(2rem, 8vw, 4.8rem)', letterSpacing: '-0.035em' }}
           baseOpacity={0.16}
           baseRotation={1.5}
           blurStrength={9}
         />
 
-        <p className="hero-body text-white/80 text-body-lg max-w-2xl mb-10 leading-relaxed text-center">
+        <p className="hero-body max-w-[36rem] text-center text-sm leading-relaxed text-white/80 sm:text-base md:text-body-lg">
           Redefining unmanned aerial systems through innovative, indigenous solutions
           designed to elevate performance and reliability.
         </p>
 
-        <div className="hero-btns flex flex-wrap gap-4 justify-center">
-          <Link to="/creations" className="btn-primary">
+        <div className="hero-btns mt-7 flex w-full flex-col items-center justify-center gap-3 sm:mt-8 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
+          <Link to="/creations" className="btn-primary w-full justify-center sm:w-auto">
             Explore Creations <ArrowForwardIcon sx={{ fontSize: 18 }} />
           </Link>
-          <Link to="/our-dna" className="btn-secondary !border-white/30 !text-white hover:!border-skyroot hover:!text-skyroot">
+          <Link to="/our-dna" className="btn-secondary w-full justify-center !border-white/30 !text-white hover:!border-skyroot hover:!text-skyroot sm:w-auto">
             Discover Our DNA
           </Link>
         </div>
-      </div>
 
-      <div className="hero-float-badge absolute bottom-8 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md border border-white/20 rounded-none px-5 py-2.5 shadow-card z-20 text-center">
-        <p className="text-[9px] font-heading font-bold text-white/60 uppercase tracking-widest mb-0.5">Built in India</p>
-        <p className="font-heading font-bold text-skyroot text-xs">Trusted Worldwide 🇮🇳</p>
+        <div className="hero-float-badge mt-5 rounded-none border border-white/20 bg-white/10 px-4 py-2 text-center shadow-card backdrop-blur-md sm:mt-6 sm:px-5 sm:py-2.5">
+          <p className="mb-0.5 text-[9px] font-heading font-bold uppercase tracking-widest text-white/60">Built in India</p>
+          <p className="text-xs font-heading font-bold text-skyroot">Trusted Worldwide 🇮🇳</p>
+        </div>
       </div>
     </section>
   );
