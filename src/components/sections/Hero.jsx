@@ -46,7 +46,7 @@ const Hero = () => {
       <HeroBackground />
       <div className="grid-pattern absolute inset-0 z-10 text-white/5" />
 
-      <div className="relative z-20 mx-auto flex max-w-4xl flex-col items-center px-2 text-center sm:px-6 md:px-8">
+      <div className="relative z-20 mx-auto mt-16 flex max-w-4xl flex-col items-center px-2 text-center sm:mt-20 sm:px-6 md:mt-24 md:px-8">
         <div className="hero-eyebrow eyebrow justify-center text-skyroot max-sm:mb-3 max-sm:text-[10px]">
           Imagine · Ideate · Innovate
         </div>
