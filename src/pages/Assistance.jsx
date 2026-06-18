@@ -1,52 +1,27 @@
-// src/pages/Assistance.jsx
-import { Link } from 'react-router-dom';
+﻿import { useRef } from 'react';
 import SEO from '../components/SEO';
-import FadeIn from '../components/FadeIn';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ParallaxWatermark from '../components/ParallaxWatermark';
+import CornerBrackets from '../components/CornerBrackets';
+import ImageFrame from '../components/common/ImageFrame';
+import OrangeButton from '../components/common/OrangeButton';
+import SecondaryHero from '../components/common/SecondaryHero';
+import SecondarySectionIntro from '../components/common/SecondarySectionIntro';
+import SecondaryCta from '../components/common/SecondaryCta';
+import useBookScrollEffects from '../hooks/useBookScrollEffects';
 import TuneIcon from '@mui/icons-material/Tune';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import SchoolIcon from '@mui/icons-material/School';
 import VerifiedIcon from '@mui/icons-material/Verified';
-import useGsapReveal from '../hooks/useGsapReveal';
-import useParallax from '../hooks/useParallax';
-import ParallaxWatermark from '../components/ParallaxWatermark';
-import SectionHeader from '../components/SectionHeader';
-import CornerBrackets from '../components/CornerBrackets';
-import AnimatedTitle from '../components/AnimatedTitle';
 
 const services = [
-  {
-    Icon: TuneIcon,
-    title: 'Component Customization',
-    desc: 'Bespoke UAV components engineered to your exact specifications — from material selection to performance tuning.',
-  },
-  {
-    Icon: EngineeringIcon,
-    title: 'Technical Consultation',
-    desc: 'Expert guidance from our aerospace engineers to help you design, integrate, and optimise your UAV platform.',
-  },
-  {
-    Icon: LocalShippingIcon,
-    title: 'Supply Chain Support',
-    desc: 'Reliable, on-time delivery of components backed by our robust supply chain and quality assurance protocols.',
-  },
-  {
-    Icon: SupportAgentIcon,
-    title: 'After-Sales Service',
-    desc: 'Comprehensive post-deployment support including maintenance, calibration, and component replacement.',
-  },
-  {
-    Icon: SchoolIcon,
-    title: 'Training & Knowledge Transfer',
-    desc: 'Structured training programmes equipping your team to maximise UAV platform performance.',
-  },
-  {
-    Icon: VerifiedIcon,
-    title: 'Warranty & Quality Assurance',
-    desc: 'Industry-leading warranty coverage backed by our uncompromising quality standards and certification.',
-  },
+  { Icon: TuneIcon, title: 'Component Customization', desc: 'Bespoke UAV components engineered to your exact specifications — from material selection to performance tuning.' },
+  { Icon: EngineeringIcon, title: 'Technical Consultation', desc: 'Expert guidance from our aerospace engineers to help you design, integrate, and optimise your UAV platform.' },
+  { Icon: LocalShippingIcon, title: 'Supply Chain Support', desc: 'Reliable, on-time delivery of components backed by our robust supply chain and quality assurance protocols.' },
+  { Icon: SupportAgentIcon, title: 'After-Sales Service', desc: 'Comprehensive post-deployment support including maintenance, calibration, and component replacement.' },
+  { Icon: SchoolIcon, title: 'Training & Knowledge Transfer', desc: 'Structured training programmes equipping your team to maximise UAV platform performance.' },
+  { Icon: VerifiedIcon, title: 'Warranty & Quality Assurance', desc: 'Industry-leading warranty coverage backed by our uncompromising quality standards and certification.' },
 ];
 
 const steps = [
@@ -57,186 +32,72 @@ const steps = [
   { num: '05', label: 'Support', desc: 'Ongoing post-deployment assistance and service.' },
 ];
 
-const ServiceImage = ({ src, alt }) => {
-  const parallaxRef = useParallax(15);
-  return (
-    <div className="img-accent overflow-hidden rounded-none aspect-[4/3] bg-white relative group">
-      <img
-        ref={parallaxRef}
-        src={src}
-        alt={alt}
-        className="w-full h-[120%] object-cover"
-        loading="lazy"
-      />
-      <CornerBrackets color="#f97316" size="10px" thickness="1.5px" hoverShift />
-    </div>
-  );
-};
+const serviceGroups = [
+  { title: 'Customization & Consultation', watermark: 'CUSTOMIZE', image: 'https://images.unsplash.com/photo-1581092160607-ee67df30d0ec?w=800&q=80', items: [services[0], services[1]] },
+  { title: 'Logistics & After-Sales', watermark: 'LOGISTICS', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80', items: [services[2], services[3]] },
+  { title: 'Training & Quality', watermark: 'TRAINING', image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80', items: [services[4], services[5]] },
+];
 
 const Assistance = () => {
+  const pageRef = useRef(null);
+  useBookScrollEffects(pageRef);
+
   return (
-    <>
+    <div ref={pageRef}>
       <SEO title="Assistance" description="Killis Bird support and consultancy services for UAV integration and after-sales." />
+      <SecondaryHero eyebrow="How We Support You" title="End-to-End" highlight="Assistance." description="From concept to deployment and beyond — we stand beside our partners at every stage of their journey." watermark="HELP" />
 
-      {/* ── Page Banner — Center Aligned (WHITE BACKGROUND) ── */}
-      <section className="pt-32 pb-16 px-6 bg-white relative overflow-hidden text-center flex flex-col items-center justify-center border-b border-border">
-        <ParallaxWatermark className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[clamp(8rem,18vw,22rem)] text-navy-100/30" speed={15}>
-          HELP
-        </ParallaxWatermark>
-        <div className="max-w-content mx-auto px-6 md:px-8 relative z-10 flex flex-col items-center">
-          <div className="eyebrow justify-center">How We Support You</div>
-          <AnimatedTitle
-            as="h1"
-            title="End-to-End"
-            highlight="Assistance."
-            lineBreakBeforeHighlight
-            className="mb-4"
-            textClassName="font-heading font-bold text-black leading-[1.08] text-center"
-            textStyle={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.02em' }}
-            baseOpacity={0.16}
-            baseRotation={1.5}
-            blurStrength={9}
-          />
-          <p className="text-muted text-body-lg max-w-xl leading-relaxed text-center">
-            From concept to deployment and beyond — we stand beside our partners at every stage of their journey.
-          </p>
-          <div className="divider-bar mt-6 mx-auto" />
+      <section data-stack-section className="bg-white py-[110px] max-sm:py-[72px]">
+        <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
+          <SecondarySectionIntro eyebrow="What We Offer" title="Our Support" highlight="Services" description="Every engagement is tailored to deliver mission-ready performance, dependable integration, and long-term support." />
         </div>
       </section>
 
-      {/* ── Section Title (WHITE BACKGROUND) ── */}
-      <section data-stack-section className="pt-16 pb-2 px-6 bg-white">
-        <div className="max-w-content mx-auto px-6 md:px-8">
-          <SectionHeader eyebrow="What We Offer" title="Our Support" orangeTitle="Services" className="!mb-0" />
-        </div>
-      </section>
-
-      {/* ── Services — Alternating Sections ── */}
-      {[
-        { 
-          s: services[0], 
-          s2: services[1], 
-          img: 'https://images.unsplash.com/photo-1581092160607-ee67df30d0ec?w=800&q=80',
-          watermark: 'CUSTOMIZE',
-          label: 'Customization & Consultation', 
-          reverse: false 
-        },
-        { 
-          s: services[2], 
-          s2: services[3], 
-          img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80',
-          watermark: 'LOGISTICS',
-          label: 'Logistics & After-Sales', 
-          reverse: true 
-        },
-        { 
-          s: services[4], 
-          s2: services[5], 
-          img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80',
-          watermark: 'TRAINING',
-          label: 'Training & Quality', 
-          reverse: false 
-        },
-      ].map(({ s, s2, img, watermark, label, reverse }, ri) => (
-        <section 
-          key={ri} 
-          data-stack-section
-          className={`section relative overflow-hidden ${ri % 2 === 1 ? 'bg-navy-50' : 'bg-white'}`}
-        >
-          <ParallaxWatermark 
-            className={`top-1/2 -translate-y-1/2 text-[clamp(6rem,12vw,15rem)] ${
-              ri % 2 === 1 ? 'right-0 text-navy-200/20' : 'left-0 text-navy-100/30'
-            }`} 
-            speed={25}
-          >
-            {watermark}
-          </ParallaxWatermark>
-
-          <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
-            <FadeIn direction={reverse ? 'right' : 'left'}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                {/* Two services stacked */}
-                <div className={`space-y-10 ${reverse ? 'lg:order-last' : ''}`}>
-                  {[s, s2].map(({ Icon, title, desc }, i) => (
-                    <div key={i} className="flex items-start gap-5">
-                      <div className="w-12 h-12 rounded-none bg-skyroot text-white flex items-center justify-center shrink-0 shadow-sm">
-                        <Icon sx={{ fontSize: 24 }} />
-                      </div>
+      {serviceGroups.map((group, index) => (
+        <section key={group.title} data-stack-section className={`relative overflow-hidden py-[110px] max-sm:py-[72px] ${index % 2 === 0 ? 'bg-[#fff8f1]' : 'bg-white'}`}>
+          <ParallaxWatermark className={`top-1/2 -translate-y-1/2 text-[clamp(6rem,12vw,15rem)] ${index % 2 === 0 ? 'right-0 text-[#111111]/[0.05]' : 'left-0 text-[#ff6b00]/[0.06]'}`} speed={22}>{group.watermark}</ParallaxWatermark>
+          <div className="relative mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-[clamp(44px,6vw,84px)] px-[clamp(20px,5vw,80px)] max-xl:grid-cols-1">
+            <div className={index % 2 === 1 ? 'xl:order-last' : ''}>
+              <SecondarySectionIntro eyebrow={`0${index + 1} ${group.title}`} title={group.title} description="Specialist expertise, fast response, and dependable execution at every stage." className="max-w-[640px]" />
+              <div className="mt-10 grid gap-5">
+                {group.items.map(({ Icon, title, desc }) => (
+                  <article key={title} className="book-reveal-card relative rounded-[18px] border border-[#f1dfd1] bg-white px-6 py-6 shadow-[0_18px_42px_rgba(17,21,26,0.06)]">
+                    <div className="flex items-start gap-4">
+                      <span className="flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-[14px] bg-[#fff0e5] text-[#ff6b00]"><Icon sx={{ fontSize: 28 }} /></span>
                       <div>
-                        <h3 className="font-heading font-bold text-black mb-1.5 text-lg">{title}</h3>
-                        <p className="text-muted text-body leading-relaxed">{desc}</p>
+                        <h3 className="text-[21px] font-extrabold text-[#111111]">{title}</h3>
+                        <p className="mt-3 text-[15px] leading-[1.78] text-[#67707d]">{desc}</p>
                       </div>
                     </div>
-                  ))}
-                  <div className="pt-2">
-                    <Link to="/contact" className="btn-primary inline-flex">
-                      Get in Touch <ArrowForwardIcon sx={{ fontSize: 16 }} />
-                    </Link>
-                  </div>
-                </div>
-                {/* Image */}
-                <div className={reverse ? 'lg:order-first' : ''}>
-                  <ServiceImage src={img} alt={label} />
-                </div>
+                  </article>
+                ))}
               </div>
-            </FadeIn>
+              <div className="mt-8"><OrangeButton to="/contact">Get in Touch</OrangeButton></div>
+            </div>
+            <div className={index % 2 === 1 ? 'xl:order-first' : ''}><ImageFrame variant="diagonal" src={group.image} alt={group.title} width="760" height="560" /></div>
           </div>
         </section>
       ))}
 
-      {/* ── Process — (WHITE BACKGROUND) ── */}
-      <section data-stack-section className="py-24 px-6 bg-white border-t border-border relative overflow-hidden">
-        <ParallaxWatermark className="right-0 bottom-0 translate-y-1/4 text-[clamp(8rem,16vw,20rem)] text-navy-100/30" speed={18}>
-          HOW
-        </ParallaxWatermark>
-        <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
-          <SectionHeader eyebrow="How It Works" title="Our" orangeTitle="Process" />
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mt-12">
-            {steps.map((step, i) => (
-              <FadeIn key={i} delay={i * 0.1} direction="up">
-                <div className="relative group bg-white border border-border p-6 rounded-none min-h-[200px]">
-                  {i < steps.length - 1 && (
-                    <div className="hidden md:block absolute top-1/2 left-full w-8 h-[1px] bg-border group-hover:bg-skyroot transition-colors duration-300 z-0" />
-                  )}
-                  <div className="relative z-10">
-                    <div className="font-heading font-bold text-skyroot text-4xl mb-3 leading-none transition-transform group-hover:scale-105 duration-300">
-                      {step.num}
-                    </div>
-                    <h4 className="font-heading font-bold text-black text-base mb-2">{step.label}</h4>
-                    <p className="text-muted text-sm leading-relaxed">{step.desc}</p>
-                  </div>
-                  <CornerBrackets color="#f97316" size="8px" thickness="1px" hoverShift />
-                </div>
-              </FadeIn>
+      <section data-stack-section className="bg-white py-[110px] max-sm:py-[72px]">
+        <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
+          <SecondarySectionIntro eyebrow="How It Works" title="Our" highlight="Process" description="A transparent workflow designed to move from idea to mission-ready delivery with speed and confidence." />
+          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-5">
+            {steps.map((step, index) => (
+              <article key={step.num} className="book-reveal-card relative min-h-[210px] rounded-[18px] border border-[#f1dfd1] bg-[#fff8f1] p-6 shadow-[0_16px_36px_rgba(17,21,26,0.05)]">
+                <div className="text-[40px] font-extrabold leading-none text-[#ff6b00]">{step.num}</div>
+                <h3 className="mt-5 text-[20px] font-extrabold text-[#111111]">{step.label}</h3>
+                <p className="mt-3 text-[15px] leading-[1.78] text-[#67707d]">{step.desc}</p>
+                {index < steps.length - 1 ? <span className="absolute right-[-10px] top-1/2 hidden h-[2px] w-5 bg-[#ff6b00]/35 md:block" aria-hidden="true" /> : null}
+                <CornerBrackets color="#f97316" size="10px" thickness="1px" hoverShift />
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA Band ── */}
-      <section data-stack-section className="section section-orange">
-        <div className="grid-pattern text-white" />
-        <FadeIn className="relative z-10 max-w-2xl mx-auto text-center">
-          <AnimatedTitle
-            as="h2"
-            title="Let Us Assist Your Next Mission"
-            className="mb-5"
-            textClassName="font-heading font-bold text-white leading-tight text-center"
-            textStyle={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}
-            baseOpacity={0.18}
-            baseRotation={1.2}
-            blurStrength={8}
-          />
-          <p className="text-white/80 max-w-lg mx-auto mb-8 leading-relaxed">
-            Reach out today and let our team craft a tailored support plan for your UAV programme.
-          </p>
-          <Link to="/contact" className="btn-white">
-            Get in Touch <ArrowForwardIcon />
-          </Link>
-        </FadeIn>
-      </section>
-    </>
+      <SecondaryCta title="Let Us Assist Your Next Mission" description="Reach out today and let our team craft a tailored support plan for your UAV programme." primaryLabel="Get in Touch" primaryTo="/contact" />
+    </div>
   );
 };
 

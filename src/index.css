@@ -1,4 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap');
+
+@font-face {
+  font-family: 'PP Mori';
+  src:
+    local('PP Mori'),
+    local('PPMori'),
+    local('PP Mori Regular'),
+    local('PPMori-Regular');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Mori';
+  src:
+    local('PP Mori'),
+    local('PPMori'),
+    local('PP Mori Medium'),
+    local('PPMori-Medium');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Mori';
+  src:
+    local('PP Mori'),
+    local('PPMori'),
+    local('PP Mori Semibold'),
+    local('PPMori-Semibold');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Mori';
+  src:
+    local('PP Mori'),
+    local('PPMori'),
+    local('PP Mori Bold'),
+    local('PPMori-Bold');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: 'Nasalization';
@@ -13,6 +61,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary-orange: #ff6b00;
+  --primary-orange-dark: #e85f00;
+  --orange-light: #fff0e5;
+  --background: #ffffff;
+  --background-soft: #fff8f1;
+  --background-warm: #fdf2e8;
+  --text-primary: #111111;
+  --text-secondary: #67707d;
+  --border-soft: #f1dfd1;
+  --dark-surface: #11151a;
+  --font-heading: 'Orbitron', 'PP Mori', 'Segoe UI', sans-serif;
+  --font-body: 'PP Mori', 'Inter', 'Segoe UI', sans-serif;
+  --font-display: 'Orbitron', 'PP Mori', 'Segoe UI', sans-serif;
+  --font-label: 'PP Mori', 'Inter', 'Segoe UI', sans-serif;
+  --fs-display: clamp(3.25rem, 7vw, 6rem);
+  --fs-h1: clamp(2.5rem, 5.5vw, 4.75rem);
+  --fs-h2: clamp(2rem, 4vw, 3.25rem);
+  --fs-h3: clamp(1.5rem, 3vw, 2rem);
+  --fs-h4: clamp(1.125rem, 1.8vw, 1.5rem);
+  --fs-body-lg: 1.125rem;
+  --fs-body: 1rem;
+  --fs-label: 0.75rem;
+  --fs-caption: 0.625rem;
+  --lh-tight: 1.05;
+  --lh-heading: 1.12;
+  --lh-body: 1.7;
+  --tracking-display: -0.06em;
+  --tracking-heading: -0.03em;
+  --tracking-label: 0.18em;
+}
 
 /* ═══════════════════════════════════════════
    BASE
@@ -30,9 +110,12 @@
   }
 
   body {
-    font-family: 'Lato', sans-serif;
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
     background: #ffffff;
     color: #111111;
+    line-height: var(--lh-body);
+    letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -44,9 +127,18 @@
   h4,
   h5,
   h6 {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-heading);
     font-weight: 700;
     color: #111111;
+    line-height: var(--lh-heading);
+    letter-spacing: var(--tracking-heading);
+  }
+
+  .font-heading,
+  .hero-heading,
+  .scroll-reveal-text.font-heading {
+    font-family: var(--font-heading) !important;
+    letter-spacing: var(--tracking-heading);
   }
 
   img {
@@ -94,10 +186,10 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-label);
     font-weight: 700;
-    font-size: 0.6875rem;
-    letter-spacing: 0.2em;
+    font-size: var(--fs-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: #f97316;
     margin-bottom: 1rem;
@@ -123,7 +215,7 @@
   /* ── Background watermark text ──────────── */
   .watermark {
     position: absolute;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
     color: rgba(0, 0, 0, 0.03);
     user-select: none;
@@ -140,16 +232,17 @@
     gap: 8px;
     background: #f97316;
     color: #fff;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-label);
     font-weight: 700;
-    font-size: 0.875rem;
+    font-size: var(--fs-label);
     padding: 14px 32px;
     border-radius: 0px;
     border: none;
     cursor: pointer;
     transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow: 0 4px 16px rgba(249, 115, 22, 0.25);
-    letter-spacing: 0.01em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .btn-primary:hover {
@@ -172,9 +265,9 @@
     gap: 8px;
     background: transparent;
     color: #111111;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-label);
     font-weight: 700;
-    font-size: 0.875rem;
+    font-size: var(--fs-label);
     padding: 13px 32px;
     border-radius: 0px;
     border: 1.5px solid #262626;
@@ -193,9 +286,11 @@
     gap: 8px;
     background: #ffffff;
     color: #f97316;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-label);
     font-weight: 700;
-    font-size: 0.875rem;
+    font-size: var(--fs-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     padding: 14px 32px;
     border-radius: 0px;
     border: none;
@@ -310,7 +405,7 @@
 
   /* ── Stat number ────────────────────────── */
   .stat-number {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-heading);
     font-weight: 700;
     color: #f97316;
     line-height: 1;
@@ -395,6 +490,218 @@
 
   .scroll-reveal-text .word {
     margin-right: 0.03em;
+  }
+
+  .site-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid var(--border-soft);
+    transition: background 0.25s ease, box-shadow 0.25s ease, backdrop-filter 0.25s ease;
+  }
+
+  .site-navbar--scrolled {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 14px 34px rgba(17, 21, 26, 0.07);
+  }
+
+  .site-navbar__inner {
+    align-items: center;
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) auto minmax(180px, 1fr);
+    height: 82px;
+    margin: 0 auto;
+    max-width: 1380px;
+    padding-left: clamp(20px, 5vw, 80px);
+    padding-right: clamp(20px, 5vw, 80px);
+  }
+
+  .site-navbar__logo {
+    align-items: center;
+    display: inline-flex;
+    justify-self: start;
+  }
+
+  .site-navbar__logo-img {
+    height: 46px;
+    object-fit: contain;
+    transition: transform 0.25s ease;
+    width: auto;
+  }
+
+  .site-navbar__logo:hover .site-navbar__logo-img,
+  .site-navbar__logo:focus-visible .site-navbar__logo-img {
+    transform: scale(1.04);
+  }
+
+  .site-navbar__links {
+    align-items: center;
+    display: flex;
+    gap: clamp(18px, 2.2vw, 38px);
+    justify-content: center;
+    list-style: none;
+  }
+
+  .site-navbar__link {
+    color: var(--text-primary);
+    display: inline-flex;
+    font-family: var(--font-label);
+    font-size: var(--fs-label);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 30px 0;
+    position: relative;
+    text-decoration: none;
+    transition: color 0.22s ease;
+  }
+
+  .site-navbar__link::after {
+    background: var(--primary-orange);
+    bottom: 18px;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.25s ease;
+    width: 100%;
+  }
+
+  .site-navbar__link:hover,
+  .site-navbar__link:focus-visible,
+  .site-navbar__link--active {
+    color: var(--primary-orange);
+  }
+
+  .site-navbar__link:hover::after,
+  .site-navbar__link:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .site-navbar__active-underline {
+    background: var(--primary-orange);
+    border-radius: 999px;
+    bottom: 18px;
+    height: 2px;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
+
+  .site-navbar__cta-wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .site-navbar__cta,
+  .site-navbar__mobile-cta {
+    align-items: center;
+    background: var(--primary-orange);
+    box-shadow: 0 16px 34px rgba(255, 107, 0, 0.22);
+    color: #fff;
+    display: inline-flex;
+    font-family: var(--font-label);
+    font-size: var(--fs-label);
+    font-weight: 800;
+    gap: 16px;
+    min-height: 54px;
+    padding: 0 28px;
+    text-decoration: none;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .site-navbar__cta:hover,
+  .site-navbar__cta:focus-visible,
+  .site-navbar__mobile-cta:hover,
+  .site-navbar__mobile-cta:focus-visible {
+    background: var(--primary-orange-dark);
+    box-shadow: 0 20px 42px rgba(255, 107, 0, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .site-navbar__cta svg,
+  .site-navbar__mobile-cta svg {
+    transition: transform 0.25s ease;
+  }
+
+  .site-navbar__cta:hover svg,
+  .site-navbar__cta:focus-visible svg,
+  .site-navbar__mobile-cta:hover svg,
+  .site-navbar__mobile-cta:focus-visible svg {
+    transform: translateX(5px);
+  }
+
+  .site-navbar__menu {
+    align-items: center;
+    background: var(--background-warm);
+    border: 1px solid var(--border-soft);
+    border-radius: 999px;
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    height: 48px;
+    justify-content: center;
+    justify-self: end;
+    width: 48px;
+  }
+
+  .site-navbar__menu span {
+    background: var(--text-primary);
+    display: block;
+    height: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    width: 20px;
+  }
+
+  .site-navbar__menu--open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .site-navbar__menu--open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-navbar__menu--open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .site-navbar__mobile-cta {
+    justify-content: center;
+    width: 100%;
+  }
+
+  @media (max-width: 1023px) {
+    .site-navbar__inner {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .site-navbar__links,
+    .site-navbar__cta-wrap {
+      display: none;
+    }
+
+    .site-navbar__menu {
+      display: inline-flex;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .site-navbar__inner {
+      height: 76px;
+    }
+
+    .site-navbar__logo-img {
+      height: 38px;
+    }
   }
 }
 

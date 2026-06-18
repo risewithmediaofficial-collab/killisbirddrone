@@ -3,12 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
-import CornerBrackets from './CornerBrackets';
-
-gsap.registerPlugin(ScrollTrigger);
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const links = [
   { to: '/', label: 'Space', end: true },
@@ -21,40 +16,29 @@ const links = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navRef = useRef(null);
 
   useEffect(() => {
     const nav = navRef.current;
     if (!nav) return;
 
-    // GSAP: hide on scroll-down, show on scroll-up
-    const showAnim = gsap.fromTo(nav,
-      { yPercent: 0 },
-      {
-        yPercent: -100,
-        paused: true,
-        duration: 0.3,
-        ease: 'power2.inOut',
-      }
-    );
-
-    ScrollTrigger.create({
-      start: 'top top',
-      end: 'max',
-      onUpdate: (self) => {
-        const scrollY = window.scrollY;
-
-        if (self.direction === -1) {
-          showAnim.reverse();
-        } else if (scrollY > 200) {
-          showAnim.play();
-        }
-      },
+    gsap.fromTo(nav, {
+      y: -20,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      ease: 'power3.out'
     });
+  }, []);
 
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   // Lock body scroll when mobile menu open
@@ -67,30 +51,27 @@ const Navbar = () => {
     <>
       <nav
         ref={navRef}
-        className="fixed top-0 left-0 right-0 z-50 border-b border-border/70 bg-white/95 shadow-soft backdrop-blur-md transition-[background-color,box-shadow,border-color] duration-300"
+        className={`site-navbar ${scrolled ? 'site-navbar--scrolled' : ''}`}
       >
-        <div className="max-w-content mx-auto px-6 md:px-8 flex items-center justify-between h-[72px]">
+        <div className="site-navbar__inner">
           {/* Logo */}
-          <Link to="/" className="flex items-center group" onClick={() => setOpen(false)}>
+          <Link to="/" className="site-navbar__logo" onClick={() => setOpen(false)}>
             <img
               src="/assests/KILLIS BIRD - LOGO.png"
               alt="Killis Bird Logo"
-              className="h-9 md:h-11 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+              className="site-navbar__logo-img"
             />
           </Link>
 
           {/* Desktop Nav */}
-          <ul className="hidden lg:flex items-center gap-1">
+          <ul className="site-navbar__links">
             {links.map(({ to, label, end }) => (
               <li key={to}>
                 <NavLink
                   to={to}
                   end={end}
                   className={({ isActive }) =>
-                    `relative px-4 py-2 text-sm font-semibold rounded-lg transition-colors duration-200 ${isActive
-                      ? 'text-skyroot'
-                      : 'text-dark hover:text-skyroot'
-                    }`
+                    `site-navbar__link ${isActive ? 'site-navbar__link--active' : ''}`
                   }
                 >
                   {({ isActive }) => (
@@ -99,7 +80,7 @@ const Navbar = () => {
                       {isActive && (
                         <motion.div
                           layoutId="nav-underline"
-                          className="absolute bottom-0 left-2 right-2 h-[2px] bg-skyroot rounded-full"
+                          className="site-navbar__active-underline"
                           transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                         />
                       )}
@@ -111,28 +92,26 @@ const Navbar = () => {
           </ul>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="site-navbar__cta-wrap">
             <Link
               to="/contact"
-              className="relative group inline-flex"
+              className="site-navbar__cta"
             >
-              <span className="btn-primary !rounded-none !py-2 !px-6 !text-sm relative z-10 bg-skyroot text-white font-heading font-bold transition-all duration-300">
-                Request Quote
-              </span>
-              <CornerBrackets color="#f97316" size="6px" thickness="1.5px" hoverShift />
+              <span>Request Quote</span>
+              <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 22 }} />
             </Link>
           </div>
 
           {/* Hamburger */}
           <button
-            className="lg:hidden p-2 rounded-lg hover:bg-navy-50 transition-colors"
+            className={`site-navbar__menu ${open ? 'site-navbar__menu--open' : ''}`}
             onClick={() => setOpen(o => !o)}
-            aria-label="Toggle menu"
+            aria-label="Toggle navigation menu"
+            aria-expanded={open}
           >
-          {open
-              ? <CloseIcon className="text-black" />
-              : <MenuIcon className="text-black" />
-            }
+            <span />
+            <span />
+            <span />
           </button>
         </div>
       </nav>
@@ -148,8 +127,8 @@ const Navbar = () => {
             transition={{ duration: 0.25 }}
             className="fixed inset-0 z-40 bg-white lg:hidden flex flex-col"
           >
-            <div className="h-[72px]" /> {/* spacer for nav */}
-            <ul className="flex flex-col px-8 py-6 gap-1 flex-1">
+            <div className="h-[82px]" /> {/* spacer for nav */}
+            <ul className="flex flex-col px-8 py-6 gap-1 flex-1 bg-[var(--background-soft)]">
               {links.map(({ to, label, end }, i) => (
                 <motion.li
                   key={to}
@@ -162,8 +141,8 @@ const Navbar = () => {
                     end={end}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
-                      `block py-4 px-2 font-heading font-bold text-2xl transition-colors border-b border-border/50 ${isActive
-                        ? 'text-skyroot'
+                      `block py-4 px-2 font-heading font-bold text-2xl transition-colors border-b border-[#f1dfd1] ${isActive
+                        ? 'text-[#ff6b00]'
                         : 'text-black hover:text-skyroot'
                       }`
                     }
@@ -181,12 +160,10 @@ const Navbar = () => {
                 <Link
                   to="/contact"
                   onClick={() => setOpen(false)}
-                  className="relative group flex justify-center w-full"
+                  className="site-navbar__mobile-cta"
                 >
-                  <span className="btn-primary w-full justify-center !text-base !py-3.5 !rounded-none text-center relative z-10 bg-skyroot text-white font-heading font-bold">
-                    Request Quote
-                  </span>
-                  <CornerBrackets color="#f97316" size="8px" thickness="1.5px" hoverShift />
+                  <span>Request Quote</span>
+                  <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 22 }} />
                 </Link>
               </motion.li>
             </ul>
@@ -198,4 +175,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

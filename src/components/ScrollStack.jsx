@@ -15,7 +15,7 @@ export const ScrollStackItem = ({ children, itemClassName = '' }) => (
 const ScrollStack = ({
   children,
   className = '',
-  selector = 'section, footer, .scroll-video-container, [data-stack-section]',
+  selector = '[data-stack-section], footer, .scroll-video-container',
   itemScale = 0.018,
   rotationAmount = 0,
   blurAmount = 0,

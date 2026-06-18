@@ -135,7 +135,7 @@ const ScrollReveal = ({
     <Tag ref={containerRef} className={`my-5 ${containerClassName}`.trim()}>
       <span
         style={textStyle}
-        className={`scroll-reveal-text block text-[clamp(1rem,2.4vw,1.25rem)] leading-[1.7] font-medium ${textClassName}`.trim()}
+        className={`scroll-reveal-text block font-sans text-body-lg leading-[var(--lh-body)] font-medium ${textClassName}`.trim()}
       >
         {splitText}
       </span>

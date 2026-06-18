@@ -7,7 +7,7 @@ const AnimatedTitle = ({
   highlight,
   lineBreakBeforeHighlight = false,
   className = '',
-  textClassName = '',
+  textClassName = 'font-heading',
   textStyle,
   highlightClassName = 'text-skyroot',
   baseOpacity = 0.14,

@@ -14,7 +14,7 @@ const MainLayout = () => (
     <Navbar />
     <ScrollToTop />
     <GlobalTextReveal />
-    <main style={{ paddingTop: '72px' }}>
+    <main style={{ paddingTop: '82px' }}>
       <ScrollStack>
         <Outlet />
         <Suspense fallback={<SectionLoader />}>

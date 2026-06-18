@@ -1,8 +1,6 @@
-// src/pages/Contact.jsx
-import { useState } from 'react';
+﻿import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
-import FadeIn from '../components/FadeIn';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -13,257 +11,112 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ParallaxWatermark from '../components/ParallaxWatermark';
-import SectionHeader from '../components/SectionHeader';
 import CornerBrackets from '../components/CornerBrackets';
-import AnimatedTitle from '../components/AnimatedTitle';
+import SecondaryHero from '../components/common/SecondaryHero';
+import SecondarySectionIntro from '../components/common/SecondarySectionIntro';
+import useBookScrollEffects from '../hooks/useBookScrollEffects';
 
 const contactInfo = [
-  {
-    Icon: LocationOnIcon,
-    label: 'Headquarters',
-    lines: ['Killis Bird Technologies Pvt. Ltd.', 'Bengaluru, Karnataka, India'],
-  },
-  {
-    Icon: EmailIcon,
-    label: 'Email Us',
-    lines: ['info@killisbird.com', 'sales@killisbird.com'],
-    href: 'mailto:info@killisbird.com',
-  },
-  {
-    Icon: PhoneIcon,
-    label: 'Call Us',
-    lines: ['+91 80 0000 0000'],
-    href: 'tel:+918000000000',
-  },
-  {
-    Icon: AccessTimeIcon,
-    label: 'Business Hours',
-    lines: ['Monday – Friday', '9:00 AM – 6:00 PM IST'],
-  },
+  { Icon: LocationOnIcon, label: 'Headquarters', lines: ['Killis Bird Technologies Pvt. Ltd.', 'Bengaluru, Karnataka, India'] },
+  { Icon: EmailIcon, label: 'Email Us', lines: ['info@killisbird.com', 'sales@killisbird.com'], href: 'mailto:info@killisbird.com' },
+  { Icon: PhoneIcon, label: 'Call Us', lines: ['+91 80 0000 0000'], href: 'tel:+918000000000' },
+  { Icon: AccessTimeIcon, label: 'Business Hours', lines: ['Monday – Friday', '9:00 AM – 6:00 PM IST'] },
 ];
 
 const Contact = () => {
+  const pageRef = useRef(null);
   const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
   const [sent, setSent] = useState(false);
+  useBookScrollEffects(pageRef);
 
-  const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
-  const handleSubmit = e => { e.preventDefault(); setSent(true); };
+  const handleChange = (event) => setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSent(true);
+  };
 
-  const inputCls = 'w-full bg-white border border-border rounded-none px-5 py-4 text-sm text-black outline-none focus:border-skyroot focus:ring-2 focus:ring-skyroot/20 transition-all placeholder-muted/60 shadow-sm';
+  const inputClassName = 'mt-3 w-full border border-[#f1dfd1] bg-white px-5 py-4 text-sm text-[#111111] outline-none transition-all duration-300 placeholder:text-[#9aa3ad] focus:border-[#ff6b00] focus:ring-2 focus:ring-[#ff6b00]/15';
 
   return (
-    <>
+    <div ref={pageRef}>
       <SEO title="Contact Us" description="Request a quote or get in touch with the Killis Bird team." />
+      <SecondaryHero eyebrow="Get In Touch" title="Let's Build Something" highlight="Extraordinary." description="Whether you are ready to partner, need a custom component, or simply want to explore possibilities — we are here." watermark="HELLO" />
 
-      {/* ── Page Banner — Center Aligned (WHITE BACKGROUND) ── */}
-      <section className="pt-32 pb-16 px-6 bg-white relative overflow-hidden text-center flex flex-col items-center justify-center border-b border-border">
-        {/* Background watermark */}
-        <ParallaxWatermark className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[clamp(8rem,18vw,22rem)] text-navy-100/30" speed={15}>
-          HELLO
-        </ParallaxWatermark>
-        <div className="max-w-content mx-auto px-6 md:px-8 relative z-10 flex flex-col items-center">
-          <div className="eyebrow justify-center">Get In Touch</div>
-          <AnimatedTitle
-            as="h1"
-            title="Let's Build Something"
-            highlight="Extraordinary."
-            lineBreakBeforeHighlight
-            className="mb-4"
-            textClassName="font-heading font-bold text-black leading-[1.08] text-center"
-            textStyle={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.02em' }}
-            baseOpacity={0.16}
-            baseRotation={1.5}
-            blurStrength={9}
-          />
-          <p className="text-muted text-body-lg max-w-xl leading-relaxed text-center">
-            Whether you are ready to partner, need a custom component, or simply want to explore
-            possibilities — we are here.
-          </p>
-          <div className="divider-bar mt-6 mx-auto" />
-        </div>
-      </section>
-
-      {/* ── Main Contact Area (NAVY BACKGROUND) ── */}
-      <section data-stack-section className="py-20 px-6 bg-navy-50 relative overflow-hidden">
-        <ParallaxWatermark className="left-0 top-1/2 -translate-y-1/2 text-[clamp(8rem,16vw,22rem)] text-navy-200/10" speed={20}>
-          CONNECT
-        </ParallaxWatermark>
-        <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-
-            {/* Info Left */}
-            <div className="lg:col-span-5">
-              <FadeIn direction="left">
-                <SectionHeader eyebrow="Contact Details" title="Let's Start a" orangeTitle="Conversation" />
-
-                <div className="space-y-8 mt-10">
-                  {contactInfo.map(({ Icon, label, lines, href }, i) => (
-                    <div key={i} className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-none bg-skyroot text-white flex items-center justify-center shrink-0 shadow-sm">
-                        <Icon sx={{ fontSize: 20 }} />
-                      </div>
-                      <div>
-                        <div className="font-heading font-bold text-black text-sm mb-1">{label}</div>
-                        {lines.map((line, li) =>
-                          href && li === 0 ? (
-                            <a key={li} href={href} className="block text-muted text-sm hover:text-skyroot transition-colors duration-200">
-                              {line}
-                            </a>
-                          ) : (
-                            <p key={li} className="text-muted text-sm">{line}</p>
-                          )
-                        )}
+      <section data-stack-section className="relative overflow-hidden bg-[#fff8f1] py-[110px] max-sm:py-[72px]">
+        <ParallaxWatermark className="left-0 top-1/2 -translate-y-1/2 text-[clamp(7rem,16vw,20rem)] text-[#111111]/[0.05]" speed={18}>CONNECT</ParallaxWatermark>
+        <div className="relative mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] gap-[clamp(44px,6vw,84px)] px-[clamp(20px,5vw,80px)] max-xl:grid-cols-1">
+          <div>
+            <SecondarySectionIntro eyebrow="Contact Details" title="Let's Start a" highlight="Conversation" description="Tell us what you are building, what support you need, or where you want to take your UAV programme next." />
+            <div className="mt-10 grid gap-5">
+              {contactInfo.map(({ Icon, label, lines, href }) => (
+                <article key={label} className="book-reveal-card rounded-[18px] border border-[#f1dfd1] bg-white px-6 py-6 shadow-[0_18px_42px_rgba(17,21,26,0.06)]">
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-[14px] bg-[#fff0e5] text-[#ff6b00]"><Icon sx={{ fontSize: 26 }} /></span>
+                    <div>
+                      <h3 className="text-[20px] font-extrabold text-[#111111]">{label}</h3>
+                      <div className="mt-3 space-y-1.5 text-[15px] leading-[1.75] text-[#67707d]">
+                        {lines.map((line, index) => (href && index === 0 ? <a key={line} href={href} className="block hover:text-[#ff6b00]">{line}</a> : <p key={line}>{line}</p>))}
                       </div>
                     </div>
-                  ))}
-                </div>
-
-                {/* Socials */}
-                <div className="flex gap-3 mt-12">
-                  {[
-                    { Icon: LinkedInIcon, href: '#', label: 'LinkedIn' },
-                    { Icon: TwitterIcon, href: '#', label: 'Twitter' },
-                    { Icon: YouTubeIcon, href: '#', label: 'YouTube' },
-                  ].map(({ Icon, href, label }) => (
-                    <motion.a
-                      key={label}
-                      href={href}
-                      aria-label={label}
-                      whileHover={{ y: -2 }}
-                      className="w-11 h-11 rounded-none border border-border flex items-center justify-center text-muted hover:text-skyroot hover:border-skyroot-light transition-all duration-300 bg-white"
-                    >
-                      <Icon sx={{ fontSize: 20 }} />
-                    </motion.a>
-                  ))}
-                </div>
-              </FadeIn>
+                  </div>
+                </article>
+              ))}
             </div>
-
-            {/* Form Right */}
-            <div className="lg:col-span-7">
-              <FadeIn direction="right">
-                {sent ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-20 bg-white rounded-none border border-border px-8 relative group"
-                  >
-                    <CheckCircleIcon sx={{ fontSize: 64, color: '#f97316', mb: 2 }} />
-                    <h3 className="font-heading font-bold text-black text-3xl mb-4">Message Received!</h3>
-                    <p className="text-muted text-body-lg max-w-sm mx-auto mb-8">
-                      Thank you for reaching out. Our team will review your request and respond within 24 hours.
-                    </p>
-                    <button
-                      onClick={() => setSent(false)}
-                      className="btn-primary"
-                    >
-                      Send Another Message
-                    </button>
-                    <CornerBrackets color="#f97316" size="12px" thickness="2px" hoverShift={false} />
-                  </motion.div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="bg-white rounded-none border border-border p-8 md:p-10 relative group">
-                    <SectionHeader eyebrow="Send a Message" title="Request a" orangeTitle="Quote" />
-                    <CornerBrackets color="#f97316" size="12px" thickness="2px" hoverShift={false} />
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5 mt-6">
-                      <div>
-                        <label className="block text-[11px] font-bold text-black uppercase tracking-widest mb-2" htmlFor="name">
-                          Full Name *
-                        </label>
-                        <input id="name" name="name" type="text" required
-                          value={form.name} onChange={handleChange}
-                          className={inputCls} placeholder="Your name" />
-                      </div>
-                      <div>
-                        <label className="block text-[11px] font-bold text-black uppercase tracking-widest mb-2" htmlFor="email">
-                          Email Address *
-                        </label>
-                        <input id="email" name="email" type="email" required
-                          value={form.email} onChange={handleChange}
-                          className={inputCls} placeholder="your@email.com" />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                      <div>
-                        <label className="block text-[11px] font-bold text-black uppercase tracking-widest mb-2" htmlFor="phone">
-                          Phone Number
-                        </label>
-                        <input id="phone" name="phone" type="tel"
-                          value={form.phone} onChange={handleChange}
-                          className={inputCls} placeholder="+91 00000 00000" />
-                      </div>
-                      <div>
-                        <label className="block text-[11px] font-bold text-black uppercase tracking-widest mb-2" htmlFor="company">
-                          Organisation
-                        </label>
-                        <input id="company" name="company" type="text"
-                          value={form.company} onChange={handleChange}
-                          className={inputCls} placeholder="Your company" />
-                      </div>
-                    </div>
-
-                    <div className="mb-5">
-                      <label className="block text-[11px] font-bold text-black uppercase tracking-widest mb-2" htmlFor="subject">
-                        Subject *
-                      </label>
-                      <div className="relative">
-                        <select id="subject" name="subject" required
-                          value={form.subject} onChange={handleChange}
-                          className={inputCls + ' appearance-none cursor-pointer pr-10'}
-                        >
-                          <option value="">Select a topic</option>
-                          <option value="quote">Request a Quote</option>
-                          <option value="customization">Custom Component Enquiry</option>
-                          <option value="partnership">Partnership Opportunity</option>
-                          <option value="support">Technical Support</option>
-                          <option value="other">Other</option>
-                        </select>
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted text-xs">
-                          ▼
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mb-7">
-                      <label className="block text-[11px] font-bold text-black uppercase tracking-widest mb-2" htmlFor="message">
-                        Message *
-                      </label>
-                      <textarea id="message" name="message" rows={5} required
-                        value={form.message} onChange={handleChange}
-                        className={inputCls + ' resize-y'}
-                        placeholder="Tell us about your project or enquiry…"
-                      />
-                    </div>
-
-                    <button type="submit" className="btn-primary w-full justify-center py-4">
-                      Send Message <ArrowForwardIcon sx={{ fontSize: 18 }} />
-                    </button>
-                  </form>
-                )}
-              </FadeIn>
+            <div className="mt-8 flex gap-3">
+              {[
+                { Icon: LinkedInIcon, href: '#', label: 'LinkedIn' },
+                { Icon: TwitterIcon, href: '#', label: 'Twitter' },
+                { Icon: YouTubeIcon, href: '#', label: 'YouTube' },
+              ].map(({ Icon, href, label }) => (
+                <motion.a key={label} href={href} aria-label={label} whileHover={{ y: -2 }} className="book-reveal-card flex h-[50px] w-[50px] items-center justify-center rounded-[14px] border border-[#f1dfd1] bg-white text-[#67707d] transition-all duration-300 hover:border-[#ff6b00] hover:text-[#ff6b00]"><Icon sx={{ fontSize: 22 }} /></motion.a>
+              ))}
             </div>
+          </div>
+
+          <div>
+            {sent ? (
+              <div className="book-reveal-card relative rounded-[22px] border border-[#f1dfd1] bg-white px-8 py-16 text-center shadow-[0_22px_48px_rgba(17,21,26,0.08)]">
+                <CheckCircleIcon sx={{ fontSize: 66, color: '#ff6b00' }} />
+                <h2 className="mt-5 text-[34px] font-extrabold text-[#111111]">Message Received!</h2>
+                <p className="mx-auto mt-4 max-w-[430px] text-[16px] leading-[1.78] text-[#67707d]">Thank you for reaching out. Our team will review your request and respond within 24 hours.</p>
+                <button onClick={() => setSent(false)} className="mt-8 inline-flex items-center justify-center bg-[#ff6b00] px-7 py-4 text-[15px] font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#e85f00]">Send Another Message</button>
+                <CornerBrackets color="#f97316" size="12px" thickness="2px" hoverShift={false} />
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="book-reveal-card relative rounded-[22px] border border-[#f1dfd1] bg-white p-8 shadow-[0_22px_48px_rgba(17,21,26,0.08)] md:p-10">
+                <SecondarySectionIntro eyebrow="Send a Message" title="Request a" highlight="Quote" />
+                <CornerBrackets color="#f97316" size="12px" thickness="2px" hoverShift={false} />
+                <div className="mt-8 grid gap-5 md:grid-cols-2">
+                  <label className="block text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#67707d]">Full Name *<input name="name" type="text" required value={form.name} onChange={handleChange} className={inputClassName} placeholder="Your name" /></label>
+                  <label className="block text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#67707d]">Email Address *<input name="email" type="email" required value={form.email} onChange={handleChange} className={inputClassName} placeholder="your@email.com" /></label>
+                  <label className="block text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#67707d]">Phone Number<input name="phone" type="tel" value={form.phone} onChange={handleChange} className={inputClassName} placeholder="+91 00000 00000" /></label>
+                  <label className="block text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#67707d]">Organisation<input name="company" type="text" value={form.company} onChange={handleChange} className={inputClassName} placeholder="Your company" /></label>
+                </div>
+                <label className="mt-5 block text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#67707d]">Subject *
+                  <select name="subject" required value={form.subject} onChange={handleChange} className={inputClassName + ' appearance-none'}>
+                    <option value="">Select a topic</option>
+                    <option value="quote">Request a Quote</option>
+                    <option value="customization">Custom Component Enquiry</option>
+                    <option value="partnership">Partnership Opportunity</option>
+                    <option value="support">Technical Support</option>
+                    <option value="other">Other</option>
+                  </select>
+                </label>
+                <label className="mt-5 block text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#67707d]">Message *
+                  <textarea name="message" rows={5} required value={form.message} onChange={handleChange} className={inputClassName + ' resize-y'} placeholder="Tell us about your project or enquiry…" />
+                </label>
+                <button type="submit" className="mt-7 inline-flex w-full items-center justify-center gap-2 bg-[#ff6b00] px-7 py-4 text-[15px] font-extrabold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#e85f00]">Send Message <ArrowForwardIcon sx={{ fontSize: 18 }} /></button>
+              </form>
+            )}
           </div>
         </div>
       </section>
 
-      {/* ── Map / Location band (WHITE BACKGROUND) ── */}
-      <section data-stack-section className="py-24 px-6 bg-white relative overflow-hidden border-t border-border">
-        {/* Background watermark */}
-        <ParallaxWatermark className="right-0 bottom-0 translate-y-1/4 text-[clamp(8rem,16vw,20rem)] text-navy-100/30" speed={15}>
-          IND
-        </ParallaxWatermark>
-        <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
-          <FadeIn className="text-center">
-            <SectionHeader eyebrow="Where We Are" title="Based in" orangeTitle="Bengaluru, India" centered />
-            <p className="text-muted text-body-lg max-w-md mx-auto leading-relaxed mt-4">
-              At the heart of India's aerospace and technology corridor — building tomorrow's aerial systems, today.
-            </p>
-          </FadeIn>
-        </div>
+      <section data-stack-section className="relative overflow-hidden bg-white py-[110px] max-sm:py-[72px]">
+        <ParallaxWatermark className="right-0 bottom-0 translate-y-1/4 text-[clamp(8rem,16vw,20rem)] text-[#ff6b00]/[0.06]" speed={15}>IND</ParallaxWatermark>
+        <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)] text-center"><SecondarySectionIntro eyebrow="Where We Are" title="Based in" highlight="Bengaluru, India" description="At the heart of India's aerospace and technology corridor — building tomorrow's aerial systems, today." centered /></div>
       </section>
-    </>
+    </div>
   );
 };
 

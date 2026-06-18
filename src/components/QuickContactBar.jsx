@@ -32,7 +32,7 @@ const QuickContactBar = () => {
   return (
     <motion.div
       whileHover={{ y: -2 }}
-      className="fixed bottom-3 right-3 z-[70] origin-bottom-right scale-[0.48] md:bottom-10 md:right-10 md:scale-90"
+      className="fixed bottom-3 right-3 z-[70] origin-bottom-right scale-[0.42] sm:scale-[0.5] md:bottom-8 md:right-8 md:scale-75 lg:bottom-10 lg:right-10 lg:scale-90"
     >
       <Folder
         color="#f97316"
@@ -57,7 +57,7 @@ const QuickContactBar = () => {
           </a>
         ))}
       />
-      <div className="pointer-events-none mt-2 hidden text-right text-[10px] font-bold uppercase tracking-[0.24em] text-black/45 md:block">
+      <div className="pointer-events-none mt-2 hidden text-right text-[10px] font-bold uppercase tracking-[0.24em] text-black/45 lg:block">
         Quick Contact
       </div>
     </motion.div>

@@ -110,7 +110,7 @@ const Company = () => {
       </section>
 
       {/* DNA section */}
-      <section ref={dnaRef} data-stack-section className="section bg-white relative overflow-hidden">
+      <section ref={dnaRef} data-stack-section className="section !pb-0 bg-white relative overflow-hidden">
         {/* Subtle grid pattern background */}
         <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
 
@@ -122,7 +122,7 @@ const Company = () => {
             <SectionHeader eyebrow="" title="The DNA of" orangeTitle="Killis Bird" centered />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center pb-10 lg:pb-12">
 
             <div className="dna-text space-y-6">
               <ScrollReveal containerClassName="dna-reveal-item my-0" textClassName="text-muted text-body-lg leading-relaxed">

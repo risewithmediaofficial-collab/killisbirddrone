@@ -117,7 +117,7 @@ const ScrollVideoCanvas = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: isMobile ? '+=300%' : '+=400%',
+          end: isMobile ? '+=135%' : '+=220%',
           scrub: true,
           pin: true,
           anticipatePin: 1,
@@ -131,11 +131,8 @@ const ScrollVideoCanvas = () => {
         }
       });
 
-      // 1. Initial entrance animation of the canvas image container
-      tl.fromTo(canvasContainerRef.current,
-        { scale: 0.85, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.2, ease: 'power2.out' }
-      );
+      // Keep the first drone frame visible immediately as the section enters.
+      tl.set(canvasContainerRef.current, { scale: 1, opacity: 1 });
 
       // ── Slide 1 Reveal ──
       tl.to('.slide-1', { opacity: 1, duration: 0.2 })
@@ -155,7 +152,7 @@ const ScrollVideoCanvas = () => {
           '-=0.5'
         )
         .to(canvasContainerRef.current, { scale: 1.05, duration: 1.5, ease: 'power1.inOut' }, '-=1.2')
-        .to({}, { duration: 0.8 })
+        .to({}, { duration: isMobile ? 0.35 : 0.55 })
         // Slide 1 Exit
         .to('.slide-1 span', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.in' })
         .to('.slide-1 h2', { opacity: 0, scale: 1.15, y: -30, duration: 0.7, ease: 'power2.in' }, '-=0.4')
@@ -180,7 +177,7 @@ const ScrollVideoCanvas = () => {
           '-=0.5'
         )
         .to(canvasContainerRef.current, { scale: 0.97, rotate: -1, duration: 1.5, ease: 'power1.inOut' }, '-=1.2')
-        .to({}, { duration: 0.8 })
+        .to({}, { duration: isMobile ? 0.35 : 0.55 })
         // Slide 2 Exit
         .to('.slide-2 span', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.in' })
         .to('.slide-2 h2', { opacity: 0, scale: 1.15, y: -30, duration: 0.7, ease: 'power2.in' }, '-=0.4')
@@ -205,15 +202,15 @@ const ScrollVideoCanvas = () => {
           '-=0.5'
         )
         .to(canvasContainerRef.current, { scale: 1.02, rotate: 0, duration: 1.5, ease: 'power1.inOut' }, '-=1.2')
-        .to({}, { duration: 0.8 })
+        .to({}, { duration: isMobile ? 0.35 : 0.55 })
         // Slide 3 Exit
         .to('.slide-3 span', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.in' })
         .to('.slide-3 h2', { opacity: 0, scale: 1.15, y: -30, duration: 0.7, ease: 'power2.in' }, '-=0.4')
         .to('.slide-3 p', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.in' }, '-=0.4')
         .to('.slide-3', { opacity: 0, duration: 0.15 }, '-=0.15')
         
-        // Final Canvas exit
-        .to(canvasContainerRef.current, { scale: 0.9, opacity: 0, duration: 1, ease: 'power2.in' }, '-=0.3');
+        // Final Canvas settle
+        .to(canvasContainerRef.current, { scale: 0.98, opacity: 1, duration: 0.45, ease: 'power2.out' }, '-=0.15');
 
     }, containerRef);
 
