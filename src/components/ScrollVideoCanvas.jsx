@@ -117,7 +117,7 @@ const ScrollVideoCanvas = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: isMobile ? '+=105%' : '+=145%',
+          end: isMobile ? '+=80%' : '+=105%',
           scrub: true,
           pin: true,
           anticipatePin: 1,

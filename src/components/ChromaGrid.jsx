@@ -117,7 +117,12 @@ const ChromaGrid = ({
                 {item.kicker}
               </span>
             )}
-            <h3 className="min-h-[3.5rem] font-heading text-xl font-bold leading-tight">{item.title}</h3>
+            <h3
+              className="min-h-[3.5rem] font-heading text-xl font-bold leading-tight"
+              style={{ color: item.titleColor || '#ffffff' }}
+            >
+              {item.title}
+            </h3>
             {item.subtitle && <p className="text-sm text-white/72">{item.subtitle}</p>}
             {item.description && <p className="min-h-[6.5rem] text-sm leading-relaxed text-white/78">{item.description}</p>}
             {item.handle && <span className="mt-auto text-xs uppercase tracking-[0.24em] text-sky-200">{item.handle}</span>}

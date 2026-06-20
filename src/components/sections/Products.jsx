@@ -40,6 +40,7 @@ const chromaItems = products.map(product => ({
   image: product.img,
   kicker: product.tag,
   title: product.name,
+  titleColor: '#f97316',
   subtitle: product.price,
   description: product.desc,
   borderColor: '#f97316',
