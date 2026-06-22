@@ -6,7 +6,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import SectionHeader from '../SectionHeader';
 import useParallax from '../../hooks/useParallax';
 import CornerBrackets from '../CornerBrackets';
-import ScrollReveal from '../ScrollReveal';
 import SmartImage from '../SmartImage';
 
 const industries = [
@@ -14,28 +13,24 @@ const industries = [
     id: '01',
     icon: '🌾',
     title: 'Precision Agriculture',
-    desc: 'UAV propulsion & swarm systems built for accurate, sustainable crop inspection and high-yield spraying optimization.',
     highlight: false
   },
   {
     id: '02',
     icon: '🏭',
     title: 'Industrial Inspection',
-    desc: 'Highly stable aerostructure components built for dangerous, complex monitoring of offshore rigs, pylons, and wind turbines.',
     highlight: false
   },
   {
     id: '03',
     icon: '🛡️',
     title: 'Defence & Surveillance',
-    desc: 'Mission-critical avionics & carbon frames engineered to withstand hostile conditions with encrypted telemetry links.',
     highlight: true // Custom highlighted card
   },
   {
     id: '04',
     icon: '🔬',
     title: 'Research & Aerospace',
-    desc: 'Custom developer platforms supporting flight dynamics research, swarming algorithms, and autonomous navigation.',
     highlight: false
   },
 ];
@@ -93,16 +88,8 @@ const Solutions = () => {
 
         {/* Centered Header Block */}
         <div className="text-center flex flex-col items-center mb-9 max-w-3xl mx-auto lg:mb-11">
-          <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2">CORE CAPABILITIES</span>
+          <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2"></span>
           <SectionHeader eyebrow="" title="Industries We" orangeTitle="Empower" centered />
-          <ScrollReveal
-            containerClassName="mt-2 max-w-3xl"
-            textClassName="text-muted text-body-lg text-center leading-relaxed"
-            baseOpacity={0.18}
-            baseRotation={1.5}
-          >
-            Our advanced UAV hardware and software solutions are engineered to adapt seamlessly across diverse applications, delivering unprecedented reliability.
-          </ScrollReveal>
         </div>
 
         {/* Content Row: 2x2 Grid + Image Column */}
@@ -110,11 +97,11 @@ const Solutions = () => {
 
           {/* Left Column: 2x2 Card Grid */}
           <div className="lg:col-span-7">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {industries.map((ind, i) => (
                 <div
                   key={i}
-                  className={`premium-solution-card p-8 rounded-none border transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between min-h-[260px] relative overflow-hidden group ${ind.highlight
+                  className={`premium-solution-card p-5 rounded-none border transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between min-h-[150px] relative overflow-hidden group ${ind.highlight
                       ? 'bg-skyroot border-skyroot text-white shadow-lg shadow-skyroot/20'
                       : 'bg-navy-50/10 border-border/60 text-black shadow-sm hover:shadow-md hover:bg-white hover:border-skyroot/40'
                     }`}
@@ -128,7 +115,7 @@ const Solutions = () => {
 
                   <div className="relative z-10">
                     {/* Webflow template style number & line header */}
-                    <div className="flex items-center justify-between gap-3 mb-6">
+                    <div className="flex items-center justify-between gap-3 mb-4">
                       <div className="flex items-center gap-2.5">
                         <span className={`font-heading font-bold text-lg leading-none ${ind.highlight ? 'text-white' : 'text-skyroot'}`}>
                           {ind.id}
@@ -138,13 +125,9 @@ const Solutions = () => {
                       <span className="text-2xl">{ind.icon}</span>
                     </div>
 
-                    <h4 className={`font-heading font-bold text-lg mb-3 ${ind.highlight ? 'text-white' : 'text-black'}`}>
+                    <h4 className={`font-heading font-bold text-lg mb-0 ${ind.highlight ? 'text-white' : 'text-black'}`}>
                       {ind.title}
                     </h4>
-
-                    <p className={`text-sm leading-relaxed ${ind.highlight ? 'text-white/90' : 'text-muted'}`}>
-                      {ind.desc}
-                    </p>
                   </div>
                 </div>
               ))}
@@ -172,3 +155,4 @@ const Solutions = () => {
 };
 
 export default Solutions;
+

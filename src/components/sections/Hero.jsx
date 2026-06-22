@@ -69,16 +69,15 @@ const Hero = () => {
       {/* Bottom-right: Body + Buttons */}
       <div className="absolute bottom-0 right-0 z-20 flex flex-col items-center gap-5 px-6 pb-14 text-center sm:px-10 sm:pb-16 md:items-end md:px-16 md:pb-20 md:text-right lg:px-20 lg:pb-24">
         <p className="hero-body max-w-[30rem] text-sm leading-relaxed tracking-wide text-white/80 sm:text-base md:text-body-lg">
-          Redefining unmanned aerial systems through innovative, indigenous solutions
-          designed to elevate performance and reliability.
+          
         </p>
 
         <div className="hero-btns flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4 md:justify-end">
           <Link to="/creations" className="btn-primary w-full justify-center sm:w-auto">
-            Explore Creations <ArrowForwardIcon sx={{ fontSize: 18 }} />
+            Creations <ArrowForwardIcon sx={{ fontSize: 18 }} />
           </Link>
           <Link to="/our-dna" className="btn-secondary w-full justify-center !border-white/30 !text-white hover:!border-skyroot hover:!text-skyroot sm:w-auto">
-            Discover Our DNA
+            Our DNA
           </Link>
         </div>
       </div>

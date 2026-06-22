@@ -1,11 +1,9 @@
 ﻿import { useRef } from 'react';
 import SEO from '../components/SEO';
-import DnaHero from '../components/sections/DnaHero';
 import FoundationSection from '../components/sections/FoundationSection';
 import CoreValuesSection from '../components/sections/CoreValuesSection';
 import VisionMissionSection from '../components/sections/VisionMissionSection';
 import PeopleSection from '../components/sections/PeopleSection';
-import DnaCtaSection from '../components/sections/DnaCtaSection';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
 
 const IMG = {
@@ -17,9 +15,9 @@ const IMG = {
 };
 
 const team = [
-  { name: 'Founders & Visionaries', desc: 'Aerospace veterans who believe India can lead the world in UAV innovation.', img: IMG.team1 },
-  { name: 'Engineers & Designers', desc: 'World-class talent engineering components with sub-millimetre precision.', img: IMG.team2 },
-  { name: 'Partners & Collaborators', desc: 'A growing ecosystem of industry, academic, and defence collaborators.', img: IMG.team3 },
+  { name: 'Founder 01', img: IMG.team1 },
+  { name: 'Founder 02', img: IMG.team2 },
+  { name: 'Founder 03', img: IMG.team3 },
 ];
 
 const OurDNA = () => {
@@ -29,14 +27,14 @@ const OurDNA = () => {
   return (
     <div ref={pageRef} className="overflow-hidden bg-white font-sans text-[#111111]">
       <SEO title="Our DNA" description="Killis Bird — Imagine, Ideate, Innovate. Where Precision Meets Innovation." />
-      <DnaHero />
       <FoundationSection image={IMG.dna} />
       <CoreValuesSection image={IMG.values} />
       <VisionMissionSection />
       <PeopleSection team={team} />
-      <DnaCtaSection />
     </div>
   );
 };
 
 export default OurDNA;
+
+

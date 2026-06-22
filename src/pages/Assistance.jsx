@@ -4,9 +4,7 @@ import ParallaxWatermark from '../components/ParallaxWatermark';
 import CornerBrackets from '../components/CornerBrackets';
 import ImageFrame from '../components/common/ImageFrame';
 import OrangeButton from '../components/common/OrangeButton';
-import SecondaryHero from '../components/common/SecondaryHero';
 import SecondarySectionIntro from '../components/common/SecondarySectionIntro';
-import SecondaryCta from '../components/common/SecondaryCta';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
 import TuneIcon from '@mui/icons-material/Tune';
 import EngineeringIcon from '@mui/icons-material/Engineering';
@@ -45,7 +43,6 @@ const Assistance = () => {
   return (
     <div ref={pageRef}>
       <SEO title="Assistance" description="Killis Bird support and consultancy services for UAV integration and after-sales." />
-      <SecondaryHero eyebrow="How We Support You" title="End-to-End" highlight="Assistance." description="From concept to deployment and beyond — we stand beside our partners at every stage of their journey." watermark="HELP" />
 
       <section data-stack-section className="bg-white py-[110px] max-sm:py-[72px]">
         <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
@@ -95,8 +92,6 @@ const Assistance = () => {
           </div>
         </div>
       </section>
-
-      <SecondaryCta title="Let Us Assist Your Next Mission" description="Reach out today and let our team craft a tailored support plan for your UAV programme." primaryLabel="Get in Touch" primaryTo="/contact" />
     </div>
   );
 };

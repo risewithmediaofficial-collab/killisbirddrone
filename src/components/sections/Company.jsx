@@ -7,14 +7,13 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import useParallax from '../../hooks/useParallax';
 import SectionHeader from '../SectionHeader';
 import CornerBrackets from '../CornerBrackets';
-import ScrollReveal from '../ScrollReveal';
 import SmartImage from '../SmartImage';
 
 const stats = [
-  { value: '500+', label: 'Components Delivered', desc: 'Precision drone parts shipped worldwide' },
-  { value: '20+', label: 'Industry Partners', desc: 'Trusted by major defence & agri operators' },
-  { value: '5+', label: 'Years Innovating', desc: 'Pioneering custom swarming firmware' },
-  { value: '100%', label: 'Made in India', desc: 'Indigenously designed and assembled' },
+  { value: '500+', label: 'Components Delivered',},
+  { value: '20+', label: 'Industry Partners',},
+  { value: '5+', label: 'Years Innovating',},
+  { value: '100%', label: 'Made in India',},
 ];
 
 const DnaImage = () => {
@@ -90,7 +89,7 @@ const Company = () => {
                 <CornerBrackets color="#f97316" size="8px" thickness="1.5px" hoverShift />
                 {/* Webflow template style number line */}
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="text-[10px] font-heading font-bold text-skyroot uppercase tracking-widest leading-none">KEY METRIC</span>
+                  <span className="text-[10px] font-heading font-bold text-skyroot uppercase tracking-widest leading-none"> </span>
                   <div className="h-[1px] bg-navy-200 group-hover:bg-skyroot w-8 transition-all duration-300" />
                 </div>
 
@@ -100,9 +99,6 @@ const Company = () => {
                 <div className="text-sm font-heading font-bold text-black uppercase tracking-wider mb-2">
                   {s.label}
                 </div>
-                <p className="text-xs text-muted leading-relaxed">
-                  {s.desc}
-                </p>
               </div>
             ))}
           </div>
@@ -118,22 +114,13 @@ const Company = () => {
 
           {/* Centered Header Block */}
           <div className="text-center flex flex-col items-center mb-9 max-w-3xl mx-auto lg:mb-11">
-            <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2">WHO WE ARE</span>
+            <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2"></span>
             <SectionHeader eyebrow="" title="The DNA of" orangeTitle="Killis Bird" centered />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center pb-8 lg:gap-12 lg:pb-10">
 
             <div className="dna-text space-y-6">
-              <ScrollReveal containerClassName="dna-reveal-item my-0" textClassName="text-muted text-body-lg leading-relaxed">
-                At Killis Birds, our core is precision engineered with imagination, ideation, and innovation.
-                This DNA powers the design and delivery of next-generation UAV components and solutions that
-                expand the possibilities of aerospace and defense.
-              </ScrollReveal>
-              <p className="dna-reveal-item text-muted text-body-lg leading-relaxed">
-                Each creation embodies visionary thinking, rigorous engineering, and uncompromising excellence
-                — we shape the future of flight.
-              </p>
 
               <blockquote className="dna-reveal-item border-l-2 border-skyroot pl-4 py-2 bg-navy-50/20 pr-4 rounded-r-xl">
                 <p className="font-heading font-bold text-black text-lg italic">
@@ -159,7 +146,7 @@ const Company = () => {
               <div className="dna-reveal-item pt-4">
                 <Link to="/our-dna" className="relative group inline-flex">
                   <span className="btn-primary !rounded-none !py-2.5 !px-6 relative z-10 bg-skyroot text-white font-heading font-bold transition-all duration-300">
-                    Explore Our DNA <ArrowForwardIcon sx={{ fontSize: 18, ml: 1 }} />
+                    Our DNA <ArrowForwardIcon sx={{ fontSize: 18, ml: 1 }} />
                   </span>
                   <CornerBrackets color="#f97316" size="6px" thickness="1.5px" hoverShift />
                 </Link>
@@ -187,3 +174,5 @@ const Company = () => {
 };
 
 export default Company;
+
+

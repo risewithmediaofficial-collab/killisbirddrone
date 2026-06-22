@@ -6,7 +6,6 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import SectionHeader from '../SectionHeader';
 import CornerBrackets from '../CornerBrackets';
 import ChromaGrid from '../ChromaGrid';
-import ScrollReveal from '../ScrollReveal';
 
 const products = [
   {
@@ -82,16 +81,8 @@ const Products = () => {
 
         {/* Centered Header Block */}
         <div className="text-center flex flex-col items-center mb-9 max-w-3xl mx-auto lg:mb-11">
-          <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2">OUR OFFERINGS</span>
+          <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2"></span>
           <SectionHeader eyebrow="" title="Best" orangeTitle="Creations" centered />
-          <ScrollReveal
-            containerClassName="mt-2 max-w-3xl"
-            textClassName="text-muted text-body-lg text-center leading-relaxed"
-            baseOpacity={0.18}
-            baseRotation={1.5}
-          >
-            Explore our custom series of high-precision components designed to optimize payload delivery, control reliability, and structural stamina.
-          </ScrollReveal>
         </div>
 
         <div className="premium-product-card">
@@ -113,3 +104,4 @@ const Products = () => {
 };
 
 export default Products;
+

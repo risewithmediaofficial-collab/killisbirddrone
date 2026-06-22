@@ -6,7 +6,6 @@ import ParallaxWatermark from '../components/ParallaxWatermark';
 import ScrollReveal from '../components/ScrollReveal';
 import ImageFrame from '../components/common/ImageFrame';
 import OrangeButton from '../components/common/OrangeButton';
-import SecondaryHero from '../components/common/SecondaryHero';
 import SecondarySectionIntro from '../components/common/SecondarySectionIntro';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
 
@@ -26,7 +25,6 @@ const Blog = () => {
   return (
     <div ref={pageRef}>
       <SEO title="Blog" description="Killis Bird — Insights, innovation stories, and technical perspectives." />
-      <SecondaryHero eyebrow="Insights & Ideas" title="The Killis Bird" highlight="Journal." description="Thought leadership, engineering insights, and innovation stories from the frontier of UAV technology." watermark="IDEAS" />
 
       <section data-stack-section className="bg-white py-[110px] max-sm:py-[72px]">
         <div className="mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-[clamp(44px,6vw,84px)] px-[clamp(20px,5vw,80px)] max-xl:grid-cols-1">

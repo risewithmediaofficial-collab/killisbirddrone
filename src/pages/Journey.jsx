@@ -1,13 +1,8 @@
-﻿import { useRef } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import WorkIcon from '@mui/icons-material/Work';
 import SEO from '../components/SEO';
 import ParallaxWatermark from '../components/ParallaxWatermark';
-import CornerBrackets from '../components/CornerBrackets';
-import ImageFrame from '../components/common/ImageFrame';
-import SecondaryHero from '../components/common/SecondaryHero';
-import SecondarySectionIntro from '../components/common/SecondarySectionIntro';
-import SecondaryCta from '../components/common/SecondaryCta';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
 
 const milestones = [
@@ -28,13 +23,6 @@ const openings = [
   { role: 'Supply Chain Manager', type: 'Full Time · Chennai', dept: 'Logistics' },
 ];
 
-const storyBands = [
-  { left: milestones[0], right: milestones[1], image: 'https://images.unsplash.com/photo-1524143986875-3b098d78b363?w=800&q=80', watermark: 'ORIGIN' },
-  { left: milestones[2], right: milestones[3], image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80', watermark: 'GROWTH' },
-  { left: milestones[4], right: milestones[5], image: 'https://images.unsplash.com/photo-1508444845599-5c89863b1c44?w=800&q=80', watermark: 'SWARM' },
-  { left: milestones[6], right: milestones[7], image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80', watermark: 'AVIONICS' },
-];
-
 const Journey = () => {
   const pageRef = useRef(null);
   useBookScrollEffects(pageRef);
@@ -42,41 +30,69 @@ const Journey = () => {
   return (
     <div ref={pageRef}>
       <SEO title="Journey" description="Killis Bird — Shape the Future With Us. Our story, milestones, and careers." />
-      <SecondaryHero eyebrow="Our Story" title="Shape the Future" highlight="With Us." description="From a single prototype to a globally trusted name — every milestone is a testament to our relentless pursuit of excellence." watermark="2025+" />
 
-      <section data-stack-section className="bg-white py-[110px] max-sm:py-[72px]">
-        <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
-          <SecondarySectionIntro eyebrow="Milestones" title="Our" highlight="Journey" description="A timeline of ideas, breakthroughs, partnerships, and bold engineering decisions that shaped Killis Bird." />
+      <section data-stack-section className="relative overflow-hidden bg-[linear-gradient(135deg,#fff8f1_0%,#ffffff_48%,#fff1e6_100%)] py-[110px] max-sm:py-[72px]">
+        <ParallaxWatermark className="right-0 top-1/2 -translate-y-1/2 text-[clamp(7rem,14vw,18rem)] text-[#ff6b00]/[0.06]" speed={20}>TIMELINE</ParallaxWatermark>
+        <div className="relative mx-auto w-full max-w-[1260px] px-[clamp(20px,5vw,80px)]">
+          <div className="absolute bottom-16 left-1/2 top-16 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[#ff6b00]/45 to-transparent max-lg:left-[42px] max-lg:translate-x-0" aria-hidden="true" />
+
+          <div className="grid gap-9">
+            {milestones.map((milestone, index) => {
+              const isLeft = index % 2 === 0;
+
+              return (
+                <article key={milestone.year} className="book-reveal-card relative grid grid-cols-[1fr_88px_1fr] items-center gap-7 max-lg:grid-cols-[56px_1fr] max-lg:gap-5">
+                  <div className={`max-lg:hidden ${isLeft ? '' : 'col-start-3'}`}>
+                    <div className="group relative overflow-hidden rounded-[28px] border border-[#f1dfd1] bg-white/90 p-7 shadow-[0_22px_60px_rgba(17,21,26,0.08)] backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-[#ff6b00]/45 hover:shadow-[0_28px_70px_rgba(255,107,0,0.13)]">
+                      <span className="absolute right-[-34px] top-[-38px] text-[96px] font-extrabold leading-none text-[#ff6b00]/[0.06]">{milestone.year}</span>
+                      <p className="text-[13px] font-extrabold uppercase tracking-[0.18em] text-[#ff6b00]">{milestone.year}</p>
+                      <h3 className="mt-4 text-[28px] font-extrabold leading-[1.08] text-[#111111]">{milestone.title}</h3>
+                      <p className="mt-4 text-[15px] leading-[1.75] text-[#67707d]">{milestone.desc}</p>
+                    </div>
+                  </div>
+
+                  <div className="relative z-10 col-start-2 row-start-1 flex h-[88px] w-[88px] items-center justify-center rounded-full border border-[#ffd2ad] bg-white shadow-[0_16px_40px_rgba(255,107,0,0.18)] max-lg:col-start-1 max-lg:h-[56px] max-lg:w-[56px]">
+                    <span className="absolute h-[54px] w-[54px] rounded-full bg-[#ff6b00]/10 max-lg:h-[34px] max-lg:w-[34px]" aria-hidden="true" />
+                    <span className="relative flex h-[34px] w-[34px] items-center justify-center rounded-full bg-[#ff6b00] text-[13px] font-extrabold text-white max-lg:h-[24px] max-lg:w-[24px] max-lg:text-[11px]">{String(index + 1).padStart(2, '0')}</span>
+                  </div>
+
+                  <div className={`max-lg:hidden ${isLeft ? 'col-start-3' : 'col-start-1 row-start-1'}`}>
+                    <div className={`h-px bg-gradient-to-r ${isLeft ? 'from-[#ff6b00]/45 to-transparent' : 'from-transparent to-[#ff6b00]/45'}`} aria-hidden="true" />
+                  </div>
+
+                  <div className="lg:hidden">
+                    <div className="relative overflow-hidden rounded-[24px] border border-[#f1dfd1] bg-white/90 p-6 shadow-[0_18px_46px_rgba(17,21,26,0.08)] backdrop-blur">
+                      <p className="text-[12px] font-extrabold uppercase tracking-[0.18em] text-[#ff6b00]">{milestone.year}</p>
+                      <h3 className="mt-3 text-[24px] font-extrabold leading-[1.1] text-[#111111]">{milestone.title}</h3>
+                      <p className="mt-3 text-[15px] leading-[1.7] text-[#67707d]">{milestone.desc}</p>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {storyBands.map((band, index) => (
-        <section key={band.watermark} data-stack-section className={`relative overflow-hidden py-[110px] max-sm:py-[72px] ${index % 2 === 0 ? 'bg-[#fff8f1]' : 'bg-white'}`}>
-          <ParallaxWatermark className={`top-1/2 -translate-y-1/2 text-[clamp(6rem,12vw,15rem)] ${index % 2 === 0 ? 'left-0 text-[#ff6b00]/[0.06]' : 'right-0 text-[#111111]/[0.05]'}`} speed={22}>{band.watermark}</ParallaxWatermark>
-          <div className="relative mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-[clamp(44px,6vw,84px)] px-[clamp(20px,5vw,80px)] max-xl:grid-cols-1">
-            <div className={index % 2 === 1 ? 'xl:order-last' : ''}>
-              <div className="mt-10 grid gap-5">
-                {[band.left, band.right].map((milestone) => (
-                  <article key={milestone.year} className="book-reveal-card relative rounded-[18px] border border-[#f1dfd1] bg-white px-6 py-6 shadow-[0_18px_42px_rgba(17,21,26,0.06)]">
-                    <div className="text-[34px] font-extrabold leading-none text-[#ff6b00]">{milestone.year}</div>
-                    <h3 className="mt-4 text-[24px] font-extrabold text-[#111111]">{milestone.title}</h3>
-                    <p className="mt-3 text-[15px] leading-[1.78] text-[#67707d]">{milestone.desc}</p>
-                    <CornerBrackets color="#f97316" size="10px" thickness="1px" hoverShift />
-                  </article>
-                ))}
-              </div>
-            </div>
-            <div className={index % 2 === 1 ? 'xl:order-first' : ''}><ImageFrame variant="diagonal" src={band.image} alt={band.watermark} width="760" height="560" /></div>
-          </div>
-        </section>
-      ))}
-
-      <section data-stack-section className="bg-white py-[110px] max-sm:py-[72px]">
+      <section data-stack-section data-no-global-reveal className="bg-white pb-[64px] pt-[80px] max-sm:py-[56px]">
         <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
-          <SecondarySectionIntro eyebrow="Careers" title="Join the" highlight="Mission" description="We are always looking for passionate engineers, innovators, and dreamers who want to shape the future of flight." />
+          <div className="max-w-[760px]">
+            <div className="inline-flex items-center gap-3 text-[12px] font-extrabold uppercase tracking-[0.22em] text-[#ff6b00]">
+              <span className="h-px w-10 bg-[#ff6b00]" aria-hidden="true" />
+              Careers
+            </div>
+            <h2 className="mt-5 text-[clamp(42px,6vw,82px)] font-normal leading-[0.95] tracking-[-0.07em] text-[#111111]">
+              Join the <span className="text-[#ff6b00]">Mission</span>
+            </h2>
+            <span className="my-7 block h-[3px] w-[52px] bg-[#ff6b00]" aria-hidden="true" />
+            <p className="max-w-[640px] text-[17px] leading-[1.8] text-[#67707d]">
+              We are always looking for passionate engineers, innovators, and dreamers who want to shape the future of flight.
+            </p>
+          </div>
+
           <div className="mt-10 divide-y divide-[#f1dfd1] border-y border-[#f1dfd1]">
             {openings.map((opening, index) => (
-              <div key={opening.role} className="book-reveal-card flex flex-col gap-5 py-7 md:flex-row md:items-center md:justify-between">
+              <div key={opening.role} className="flex flex-col gap-5 py-7 md:flex-row md:items-center md:justify-between">
                 <div className="flex items-start gap-5">
                   <span className="pt-1 text-[32px] font-extrabold leading-none text-[#ff6b00]">0{index + 1}</span>
                   <div>
@@ -93,8 +109,6 @@ const Journey = () => {
           </div>
         </div>
       </section>
-
-      <SecondaryCta title="Be Part of Our Next Chapter" description="Whether through partnership, collaboration, or career — there is a place for you in the Killis Bird story." primaryLabel="Partner With Us" primaryTo="/contact" secondaryLabel="careers@killisbird.com" secondaryHref="mailto:careers@killisbird.com" />
     </div>
   );
 };

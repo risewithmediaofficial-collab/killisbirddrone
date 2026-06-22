@@ -5,23 +5,19 @@ import StarIcon from '@mui/icons-material/Star';
 import FadeIn from '../FadeIn';
 import SectionHeader from '../SectionHeader';
 import CornerBrackets from '../CornerBrackets';
-import ScrollReveal from '../ScrollReveal';
 
 const voices = [
   { 
     quote: 'Killis Bird components set a new benchmark for precision and reliability. Their custom UAV brushless motors and SWARM control systems completely transformed our telemetry operations.', 
     name: 'Rajiv Sharma', 
-    role: 'CTO, AeroVentures Ltd.' 
   },
   { 
     quote: 'The attention to aerostructural engineering detail is extraordinary. We have partnered with them for three consecutive custom drone fleet builds and achieved 100% mission success.', 
     name: 'Priya Nair', 
-    role: 'Director of Operations, DefenceTech Systems' 
   },
   { 
     quote: 'Unmatched structural integrity, lightweight carbon frames, and incredible technical support. Killis Bird is truly a world-class aerospace component partner.', 
     name: 'Arjun Menon', 
-    role: 'Head of Procurement, SkyAgri Corp' 
   },
 ];
 
@@ -79,15 +75,6 @@ const TrustedClients = () => {
         <div className="max-w-content mx-auto px-6 md:px-8">
           <div className="flex flex-col items-center justify-center text-center">
             <span className="text-[10px] font-heading font-bold text-muted uppercase tracking-widest block mb-4">OUR TRUSTED COLLABORATORS</span>
-            <ScrollReveal
-              containerClassName="max-w-2xl"
-              textClassName="text-sm uppercase tracking-[0.24em] text-black/70"
-              baseOpacity={0.22}
-              baseRotation={1}
-              blurStrength={6}
-            >
-              Built for demanding missions. Trusted by teams that cannot afford failure.
-            </ScrollReveal>
             <div className="flex flex-wrap justify-center items-center gap-y-4 gap-x-2 md:gap-x-8 mt-4">
               {partners.map((p, i) => (
                 <FadeIn key={i} delay={i * 0.05}>
@@ -108,3 +95,4 @@ const TrustedClients = () => {
 };
 
 export default TrustedClients;
+

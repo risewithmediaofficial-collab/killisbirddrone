@@ -21,12 +21,7 @@ const FoundationSection = ({ image }) => (
           The DNA of
         </SplitHeading>
         <span className="my-7 block h-[3px] w-[52px] bg-[#ff6b00]" aria-hidden="true" />
-        <div className="grid gap-5 [&_p]:text-lg [&_p]:leading-[1.78] [&_p]:text-[#67707d] max-sm:[&_p]:text-base">
-          <p>At Killis Bird, our core is precision engineered with imagination, ideation, and innovation.</p>
-          <p>This DNA powers the design and delivery of next-generation UAV components and solutions that expand the possibilities of aerospace and defence.</p>
-          <p>Each creation embodies visionary thinking, rigorous engineering, and uncompromising excellence — we shape the future of flight.</p>
-        </div>
-        <QuoteCard>The sky is not the limit — it is merely where we begin.</QuoteCard>
+        <QuoteCard>— we shape the future of flight.</QuoteCard>
         <p className="flex items-center gap-3 text-lg font-bold leading-[1.78] text-[#67707d] max-sm:text-base">
           <PublicIcon aria-hidden="true" sx={{ fontSize: 24, color: '#ff6b00' }} />
           <span className="text-[#ff6b00]">Built in India.</span> Trusted Worldwide.
@@ -47,3 +42,4 @@ const FoundationSection = ({ image }) => (
 );
 
 export default FoundationSection;
+

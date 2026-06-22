@@ -8,11 +8,6 @@ const SecondarySectionIntro = ({ eyebrow, title, highlight, description, centere
       {title}
     </SplitHeading>
     <span className={`my-7 block h-[3px] w-[52px] bg-[#ff6b00] ${centered ? 'mx-auto' : ''}`} aria-hidden="true" />
-    {description ? (
-      <p className={`text-lg leading-[1.78] text-[#67707d] max-sm:text-base ${centered ? 'mx-auto max-w-[720px]' : 'max-w-[720px]'}`.trim()}>
-        {description}
-      </p>
-    ) : null}
   </div>
 );
 

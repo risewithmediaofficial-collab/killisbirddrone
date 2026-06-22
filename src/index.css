@@ -73,9 +73,9 @@
   --text-secondary: #67707d;
   --border-soft: #f1dfd1;
   --dark-surface: #11151a;
-  --font-heading: 'Orbitron', 'PP Mori', 'Segoe UI', sans-serif;
+  --font-heading: 'Blinker', 'PP Mori', 'Segoe UI', sans-serif;
   --font-body: 'PP Mori', 'Inter', 'Segoe UI', sans-serif;
-  --font-display: 'Orbitron', 'PP Mori', 'Segoe UI', sans-serif;
+  --font-display: 'Blinker', 'PP Mori', 'Segoe UI', sans-serif;
   --font-label: 'PP Mori', 'Inter', 'Segoe UI', sans-serif;
   --fs-display: clamp(3.25rem, 7vw, 6rem);
   --fs-h1: clamp(2.5rem, 5.5vw, 4.75rem);
@@ -549,7 +549,7 @@
   .site-navbar__link {
     color: var(--text-primary);
     display: inline-flex;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Blinker', sans-serif;
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.1em;

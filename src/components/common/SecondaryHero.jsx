@@ -30,7 +30,6 @@ const SecondaryHero = ({ eyebrow, title, highlight, description, watermark }) =>
           {title}
         </SplitHeading>
         <span className="mx-auto my-7 block h-[3px] w-[58px] bg-[#ff6b00]" aria-hidden="true" />
-        <p className="mx-auto max-w-[720px] text-lg leading-[1.78] text-[#67707d] max-sm:text-base">{description}</p>
       </div>
       <span className="absolute bottom-2 right-[clamp(20px,5vw,80px)] h-[72px] w-[72px] border-b-2 border-r-2 border-[#ff6b00] max-sm:h-12 max-sm:w-12" aria-hidden="true" />
     </div>

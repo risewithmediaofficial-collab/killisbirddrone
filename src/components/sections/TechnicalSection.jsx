@@ -1,11 +1,11 @@
 // src/components/sections/TechnicalSection.jsx
-import React from 'react';
-import { motion } from 'framer-motion';
-import FadeIn from '../FadeIn';
-import useParallax from '../../hooks/useParallax';
-import ParallaxWatermark from '../ParallaxWatermark';
-import SectionHeader from '../SectionHeader';
-import SmartImage from '../SmartImage';
+import React from "react";
+import { motion } from "framer-motion";
+import FadeIn from "../FadeIn";
+import useParallax from "../../hooks/useParallax";
+import ParallaxWatermark from "../ParallaxWatermark";
+import SectionHeader from "../SectionHeader";
+import SmartImage from "../SmartImage";
 
 const NewGenImage = () => {
   const ref = useParallax(20);
@@ -24,16 +24,22 @@ const NewGenImage = () => {
           whileTap={{ scale: 0.95 }}
           className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-skyroot rounded-none flex items-center justify-center shadow-soft cursor-pointer relative group"
         >
-          <span className="text-white text-2xl sm:text-3xl pl-0.5 sm:pl-1">▶</span>
+          <span className="text-white text-2xl sm:text-3xl pl-0.5 sm:pl-1">
+            ▶
+          </span>
         </motion.div>
       </div>
       <motion.div
         animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
         className="absolute right-3 bottom-3 sm:right-6 sm:bottom-6 bg-white rounded-none border border-border p-2.5 sm:p-4 shadow-card z-10"
       >
-        <p className="font-heading font-bold text-black text-lg sm:text-2xl leading-none">4K+</p>
-        <p className="text-muted text-[10px] sm:text-xs font-medium mt-0.5 sm:mt-1">Flight Hours Tested</p>
+        <p className="font-heading font-bold text-black text-lg sm:text-2xl leading-none">
+          4K+
+        </p>
+        <p className="text-muted text-[10px] sm:text-xs font-medium mt-0.5 sm:mt-1">
+          Flight Hours Tested
+        </p>
       </motion.div>
     </div>
   );
@@ -41,17 +47,24 @@ const NewGenImage = () => {
 
 const TechnicalSection = () => {
   return (
-    <section data-stack-section className="bg-navy-50 relative overflow-hidden px-4 py-[72px] sm:px-6 md:px-8 lg:py-[88px]">
-      <ParallaxWatermark className="left-0 top-1/2 -translate-y-1/2 text-[clamp(4rem,12vw,14rem)] text-navy-200/20" speed={20}>
+    <section
+      data-stack-section
+      className="bg-navy-50 relative overflow-hidden px-4 py-[72px] sm:px-6 md:px-8 lg:py-[88px]"
+    >
+      <ParallaxWatermark
+        className="left-0 top-1/2 -translate-y-1/2 text-[clamp(4rem,12vw,14rem)] text-navy-200/20"
+        speed={20}
+      >
         A NEW GEN
       </ParallaxWatermark>
       <div className="max-w-content mx-auto px-4 sm:px-6 md:px-8 relative z-10">
         <FadeIn className="text-center flex flex-col items-center">
-          <SectionHeader eyebrow="Next Gen" title="A New Gen of" orangeTitle="UAV Solutions" centered />
-          <p className="text-muted text-sm sm:text-body-lg max-w-xl mx-auto mb-6 sm:mb-10 text-center leading-relaxed">
-            Whether you are building for precision agriculture, industrial applications,
-            advanced surveillance or defense — Killis Birds is your trusted collaborator in flight.
-          </p>
+          <SectionHeader
+            eyebrow=""
+            title="A New Gen of"
+            orangeTitle="UAV Solutions"
+            centered
+          />
         </FadeIn>
 
         <FadeIn delay={0.2}>

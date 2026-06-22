@@ -7,7 +7,6 @@ const FeatureCard = ({ icon: Icon, title, children, className = '' }) => (
     <div>
       <h3 className="mb-3 text-[26px] font-extrabold text-[#111111]">{title}</h3>
       <span className="mb-4 block h-0.5 w-12 bg-[#ff6b00]" aria-hidden="true" />
-      <p className="text-[17px] leading-[1.72] text-[#67707d]">{children}</p>
     </div>
   </article>
 );

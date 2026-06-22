@@ -2,7 +2,7 @@
 import React, { Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/sections/Hero';
-import ScrollVideoCanvas from './components/ScrollVideoCanvas';
+// import ScrollVideoCanvas from './components/ScrollVideoCanvas';
 import SmoothScroll from './components/SmoothScroll';
 import SectionLoader from './components/SectionLoader';
 import ScrollToTop from './components/ScrollToTop';
@@ -15,10 +15,7 @@ import QuickContactBar from './components/QuickContactBar';
 const Company = lazy(() => import('./components/sections/Company'));
 const Solutions = lazy(() => import('./components/sections/Solutions'));
 const Products = lazy(() => import('./components/sections/Products'));
-const TechnicalSection = lazy(() => import('./components/sections/TechnicalSection'));
 const TrustedClients = lazy(() => import('./components/sections/TrustedClients'));
-const Careers = lazy(() => import('./components/sections/Careers'));
-const CTA = lazy(() => import('./components/sections/CTA'));
 const Footer = lazy(() => import('./components/Footer'));
 
 const App = () => {
@@ -39,13 +36,10 @@ const App = () => {
         <SmoothScroll>
           <Suspense fallback={<SectionLoader />}>
             <Company />
-            <ScrollVideoCanvas />
+            {/* <ScrollVideoCanvas /> */}
             <Solutions />
             <Products />
-            <TechnicalSection />
             <TrustedClients />
-            <Careers />
-            <CTA />
             <Footer />
           </Suspense>
         </SmoothScroll>

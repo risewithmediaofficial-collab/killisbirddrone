@@ -11,7 +11,6 @@ const DnaCtaSection = () => (
         </p>
         <h2 id="dna-cta-title" className="relative z-[1] max-w-[820px] font-heading text-[clamp(38px,5vw,72px)] font-normal leading-[1.06] tracking-[-0.055em] text-white">Ready to Build the Future With Us?</h2>
         <p className="relative z-[1] my-7 max-w-[620px] text-lg leading-[1.75] text-white/80">
-          Whether you are an industry pioneer or an emerging innovator, Killis Bird is your trusted partner in flight.
         </p>
         <OrangeButton to="/contact" aria-label="Partner with Killis Bird" className="relative z-[1] bg-white text-[#070707] hover:bg-[#fff0e5] focus-visible:bg-[#fff0e5]">
           Partner With Us

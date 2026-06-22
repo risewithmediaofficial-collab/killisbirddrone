@@ -6,7 +6,6 @@ import WorkIcon from '@mui/icons-material/Work';
 import FadeIn from '../FadeIn';
 import SectionHeader from '../SectionHeader';
 import CornerBrackets from '../CornerBrackets';
-import ScrollReveal from '../ScrollReveal';
 import SmartImage from '../SmartImage';
 
 const openingsSummary = [
@@ -24,16 +23,8 @@ const Careers = () => {
 
         {/* Centered Header Block */}
         <div className="text-center flex flex-col items-center mb-16 max-w-3xl mx-auto">
-          <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2">JOIN OUR MISSION</span>
+          <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2"></span>
           <SectionHeader eyebrow="" title="Build the Next" orangeTitle="UAV Generation" centered />
-          <ScrollReveal
-            containerClassName="mt-2 max-w-3xl"
-            textClassName="text-muted text-body-lg text-center leading-relaxed"
-            baseOpacity={0.18}
-            baseRotation={1.5}
-          >
-            We are constantly pushing boundaries in structural design, swarming logic, and power systems. Join a team where you can actually make an impact on real aerospace hardware.
-          </ScrollReveal>
         </div>
 
         {/* Content Grid: Left image with pattern, Right openings */}
@@ -92,7 +83,7 @@ const Careers = () => {
             <div className="pt-2 flex justify-center sm:justify-start">
               <Link to="/journey" className="relative group inline-flex">
                 <span className="btn-primary !rounded-none !py-2.5 !px-6 relative z-10 bg-skyroot text-white font-heading font-bold transition-all duration-300">
-                  Explore All Job Openings <ArrowForwardIcon sx={{ fontSize: 18, ml: 1 }} />
+                  All Job Openings <ArrowForwardIcon sx={{ fontSize: 18, ml: 1 }} />
                 </span>
                 <CornerBrackets color="#f97316" size="6px" thickness="1.5px" hoverShift />
               </Link>
@@ -106,3 +97,4 @@ const Careers = () => {
 };
 
 export default Careers;
+

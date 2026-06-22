@@ -41,7 +41,7 @@ const CTA = () => {
           </Link>
           <Link to="/creations" className="relative group inline-flex">
             <span className="inline-flex items-center gap-2 border border-white/40 hover:border-white text-white font-heading font-bold px-8 py-3 rounded-none transition-all duration-300 text-sm relative z-10 bg-transparent">
-              Explore Creations
+              Creations
             </span>
             <CornerBrackets color="#ffffff" size="6px" thickness="1.5px" hoverShift />
           </Link>

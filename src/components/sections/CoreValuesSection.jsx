@@ -39,7 +39,6 @@ const CoreValuesSection = ({ image }) => (
           What Drives
         </SplitHeading>
         <span className="my-7 block h-[3px] w-[52px] bg-[#ff6b00]" aria-hidden="true" />
-        <p className="text-lg leading-[1.78] text-[#67707d] max-sm:text-base">At Killis Bird, our core values shape every decision, design, and innovation — powering the future of flight.</p>
       </div>
       <div className="grid grid-cols-[minmax(0,1.05fr)_minmax(420px,0.95fr)] items-center gap-[clamp(44px,6vw,84px)] max-xl:grid-cols-1">
         <ImageFrame
@@ -62,3 +61,4 @@ const CoreValuesSection = ({ image }) => (
 );
 
 export default CoreValuesSection;
+

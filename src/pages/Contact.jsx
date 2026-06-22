@@ -40,7 +40,7 @@ const Contact = () => {
   return (
     <div ref={pageRef}>
       <SEO title="Contact Us" description="Request a quote or get in touch with the Killis Bird team." />
-      <SecondaryHero eyebrow="Get In Touch" title="Let's Build Something" highlight="Extraordinary." description="Whether you are ready to partner, need a custom component, or simply want to explore possibilities — we are here." watermark="HELLO" />
+      <SecondaryHero eyebrow="Get In Touch" title="Let's Build Something" highlight="Extraordinary." description="Whetheryou are ready to partner, need a custom component, or simply want to explore possibilities — we are here." watermark="HELLO" />
 
       <section data-stack-section className="relative overflow-hidden bg-[#fff8f1] py-[110px] max-sm:py-[72px]">
         <ParallaxWatermark className="left-0 top-1/2 -translate-y-1/2 text-[clamp(7rem,16vw,20rem)] text-[#111111]/[0.05]" speed={18}>CONNECT</ParallaxWatermark>
