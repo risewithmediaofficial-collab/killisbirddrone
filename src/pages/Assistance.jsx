@@ -1,4 +1,4 @@
-﻿import { useRef } from 'react';
+import { useRef } from 'react';
 import SEO from '../components/SEO';
 import ParallaxWatermark from '../components/ParallaxWatermark';
 import CornerBrackets from '../components/CornerBrackets';
@@ -14,12 +14,12 @@ import SchoolIcon from '@mui/icons-material/School';
 import VerifiedIcon from '@mui/icons-material/Verified';
 
 const services = [
-  { Icon: TuneIcon, title: 'Component Customization',},
-  { Icon: EngineeringIcon, title: 'Technical Consultation', },
-  { Icon: LocalShippingIcon, title: 'Supply Chain Support',},
-  { Icon: SupportAgentIcon, title: 'After-Sales Service',},
-  { Icon: SchoolIcon, title: 'Training & Knowledge Transfer'},
-  { Icon: VerifiedIcon, title: 'Warranty & Quality Assurance',},
+  { Icon: TuneIcon, title: 'Component Customization' },
+  { Icon: EngineeringIcon, title: 'Technical Consultation' },
+  { Icon: LocalShippingIcon, title: 'Supply Chain Support' },
+  { Icon: SupportAgentIcon, title: 'After-Sales Service' },
+  { Icon: SchoolIcon, title: 'Training & Knowledge Transfer' },
+  { Icon: VerifiedIcon, title: 'Warranty & Quality Assurance' }
 ];
 
 const steps = [
