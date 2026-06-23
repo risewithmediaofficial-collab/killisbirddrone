@@ -78,7 +78,6 @@ const DnaHero = () => {
             <span className="dna-hero-word block text-[#ff6b00]">Innovate.</span>
           </h1>
           <p className="dna-hero-reveal mt-3 font-serif text-[clamp(15px,1.2vw,18px)] italic text-[#11151a] max-sm:text-[15px]">“Where Precision Meets Innovation”</p>
-          <span className="dna-hero-reveal my-3 block h-1 w-[36px] bg-[#ff6b00]" aria-hidden="true" />
         </div>
 
         <div className="relative min-h-[360px] overflow-hidden rounded-[32px] border border-[#f1dfd1] bg-[radial-gradient(circle_at_72%_20%,#fff_0_18%,transparent_19%),linear-gradient(135deg,#fff8f1,#fff1e6)] shadow-[0_18px_44px_rgba(17,21,26,0.06)] max-lg:min-h-[320px] max-sm:min-h-[260px]" aria-label="Killis Bird UAV technology visual">

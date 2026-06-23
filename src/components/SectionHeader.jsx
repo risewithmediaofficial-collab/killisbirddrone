@@ -18,7 +18,6 @@ const SectionHeader = ({ eyebrow, title, orangeTitle, centered = true, className
         baseRotation={2}
         blurStrength={8}
       />
-      <div className={`divider-bar mt-1 ${centered ? 'mx-auto' : ''}`} />
     </div>
   );
 };
