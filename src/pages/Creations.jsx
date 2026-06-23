@@ -1,4 +1,4 @@
-﻿import { useRef } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import SEO from "../components/SEO";
@@ -92,7 +92,6 @@ const Creations = () => {
         title="Creations"
         description="Killis Bird — Engineered for Excellence. Precision UAV components and solutions."
       />
-      4
       {categories.map(
         ({ num, category, tagline, items, img, watermark }, index) => (
           <section
