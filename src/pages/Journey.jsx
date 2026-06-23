@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import WorkIcon from '@mui/icons-material/Work';
 import SEO from '../components/SEO';
 import ParallaxWatermark from '../components/ParallaxWatermark';
-import FlowingMenu from '../components/FlowingMenu';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
 
 const milestones = [
@@ -80,7 +79,7 @@ const Journey = () => {
     <div ref={pageRef}>
       <SEO title="Journey" description="Killis Bird — Shape the Future With Us. Our story, milestones, and careers." />
 
-      {/* ── MILESTONES: FlowingMenu ── */}
+      {/* ── MILESTONES: Vertical Timeline ── */}
       <section data-stack-section className="relative overflow-hidden bg-white">
         {/* Section header */}
         <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)] pt-[80px] pb-[48px]">
@@ -92,10 +91,11 @@ const Journey = () => {
           </ParallaxWatermark>
           <div className="relative z-10">
             <div className="inline-flex items-center gap-3 text-[12px] font-extrabold uppercase tracking-[0.22em] text-[#ff6b00]">
-              
+              <span className="h-px w-10 bg-[#ff6b00]" aria-hidden="true" />
+              Our Journey
             </div>
             <h2 className="mt-5 text-[clamp(36px,5vw,72px)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[#111111]">
-               <span className="text-[#ff6b00]"></span>
+              Milestones <span className="text-[#ff6b00]">That Define Us</span>
             </h2>
             <p className="max-w-[560px] text-[16px] leading-[1.8] text-[#67707d]">
               From a bold idea in 2018 to a globally trusted UAV component brand — every year marks a new chapter in our pursuit of precision and innovation.
@@ -103,17 +103,76 @@ const Journey = () => {
           </div>
         </div>
 
-        {/* FlowingMenu milestones */}
-        <div style={{ height: `${milestones.length * 88}px`, minHeight: '600px', position: 'relative' }}>
-          <FlowingMenu
-            items={milestones}
-            speed={18}
-            textColor="#111111"
-            bgColor="#ffffff"
-            marqueeBgColor="#ff6b00"
-            marqueeTextColor="#ffffff"
-            borderColor="rgba(17,21,26,0.1)"
+        {/* Vertical Timeline */}
+        <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)] py-16">
+          {/* Vertical central line */}
+          <div 
+            className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-[#f1dfd1]/80 -translate-x-1/2 max-lg:left-[47px] max-lg:translate-x-0" 
+            aria-hidden="true" 
           />
+
+          <div className="relative z-10 flex flex-col gap-16 lg:gap-24">
+            {milestones.map((m, index) => {
+              const year = m.eyebrow;
+              const title = m.text;
+              const desc = m.desc;
+              const number = index + 1 < 10 ? `0${index + 1}` : index + 1;
+              const isEven = index % 2 === 0;
+
+              return (
+                <div 
+                  key={index}
+                  className="relative grid grid-cols-2 gap-24 items-center max-lg:grid-cols-1 max-lg:pl-[70px]"
+                >
+                  {/* Central node circle */}
+                  <div 
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-[54px] h-[54px] rounded-full bg-white border border-[#f1dfd1]/80 shadow-[0_8px_24px_rgba(255,107,0,0.08)] max-lg:left-[47px] max-lg:translate-x-0 max-lg:top-[28px] max-lg:-translate-y-0"
+                    aria-hidden="true"
+                  >
+                    <div className="w-9 h-9 rounded-full bg-[#ff6b00] flex items-center justify-center text-white text-[13px] font-extrabold">
+                      {number}
+                    </div>
+                  </div>
+
+                  {/* Card Container */}
+                  <div 
+                    className={`w-full flex ${
+                      isEven ? 'lg:justify-end' : 'lg:justify-start lg:col-start-2'
+                    }`}
+                  >
+                    {/* The Card */}
+                    <div 
+                      className={`relative overflow-hidden w-full max-w-[540px] rounded-[24px] border border-[#f1dfd1]/70 bg-white p-8 md:p-10 shadow-[0_12px_44px_rgba(17,21,26,0.04)] hover:shadow-[0_20px_54px_rgba(255,107,0,0.06)] hover:border-[#ff6b00]/30 transition-all duration-500 group reveal-card ${
+                        isEven 
+                          ? 'lg:before:right-[-48px] lg:before:-translate-x-1/2' 
+                          : 'lg:before:left-[-48px] lg:before:translate-x-1/2'
+                      } before:absolute before:top-1/2 before:-translate-y-1/2 before:w-12 before:h-[2px] before:bg-[#f1dfd1]/80 before:hidden lg:before:block max-lg:before:block max-lg:before:left-[-42px] max-lg:before:w-[42px] max-lg:before:top-[55px]`}
+                    >
+                      {/* Faded year watermark */}
+                      <span 
+                        className="absolute right-6 bottom-2 font-heading text-[clamp(4.5rem,8vw,8rem)] font-extrabold tracking-tight text-[#ff6b00]/[0.03] select-none pointer-events-none z-0 transition-transform duration-700 group-hover:scale-105"
+                        aria-hidden="true"
+                      >
+                        {year}
+                      </span>
+
+                      <div className="relative z-10">
+                        <span className="text-[#ff6b00] font-extrabold text-[14px] tracking-wider uppercase">
+                          {year}
+                        </span>
+                        <h3 className="mt-3 text-[26px] md:text-[30px] font-extrabold leading-tight text-[#111111] tracking-tight group-hover:text-[#ff6b00] transition-colors duration-300">
+                          {title}
+                        </h3>
+                        <p className="mt-4 text-[15px] leading-[1.8] text-[#67707d]">
+                          {desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 

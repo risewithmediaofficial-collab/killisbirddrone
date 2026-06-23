@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import SEO from '../components/SEO';
 import ParallaxWatermark from '../components/ParallaxWatermark';
-import CornerBrackets from '../components/CornerBrackets';
 import ImageFrame from '../components/common/ImageFrame';
 import OrangeButton from '../components/common/OrangeButton';
 import SecondarySectionIntro from '../components/common/SecondarySectionIntro';
@@ -46,7 +45,7 @@ const Assistance = () => {
 
       <section data-stack-section className="bg-white py-[64px] max-sm:py-[44px]">
         <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
-          <SecondarySectionIntro eyebrow="What We Offer" title="" highlight="" description="Every engagement is tailored to deliver mission-ready performance, dependable integration, and long-term support." />
+          <SecondarySectionIntro eyebrow="What We Offer" title="Our Support" highlight="Services" description="Every engagement is tailored to deliver mission-ready performance, dependable integration, and long-term support." />
         </div>
       </section>
 

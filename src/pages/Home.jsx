@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import { useEffect, useRef, useLayoutEffect } from "react";
+import {  useRef, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
@@ -7,12 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SEO from "../components/SEO";
 import FadeIn from "../components/FadeIn";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import StarIcon from "@mui/icons-material/Star";
 import useParallax from "../hooks/useParallax";
 import useTextReveal from "../hooks/useTextReveal";
-import useGsapReveal from "../hooks/useGsapReveal";
 import ParallaxWatermark from "../components/ParallaxWatermark";
 import SectionHeader from "../components/SectionHeader";
 import CornerBrackets from "../components/CornerBrackets";
