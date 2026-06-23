@@ -46,7 +46,7 @@ const Assistance = () => {
 
       <section data-stack-section className="bg-white py-[64px] max-sm:py-[44px]">
         <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
-          <SecondarySectionIntro eyebrow="What We Offer" title="Our Support" highlight="Services" description="Every engagement is tailored to deliver mission-ready performance, dependable integration, and long-term support." />
+          <SecondarySectionIntro eyebrow="What We Offer" title="" highlight="" description="Every engagement is tailored to deliver mission-ready performance, dependable integration, and long-term support." />
         </div>
       </section>
 

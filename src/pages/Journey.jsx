@@ -92,11 +92,10 @@ const Journey = () => {
           </ParallaxWatermark>
           <div className="relative z-10">
             <div className="inline-flex items-center gap-3 text-[12px] font-extrabold uppercase tracking-[0.22em] text-[#ff6b00]">
-              <span className="h-px w-10 bg-[#ff6b00]" aria-hidden="true" />
-              Our Journey
+              
             </div>
             <h2 className="mt-5 text-[clamp(36px,5vw,72px)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[#111111]">
-              Milestones <span className="text-[#ff6b00]">That Define Us</span>
+               <span className="text-[#ff6b00]"></span>
             </h2>
             <p className="max-w-[560px] text-[16px] leading-[1.8] text-[#67707d]">
               From a bold idea in 2018 to a globally trusted UAV component brand — every year marks a new chapter in our pursuit of precision and innovation.
