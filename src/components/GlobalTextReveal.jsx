@@ -19,7 +19,7 @@ const GlobalTextReveal = () => {
           'section p, section li, section blockquote, section h3, section h4'
         )
       ).filter(node => {
-        if (node.closest('form, nav, footer, button, a, label, [data-no-global-reveal], .reveal-group, .book-reveal-card')) return false;
+        if (node.closest('form, nav, footer, button, a, label, [data-no-global-reveal], .reveal-group, .book-reveal-card, .book-reveal-text')) return false;
         if (node.classList.contains('scroll-reveal-text')) return false;
         if (node.dataset.textAnimated === 'true') return false;
         return node.textContent?.trim().length > 18;
@@ -28,7 +28,7 @@ const GlobalTextReveal = () => {
       const imageTargets = Array.from(
         document.querySelectorAll('section img')
       ).filter(node => {
-        if (node.closest('nav, footer, button, a, [data-no-global-reveal], .image-frame, .book-reveal-card')) return false;
+        if (node.closest('nav, footer, button, a, [data-no-global-reveal], .image-frame, .book-reveal-card, .book-reveal-text')) return false;
         if (node.dataset.imageAnimated === 'true') return false;
         return true;
       });

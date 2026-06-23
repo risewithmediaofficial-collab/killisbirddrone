@@ -56,15 +56,13 @@ const Assistance = () => {
           <div className="relative mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-[clamp(44px,6vw,84px)] px-[clamp(20px,5vw,80px)] max-xl:grid-cols-1">
             <div className={index % 2 === 1 ? 'xl:order-last' : ''}>
               <SecondarySectionIntro eyebrow={`0${index + 1} ${group.title}`} title={group.title} description="Specialist expertise, fast response, and dependable execution at every stage." className="max-w-[640px]" />
-              <div className="mt-10 grid gap-5">
+              <div className="mt-10 grid gap-8">
                 {group.items.map(({ Icon, title, desc }) => (
-                  <article key={title} className="book-reveal-card relative rounded-[18px] border border-[#f1dfd1] bg-white px-6 py-6 shadow-[0_18px_42px_rgba(17,21,26,0.06)]">
-                    <div className="flex items-start gap-4">
-                      <span className="flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-[14px] bg-[#fff0e5] text-[#ff6b00]"><Icon sx={{ fontSize: 28 }} /></span>
-                      <div>
-                        <h3 className="text-[21px] font-extrabold text-[#111111]">{title}</h3>
-                        <p className="mt-3 text-[15px] leading-[1.78] text-[#67707d]">{desc}</p>
-                      </div>
+                  <article key={title} className="book-reveal-text relative flex items-start gap-4 border-b border-[#f1dfd1]/40 pb-6 last:border-b-0 last:pb-0">
+                    <span className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[12px] bg-[#fff0e5] text-[#ff6b00]"><Icon sx={{ fontSize: 26 }} /></span>
+                    <div>
+                      <h3 className="text-[21px] font-extrabold text-[#111111]">{title}</h3>
+                      <p className="mt-2 text-[15px] leading-[1.78] text-[#67707d]">{desc}</p>
                     </div>
                   </article>
                 ))}
@@ -79,14 +77,12 @@ const Assistance = () => {
       <section data-stack-section className="bg-white py-[64px] max-sm:py-[44px]">
         <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
           <SecondarySectionIntro eyebrow="How It Works" title="Our" highlight="Process" description="A transparent workflow designed to move from idea to mission-ready delivery with speed and confidence." />
-          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-5">
-            {steps.map((step, index) => (
-              <article key={step.num} className="book-reveal-card relative min-h-[210px] rounded-[18px] border border-[#f1dfd1] bg-[#fff8f1] p-6 shadow-[0_16px_36px_rgba(17,21,26,0.05)]">
+          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-5">
+            {steps.map((step) => (
+              <article key={step.num} className="book-reveal-text relative">
                 <div className="text-[40px] font-extrabold leading-none text-[#ff6b00]">{step.num}</div>
-                <h3 className="mt-5 text-[20px] font-extrabold text-[#111111]">{step.label}</h3>
-                <p className="mt-3 text-[15px] leading-[1.78] text-[#67707d]">{step.desc}</p>
-                {index < steps.length - 1 ? <span className="absolute right-[-10px] top-1/2 hidden h-[2px] w-5 bg-[#ff6b00]/35 md:block" aria-hidden="true" /> : null}
-                <CornerBrackets color="#f97316" size="10px" thickness="1px" hoverShift />
+                <h3 className="mt-4 text-[20px] font-extrabold text-[#111111]">{step.label}</h3>
+                <p className="mt-2 text-[15px] leading-[1.78] text-[#67707d]">{step.desc}</p>
               </article>
             ))}
           </div>

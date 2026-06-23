@@ -42,17 +42,17 @@ const Blog = () => {
         <ParallaxWatermark className="left-0 top-1/2 -translate-y-1/2 text-[clamp(6rem,14vw,18rem)] text-[#ff6b00]/[0.06]" speed={20}>BLOG</ParallaxWatermark>
         <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
           <SecondarySectionIntro eyebrow="More Articles" title="Latest" highlight="Perspectives" description="A curated stream of engineering viewpoints, policy updates, and innovation stories shaping the future of flight." />
-          <div className="mt-12 grid gap-7 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-12 grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
             {posts.slice(1).map((post) => (
-              <article key={post.title} className="book-reveal-card overflow-hidden rounded-[20px] border border-[#f1dfd1] bg-white shadow-[0_18px_42px_rgba(17,21,26,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(17,21,26,0.1)]">
-                <ImageFrame variant="landscape" src={post.img} alt={post.title} width="760" height="420" className="min-h-[280px]" />
-                <div className="px-6 pb-7 pt-6">
+              <article key={post.title} className="book-reveal-text group">
+                <ImageFrame variant="landscape" src={post.img} alt={post.title} width="760" height="420" className="min-h-[280px] rounded-[18px]" />
+                <div className="mt-5">
                   <div className="flex flex-wrap items-center gap-3 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#ff6b00]">
                     <span>{post.tag}</span><span className="h-1 w-1 rounded-full bg-[#ff6b00]" aria-hidden="true" /><span className="text-[#67707d]">{post.date}</span>
                   </div>
-                  <h3 className="mt-4 text-[24px] font-extrabold leading-[1.2] text-[#111111]">{post.title}</h3>
+                  <h3 className="mt-3 text-[24px] font-extrabold leading-[1.2] text-[#111111] transition-colors duration-300 group-hover:text-[#ff6b00]">{post.title}</h3>
                   <p className="mt-3 text-[15px] leading-[1.78] text-[#67707d]">{post.excerpt}</p>
-                  <Link to="/contact" className="mt-5 inline-flex items-center gap-2 text-[14px] font-extrabold text-[#ff6b00] transition-colors duration-300 hover:text-[#e85f00]">
+                  <Link to="/contact" className="mt-4 inline-flex items-center gap-2 text-[14px] font-extrabold text-[#ff6b00] transition-colors duration-300 hover:text-[#e85f00]">
                     <span>Read More</span><ArrowForwardIcon sx={{ fontSize: 18 }} />
                   </Link>
                 </div>
@@ -65,7 +65,7 @@ const Blog = () => {
       <section data-stack-section className="bg-white py-[64px] max-sm:py-[44px]">
         <div className="mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.48fr)_minmax(0,0.52fr)] items-center gap-[clamp(44px,6vw,84px)] px-[clamp(20px,5vw,80px)] max-xl:grid-cols-1">
           <div><SecondarySectionIntro eyebrow="Newsletter" title="Stay Ahead of" highlight="the Curve" description="Subscribe to our newsletter for the latest UAV engineering insights delivered directly to your inbox." /></div>
-          <form className="book-reveal-card rounded-[20px] border border-[#f1dfd1] bg-[#fff8f1] p-7 shadow-[0_18px_42px_rgba(17,21,26,0.06)]" onSubmit={(event) => event.preventDefault()}>
+          <form className="book-reveal-text rounded-[20px] bg-[#fff8f1] p-8" onSubmit={(event) => event.preventDefault()}>
             <label className="block text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#67707d]" htmlFor="newsletter-email">Email Address</label>
             <input id="newsletter-email" type="email" placeholder="Enter your email address" required className="mt-3 w-full border border-[#f1dfd1] bg-white px-5 py-4 text-sm text-[#111111] outline-none transition-all duration-300 placeholder:text-[#9aa3ad] focus:border-[#ff6b00] focus:ring-2 focus:ring-[#ff6b00]/15" />
             <div className="mt-5"><OrangeButton>Subscribe</OrangeButton></div>

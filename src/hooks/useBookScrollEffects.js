@@ -40,21 +40,21 @@ const useBookScrollEffects = (rootRef) => {
         );
       });
 
-      // ── Cards ───────────────────────────────────────────────────
-      gsap.utils.toArray('.book-reveal-card').forEach((card) => {
+      // ── Text reveal on scroll up and down ────────────────────────
+      gsap.utils.toArray('.book-reveal-text').forEach((el) => {
         gsap.fromTo(
-          card,
-          { y: 22, opacity: 0 },
+          el,
+          { y: 24, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: isMobile ? 0.5 : 0.75,
+            duration: isMobile ? 0.55 : 0.8,
             ease: 'power2.out',
             scrollTrigger: {
-              trigger: card,
+              trigger: el,
               start: isMobile ? 'top 97%' : 'top 92%',
-              toggleActions: 'play none none none',
-              once: true,
+              toggleActions: 'play reverse play reverse',
+              once: false,
             },
           },
         );

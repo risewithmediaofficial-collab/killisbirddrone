@@ -78,21 +78,21 @@ const Creations = () => {
                   description={tagline}
                   className="max-w-[640px]"
                 />
-                <div className="mt-10 grid gap-5">
+                <div className="mt-10 grid gap-8">
                   {items.map((item) => (
                     <article
                       key={item.name}
-                      className="book-reveal-card rounded-[18px] border border-[#f1dfd1] bg-white px-6 py-6 shadow-[0_18px_42px_rgba(17,21,26,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#ff6b00]/45"
+                      className="book-reveal-text border-b border-[#f1dfd1]/40 pb-6 last:border-0 last:pb-0"
                     >
                       <h3 className="text-[21px] font-extrabold text-[#111111]">
                         {item.name}
                       </h3>
-                      <p className="mt-3 text-[15px] leading-[1.78] text-[#67707d]">
+                      <p className="mt-2 text-[15px] leading-[1.78] text-[#67707d]">
                         {item.desc}
                       </p>
                       <Link
                         to="/contact"
-                        className="mt-4 inline-flex items-center gap-2 text-[14px] font-extrabold text-[#ff6b00] transition-colors duration-300 hover:text-[#e85f00]"
+                        className="mt-3 inline-flex items-center gap-2 text-[14px] font-extrabold text-[#ff6b00] transition-colors duration-300 hover:text-[#e85f00]"
                       >
                         <span>Request Quote</span>
                         <ArrowRightAltIcon sx={{ fontSize: 18 }} />

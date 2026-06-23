@@ -43,49 +43,7 @@ const stats = [
   { value: "100%", label: "Made in India" },
 ];
 
-const products = [
-  {
-    name: "High-Thrust Motor Series",
-    tag: "PROPULSION",
-    price: "Get Quote",
-    img: IMG.product1,
-  },
-  {
-    name: "Carbon Fibre Frame X3",
-    tag: "AIRFRAME",
-    price: "Get Quote",
-    img: IMG.product2,
-  },
-  {
-    name: "Swarm Control Module",
-    tag: "AVIONICS",
-    price: "Get Quote",
-    img: IMG.product3,
-  },
-];
 
-const industries = [
-  {
-    icon: "🌾",
-    title: "Precision Agriculture",
-    desc: "UAV solutions for accurate, efficient and sustainable yield optimisation.",
-  },
-  {
-    icon: "🏭",
-    title: "Industrial Inspection",
-    desc: "Aerial systems built for complex industrial monitoring operations.",
-  },
-  {
-    icon: "🛡️",
-    title: "Defence & Surveillance",
-    desc: "Mission-critical components engineered for reliability and adaptability.",
-  },
-  {
-    icon: "🔬",
-    title: "Research & Development",
-    desc: "Precision platforms supporting cutting-edge aerospace research.",
-  },
-];
 
 const voices = [
   {
@@ -132,20 +90,7 @@ const HeroBackground = () => {
   );
 };
 
-const DnaImage = () => {
-  const ref = useParallax(15);
-  return (
-    <div className="img-accent overflow-hidden rounded-2xl aspect-[4/3]">
-      <SmartImage
-        ref={ref}
-        src={IMG.dna}
-        alt="Killis Bird UAV engineering"
-        className="w-full h-[120%] object-cover"
-        loading="lazy"
-      />
-    </div>
-  );
-};
+
 
 const NewGenImage = () => {
   const ref = useParallax(20);
@@ -190,61 +135,12 @@ const NewGenImage = () => {
   );
 };
 
-const IndustriesMosaic = () => {
-  const col1Ref = useParallax(12);
-  const col2Ref = useParallax(-12);
-  return (
-    <div className="grid grid-cols-2 gap-4 h-[520px] overflow-hidden">
-      <div ref={col1Ref} className="flex flex-col gap-4 h-[115%]">
-        <div className="flex-1 rounded-2xl overflow-hidden">
-          <SmartImage
-            src={IMG.agriculture}
-            alt="Agricultural UAV"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-        <div className="h-40 rounded-2xl overflow-hidden">
-          <SmartImage
-            src={IMG.inspection}
-            alt="Industrial inspection drone"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      </div>
-      <div
-        ref={col2Ref}
-        className="flex flex-col gap-4 h-[115%] translate-y-[-8%]"
-      >
-        <div className="h-40 rounded-2xl overflow-hidden">
-          <SmartImage
-            src={IMG.defence}
-            alt="Defence UAV system"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-        <div className="flex-1 rounded-2xl overflow-hidden">
-          <SmartImage
-            src={IMG.research}
-            alt="Research drone platform"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
+
 
 /* ── Main Component ───────────────────────── */
 const Home = () => {
   const heroRef = useRef(null);
   const statsRef = useRef(null);
-  const productsRef = useRef(null);
-  const dnaRef = useRef(null);
-  const industriesRef = useRef(null);
 
   const heroHeadingRef = useTextReveal();
 
@@ -290,59 +186,7 @@ const Home = () => {
         },
       );
 
-      // Products stagger
-      gsap.fromTo(
-        ".product-card",
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: productsRef.current,
-            start: "top 80%",
-            once: true,
-          },
-        },
-      );
 
-      // DNA section reveal
-      gsap.fromTo(
-        ".dna-text .reveal-item",
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.08,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: dnaRef.current,
-            start: "top 75%",
-            once: true,
-          },
-        },
-      );
-
-      // Industries
-      gsap.fromTo(
-        ".industry-item",
-        { opacity: 0, x: -30 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: industriesRef.current,
-            start: "top 80%",
-            once: true,
-          },
-        },
-      );
     }, heroRef);
 
     return () => ctx.revert();
@@ -437,162 +281,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── FEATURED CREATIONS (NAVY BACKGROUND) ── */}
-      <section
-        ref={productsRef}
-        className="section bg-navy-50 relative overflow-hidden"
-      >
-        <ParallaxWatermark
-          className="right-0 top-0 text-[clamp(6rem,14vw,16rem)] text-navy-200/20"
-          speed={25}
-        >
-          CREATIONS
-        </ParallaxWatermark>
-        <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
-          <FadeIn className="flex items-end justify-between mb-12">
-            <SectionHeader
-              eyebrow=""
-              title="Best"
-              orangeTitle="Creations"
-              className="!mb-0"
-            />
-            <Link
-              to="/creations"
-              className="hidden md:flex items-center gap-2 text-skyroot font-heading font-bold text-sm hover:gap-3 transition-all duration-300"
-            >
-              View All <ArrowRightAltIcon />
-            </Link>
-          </FadeIn>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {products.map((p, i) => (
-              <div key={i} className="product-card card group">
-                <div className="card-img aspect-[4/3] bg-white">
-                  <SmartImage
-                    src={p.img}
-                    alt={p.name}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-6 bg-white">
-                  <span className="text-[10px] font-heading font-bold uppercase tracking-widest text-white bg-black px-2.5 py-1 rounded-md inline-block mb-3">
-                    {p.tag}
-                  </span>
-                  <h3 className="font-heading font-bold text-black text-h4 mb-3 group-hover:text-skyroot transition-colors">
-                    {p.name}
-                  </h3>
-                  <div className="flex items-center justify-between">
-                    <span className="font-heading font-bold text-skyroot text-sm">
-                      {p.price}
-                    </span>
-                    <Link
-                      to="/contact"
-                      className="btn-primary !py-2 !px-4 !text-xs !rounded-none"
-                    >
-                      Enquire{" "}
-                      <ArrowForwardIcon
-                        sx={{ fontSize: 14 }}
-                        className="card-arrow transition-transform"
-                      />
-                    </Link>
-                  </div>
-                </div>
-                <CornerBrackets
-                  color="#f97316"
-                  size="10px"
-                  thickness="1.5px"
-                  hoverShift
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── DNA (WHITE BACKGROUND) ── */}
-      <section
-        ref={dnaRef}
-        className="section bg-white relative overflow-hidden"
-      >
-        <ParallaxWatermark
-          className="right-0 top-1/2 -translate-y-1/2 text-[clamp(8rem,16vw,22rem)] text-navy-100/30"
-          speed={15}
-        >
-          PRO
-        </ParallaxWatermark>
-        <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="dna-text">
-              <SectionHeader
-                eyebrow=""
-                title="The DNA of"
-                orangeTitle="Killis Bird"
-              />
-              <p className="reveal-item text-muted text-body-lg leading-relaxed mb-4">
-                At Killis Birds, our core is precision engineered with
-                imagination, ideation, and innovation. This DNA powers the
-                design and delivery of next-generation UAV components and
-                solutions that expand the possibilities of aerospace and
-                defense.
-              </p>
-              <p className="reveal-item text-muted text-body-lg leading-relaxed mb-6">
-                Each creation embodies visionary thinking, rigorous engineering,
-                and uncompromising excellence — we shape the future of flight.
-              </p>
-
-              <blockquote className="reveal-item accent-left mb-8">
-                <p className="font-heading font-bold text-black text-lg italic">
-                  "Where Precision Meets Innovation"
-                </p>
-              </blockquote>
-
-              <div className="reveal-item grid grid-cols-3 gap-6 mb-8">
-                {[
-                  { val: "8K", unit: "", label: "Resolution" },
-                  { val: "15", unit: "km", label: "Range" },
-                  { val: "74", unit: "mph", label: "Speed" },
-                ].map((s, i) => (
-                  <div key={i}>
-                    <div className="font-heading font-bold text-3xl text-black leading-none">
-                      {s.val}
-                      <span className="text-skyroot text-lg ml-0.5">
-                        {s.unit}
-                      </span>
-                    </div>
-                    <div className="text-muted text-xs font-medium mt-1">
-                      {s.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <Link to="/our-dna" className="reveal-item btn-primary">
-                Our DNA <ArrowForwardIcon sx={{ fontSize: 18 }} />
-              </Link>
-            </div>
-
-            <div className="dna-image relative">
-              <DnaImage />
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute -right-4 bottom-8 bg-white border border-border rounded-none px-5 py-3 shadow-card z-10"
-              >
-                <p className="text-muted text-xs font-medium">Starting from</p>
-                <p className="font-heading font-bold text-skyroot text-lg">
-                  Custom Quote
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── NEW GEN (NAVY BACKGROUND) ── */}
       <section className="section bg-navy-50 relative overflow-hidden">
         <ParallaxWatermark
@@ -615,61 +303,6 @@ const Home = () => {
           <FadeIn delay={0.2}>
             <NewGenImage />
           </FadeIn>
-        </div>
-      </section>
-
-      {/* ── INDUSTRIES (WHITE BACKGROUND) ── */}
-      <section
-        ref={industriesRef}
-        className="section bg-white relative overflow-hidden"
-      >
-        <ParallaxWatermark
-          className="right-0 bottom-0 translate-y-1/4 text-[clamp(8rem,16vw,20rem)] text-navy-100/30"
-          speed={18}
-        >
-          SKILLS
-        </ParallaxWatermark>
-        <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div>
-              <SectionHeader
-                eyebrow=""
-                title="Industries We"
-                orangeTitle="Empower"
-              />
-              <p className="reveal-item text-muted text-body-lg mb-10 max-w-md leading-relaxed">
-                Our UAV components and solutions are designed to adapt
-                seamlessly across industries, delivering accuracy for farming,
-                efficiency for industries, and reliability for defense missions.
-              </p>
-
-              <div className="space-y-6">
-                {industries.map((ind, i) => (
-                  <div
-                    key={i}
-                    className="industry-item flex items-start gap-4 py-4 border-b border-border/50 group cursor-default"
-                  >
-                    <span className="text-2xl shrink-0">{ind.icon}</span>
-                    <div>
-                      <h4 className="font-heading font-bold text-black text-h4 mb-1 group-hover:text-skyroot transition-colors duration-300">
-                        {ind.title}
-                      </h4>
-                      <p className="text-muted text-body">{ind.desc}</p>
-                    </div>
-                    <ArrowRightAltIcon className="ml-auto text-skyroot opacity-0 group-hover:opacity-100 transition-all duration-300 shrink-0 mt-1" />
-                  </div>
-                ))}
-              </div>
-
-              <Link to="/creations" className="btn-primary mt-8 inline-flex">
-                View Creations <ArrowForwardIcon sx={{ fontSize: 18 }} />
-              </Link>
-            </div>
-
-            <FadeIn direction="right" delay={0.2}>
-              <IndustriesMosaic />
-            </FadeIn>
-          </div>
         </div>
       </section>
 

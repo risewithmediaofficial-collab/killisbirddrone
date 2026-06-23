@@ -13,8 +13,6 @@ import QuickContactBar from './components/QuickContactBar';
 
 // Lazy loaded below-the-fold components
 const Company = lazy(() => import('./components/sections/Company'));
-const Solutions = lazy(() => import('./components/sections/Solutions'));
-const Products = lazy(() => import('./components/sections/Products'));
 const TrustedClients = lazy(() => import('./components/sections/TrustedClients'));
 const Footer = lazy(() => import('./components/Footer'));
 
@@ -37,8 +35,6 @@ const App = () => {
           <Suspense fallback={<SectionLoader />}>
             <Company />
             {/* <ScrollVideoCanvas /> */}
-            <Solutions />
-            <Products />
             <TrustedClients />
             <Footer />
           </Suspense>
