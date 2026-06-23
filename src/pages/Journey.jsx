@@ -75,14 +75,41 @@ const Journey = () => {
   const pageRef = useRef(null);
   useBookScrollEffects(pageRef);
 
+  const timelineScrollRef = useRef(null);
+  const isMouseDown = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const handleMouseDown = (e) => {
+    isMouseDown.current = true;
+    startX.current = e.pageX - timelineScrollRef.current.offsetLeft;
+    scrollLeft.current = timelineScrollRef.current.scrollLeft;
+  };
+
+  const handleMouseLeave = () => {
+    isMouseDown.current = false;
+  };
+
+  const handleMouseUp = () => {
+    isMouseDown.current = false;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isMouseDown.current) return;
+    e.preventDefault();
+    const x = e.pageX - timelineScrollRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    timelineScrollRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
   return (
     <div ref={pageRef}>
       <SEO title="Journey" description="Killis Bird — Shape the Future With Us. Our story, milestones, and careers." />
 
-      {/* ── MILESTONES: Vertical Timeline ── */}
+      {/* ── MILESTONES: Horizontal Timeline ── */}
       <section data-stack-section className="relative overflow-hidden bg-white">
         {/* Section header */}
-        <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)] pt-[80px] pb-[48px]">
+        <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)] pt-[80px] pb-[24px]">
           <ParallaxWatermark
             className="right-0 top-1/2 -translate-y-1/2 text-[clamp(6rem,12vw,14rem)] text-[#ff6b00]/[0.06]"
             speed={20}
@@ -103,75 +130,90 @@ const Journey = () => {
           </div>
         </div>
 
-        {/* Vertical Timeline */}
-        <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)] py-16">
-          {/* Vertical central line */}
+        {/* Horizontal Timeline */}
+        <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)] py-12">
+          {/* Scroll hint */}
+          <div className="flex items-center justify-end gap-2 mb-4 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#67707d] select-none">
+            <span>Scroll horizontally to explore</span>
+            <span className="animate-pulse">→</span>
+          </div>
+
           <div 
-            className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-[#f1dfd1]/80 -translate-x-1/2 max-lg:left-[47px] max-lg:translate-x-0" 
-            aria-hidden="true" 
-          />
+            ref={timelineScrollRef}
+            className="relative overflow-x-auto scrollbar-none py-8 cursor-grab active:cursor-grabbing"
+            style={{ minHeight: '480px' }}
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+          >
+            {/* Horizontal guide line */}
+            <div 
+              className="absolute left-0 right-0 h-[2px] bg-[#f1dfd1]/80 top-[180px] -translate-y-1/2" 
+              aria-hidden="true" 
+            />
 
-          <div className="relative z-10 flex flex-col gap-16 lg:gap-24">
-            {milestones.map((m, index) => {
-              const year = m.eyebrow;
-              const title = m.text;
-              const desc = m.desc;
-              const number = index + 1 < 10 ? `0${index + 1}` : index + 1;
-              const isEven = index % 2 === 0;
+            {/* Timeline track */}
+            <div className="relative flex gap-20 lg:gap-32 px-12 pb-12 w-max">
+              {milestones.map((m, index) => {
+                const year = m.eyebrow;
+                const title = m.text;
+                const desc = m.desc;
+                const number = index + 1 < 10 ? `0${index + 1}` : index + 1;
 
-              return (
-                <div 
-                  key={index}
-                  className="relative grid grid-cols-2 gap-24 items-center max-lg:grid-cols-1 max-lg:pl-[70px]"
-                >
-                  {/* Central node circle */}
+                return (
                   <div 
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-[54px] h-[54px] rounded-full bg-white border border-[#f1dfd1]/80 shadow-[0_8px_24px_rgba(255,107,0,0.08)] max-lg:left-[47px] max-lg:translate-x-0 max-lg:top-[28px] max-lg:-translate-y-0"
-                    aria-hidden="true"
+                    key={index}
+                    className="relative flex flex-col items-center min-w-[260px] lg:min-w-[320px] group select-text"
                   >
-                    <div className="w-9 h-9 rounded-full bg-[#ff6b00] flex items-center justify-center text-white text-[13px] font-extrabold">
-                      {number}
+                    {/* Above the line: Year and Title */}
+                    <div className="absolute bottom-[calc(100%-156px)] left-1/2 -translate-x-1/2 flex flex-col items-center text-center w-[220px] pb-4">
+                      <span className="text-[#ff6b00] font-extrabold text-[13px] tracking-wider uppercase">
+                        {year}
+                      </span>
+                      <h3 className="mt-2 text-[18px] lg:text-[20px] font-extrabold leading-snug text-[#111111] tracking-tight transition-colors duration-300 group-hover:text-[#ff6b00]">
+                        {title}
+                      </h3>
                     </div>
-                  </div>
 
-                  {/* Card Container */}
-                  <div 
-                    className={`w-full flex ${
-                      isEven ? 'lg:justify-end' : 'lg:justify-start lg:col-start-2'
-                    }`}
-                  >
-                    {/* The Card */}
+                    {/* On the line: Circle Node */}
                     <div 
-                      className={`relative overflow-hidden w-full max-w-[540px] rounded-[24px] border border-[#f1dfd1]/70 bg-white p-8 md:p-10 shadow-[0_12px_44px_rgba(17,21,26,0.04)] hover:shadow-[0_20px_54px_rgba(255,107,0,0.06)] hover:border-[#ff6b00]/30 transition-all duration-500 group reveal-card ${
-                        isEven 
-                          ? 'lg:before:right-[-48px] lg:before:-translate-x-1/2' 
-                          : 'lg:before:left-[-48px] lg:before:translate-x-1/2'
-                      } before:absolute before:top-1/2 before:-translate-y-1/2 before:w-12 before:h-[2px] before:bg-[#f1dfd1]/80 before:hidden lg:before:block max-lg:before:block max-lg:before:left-[-42px] max-lg:before:w-[42px] max-lg:before:top-[55px]`}
+                      className="absolute top-[180px] -translate-y-1/2 z-20 flex items-center justify-center w-[48px] h-[48px] rounded-full bg-white border border-[#f1dfd1]/80 shadow-[0_4px_16px_rgba(255,107,0,0.08)] group-hover:scale-110 group-hover:border-[#ff6b00] group-hover:shadow-[0_8px_24px_rgba(255,107,0,0.16)] transition-all duration-300"
+                      aria-hidden="true"
+                    >
+                      <div className="w-7 h-7 rounded-full bg-[#ff6b00] flex items-center justify-center text-white text-[12px] font-extrabold">
+                        {number}
+                      </div>
+                    </div>
+
+                    {/* Below the line: Info Card (Show only on hover) */}
+                    <div 
+                      className="absolute top-[204px] left-1/2 -translate-x-1/2 w-[280px] lg:w-[320px] bg-white border border-[#f1dfd1]/80 rounded-[20px] p-6 shadow-[0_16px_48px_rgba(17,21,26,0.08)] z-30 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 origin-top"
                     >
                       {/* Faded year watermark */}
                       <span 
-                        className="absolute right-6 bottom-2 font-heading text-[clamp(4.5rem,8vw,8rem)] font-extrabold tracking-tight text-[#ff6b00]/[0.03] select-none pointer-events-none z-0 transition-transform duration-700 group-hover:scale-105"
+                        className="absolute right-4 bottom-2 font-heading text-[5rem] font-extrabold tracking-tight text-[#ff6b00]/[0.03] select-none pointer-events-none z-0"
                         aria-hidden="true"
                       >
                         {year}
                       </span>
 
-                      <div className="relative z-10">
-                        <span className="text-[#ff6b00] font-extrabold text-[14px] tracking-wider uppercase">
+                      <div className="relative z-10 whitespace-normal">
+                        <span className="text-[#ff6b00] font-extrabold text-[12px] tracking-wider uppercase">
                           {year}
                         </span>
-                        <h3 className="mt-3 text-[26px] md:text-[30px] font-extrabold leading-tight text-[#111111] tracking-tight group-hover:text-[#ff6b00] transition-colors duration-300">
+                        <h4 className="mt-2 text-[18px] font-extrabold leading-snug text-[#111111] tracking-tight">
                           {title}
-                        </h3>
-                        <p className="mt-4 text-[15px] leading-[1.8] text-[#67707d]">
+                        </h4>
+                        <p className="mt-3 text-[13px] leading-[1.6] text-[#67707d]">
                           {desc}
                         </p>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
