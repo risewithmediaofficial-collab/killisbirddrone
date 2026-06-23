@@ -17,15 +17,12 @@ const categories = [
     items: [
       {
         name: "High-Thrust Brushless Motors",
-        desc: "Precision-wound motors engineered for maximum torque efficiency and longevity.",
       },
       {
         name: "Variable Pitch Propellers",
-        desc: "Aerodynamically optimised propellers delivering superior lift-to-drag ratio.",
       },
       {
         name: "ESC Controllers",
-        desc: "Advanced electronic speed controllers with real-time telemetry and failsafe protocols.",
       },
     ],
   },
@@ -38,15 +35,12 @@ const categories = [
     items: [
       {
         name: "Carbon Fibre Frames",
-        desc: "Lightweight, high-tensile composite airframes for structural integrity under extreme conditions.",
       },
       {
         name: "Folding Arm Assemblies",
-        desc: "Rapid-deploy folding arm systems enabling seamless transport and field deployment.",
       },
       {
         name: "Landing Gear Systems",
-        desc: "Vibration-dampening gear engineered for precision sensor stability and harsh terrain.",
       },
     ],
   },
@@ -59,15 +53,12 @@ const categories = [
     items: [
       {
         name: "Flight Control Units",
-        desc: "Indigenous flight controllers with multi-redundant IMU arrays for mission-critical stability.",
       },
       {
         name: "Telemetry & Data Links",
-        desc: "Encrypted long-range data links providing real-time telemetry with minimal latency.",
       },
       {
         name: "Payload Integration Systems",
-        desc: "Modular payload bays supporting cameras, sensors, and specialised mission equipment.",
       },
     ],
   },
@@ -80,15 +71,12 @@ const categories = [
     items: [
       {
         name: "Swarm Coordination Modules",
-        desc: "Advanced mesh-networking modules enabling coordinated multi-UAV swarm operations.",
       },
       {
         name: "Autonomous Navigation Units",
-        desc: "AI-powered navigation systems for obstacle avoidance and dynamic path planning.",
       },
       {
         name: "Formation Control Software",
-        desc: "Purpose-built firmware for precision formation flying and distributed mission execution.",
       },
     ],
   },

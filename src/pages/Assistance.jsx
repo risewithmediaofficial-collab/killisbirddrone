@@ -14,12 +14,12 @@ import SchoolIcon from '@mui/icons-material/School';
 import VerifiedIcon from '@mui/icons-material/Verified';
 
 const services = [
-  { Icon: TuneIcon, title: 'Component Customization', desc: 'Bespoke UAV components engineered to your exact specifications — from material selection to performance tuning.' },
-  { Icon: EngineeringIcon, title: 'Technical Consultation', desc: 'Expert guidance from our aerospace engineers to help you design, integrate, and optimise your UAV platform.' },
-  { Icon: LocalShippingIcon, title: 'Supply Chain Support', desc: 'Reliable, on-time delivery of components backed by our robust supply chain and quality assurance protocols.' },
-  { Icon: SupportAgentIcon, title: 'After-Sales Service', desc: 'Comprehensive post-deployment support including maintenance, calibration, and component replacement.' },
-  { Icon: SchoolIcon, title: 'Training & Knowledge Transfer', desc: 'Structured training programmes equipping your team to maximise UAV platform performance.' },
-  { Icon: VerifiedIcon, title: 'Warranty & Quality Assurance', desc: 'Industry-leading warranty coverage backed by our uncompromising quality standards and certification.' },
+  { Icon: TuneIcon, title: 'Component Customization',},
+  { Icon: EngineeringIcon, title: 'Technical Consultation', },
+  { Icon: LocalShippingIcon, title: 'Supply Chain Support',},
+  { Icon: SupportAgentIcon, title: 'After-Sales Service',},
+  { Icon: SchoolIcon, title: 'Training & Knowledge Transfer'},
+  { Icon: VerifiedIcon, title: 'Warranty & Quality Assurance',},
 ];
 
 const steps = [
