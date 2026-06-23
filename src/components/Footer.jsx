@@ -88,9 +88,11 @@ const Footer = () => (
             <li className="flex items-start gap-2.5">
               <LocationOnIcon sx={{ fontSize: 16, color: '#f97316', mt: 0.25, flexShrink: 0 }} />
               <span className="text-white/60 text-sm leading-relaxed">
-                Killis Bird Technologies Pvt. Ltd.<br />Plot No.107,
-Pollupalli SIDCO Industrial Estate,
-Gangasandiram, Krishnagiri 635115
+                Killis Bird Technologies Pvt. Ltd.<br />
+                Plot No.107, Pollupalli SIDCO Industrial Estate,<br />
+                Near Govt. Medical College, Gangasandiram,<br />
+                Billanakuppam Post, Krishnagiri District – 635115,<br />
+                Tamil Nadu, India
               </span>
             </li>
             <li>
@@ -102,11 +104,11 @@ Gangasandiram, Krishnagiri 635115
               </a>
             </li>
             <li>
-              <a href="tel:+918000000000"
+              <a href="tel:+918015122126"
                 className="flex items-center gap-2.5 text-white/60 hover:text-skyroot text-sm transition-colors"
               >
                 <PhoneIcon sx={{ fontSize: 15, color: '#f97316', flexShrink: 0 }} />
-                 +91 72007 43683
+                +91 80151 22126
               </a>
             </li>
           </ul>

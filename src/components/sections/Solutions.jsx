@@ -41,7 +41,7 @@ const SolutionsImage = () => {
     <div className="relative rounded-none overflow-hidden aspect-[4/5] h-[500px] w-full shadow-lg border border-border/40 group">
       <SmartImage
         ref={ref}
-        src="https://images.unsplash.com/photo-1508444845599-5c89863b1c44?w=800&q=80"
+        src="/assests/solutions.jpg"
         alt="Killis Bird aerospace engineering drone"
         className="w-full h-[120%] object-cover group-hover:scale-105 transition-transform duration-700"
       />

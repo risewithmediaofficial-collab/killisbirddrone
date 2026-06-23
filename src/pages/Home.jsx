@@ -16,31 +16,23 @@ import useGsapReveal from "../hooks/useGsapReveal";
 import ParallaxWatermark from "../components/ParallaxWatermark";
 import SectionHeader from "../components/SectionHeader";
 import CornerBrackets from "../components/CornerBrackets";
+import SmartImage from "../components/SmartImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /* ── Stock Images ─────────────────────────── */
 const IMG = {
-  hero: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=1600&q=80",
-  heroDrone:
-    "https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=800&q=80",
-  dna: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=800&q=80",
-  product1:
-    "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=600&q=80",
-  product2:
-    "https://images.unsplash.com/photo-1508444845599-5c89863b1c44?w=600&q=80",
-  product3:
-    "https://images.unsplash.com/photo-1524143986875-3b098d78b363?w=600&q=80",
-  agriculture:
-    "https://images.unsplash.com/photo-1586771107445-b3e7eb9f5a43?w=600&q=80",
-  inspection:
-    "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&q=80",
-  defence:
-    "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=600&q=80",
-  research:
-    "https://images.unsplash.com/photo-1581092160607-ee67df30d0ec?w=600&q=80",
-  newgen:
-    "https://images.unsplash.com/photo-1593113630400-ea4288922497?w=1200&q=80",
+  hero: "/assests/hero.jpg",
+  heroDrone: "/assests/herodrone.jpg",
+  dna: "/assests/dna.jpg",
+  product1: "/assests/product1.jpg",
+  product2: "/assests/product2.jpg",
+  product3: "/assests/product3.jpg",
+  agriculture: "/assests/agriculture.jpg",
+  inspection: "/assests/inspection.jpg",
+  defence: "/assests/defence.jpg",
+  research: "/assests/research.jpg",
+  newgen: "/assests/newgen.jpg",
 };
 
 /* ── Data ─────────────────────────────────── */
@@ -130,7 +122,7 @@ const HeroBackground = () => {
   const ref = useParallax(35);
   return (
     <div ref={ref} className="absolute inset-0 w-full h-[130%] z-0">
-      <img
+      <SmartImage
         src={IMG.hero}
         alt="UAV drone flying over landscape"
         className="w-full h-full object-cover"
@@ -144,7 +136,7 @@ const DnaImage = () => {
   const ref = useParallax(15);
   return (
     <div className="img-accent overflow-hidden rounded-2xl aspect-[4/3]">
-      <img
+      <SmartImage
         ref={ref}
         src={IMG.dna}
         alt="Killis Bird UAV engineering"
@@ -159,7 +151,7 @@ const NewGenImage = () => {
   const ref = useParallax(20);
   return (
     <div className="relative rounded-none overflow-hidden aspect-[21/9] h-[360px] md:h-[480px] border border-border group">
-      <img
+      <SmartImage
         ref={ref}
         src={IMG.newgen}
         alt="New generation UAV drone fleet"
@@ -205,7 +197,7 @@ const IndustriesMosaic = () => {
     <div className="grid grid-cols-2 gap-4 h-[520px] overflow-hidden">
       <div ref={col1Ref} className="flex flex-col gap-4 h-[115%]">
         <div className="flex-1 rounded-2xl overflow-hidden">
-          <img
+          <SmartImage
             src={IMG.agriculture}
             alt="Agricultural UAV"
             className="w-full h-full object-cover"
@@ -213,7 +205,7 @@ const IndustriesMosaic = () => {
           />
         </div>
         <div className="h-40 rounded-2xl overflow-hidden">
-          <img
+          <SmartImage
             src={IMG.inspection}
             alt="Industrial inspection drone"
             className="w-full h-full object-cover"
@@ -226,7 +218,7 @@ const IndustriesMosaic = () => {
         className="flex flex-col gap-4 h-[115%] translate-y-[-8%]"
       >
         <div className="h-40 rounded-2xl overflow-hidden">
-          <img
+          <SmartImage
             src={IMG.defence}
             alt="Defence UAV system"
             className="w-full h-full object-cover"
@@ -234,7 +226,7 @@ const IndustriesMosaic = () => {
           />
         </div>
         <div className="flex-1 rounded-2xl overflow-hidden">
-          <img
+          <SmartImage
             src={IMG.research}
             alt="Research drone platform"
             className="w-full h-full object-cover"
@@ -476,7 +468,7 @@ const Home = () => {
             {products.map((p, i) => (
               <div key={i} className="product-card card group">
                 <div className="card-img aspect-[4/3] bg-white">
-                  <img
+                  <SmartImage
                     src={p.img}
                     alt={p.name}
                     className="w-full h-full object-cover"

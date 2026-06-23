@@ -18,7 +18,7 @@ const cards = [
 ];
 
 const VisionMissionSection = () => (
-  <section id="purpose" className="bg-white py-[120px] max-sm:py-[72px]" aria-labelledby="purpose-title">
+  <section id="purpose" className="bg-white py-[64px] max-sm:py-[44px]" aria-labelledby="purpose-title">
     <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
       <div className="reveal-group mb-14 max-w-[760px]">
         <SectionLabel>Our Purpose</SectionLabel>

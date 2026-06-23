@@ -15,91 +15,71 @@ const useBookScrollEffects = (rootRef) => {
     }
 
     const ctx = gsap.context(() => {
+      // ── Reveal groups (headings / text blocks) ──────────────────
       gsap.utils.toArray('.reveal-group').forEach((group) => {
         const children = Array.from(group.children);
         if (!children.length) return;
 
         gsap.fromTo(
           children,
-          { y: 48, opacity: 0, filter: 'blur(12px)', scale: 0.985 },
+          { y: 28, opacity: 0, filter: 'blur(6px)' },
           {
             y: 0,
             opacity: 1,
             filter: 'blur(0px)',
-            scale: 1,
-            duration: isMobile ? 0.7 : 1.1,
-            ease: 'power3.out',
-            stagger: isMobile ? 0.06 : 0.12,
+            duration: isMobile ? 0.55 : 0.85,
+            ease: 'power2.out',
+            stagger: isMobile ? 0.05 : 0.09,
             scrollTrigger: {
               trigger: group,
-              start: isMobile ? 'top 94%' : 'top 88%',
-              end: isMobile ? 'top 72%' : 'top 42%',
-              scrub: !isMobile,
-              once: isMobile,
+              start: isMobile ? 'top 96%' : 'top 90%',
+              toggleActions: 'play none none none',
+              once: true,
             },
           },
         );
       });
 
+      // ── Cards ───────────────────────────────────────────────────
       gsap.utils.toArray('.book-reveal-card').forEach((card) => {
         gsap.fromTo(
           card,
-          { y: 42, opacity: 0, filter: 'blur(10px)', scale: 0.975 },
+          { y: 22, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            filter: 'blur(0px)',
-            scale: 1,
-            duration: isMobile ? 0.65 : 1,
-            ease: 'power3.out',
+            duration: isMobile ? 0.5 : 0.75,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: card,
-              start: isMobile ? 'top 95%' : 'top 90%',
-              end: isMobile ? 'top 74%' : 'top 48%',
-              scrub: !isMobile,
-              once: isMobile,
+              start: isMobile ? 'top 97%' : 'top 92%',
+              toggleActions: 'play none none none',
+              once: true,
             },
           },
         );
       });
 
+      // ── Image frames ────────────────────────────────────────────
       gsap.utils.toArray('.image-frame').forEach((frame) => {
         const media = frame.querySelector('.image-frame__media');
         const outline = frame.querySelector('.image-frame__outline');
-        const image = frame.querySelector('img, canvas');
 
         if (media) {
           gsap.fromTo(
             media,
-            { scale: 1.14, filter: 'blur(18px)' },
+            { scale: 1.06, filter: 'blur(8px)', opacity: 0 },
             {
               scale: 1,
               filter: 'blur(0px)',
-              ease: 'power3.out',
+              opacity: 1,
+              duration: isMobile ? 0.6 : 0.9,
+              ease: 'power2.out',
               scrollTrigger: {
                 trigger: frame,
-                start: isMobile ? 'top 96%' : 'top 92%',
-                end: isMobile ? 'top 78%' : 'top 38%',
-                scrub: !isMobile,
-                once: isMobile,
-              },
-            },
-          );
-        }
-
-        if (image) {
-          gsap.fromTo(
-            image,
-            { scale: 1.18 },
-            {
-              scale: 1.03,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: frame,
-                start: isMobile ? 'top 96%' : 'top 92%',
-                end: isMobile ? 'top 78%' : 'top 38%',
-                scrub: !isMobile,
-                once: isMobile,
+                start: isMobile ? 'top 97%' : 'top 92%',
+                toggleActions: 'play none none none',
+                once: true,
               },
             },
           );
@@ -108,18 +88,18 @@ const useBookScrollEffects = (rootRef) => {
         if (outline) {
           gsap.fromTo(
             outline,
-            { scale: 0.94, opacity: 0, filter: 'blur(8px)' },
+            { scale: 0.97, opacity: 0 },
             {
               scale: 1,
-              opacity: 0.9,
-              filter: 'blur(0px)',
-              ease: 'power3.out',
+              opacity: 0.8,
+              duration: isMobile ? 0.55 : 0.8,
+              ease: 'power2.out',
+              delay: 0.1,
               scrollTrigger: {
                 trigger: frame,
-                start: isMobile ? 'top 96%' : 'top 92%',
-                end: isMobile ? 'top 80%' : 'top 44%',
-                scrub: !isMobile,
-                once: isMobile,
+                start: isMobile ? 'top 97%' : 'top 92%',
+                toggleActions: 'play none none none',
+                once: true,
               },
             },
           );
@@ -134,3 +114,4 @@ const useBookScrollEffects = (rootRef) => {
 };
 
 export default useBookScrollEffects;
+

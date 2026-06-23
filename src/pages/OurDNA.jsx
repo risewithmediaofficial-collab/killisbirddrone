@@ -6,10 +6,10 @@ import PeopleSection from '../components/sections/PeopleSection';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
 
 const IMG = {
-  dna: 'https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=1100&q=85',
-  team1: 'https://images.unsplash.com/photo-1581092160607-ee67df30d0ec?w=900&q=82',
-  team2: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=900&q=82',
-  team3: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=82',
+  dna: '/assests/dna.jpg',
+  team1: '/assests/founder1.jpg',
+  team2: '/assests/founder2.jpg',
+  team3: '/assests/founder3.jpg',
 };
 
 const team = [

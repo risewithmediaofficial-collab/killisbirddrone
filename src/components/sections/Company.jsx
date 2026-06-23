@@ -22,7 +22,7 @@ const DnaImage = () => {
     <div className="relative overflow-hidden rounded-none aspect-[4/3] bg-white shadow-lg border border-border/40 group">
       <SmartImage
         ref={ref}
-        src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=800&q=80"
+        src="/assests/dna.jpg"
         alt="Killis Bird UAV engineering"
         className="w-full h-[120%] object-cover group-hover:scale-105 transition-transform duration-700"
       />

@@ -12,30 +12,31 @@ const ImageFrame = ({
   height
 }) => {
   const variants = {
-    hero: '[clip-path:ellipse(50%_44%_at_50%_50%)] rounded-[40px]',
-    diagonal: '[clip-path:polygon(18%_0,100%_0,100%_78%,83%_100%,0_100%,0_22%)] rounded-tr-[26px] rounded-bl-[26px]',
-    landscape: '[clip-path:polygon(8%_0,100%_0,100%_74%,77%_100%,10%_100%,0_88%,0_13%)] rounded-t-[22px] rounded-bl-[22px]',
-    technical: '[clip-path:polygon(0_0,92%_0,100%_13%,100%_100%,8%_100%,0_88%)] rounded-[22px]',
-    darkCard: '[clip-path:polygon(0_0,100%_0,100%_82%,88%_100%,0_100%)] rounded-[18px]'
+    hero: '[clip-path:ellipse(50%_46%_at_50%_50%)] rounded-[24px]',
+    diagonal: '[clip-path:polygon(8%_0,100%_0,100%_92%,92%_100%,0_100%,0_8%)] rounded-tr-[16px] rounded-bl-[16px]',
+    landscape: '[clip-path:polygon(4%_0,100%_0,100%_90%,90%_100%,4%_100%,0_96%,0_4%)] rounded-t-[14px] rounded-bl-[14px]',
+    technical: '[clip-path:polygon(0_0,96%_0,100%_4%,100%_100%,4%_100%,0_96%)] rounded-[14px]',
+    darkCard: '[clip-path:polygon(0_0,100%_0,100%_92%,92%_100%,0_100%)] rounded-[12px]'
   };
   const variantClass = variants[variant] || variants.diagonal;
 
   return (
-  <figure className={`image-frame group relative m-0 min-h-[520px] max-sm:min-h-[360px] ${className}`.trim()}>
-    <div className={`image-frame__outline absolute -inset-[18px] z-[1] border-2 border-[#ff6b00] opacity-90 max-sm:-inset-2.5 ${variantClass}`} aria-hidden="true" />
-    <div className={`image-frame__media relative z-[2] h-full min-h-[inherit] overflow-hidden ${variantClass}`}>
-      <SmartImage
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        loading={loading}
-        className={`h-full min-h-[inherit] w-full object-cover transition-transform duration-700 group-hover:scale-105 ${imageClassName}`.trim()}
-      />
-    </div>
-    {floatingContent ? <div className="absolute right-[-42px] top-[18%] z-[4] before:absolute before:-left-11 before:top-1/2 before:h-0.5 before:w-11 before:bg-[#ff6b00] max-xl:right-4 max-sm:bottom-4 max-sm:left-4 max-sm:right-4 max-sm:top-auto max-sm:before:hidden">{floatingContent}</div> : null}
-  </figure>
+    <figure className={`image-frame group relative m-0 max-w-[480px] mx-auto w-full min-h-[280px] max-sm:min-h-[180px] ${className}`.trim()}>
+      <div className={`image-frame__outline absolute -inset-[6px] z-[1] border-[1.5px] border-[#ff6b00] opacity-80 max-sm:-inset-[4px] ${variantClass}`} aria-hidden="true" />
+      <div className={`image-frame__media relative z-[2] h-full min-h-[inherit] overflow-hidden ${variantClass}`}>
+        <SmartImage
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          loading={loading}
+          className={`h-full min-h-[inherit] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] ${imageClassName}`.trim()}
+        />
+      </div>
+      {floatingContent ? <div className="absolute right-[-32px] top-[16%] z-[4] before:absolute before:-left-8 before:top-1/2 before:h-px before:w-8 before:bg-[#ff6b00] max-xl:right-3 max-sm:bottom-3 max-sm:left-3 max-sm:right-3 max-sm:top-auto max-sm:before:hidden">{floatingContent}</div> : null}
+    </figure>
   );
 };
 
 export default ImageFrame;
+

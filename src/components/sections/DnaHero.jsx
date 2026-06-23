@@ -66,19 +66,19 @@ const DnaHero = () => {
   return (
     <section
       ref={rootRef}
-      className="relative overflow-hidden bg-white py-10 max-sm:py-8"
+      className="relative overflow-hidden bg-white py-6 max-sm:py-4"
       aria-labelledby="dna-hero-title"
     >
-      <div className="mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] items-center gap-8 px-[clamp(20px,5vw,80px)] max-lg:grid-cols-1">
-        <div className="relative z-[2] py-4 pl-5 max-sm:pl-4">
-          <span className="absolute left-0 top-2 h-[52px] w-[52px] border-l-2 border-t-2 border-[#ff6b00] max-sm:h-10 max-sm:w-10" aria-hidden="true" />
-          <h1 id="dna-hero-title" className="font-heading text-[clamp(44px,5vw,76px)] font-normal leading-[0.98] tracking-[-0.055em] text-[#111111] max-sm:text-[clamp(38px,13vw,52px)]" aria-label="Imagine. Ideate. Innovate.">
+      <div className="mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] items-center gap-6 px-[clamp(20px,5vw,80px)] max-lg:grid-cols-1">
+        <div className="relative z-[2] py-3 pl-5 max-sm:pl-4">
+          <span className="absolute left-0 top-2 h-[40px] w-[40px] border-l-2 border-t-2 border-[#ff6b00] max-sm:h-8 max-sm:w-8" aria-hidden="true" />
+          <h1 id="dna-hero-title" className="font-heading text-[clamp(34px,4vw,58px)] font-normal leading-[0.98] tracking-[-0.055em] text-[#111111] max-sm:text-[clamp(30px,11vw,44px)]" aria-label="Imagine. Ideate. Innovate.">
             <span className="dna-hero-word block">Imagine.</span>
             <span className="dna-hero-word block">Ideate.</span>
             <span className="dna-hero-word block text-[#ff6b00]">Innovate.</span>
           </h1>
-          <p className="dna-hero-reveal mt-5 font-serif text-[clamp(18px,1.5vw,22px)] italic text-[#11151a] max-sm:text-[18px]">“Where Precision Meets Innovation”</p>
-          <span className="dna-hero-reveal my-5 block h-1 w-[44px] bg-[#ff6b00]" aria-hidden="true" />
+          <p className="dna-hero-reveal mt-3 font-serif text-[clamp(15px,1.2vw,18px)] italic text-[#11151a] max-sm:text-[15px]">“Where Precision Meets Innovation”</p>
+          <span className="dna-hero-reveal my-3 block h-1 w-[36px] bg-[#ff6b00]" aria-hidden="true" />
         </div>
 
         <div className="relative min-h-[360px] overflow-hidden rounded-[32px] border border-[#f1dfd1] bg-[radial-gradient(circle_at_72%_20%,#fff_0_18%,transparent_19%),linear-gradient(135deg,#fff8f1,#fff1e6)] shadow-[0_18px_44px_rgba(17,21,26,0.06)] max-lg:min-h-[320px] max-sm:min-h-[260px]" aria-label="Killis Bird UAV technology visual">
@@ -110,25 +110,25 @@ const DnaHero = () => {
       </div>
 
       <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
-        <div className="dna-hero-late relative z-[5] mt-10 grid grid-cols-4 rounded-t-[16px] border border-[#f1dfd1] border-b-2 border-b-[#ff6b00] bg-white/95 shadow-[0_18px_42px_rgba(17,21,26,0.07)] after:absolute after:bottom-[-8px] after:left-1/2 after:h-4 after:w-4 after:-translate-x-1/2 after:rotate-45 after:border-b-2 after:border-r-2 after:border-[#ff6b00] after:bg-white max-xl:grid-cols-2 max-sm:grid-cols-1">
+        <div className="dna-hero-late relative z-[5] mt-5 grid grid-cols-4 rounded-t-[16px] border border-[#f1dfd1] border-b-2 border-b-[#ff6b00] bg-white/95 shadow-[0_18px_42px_rgba(17,21,26,0.07)] after:absolute after:bottom-[-8px] after:left-1/2 after:h-4 after:w-4 after:-translate-x-1/2 after:rotate-45 after:border-b-2 after:border-r-2 after:border-[#ff6b00] after:bg-white max-xl:grid-cols-2 max-sm:grid-cols-1">
           {navItems.map(({ id, Icon, title, highlight, text }, index) => (
             <button
               key={id}
               type="button"
-              className={`group border-r border-[#f1dfd1] bg-transparent p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:bg-[#fff8f1] focus-visible:-translate-y-1 focus-visible:bg-[#fff8f1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ff6b00] max-sm:border-b max-sm:border-r-0 max-sm:p-5 ${index === 1 ? 'max-xl:border-r-0' : ''} ${index < 2 ? 'max-xl:border-b' : ''} ${index === 3 ? 'border-r-0 max-sm:border-b-0' : ''}`}
+              className={`group border-r border-[#f1dfd1] bg-transparent p-3.5 text-left transition-all duration-300 hover:-translate-y-1 hover:bg-[#fff8f1] focus-visible:-translate-y-1 focus-visible:bg-[#fff8f1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ff6b00] max-sm:border-b max-sm:border-r-0 max-sm:p-4 ${index === 1 ? 'max-xl:border-r-0' : ''} ${index < 2 ? 'max-xl:border-b' : ''} ${index === 3 ? 'border-r-0 max-sm:border-b-0' : ''}`}
               onClick={() => scrollTo(id)}
             >
-              <Icon aria-hidden="true" sx={{ fontSize: 28 }} className="mb-3 text-[#ff6b00] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105" />
-              <span className="mb-3 block h-0.5 w-7 bg-[#ff6b00]" aria-hidden="true" />
-              <strong className="block text-[17px] leading-[1.18] text-[#111111]">
+              <Icon aria-hidden="true" sx={{ fontSize: 22 }} className="mb-2 text-[#ff6b00] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105" />
+              <span className="mb-2 block h-0.5 w-6 bg-[#ff6b00]" aria-hidden="true" />
+              <strong className="block text-[14px] leading-[1.18] text-[#111111]">
                 {title.replace(highlight, '')}
                 <em className="not-italic text-[#ff6b00]">{highlight}</em>
               </strong>
             </button>
           ))}
         </div>
-        <p className="flex items-center justify-center gap-2 py-5 text-center text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#11151a] max-sm:flex-wrap max-sm:text-[10px]">
-          <TravelExploreIcon aria-hidden="true" sx={{ fontSize: 18 }} className="text-[#ff6b00]" />
+        <p className="flex items-center justify-center gap-2 py-3 text-center text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#11151a] max-sm:flex-wrap max-sm:text-[10px]">
+          <TravelExploreIcon aria-hidden="true" sx={{ fontSize: 16 }} className="text-[#ff6b00]" />
           <span className="text-[#ff6b00]">Built in India.</span> Trusted Worldwide.
         </p>
       </div>

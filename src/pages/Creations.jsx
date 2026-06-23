@@ -10,74 +10,39 @@ import useBookScrollEffects from "../hooks/useBookScrollEffects";
 const categories = [
   {
     num: "01",
-    category: "Propulsions",
-    tagline: "Power that lifts ambitions.",
+    category: "Propulsion System",
+    tagline: "Raw power, precisely engineered for every mission profile.",
     watermark: "PROPULSION",
-    img: "https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=800&q=80",
+    img: "/assests/propulsion.jpg",
     items: [
-      {
-        name: "High-Thrust Brushless Motors",
-      },
-      {
-        name: "Variable Pitch Propellers",
-      },
-      {
-        name: "ESC Controllers",
-      },
+      { name: "BLDC Motors", desc: "High-efficiency brushless DC motors built for sustained thrust and extended flight endurance." },
+      { name: "Propellers", desc: "Aerodynamically optimised propellers delivering superior lift-to-drag performance." },
+      { name: "Propulsion Stack", desc: "Integrated propulsion assemblies combining motor, ESC, and propeller for seamless deployment." },
     ],
   },
   {
     num: "02",
-    category: "Airframes",
-    tagline: "Strength engineered into every fibre.",
+    category: "Airframe",
+    tagline: "Strength and precision engineered into every carbon fibre joint.",
     watermark: "AIRFRAME",
-    img: "https://images.unsplash.com/photo-1533929294112-264e8d48e89e?w=800&q=80",
+    img: "/assests/airframe.jpg",
     items: [
-      {
-        name: "Carbon Fibre Frames",
-      },
-      {
-        name: "Folding Arm Assemblies",
-      },
-      {
-        name: "Landing Gear Systems",
-      },
+      { name: "Racing Frame", desc: "Ultra-lightweight, high-rigidity frames built for maximum speed and agility in competitive UAV racing." },
+      { name: "Freestyle Frame", desc: "Robust and flexible frames designed for dynamic freestyle manoeuvres and aerial acrobatics." },
+      { name: "Swarm Frame", desc: "Compact, modular airframes optimised for coordinated multi-UAV swarm formation operations." },
+      { name: "Fixed & VTOL", desc: "Fixed-wing and vertical take-off & landing airframes engineered for long-endurance and versatile mission profiles." },
     ],
   },
   {
     num: "03",
     category: "Avionics",
-    tagline: "Intelligence at the heart of flight.",
+    tagline: "Intelligence at the heart of every flight system.",
     watermark: "AVIONICS",
-    img: "https://images.unsplash.com/photo-1601524909162-be87252be298?w=800&q=80",
+    img: "/assests/avionics.jpg",
     items: [
-      {
-        name: "Flight Control Units",
-      },
-      {
-        name: "Telemetry & Data Links",
-      },
-      {
-        name: "Payload Integration Systems",
-      },
-    ],
-  },
-  {
-    num: "04",
-    category: "Swarms",
-    tagline: "Coordinated intelligence. Distributed power.",
-    watermark: "SWARM",
-    img: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=800&q=80",
-    items: [
-      {
-        name: "Swarm Coordination Modules",
-      },
-      {
-        name: "Autonomous Navigation Units",
-      },
-      {
-        name: "Formation Control Software",
-      },
+      { name: "FCC – Flight Control Computer", desc: "Indigenous flight controllers with multi-redundant IMU arrays for mission-critical stability and autonomous navigation." },
+      { name: "ESC – Electronic Speed Controller", desc: "Advanced ESCs with real-time telemetry, precision throttle response, and integrated failsafe protocols." },
+      { name: "Communication System", desc: "Encrypted long-range data links providing real-time telemetry and command relay with minimal latency." },
     ],
   },
 ];
@@ -97,7 +62,7 @@ const Creations = () => {
           <section
             key={category}
             data-stack-section
-            className={`relative overflow-hidden py-[110px] max-sm:py-[72px] ${index % 2 === 0 ? "bg-white" : "bg-[#fff8f1]"}`}
+            className={`relative overflow-hidden py-[64px] max-sm:py-[44px] ${index % 2 === 0 ? "bg-white" : "bg-[#fff8f1]"}`}
           >
             <ParallaxWatermark
               className={`top-1/2 -translate-y-1/2 text-[clamp(6rem,12vw,15rem)] ${index % 2 === 0 ? "left-0 text-[#ff6b00]/[0.06]" : "right-0 text-[#111111]/[0.05]"}`}

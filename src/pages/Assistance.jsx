@@ -31,9 +31,9 @@ const steps = [
 ];
 
 const serviceGroups = [
-  { title: 'Customization & Consultation', watermark: 'CUSTOMIZE', image: 'https://images.unsplash.com/photo-1581092160607-ee67df30d0ec?w=800&q=80', items: [services[0], services[1]] },
-  { title: 'Logistics & After-Sales', watermark: 'LOGISTICS', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80', items: [services[2], services[3]] },
-  { title: 'Training & Quality', watermark: 'TRAINING', image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80', items: [services[4], services[5]] },
+  { title: 'Customization & Consultation', watermark: 'CUSTOMIZE', image: '/assests/assistance1.jpg', items: [services[0], services[1]] },
+  { title: 'Logistics & After-Sales', watermark: 'LOGISTICS', image: '/assests/assistance2.jpg', items: [services[2], services[3]] },
+  { title: 'Training & Quality', watermark: 'TRAINING', image: '/assests/assistance3.jpg', items: [services[4], services[5]] },
 ];
 
 const Assistance = () => {
@@ -44,14 +44,14 @@ const Assistance = () => {
     <div ref={pageRef}>
       <SEO title="Assistance" description="Killis Bird support and consultancy services for UAV integration and after-sales." />
 
-      <section data-stack-section className="bg-white py-[110px] max-sm:py-[72px]">
+      <section data-stack-section className="bg-white py-[64px] max-sm:py-[44px]">
         <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
           <SecondarySectionIntro eyebrow="What We Offer" title="Our Support" highlight="Services" description="Every engagement is tailored to deliver mission-ready performance, dependable integration, and long-term support." />
         </div>
       </section>
 
       {serviceGroups.map((group, index) => (
-        <section key={group.title} data-stack-section className={`relative overflow-hidden py-[110px] max-sm:py-[72px] ${index % 2 === 0 ? 'bg-[#fff8f1]' : 'bg-white'}`}>
+        <section key={group.title} data-stack-section className={`relative overflow-hidden py-[64px] max-sm:py-[44px] ${index % 2 === 0 ? 'bg-[#fff8f1]' : 'bg-white'}`}>
           <ParallaxWatermark className={`top-1/2 -translate-y-1/2 text-[clamp(6rem,12vw,15rem)] ${index % 2 === 0 ? 'right-0 text-[#111111]/[0.05]' : 'left-0 text-[#ff6b00]/[0.06]'}`} speed={22}>{group.watermark}</ParallaxWatermark>
           <div className="relative mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-[clamp(44px,6vw,84px)] px-[clamp(20px,5vw,80px)] max-xl:grid-cols-1">
             <div className={index % 2 === 1 ? 'xl:order-last' : ''}>
@@ -76,7 +76,7 @@ const Assistance = () => {
         </section>
       ))}
 
-      <section data-stack-section className="bg-white py-[110px] max-sm:py-[72px]">
+      <section data-stack-section className="bg-white py-[64px] max-sm:py-[44px]">
         <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
           <SecondarySectionIntro eyebrow="How It Works" title="Our" highlight="Process" description="A transparent workflow designed to move from idea to mission-ready delivery with speed and confidence." />
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-5">
