@@ -20,7 +20,6 @@ const FoundationSection = ({ image }) => (
         <SplitHeading id="foundation-title" highlight="Killis Bird">
           The DNA of
         </SplitHeading>
-        <span className="my-4 block h-[3px] w-[44px] bg-[#ff6b00]" aria-hidden="true" />
         <QuoteCard>— we shape the future of flight.</QuoteCard>
         <p className="flex items-center gap-3 text-base font-bold leading-[1.78] text-[#67707d]">
           <PublicIcon aria-hidden="true" sx={{ fontSize: 20, color: '#ff6b00' }} />

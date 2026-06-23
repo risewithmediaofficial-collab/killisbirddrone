@@ -25,7 +25,6 @@ const VisionMissionSection = () => (
         <SplitHeading id="purpose-title" highlight="Mission">
           Vision &
         </SplitHeading>
-        <span className="my-7 block h-[3px] w-[52px] bg-[#ff6b00]" aria-hidden="true" />
       </div>
       <div className="dna-purpose__grid grid grid-cols-2 items-stretch gap-8 max-lg:grid-cols-1">
         {cards.map(({ Icon, title, text }) => (
@@ -37,7 +36,6 @@ const VisionMissionSection = () => (
               <Icon aria-hidden="true" sx={{ fontSize: 36 }} />
             </div>
             <h3 className="text-[30px] font-extrabold text-[#111111]">{title}</h3>
-            <span className="my-7 block h-[3px] w-[52px] bg-[#ff6b00]" aria-hidden="true" />
             <p className="max-w-[640px] text-lg leading-[1.78] text-[#67707d] max-sm:text-base">{text}</p>
           </article>
         ))}

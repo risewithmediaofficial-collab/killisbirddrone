@@ -98,7 +98,6 @@ const Journey = () => {
             <h2 className="mt-5 text-[clamp(36px,5vw,72px)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[#111111]">
               Milestones <span className="text-[#ff6b00]">That Define Us</span>
             </h2>
-            <span className="my-6 block h-[3px] w-[52px] bg-[#ff6b00]" aria-hidden="true" />
             <p className="max-w-[560px] text-[16px] leading-[1.8] text-[#67707d]">
               From a bold idea in 2018 to a globally trusted UAV component brand — every year marks a new chapter in our pursuit of precision and innovation.
             </p>
@@ -129,7 +128,6 @@ const Journey = () => {
             <h2 className="mt-5 text-[clamp(42px,6vw,82px)] font-normal leading-[0.95] tracking-[-0.07em] text-[#111111]">
               Join the <span className="text-[#ff6b00]">Mission</span>
             </h2>
-            <span className="my-7 block h-[3px] w-[52px] bg-[#ff6b00]" aria-hidden="true" />
             <p className="max-w-[640px] text-[17px] leading-[1.8] text-[#67707d]">
               We are always looking for passionate engineers, innovators, and dreamers who want to shape the future of flight.
             </p>

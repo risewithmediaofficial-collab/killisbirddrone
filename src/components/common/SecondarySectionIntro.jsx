@@ -7,7 +7,6 @@ const SecondarySectionIntro = ({ eyebrow, title, highlight, description, centere
     <SplitHeading className={centered ? 'mx-auto' : ''} highlight={highlight}>
       {title}
     </SplitHeading>
-    <span className={`my-4 block h-[3px] w-[44px] bg-[#ff6b00] ${centered ? 'mx-auto' : ''}`} aria-hidden="true" />
   </div>
 );
 
