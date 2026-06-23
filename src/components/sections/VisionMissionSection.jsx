@@ -2,7 +2,6 @@ import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import SectionLabel from '../common/SectionLabel';
 import SplitHeading from '../common/SplitHeading';
-import DecorativeDots from '../common/DecorativeDots';
 
 const cards = [
   {
@@ -26,16 +25,16 @@ const VisionMissionSection = () => (
           Vision &
         </SplitHeading>
       </div>
-      <div className="dna-purpose__grid grid grid-cols-2 items-stretch gap-8 max-lg:grid-cols-1">
+      <div className="grid grid-cols-2 gap-x-[clamp(48px,8vw,120px)] gap-y-12 max-lg:grid-cols-1">
         {cards.map(({ Icon, title, text }) => (
-          <article key={title} className="purpose-card group relative min-h-[390px] overflow-hidden rounded-[20px] border border-[#f1dfd1] bg-white p-[clamp(34px,5vw,58px)] shadow-[0_22px_54px_rgba(17,21,26,0.07)] transition-all duration-300 hover:-translate-y-1 hover:border-[#ff6b00] max-sm:min-h-0 max-sm:px-6">
-            <DecorativeDots className="absolute -bottom-8 right-5 opacity-30" />
-            <div className="mb-8 flex h-[82px] w-[82px] items-center justify-center rounded-full bg-[#fff0e5] text-[#ff6b00] transition-all duration-300 group-hover:rotate-6 group-hover:bg-[#ff6b00] group-hover:text-white">
-              <Icon aria-hidden="true" sx={{ fontSize: 36 }} />
+          <div key={title} className="flex flex-col gap-4">
+            <div className="flex items-center gap-4">
+              <Icon aria-hidden="true" sx={{ fontSize: 28 }} className="text-[#ff6b00] shrink-0" />
+              <h3 className="text-[26px] font-extrabold text-[#111111] leading-tight">{title}</h3>
             </div>
-            <h3 className="text-[30px] font-extrabold text-[#111111]">{title}</h3>
-            <p className="max-w-[640px] text-lg leading-[1.78] text-[#67707d] max-sm:text-base">{text}</p>
-          </article>
+            <div className="h-px w-12 bg-[#ff6b00]" aria-hidden="true" />
+            <p className="text-[16px] leading-[1.82] text-[#67707d]">{text}</p>
+          </div>
         ))}
       </div>
     </div>
