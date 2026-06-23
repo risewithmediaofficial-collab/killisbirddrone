@@ -30,8 +30,6 @@ const VisionMissionSection = () => (
         {cards.map(({ Icon, title, text }) => (
           <article key={title} className="purpose-card group relative min-h-[390px] overflow-hidden rounded-[20px] border border-[#f1dfd1] bg-white p-[clamp(34px,5vw,58px)] shadow-[0_22px_54px_rgba(17,21,26,0.07)] transition-all duration-300 hover:-translate-y-1 hover:border-[#ff6b00] max-sm:min-h-0 max-sm:px-6">
             <DecorativeDots className="absolute -bottom-8 right-5 opacity-30" />
-            <span className="absolute left-5 top-5 h-[54px] w-[54px] border-l-2 border-t-2 border-[#ff6b00]" aria-hidden="true" />
-            <span className="absolute bottom-5 right-5 h-[54px] w-[54px] border-b-2 border-r-2 border-[#ff6b00]" aria-hidden="true" />
             <div className="mb-8 flex h-[82px] w-[82px] items-center justify-center rounded-full bg-[#fff0e5] text-[#ff6b00] transition-all duration-300 group-hover:rotate-6 group-hover:bg-[#ff6b00] group-hover:text-white">
               <Icon aria-hidden="true" sx={{ fontSize: 36 }} />
             </div>

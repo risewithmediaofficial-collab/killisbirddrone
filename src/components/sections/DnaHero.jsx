@@ -71,7 +71,6 @@ const DnaHero = () => {
     >
       <div className="mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] items-center gap-6 px-[clamp(20px,5vw,80px)] max-lg:grid-cols-1">
         <div className="relative z-[2] py-3 pl-5 max-sm:pl-4">
-          <span className="absolute left-0 top-2 h-[40px] w-[40px] border-l-2 border-t-2 border-[#ff6b00] max-sm:h-8 max-sm:w-8" aria-hidden="true" />
           <h1 id="dna-hero-title" className="font-heading text-[clamp(34px,4vw,58px)] font-normal leading-[0.98] tracking-[-0.055em] text-[#111111] max-sm:text-[clamp(30px,11vw,44px)]" aria-label="Imagine. Ideate. Innovate.">
             <span className="dna-hero-word block">Imagine.</span>
             <span className="dna-hero-word block">Ideate.</span>
@@ -104,7 +103,6 @@ const DnaHero = () => {
             eyebrow="Precision"
             title="In Every Detail"
           />
-          <span className="absolute bottom-5 right-5 h-[42px] w-[42px] border-b-2 border-r-2 border-[#ff6b00] max-sm:h-8 max-sm:w-8" aria-hidden="true" />
         </div>
       </div>
 

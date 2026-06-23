@@ -18,7 +18,6 @@ const SecondaryHero = ({ eyebrow, title, highlight, description, watermark }) =>
       </span>
     ) : null}
     <div className="relative mx-auto flex w-full max-w-[1380px] flex-col items-center px-[clamp(20px,5vw,80px)] text-center">
-      <div className="absolute left-[clamp(20px,5vw,80px)] top-2 h-[48px] w-[48px] border-l-2 border-t-2 border-[#ff6b00] max-sm:h-9 max-sm:w-9" aria-hidden="true" />
       <div className="reveal-group max-w-[820px]">
         <SectionLabel className="justify-center">{eyebrow}</SectionLabel>
         <SplitHeading
@@ -31,7 +30,6 @@ const SecondaryHero = ({ eyebrow, title, highlight, description, watermark }) =>
         </SplitHeading>
         {description && <p className="mx-auto max-w-[600px] text-[15px] leading-[1.8] text-[#67707d]">{description}</p>}
       </div>
-      <span className="absolute bottom-2 right-[clamp(20px,5vw,80px)] h-[48px] w-[48px] border-b-2 border-r-2 border-[#ff6b00] max-sm:h-9 max-sm:w-9" aria-hidden="true" />
     </div>
   </section>
 );
