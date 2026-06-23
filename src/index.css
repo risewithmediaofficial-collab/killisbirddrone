@@ -725,6 +725,14 @@
     scrollbar-width: none;
   }
 
+  @keyframes slideArrow {
+    0%, 100% { transform: translateX(-3px); }
+    50% { transform: translateX(3px); }
+  }
+  .animate-timeline-arrow {
+    animation: slideArrow 1.2s infinite ease-in-out;
+  }
+
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
 

@@ -102,6 +102,16 @@ const Journey = () => {
     timelineScrollRef.current.scrollLeft = scrollLeft.current - walk;
   };
 
+  const scrollTimeline = (direction) => {
+    if (timelineScrollRef.current) {
+      const scrollAmount = 340; // width of one card + gap
+      timelineScrollRef.current.scrollTo({
+        left: timelineScrollRef.current.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount),
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <div ref={pageRef}>
       <SEO title="Journey" description="Killis Bird — Shape the Future With Us. Our story, milestones, and careers." />
@@ -116,27 +126,55 @@ const Journey = () => {
           >
             TIMELINE
           </ParallaxWatermark>
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-3 text-[12px] font-extrabold uppercase tracking-[0.22em] text-[#ff6b00]">
-              <span className="h-px w-10 bg-[#ff6b00]" aria-hidden="true" />
-              Our Journey
+          <div className="relative z-10 flex justify-between items-end gap-6 flex-wrap">
+            <div>
+              <div className="inline-flex items-center gap-3 text-[12px] font-extrabold uppercase tracking-[0.22em] text-[#ff6b00]">
+                <span className="h-px w-10 bg-[#ff6b00]" aria-hidden="true" />
+                Our Journey
+              </div>
+              <h2 className="mt-5 text-[clamp(36px,5vw,72px)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[#111111]">
+                Milestones <span className="text-[#ff6b00]">That Define Us</span>
+              </h2>
+              <p className="max-w-[560px] text-[16px] leading-[1.8] text-[#67707d] mt-4">
+                From a bold idea in 2018 to a globally trusted UAV component brand — every year marks a new chapter in our pursuit of precision and innovation.
+              </p>
             </div>
-            <h2 className="mt-5 text-[clamp(36px,5vw,72px)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[#111111]">
-              Milestones <span className="text-[#ff6b00]">That Define Us</span>
-            </h2>
-            <p className="max-w-[560px] text-[16px] leading-[1.8] text-[#67707d]">
-              From a bold idea in 2018 to a globally trusted UAV component brand — every year marks a new chapter in our pursuit of precision and innovation.
-            </p>
+
+            {/* Scroll animation hint */}
+            <div className="flex items-center gap-3 text-[12px] font-extrabold uppercase tracking-[0.2em] text-[#ff6b00] select-none pb-2">
+              <span>Drag or Scroll to Explore</span>
+              <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-[#ff6b00]/40 text-[#ff6b00]">
+                <svg className="w-4 h-4 animate-timeline-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Horizontal Timeline */}
+        {/* Horizontal Timeline Wrapper */}
         <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)] py-12">
-          {/* Scroll hint */}
-          <div className="flex items-center justify-end gap-2 mb-4 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#67707d] select-none">
-            <span>Scroll horizontally to explore</span>
-            <span className="animate-pulse">→</span>
-          </div>
+          {/* Left Scroll Button */}
+          <button 
+            onClick={() => scrollTimeline('left')}
+            className="absolute left-2 top-[180px] -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white border border-[#f1dfd1] text-[#ff6b00] flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:bg-[#fff8f1] hover:scale-105 active:scale-95 transition-all duration-300 max-lg:hidden"
+            aria-label="Scroll left"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+
+          {/* Right Scroll Button */}
+          <button 
+            onClick={() => scrollTimeline('right')}
+            className="absolute right-2 top-[180px] -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white border border-[#f1dfd1] text-[#ff6b00] flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:bg-[#fff8f1] hover:scale-105 active:scale-95 transition-all duration-300 max-lg:hidden"
+            aria-label="Scroll right"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
 
           <div 
             ref={timelineScrollRef}
@@ -147,14 +185,14 @@ const Journey = () => {
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
           >
-            {/* Horizontal guide line */}
-            <div 
-              className="absolute left-0 right-0 h-[2px] bg-[#f1dfd1]/80 top-[180px] -translate-y-1/2" 
-              aria-hidden="true" 
-            />
-
             {/* Timeline track */}
             <div className="relative flex gap-20 lg:gap-32 px-12 pb-12 w-max">
+              {/* Horizontal guide line inside track (spans full track width) */}
+              <div 
+                className="absolute left-0 right-0 h-[2px] bg-[#f1dfd1]/80 top-[180px] -translate-y-1/2 z-0" 
+                aria-hidden="true" 
+              />
+
               {milestones.map((m, index) => {
                 const year = m.eyebrow;
                 const title = m.text;
@@ -164,7 +202,7 @@ const Journey = () => {
                 return (
                   <div 
                     key={index}
-                    className="relative flex flex-col items-center min-w-[260px] lg:min-w-[320px] group select-text"
+                    className="relative flex flex-col items-center min-w-[260px] lg:min-w-[320px] group select-text z-10"
                   >
                     {/* Above the line: Year and Title */}
                     <div className="absolute bottom-[calc(100%-156px)] left-1/2 -translate-x-1/2 flex flex-col items-center text-center w-[220px] pb-4">
