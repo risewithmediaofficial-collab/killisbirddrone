@@ -21,7 +21,7 @@ const voices = [
   },
 ];
 
-const partners = ['AeroVentures', 'DefenceTech', 'SkyAgri Corp', 'InspectX', 'SwarmLabs', 'AviaNXT'];
+const partners = [];
 
 const TrustedClients = () => {
   return (
@@ -30,7 +30,7 @@ const TrustedClients = () => {
       <section data-stack-section className="section bg-navy-50/10 relative overflow-hidden border-t border-b border-border/40">
         <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
           <div className="text-center flex flex-col items-center mb-12">
-            <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2">CLIENT VERDICTS</span>
+            <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2">VOICES OF TRUST</span>
             <SectionHeader eyebrow="" title="Voices of" orangeTitle="Trust" centered />
           </div>
 
@@ -74,7 +74,7 @@ const TrustedClients = () => {
       <section data-stack-section className="section-sm bg-white border-b border-border/40">
         <div className="max-w-content mx-auto px-6 md:px-8">
           <div className="flex flex-col items-center justify-center text-center">
-            <span className="text-[10px] font-heading font-bold text-muted uppercase tracking-widest block mb-4">OUR TRUSTED COLLABORATORS</span>
+            <span className="text-[10px] font-heading font-bold text-muted uppercase tracking-widest block mb-4"></span>
             <div className="flex flex-wrap justify-center items-center gap-y-4 gap-x-2 md:gap-x-8 mt-4">
               {partners.map((p, i) => (
                 <FadeIn key={i} delay={i * 0.05}>

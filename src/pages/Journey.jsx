@@ -114,7 +114,7 @@ const Journey = () => {
 
   return (
     <div ref={pageRef}>
-      <SEO title="Journey" description="Killis Bird — Shape the Future With Us. Our story, milestones, and careers." />
+      <SEO title="Journey" description="Killis Bird :: Imagine, IDeate, Innovate — Shape the Future With Us. Our story, milestones, and careers." />
 
       {/* ── MILESTONES: Horizontal Timeline ── */}
       <section data-stack-section className="relative overflow-hidden bg-white">
@@ -129,8 +129,7 @@ const Journey = () => {
           <div className="relative z-10 flex justify-between items-end gap-6 flex-wrap">
             <div>
               <div className="inline-flex items-center gap-3 text-[12px] font-extrabold uppercase tracking-[0.22em] text-[#ff6b00]">
-                <span className="h-px w-10 bg-[#ff6b00]" aria-hidden="true" />
-                Our Journey
+                
               </div>
               <h2 className="mt-5 text-[clamp(36px,5vw,72px)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[#111111]">
                 Milestones <span className="text-[#ff6b00]">That Define Us</span>

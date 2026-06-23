@@ -24,7 +24,7 @@ const OurDNA = () => {
 
   return (
     <div ref={pageRef} className="overflow-hidden bg-white font-sans text-[#111111]">
-      <SEO title="Our DNA" description="Killis Bird — Imagine, Ideate, Innovate. Where Precision Meets Innovation." />
+      <SEO title="Our DNA" description="Killis Bird :: Imagine, IDeate, Innovate — Where Precision Meets Innovation." />
       <FoundationSection image={IMG.dna} />
       <VisionMissionSection />
       <PeopleSection team={team} />

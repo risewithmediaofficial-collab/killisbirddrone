@@ -8,12 +8,12 @@ const cards = [
   {
     Icon: GpsFixedIcon,
     title: 'Our Vision',
-    text: 'We deliver the most trusted, innovative, and distinctive UAV components and solutions to our partners — setting the global standard for aerial excellence.'
+    text: 'We deliver the most trusted, innovative, and distinctive UAV components and solutions to our partners.'
   },
   {
     Icon: RocketLaunchIcon,
     title: 'Our Mission',
-    text: 'To engineer robust, adaptable, and forward-thinking UAV technologies that empower our partners with reliability and excellence through continuous innovation, precision design, and uncompromising quality.'
+    text: 'To engineer robust, adaptable, and forward thinking UAV technologies that empower our partners with reliability and excellence, through continuous innovation, precision design, and uncompromising quality.'
   }
 ];
 

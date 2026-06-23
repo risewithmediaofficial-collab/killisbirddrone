@@ -20,10 +20,15 @@ const FoundationSection = ({ image }) => (
         <SplitHeading id="foundation-title" highlight="Killis Bird">
           The DNA of
         </SplitHeading>
+        <p className="mt-4 text-[15px] leading-[1.85] text-[#67707d] max-w-[560px]">
+          At Killis Birds, our core is precision engineered with imagination, ideation, and innovation.
+          This DNA powers the design and delivery of next generation UAV components and solutions that expand the possibilities of aerospace and defense.
+          Each creation embodies visionary thinking, rigorous engineering, and uncompromising excellence.
+        </p>
         <QuoteCard>— we shape the future of flight.</QuoteCard>
         <p className="flex items-center gap-3 text-base font-bold leading-[1.78] text-[#67707d]">
           <PublicIcon aria-hidden="true" sx={{ fontSize: 20, color: '#ff6b00' }} />
-          <span className="text-[#ff6b00]">Built in India.</span> Trusted Worldwide.
+          <span className="text-[#ff6b00]">Built in India.</span> Trusted worldwide.
         </p>
       </div>
       <ImageFrame
