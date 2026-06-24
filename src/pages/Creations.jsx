@@ -53,7 +53,7 @@ const ProductImageViewer = ({ images, name }) => {
   const next = (e) => { e.stopPropagation(); setCurrent((c) => (c + 1) % images.length); };
 
   return (
-    <div className="relative w-full aspect-square bg-[#f7f7f7] border border-black/[0.06] flex items-center justify-center overflow-hidden group">
+    <div className="relative w-full h-52 sm:h-auto sm:aspect-square bg-[#f7f7f7] border-b border-black/[0.06] flex items-center justify-center overflow-hidden group">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -130,10 +130,10 @@ const ProductImageViewer = ({ images, name }) => {
 /* ── Product Card ── */
 const ProductCard = ({ product, index }) => (
   <motion.div
-    initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0, y: 16 }}
-    whileInView={{ clipPath: "inset(0 0 0% 0)", opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-40px" }}
-    transition={{ duration: 0.55, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
     className="flex flex-col border border-black/[0.09] bg-white group hover:border-[#ff6b00]/40 transition-colors duration-200"
   >
     {/* Image viewer */}
@@ -192,7 +192,7 @@ const ProductCard = ({ product, index }) => (
 const CategorySection = ({ num, category, tagline, watermark, products, index }) => (
   <section
     data-stack-section
-    className={`relative overflow-hidden py-[72px] max-sm:py-[48px] ${index % 2 === 0 ? "bg-white" : "bg-[#fff8f1]"}`}
+    className={`relative py-[72px] max-sm:py-[48px] ${index % 2 === 0 ? "bg-white" : "bg-[#fff8f1]"}`}
   >
     <ParallaxWatermark
       className={`top-1/2 -translate-y-1/2 text-[clamp(6rem,12vw,15rem)] ${index % 2 === 0 ? "left-0 text-[#ff6b00]/[0.06]" : "right-0 text-[#111111]/[0.05]"}`}
