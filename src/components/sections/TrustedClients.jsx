@@ -1,93 +1,118 @@
-// src/components/sections/TrustedClients.jsx
 import React from 'react';
+import { motion } from 'framer-motion';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import StarIcon from '@mui/icons-material/Star';
-import FadeIn from '../FadeIn';
 import SectionHeader from '../SectionHeader';
-import CornerBrackets from '../CornerBrackets';
 
 const voices = [
-  { 
-    quote: 'Killis Bird components set a new benchmark for precision and reliability. Their custom UAV brushless motors and SWARM control systems completely transformed our telemetry operations.', 
-    name: 'Rajiv Sharma', 
+  {
+    quote: 'Killis Bird components set a new benchmark for precision and reliability. Their custom UAV brushless motors and SWARM control systems completely transformed our telemetry operations.',
+    name: 'Rajiv Sharma',
+    initials: 'RS',
   },
-  { 
-    quote: 'The attention to aerostructural engineering detail is extraordinary. We have partnered with them for three consecutive custom drone fleet builds and achieved 100% mission success.', 
-    name: 'Priya Nair', 
+  {
+    quote: 'The attention to aerostructural engineering detail is extraordinary. We have partnered with them for three consecutive custom drone fleet builds and achieved 100% mission success.',
+    name: 'Priya Nair',
+    initials: 'PN',
   },
-  { 
-    quote: 'Unmatched structural integrity, lightweight carbon frames, and incredible technical support. Killis Bird is truly a world-class aerospace component partner.', 
-    name: 'Arjun Menon', 
+  {
+    quote: 'Unmatched structural integrity, lightweight carbon frames, and incredible technical support. Killis Bird is truly a world-class aerospace component partner.',
+    name: 'Arjun Menon',
+    initials: 'AM',
   },
 ];
 
-const partners = [];
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.11 } },
+};
+
+const cardVariants = {
+  hidden: { clipPath: 'inset(0 0 100% 0)', opacity: 0, y: 14 },
+  visible: { clipPath: 'inset(0 0 0% 0)', opacity: 1, y: 0, transition: { duration: 0.58, ease: [0.16, 1, 0.3, 1] } },
+};
 
 const TrustedClients = () => {
   return (
     <>
-      {/* ── TESTIMONIALS (ORANGE BACKGROUND) ── */}
-      <section data-stack-section className="section bg-navy-50/10 relative overflow-hidden border-t border-b border-border/40">
+      {/* Testimonials */}
+      <section data-stack-section className="section bg-white relative overflow-hidden border-t border-b border-black/[0.07]">
         <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
-          <div className="text-center flex flex-col items-center mb-12">
-            <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2">VOICES OF TRUST</span>
-            <SectionHeader eyebrow="" title="Voices of" orangeTitle="Trust" centered />
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            {voices.map((v, i) => (
-              <FadeIn key={i} delay={i * 0.1} direction="up">
-                <div className="bg-white border border-border/70 rounded-none p-8 hover:border-skyroot hover:shadow-xl hover:-translate-y-2.5 transition-all duration-500 group flex flex-col h-full relative">
-                  <CornerBrackets color="#f97316" size="10px" thickness="1.5px" hoverShift />
-                  
-                  <div className="flex justify-between items-start mb-6">
-                    <FormatQuoteIcon sx={{ fontSize: 36, color: '#f97316', opacity: 0.3 }} />
-                    <div className="flex gap-0.5">
-                      {[...Array(5)].map((_, si) => (
-                        <StarIcon key={si} sx={{ fontSize: 16, color: '#f97316' }} />
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <p className="text-black/85 text-sm leading-relaxed italic mb-8 flex-grow">
-                    "{v.quote}"
-                  </p>
-
-                  <div className="flex items-center gap-4 border-t border-border/60 pt-6">
-                    <div className="w-11 h-11 rounded-none bg-skyroot text-white flex items-center justify-center font-heading font-bold text-base shrink-0 shadow-sm relative group/avatar">
-                      <CornerBrackets color="#ffffff" size="4px" thickness="1px" hoverShift={false} />
-                      {v.name[0]}
-                    </div>
-                    <div>
-                      <p className="font-heading font-bold text-black text-sm leading-none mb-1.5">{v.name}</p>
-                      <p className="text-skyroot text-xs font-medium">{v.role}</p>
-                    </div>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── PARTNERS (WHITE BACKGROUND) ── */}
-      <section data-stack-section className="section-sm bg-white border-b border-border/40">
-        <div className="max-w-content mx-auto px-6 md:px-8">
-          <div className="flex flex-col items-center justify-center text-center">
-            <span className="text-[10px] font-heading font-bold text-muted uppercase tracking-widest block mb-4"></span>
-            <div className="flex flex-wrap justify-center items-center gap-y-4 gap-x-2 md:gap-x-8 mt-4">
-              {partners.map((p, i) => (
-                <FadeIn key={i} delay={i * 0.05}>
-                  <div className="relative group inline-flex">
-                    <div className="px-6 py-3 bg-navy-50/10 border border-border/40 rounded-none text-black/60 hover:text-skyroot hover:border-skyroot hover:bg-white font-heading font-bold text-xs tracking-widest uppercase transition-all duration-300 cursor-default shadow-sm relative z-10">
-                      {p}
-                    </div>
-                    <CornerBrackets color="#f97316" size="5px" thickness="1px" hoverShift />
-                  </div>
-                </FadeIn>
-              ))}
+          {/* Split header */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-end gap-8 mb-12 border-b border-black/[0.07] pb-10">
+            <div>
+              <SectionHeader eyebrow="Voices of Trust" title="Client" orangeTitle="Testimonials" centered={false} className="mb-0" />
+            </div>
+            <div className="hidden lg:flex justify-end items-end">
+              <motion.div
+                initial={{ opacity: 0, x: 12 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="text-right"
+              >
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/35" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  Verified Partners
+                </p>
+                <p className="font-heading font-bold text-3xl text-black tracking-tight mt-1">
+                  3<span className="text-skyroot">+</span>
+                </p>
+              </motion.div>
             </div>
           </div>
+
+          {/* Cards */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-black/[0.07]"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+          >
+            {voices.map((v, i) => (
+              <motion.div
+                key={i}
+                variants={cardVariants}
+                className="group relative border-r border-b border-black/[0.07] p-8 transition-all duration-200 hover:bg-[rgba(249,115,22,0.02)] flex flex-col"
+              >
+                {/* Index + stars row */}
+                <div className="flex items-center justify-between mb-6">
+                  <span
+                    className="font-bold text-xs text-skyroot"
+                    style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '0.08em' }}
+                  >
+                    0{i + 1}
+                  </span>
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, si) => (
+                      <StarIcon key={si} sx={{ fontSize: 11, color: '#f97316' }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Quote icon */}
+                <FormatQuoteIcon sx={{ fontSize: 28, color: '#f97316', opacity: 0.22, mb: 1.5 }} />
+
+                {/* Quote text */}
+                <p className="text-black/75 text-sm leading-relaxed italic flex-grow mb-8" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  "{v.quote}"
+                </p>
+
+                {/* Author */}
+                <div className="flex items-center gap-3 border-t border-black/[0.07] pt-5 mt-auto">
+                  <div className="w-9 h-9 shrink-0 bg-skyroot text-white flex items-center justify-center font-bold text-xs" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    {v.initials}
+                  </div>
+                  <p className="font-heading font-bold text-black text-sm">{v.name}</p>
+                </div>
+
+                {/* Orange left-border reveal on hover */}
+                <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-skyroot scale-y-0 origin-bottom transition-transform duration-200 ease-out group-hover:scale-y-100" />
+              </motion.div>
+            ))}
+          </motion.div>
+
         </div>
       </section>
     </>
@@ -95,4 +120,3 @@ const TrustedClients = () => {
 };
 
 export default TrustedClients;
-

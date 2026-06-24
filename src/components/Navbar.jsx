@@ -71,7 +71,7 @@ const Navbar = () => {
                   to={to}
                   end={end}
                   className={({ isActive }) =>
-                    `site-navbar__link ${isActive ? 'site-navbar__link--active' : ''}`
+                    `site-navbar__link nav-link-premium ${isActive ? 'site-navbar__link--active' : ''}`
                   }
                 >
                   {({ isActive }) => (
@@ -93,12 +93,10 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="site-navbar__cta-wrap">
-            <Link
-              to="/contact"
-              className="site-navbar__cta"
-            >
-              <span>Request Quote</span>
-              <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 22 }} />
+            <Link to="/contact" className="site-navbar__cta group relative overflow-hidden">
+              <span className="relative z-10 transition-colors duration-200 group-hover:text-white">Request Quote</span>
+              <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 22 }} className="relative z-10 transition-transform duration-200 group-hover:translate-x-1" />
+              <span className="absolute inset-0 bg-[var(--primary-orange-dark)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]" />
             </Link>
           </div>
 
@@ -116,32 +114,32 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu — full screen */}
+      {/* Mobile Menu — full screen clip-path reveal */}
       <AnimatePresence>
         {open && (
           <motion.div
             key="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            initial={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
+            animate={{ opacity: 1, clipPath: 'inset(0 0 0% 0)' }}
+            exit={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
+            transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-40 bg-white lg:hidden flex flex-col"
           >
-            <div className="h-[82px]" /> {/* spacer for nav */}
-            <ul className="flex flex-col px-8 py-6 gap-1 flex-1 bg-[var(--background-soft)]">
+            <div className="h-[82px]" />
+            <ul className="flex flex-col px-8 py-6 gap-0 flex-1 bg-[var(--background-soft)]">
               {links.map(({ to, label, end }, i) => (
                 <motion.li
                   key={to}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 + i * 0.06, ease: 'easeOut' }}
+                  transition={{ delay: 0.05 + i * 0.055, ease: [0.16, 1, 0.3, 1], duration: 0.38 }}
                 >
                   <NavLink
                     to={to}
                     end={end}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
-                      `block py-4 px-2 font-heading font-bold text-2xl transition-colors border-b border-[#f1dfd1] ${isActive
+                      `block py-4 px-2 font-sans font-medium text-2xl tracking-tight transition-colors border-b border-[#f1dfd1] ${isActive
                         ? 'text-[#ff6b00]'
                         : 'text-black hover:text-skyroot'
                       }`
@@ -155,7 +153,7 @@ const Navbar = () => {
                 className="pt-6"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
               >
                 <Link
                   to="/contact"
