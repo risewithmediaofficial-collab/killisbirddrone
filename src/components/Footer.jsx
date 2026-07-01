@@ -3,13 +3,15 @@ import { motion } from 'framer-motion';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const navLinks = [
-  { to: '/', label: 'Home' },
+  { to: '/', label: 'Space' },
   { to: '/our-dna', label: 'Our DNA' },
   { to: '/creations', label: 'Creations' },
   { to: '/assistance', label: 'Assistance' },
@@ -32,24 +34,30 @@ const Footer = () => (
         {/* Brand — col span 4 */}
         <div className="lg:col-span-4 border-r border-b border-white/[0.06] p-8 md:p-10">
           <Link to="/" className="flex items-center mb-5 group">
-            <img
-              src="/assests/KILLIS BIRD - LOGO.png"
-              alt="Killis Bird Logo"
-              className="h-12 md:h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-            />
+            <span className="bg-white inline-flex p-1 rounded-sm">
+              <img
+                src="/assests/KILLIS BIRD - LOGO.png"
+                alt="Killis Bird Logo"
+                className="h-10 md:h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+              />
+            </span>
           </Link>
           <p className="text-white/45 text-sm leading-relaxed mb-1" style={{ fontFamily: 'Inter, sans-serif' }}>Imagine. Ideate. Innovate.</p>
           <p className="text-skyroot font-semibold text-sm mb-6" style={{ fontFamily: 'Inter, sans-serif' }}>🇮🇳 Built in India. Trusted Worldwide.</p>
 
           <div className="flex gap-2">
             {[
-              { Icon: LinkedInIcon, href: '#', label: 'LinkedIn' },
+              { Icon: InstagramIcon, href: 'https://www.instagram.com/killisbird?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', label: 'Instagram' },
+              { Icon: FacebookIcon, href: '#', label: 'Facebook' },
               { Icon: TwitterIcon, href: '#', label: 'Twitter' },
+              { Icon: LinkedInIcon, href: '#', label: 'LinkedIn' },
               { Icon: YouTubeIcon, href: '#', label: 'YouTube' },
             ].map(({ Icon, href, label }) => (
               <motion.a
                 key={label}
                 href={href}
+                target={href && href !== '#' ? '_blank' : undefined}
+                rel={href && href !== '#' ? 'noopener noreferrer' : undefined}
                 aria-label={label}
                 whileHover={{ y: -2 }}
                 className="w-9 h-9 border border-white/[0.12] hover:border-skyroot hover:bg-skyroot flex items-center justify-center transition-colors duration-200"
@@ -161,7 +169,7 @@ const Footer = () => (
         <p className="text-white/25 text-xs" style={{ fontFamily: 'Inter, sans-serif' }}>
           © {new Date().getFullYear()} Killis Bird Technologies Pvt. Ltd. All rights reserved.
         </p>
-        <p className="text-white/15 text-xs" style={{ fontFamily: 'Inter, sans-serif' }}>
+        <p className="text-white/60 text-xs font-semibold" style={{ fontFamily: 'Inter, sans-serif' }}>
           Precision Engineered. Innovation Delivered.
         </p>
       </div>

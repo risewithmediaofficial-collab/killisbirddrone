@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import WorkIcon from '@mui/icons-material/Work';
 import SEO from '../components/SEO';
 import ParallaxWatermark from '../components/ParallaxWatermark';
@@ -309,13 +309,15 @@ const Journey = () => {
                     </p>
                   </div>
                 </div>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center border border-[#ff6b00]/30 px-6 py-3 text-[13px] font-extrabold text-[#ff6b00] transition-all duration-200 hover:border-[#ff6b00] hover:bg-[#fff8f1] hover:-translate-y-0.5"
+                {/* Temporarily locked: render disabled button instead of a link */}
+                <button
+                  disabled
+                  className="inline-flex items-center justify-center border border-[#ff6b00]/30 px-6 py-3 text-[13px] font-extrabold text-[#ff6b00] opacity-60 cursor-not-allowed"
                   style={{ fontFamily: 'Inter, sans-serif' }}
+                  aria-disabled="true"
                 >
                   Apply Now
-                </Link>
+                </button>
               </div>
             ))}
           </div>

@@ -252,7 +252,7 @@ const Home = () => {
             Built in India
           </p>
           <p className="font-heading font-bold text-skyroot text-xs">
-            Trusted Worldwide 🇮🇳
+            Trusted Worldwide 
           </p>
         </div>
       </section>

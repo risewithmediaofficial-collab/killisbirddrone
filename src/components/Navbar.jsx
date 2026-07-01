@@ -134,19 +134,25 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 + i * 0.055, ease: [0.16, 1, 0.3, 1], duration: 0.38 }}
                 >
-                  <NavLink
-                    to={to}
-                    end={end}
-                    onClick={() => setOpen(false)}
-                    className={({ isActive }) =>
-                      `block py-4 px-2 font-sans font-medium text-2xl tracking-tight transition-colors border-b border-[#f1dfd1] ${isActive
-                        ? 'text-[#ff6b00]'
-                        : 'text-black hover:text-skyroot'
-                      }`
-                    }
-                  >
-                    {label}
-                  </NavLink>
+                  {to === '/assistance' || to === '/blog' ? (
+                    <div className="block py-4 px-2 font-sans font-medium text-2xl tracking-tight transition-colors border-b border-[#f1dfd1] text-black/50">
+                      {label} <em className="ml-2 text-[14px] text-black/30">Coming soon</em>
+                    </div>
+                  ) : (
+                    <NavLink
+                      to={to}
+                      end={end}
+                      onClick={() => setOpen(false)}
+                      className={({ isActive }) =>
+                        `block py-4 px-2 font-sans font-medium text-2xl tracking-tight transition-colors border-b border-[#f1dfd1] ${isActive
+                          ? 'text-[#ff6b00]'
+                          : 'text-black hover:text-skyroot'
+                        }`
+                      }
+                    >
+                      {label}
+                    </NavLink>
+                  )}
                 </motion.li>
               ))}
               <motion.li

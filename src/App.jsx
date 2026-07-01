@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/sections/Hero';
 // import ScrollVideoCanvas from './components/ScrollVideoCanvas';

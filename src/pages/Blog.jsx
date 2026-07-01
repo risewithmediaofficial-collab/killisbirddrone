@@ -1,22 +1,7 @@
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import SEO from '../components/SEO';
-import ParallaxWatermark from '../components/ParallaxWatermark';
-import ScrollReveal from '../components/ScrollReveal';
-import ImageFrame from '../components/common/ImageFrame';
-import OrangeButton from '../components/common/OrangeButton';
-import SecondarySectionIntro from '../components/common/SecondarySectionIntro';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
-
-const posts = [
-  { tag: 'Innovation', date: 'May 2025', title: 'The Future of Swarm UAV Technology in Defence Applications', excerpt: 'How coordinated multi-UAV systems are transforming modern defence strategies and operational capabilities.', img: '/assests/blog1.jpg' },
-  { tag: 'Engineering', date: 'April 2025', title: 'Carbon Fibre vs. Aluminium: Choosing the Right Airframe Material', excerpt: 'A deep-dive into material science for UAV frames — performance, weight, cost, and real-world trade-offs.', img: '/assests/blog2.jpg' },
-  { tag: 'Agriculture', date: 'March 2025', title: 'Precision Agriculture: How UAVs Are Feeding the Future', excerpt: 'Exploring how drone technology is revolutionising crop monitoring, spraying, and yield prediction across India.', img: '/assests/blog3.jpg' },
-  { tag: 'Policy', date: 'February 2025', title: 'Navigating Drone Regulations: What You Need to Know', excerpt: 'A comprehensive guide to the DGCA drone framework and how it impacts UAV manufacturers and operators.', img: '/assests/blog4.jpg' },
-  { tag: 'Technology', date: 'January 2025', title: 'AI-Powered Autonomous Navigation: The Next Frontier', excerpt: 'How artificial intelligence is enabling real-time obstacle avoidance and dynamic path planning for UAVs.', img: '/assests/blog5.jpg' },
-  { tag: 'Company', date: 'December 2024', title: 'Built in India, Trusted Worldwide: Our Global Expansion Story', excerpt: 'How Killis Bird grew from a Bangalore startup to a globally recognised UAV component brand.', img: '/assests/blog6.jpg' },
-];
+import ComingSoon from '../components/ComingSoon';
 
 const Blog = () => {
   const pageRef = useRef(null);
@@ -25,54 +10,7 @@ const Blog = () => {
   return (
     <div ref={pageRef}>
       <SEO title="Blog" description="Killis Bird — Insights, innovation stories, and technical perspectives." />
-
-      <section data-stack-section className="bg-white py-[64px] max-sm:py-[44px]">
-        <div className="mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-[clamp(44px,6vw,84px)] px-[clamp(20px,5vw,80px)] max-xl:grid-cols-1">
-          <div>
-            <SecondarySectionIntro eyebrow={`${posts[0].tag} • ${posts[0].date}`} title="Featured" highlight="Perspective" className="max-w-[640px]" />
-            <h2 className="mt-5 max-w-[700px] text-[clamp(22px,3vw,38px)] font-normal leading-[1.06] tracking-[-0.05em] text-[#111111]">{posts[0].title}</h2>
-            <div className="mt-6 max-w-[620px]"><ScrollReveal containerClassName="my-0" textClassName="text-lg leading-[1.8] text-[#67707d] max-sm:text-base" baseRotation={1.2}>{posts[0].excerpt}</ScrollReveal></div>
-            <div className="mt-8"><OrangeButton to="/contact">Read Article</OrangeButton></div>
-          </div>
-          <div><ImageFrame variant="technical" src={posts[0].img} alt={posts[0].title} width="820" height="520" /></div>
-        </div>
-      </section>
-
-      <section data-stack-section className="relative overflow-hidden bg-[#fff8f1] py-[64px] max-sm:py-[44px]">
-        <ParallaxWatermark className="left-0 top-1/2 -translate-y-1/2 text-[clamp(6rem,14vw,18rem)] text-[#ff6b00]/[0.06]" speed={20}>BLOG</ParallaxWatermark>
-        <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
-          <SecondarySectionIntro eyebrow="More Articles" title="Latest" highlight="Perspectives" description="A curated stream of engineering viewpoints, policy updates, and innovation stories shaping the future of flight." />
-          <div className="mt-12 grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
-            {posts.slice(1).map((post) => (
-              <article key={post.title} className="book-reveal-text group">
-                <ImageFrame variant="landscape" src={post.img} alt={post.title} width="760" height="420" className="min-h-[280px] rounded-[18px]" />
-                <div className="mt-5">
-                  <div className="flex flex-wrap items-center gap-3 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#ff6b00]">
-                    <span>{post.tag}</span><span className="h-1 w-1 rounded-full bg-[#ff6b00]" aria-hidden="true" /><span className="text-[#67707d]">{post.date}</span>
-                  </div>
-                  <h3 className="mt-3 text-[24px] font-extrabold leading-[1.2] text-[#111111] transition-colors duration-300 group-hover:text-[#ff6b00]">{post.title}</h3>
-                  <p className="mt-3 text-[15px] leading-[1.78] text-[#67707d]">{post.excerpt}</p>
-                  <Link to="/contact" className="mt-4 inline-flex items-center gap-2 text-[14px] font-extrabold text-[#ff6b00] transition-colors duration-300 hover:text-[#e85f00]">
-                    <span>Read More</span><ArrowForwardIcon sx={{ fontSize: 18 }} />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section data-stack-section className="bg-white py-[64px] max-sm:py-[44px]">
-        <div className="mx-auto grid w-full max-w-[1380px] grid-cols-[minmax(0,0.48fr)_minmax(0,0.52fr)] items-center gap-[clamp(44px,6vw,84px)] px-[clamp(20px,5vw,80px)] max-xl:grid-cols-1">
-          <div><SecondarySectionIntro eyebrow="Newsletter" title="Stay Ahead of" highlight="the Curve" description="Subscribe to our newsletter for the latest UAV engineering insights delivered directly to your inbox." /></div>
-          <form className="book-reveal-text rounded-[20px] bg-[#fff8f1] p-8" onSubmit={(event) => event.preventDefault()}>
-            <label className="block text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#67707d]" htmlFor="newsletter-email">Email Address</label>
-            <input id="newsletter-email" type="email" placeholder="Enter your email address" required className="mt-3 w-full border border-[#f1dfd1] bg-white px-5 py-4 text-sm text-[#111111] outline-none transition-all duration-300 placeholder:text-[#9aa3ad] focus:border-[#ff6b00] focus:ring-2 focus:ring-[#ff6b00]/15" />
-            <div className="mt-5"><OrangeButton>Subscribe</OrangeButton></div>
-            <p className="mt-4 text-sm text-[#67707d]">No spam, unsubscribe at any time.</p>
-          </form>
-        </div>
-      </section>
+      <ComingSoon title="Blog — Coming Soon" subtitle="We’re curating articles and perspectives. Content will appear here soon." />
     </div>
   );
 };

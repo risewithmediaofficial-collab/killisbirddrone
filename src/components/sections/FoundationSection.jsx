@@ -25,12 +25,9 @@ const FoundationSection = ({ image }) => (
           This DNA powers the design and delivery of next generation UAV components and solutions that expand the possibilities of aerospace and defense.
           Each creation embodies visionary thinking, rigorous engineering, and uncompromising excellence.
         </p>
-        <QuoteCard>— we shape the future of flight.</QuoteCard>
-        <p className="flex items-center gap-3 text-base font-bold leading-[1.78] text-[#67707d]">
-          <PublicIcon aria-hidden="true" sx={{ fontSize: 20, color: '#ff6b00' }} />
-          <span className="text-[#ff6b00]">Built in India.</span> Trusted worldwide.
-        </p>
+        <QuoteCard>We shape the future of flight.</QuoteCard>
       </div>
+      <div>
       <ImageFrame
         variant="diagonal"
         src={image}
@@ -41,6 +38,13 @@ const FoundationSection = ({ image }) => (
           <FloatingInfoCard icon={GpsFixedIcon} title="Precision by Design." text="Engineered for what's next." />
         }
       />
+      <div className="mt-4 flex justify-end">
+        <p className="flex items-center gap-3 text-base font-bold leading-[1.78] text-[#67707d]">
+          <PublicIcon aria-hidden="true" sx={{ fontSize: 20, color: '#ff6b00' }} />
+          <span className="text-[#ff6b00]">Built in India.</span> Trusted worldwide.
+        </p>
+      </div>
+      </div>
     </div>
   </section>
 );

@@ -168,13 +168,15 @@ const ProductCard = ({ product, index }) => (
       {/* Thin divider */}
       <div className="w-full h-px bg-black/[0.06] mb-4" />
 
-      {/* Price */}
-      <p
-        className="text-[22px] font-extrabold text-[#111111] text-center mb-5 tracking-tight"
-        style={{ letterSpacing: "-0.03em" }}
-      >
-        {product.price}
-      </p>
+      {/* Price (hide when it's a 'Get Quote' label to avoid duplicate CTA) */}
+      {product.price && product.price !== 'Get Quote' && (
+        <p
+          className="text-[22px] font-extrabold text-[#111111] text-center mb-5 tracking-tight"
+          style={{ letterSpacing: "-0.03em" }}
+        >
+          {product.price}
+        </p>
+      )}
 
       {/* CTA */}
       <Link
@@ -304,7 +306,7 @@ const categories = [
           "Sustained thrust for extended endurance",
           "Multi-rotor & fixed-wing compatible",
         ],
-        price: "Get Quote",
+        price: "",
         images: [], // Add image paths here e.g. ["/assests/bldc-1.jpg", "/assests/bldc-2.jpg"]
       },
       {

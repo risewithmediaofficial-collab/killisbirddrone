@@ -1,6 +1,6 @@
-import React, { useRef, useLayoutEffect } from 'react';
+﻿import { useRef, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import {  } from 'framer-motion';
 import { gsap } from 'gsap';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import useParallax from '../../hooks/useParallax';
@@ -49,16 +49,9 @@ const Hero = () => {
       {/* Structural grid overlay */}
       <div className="grid-pattern absolute inset-0 z-10 text-white/5" />
 
-      {/* Technical horizontal divider line */}
-      <div className="hero-tech-overlay absolute z-20 left-0 right-0 top-[80vh] h-px bg-white/10 pointer-events-none" />
+      {/* Technical horizontal divider line removed per design request */}
 
-      {/* Technical coordinate labels */}
-      <span className="hero-tech-overlay tech-overlay-label z-20 top-[76px] left-6 sm:left-10 mt-4 opacity-0" style={{ color: 'rgba(249,115,22,0.45)', top: 'calc(76px + 1.5rem)' }}>
-        22.6° N / 80.2° E
-      </span>
-      <span className="hero-tech-overlay tech-overlay-label z-20 right-6 sm:right-10 opacity-0" style={{ color: 'rgba(255,255,255,0.25)', top: 'calc(76px + 1.5rem)' }}>
-        ALT · 1200M
-      </span>
+      {/* Technical coordinate labels removed per request */}
 
       {/* Top-left: Title */}
       <div className="absolute left-0 top-[76px] z-20 px-6 pt-12 sm:px-10 sm:pt-16 md:px-16 md:pt-18 lg:px-20 lg:pt-22">
@@ -96,22 +89,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Built-in-India float badge — razor-thin border */}
-      <motion.div
-        className="hero-float-badge absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="border border-white/15 bg-white/[0.06] px-5 py-2.5 backdrop-blur-sm text-center">
-          <p className="text-[9px] font-heading font-bold text-white/45 uppercase tracking-widest mb-0.5">
-            Built in India
-          </p>
-          <p className="font-heading font-bold text-skyroot text-xs">
-            Trusted Worldwide 🇮🇳
-          </p>
-        </div>
-      </motion.div>
+      {/* Built-in-India float badge removed per request */}
 
       {/* Spacer to maintain min-h-screen */}
       <div className="min-h-screen" />

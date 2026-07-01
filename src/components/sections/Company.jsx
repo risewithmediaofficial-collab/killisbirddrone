@@ -1,4 +1,4 @@
-import React from 'react';
+// React automatic runtime in use; no default import required
 import { motion } from 'framer-motion';
 
 const stats = [
@@ -35,7 +35,7 @@ const Company = () => {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="section-label-technical"
             >
-              Performance Data
+          
             </motion.div>
             <div className="overflow-hidden">
               <motion.h2
