@@ -88,10 +88,7 @@ const Hero = () => {
               <span className="block text-white">Precision</span>
               <span className="block text-orange-500">Engineered.</span>
             </h1>
-            <p className="hero-body text-white/75 text-sm md:text-base leading-relaxed mt-4 max-w-md">
-              Redefining unmanned aerial systems through indigenous engineering —
-              designed for performance, built for reliability, trusted worldwide.
-            </p>
+
             <div className="hero-btns flex flex-wrap items-center gap-3 mt-6">
               <Link to="/creations" className="btn-primary" aria-label="View our creations">
                 Explore Creations
