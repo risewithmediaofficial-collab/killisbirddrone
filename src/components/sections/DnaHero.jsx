@@ -1,6 +1,22 @@
 // src/components/sections/DnaHero.jsx
 import FadeIn from '../FadeIn';
 
+const renderDescription = (description) => {
+  const highlightedDescriptions = [
+    'Where Precision Meets Innovation',
+    'Engineered for Excellence',
+    'Shape the Future With Us',
+  ];
+
+  if (!highlightedDescriptions.includes(description)) return description;
+
+  return (
+    <>
+      <span className="text-orange-500 font-bold">{description}</span>
+    </>
+  );
+};
+
 const DnaHero = ({
   eyebrow = '',
   title = '',
@@ -28,7 +44,7 @@ const DnaHero = ({
 
         <h1
           className="font-heading font-bold text-black leading-[1.05] mb-5"
-          style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)', letterSpacing: '-0.035em' }}
+          style={{ fontSize: 'clamp(1.9rem, 3.4vw, 3.25rem)', letterSpacing: '-0.02em' }}
         >
           {title}{' '}
           {highlight && <span className="text-orange-500">{highlight}</span>}
@@ -36,8 +52,8 @@ const DnaHero = ({
 
         {description && (
           <p className="text-neutral-500 leading-relaxed max-w-[56ch]"
-             style={{ fontSize: 'var(--fs-body-lg)' }}>
-            {description}
+             style={{ fontSize: 'clamp(1.25rem, 2.2vw, 2rem)' }}>
+            {renderDescription(description)}
           </p>
         )}
       </FadeIn>

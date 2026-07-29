@@ -1,6 +1,22 @@
 // src/components/common/SecondaryHero.jsx
 import FadeIn from '../FadeIn';
 
+const renderDescription = (description) => {
+  const highlightedDescriptions = [
+    'Where Precision Meets Innovation',
+    'Engineered for Excellence',
+    'Shape the Future With Us',
+  ];
+
+  if (!highlightedDescriptions.includes(description)) return description;
+
+  return (
+    <>
+      <span className="text-orange-500 font-bold">{description}</span>
+    </>
+  );
+};
+
 /**
  * Inner-page hero banner.
  * Used by: Creations, Assistance, Journey, Contact pages
@@ -32,7 +48,7 @@ const SecondaryHero = ({
 
         <h1
           className="font-heading font-bold text-black leading-[1.05] mb-5"
-          style={{ fontSize: 'clamp(2.2rem, 4.5vw, 4rem)', letterSpacing: '-0.03em' }}
+          style={{ fontSize: 'clamp(1.9rem, 3.4vw, 3.25rem)', letterSpacing: '-0.02em' }}
         >
           {title}{' '}
           {highlight && (
@@ -42,8 +58,8 @@ const SecondaryHero = ({
 
         {description && (
           <p className="text-neutral-500 leading-relaxed max-w-[54ch]"
-             style={{ fontSize: 'var(--fs-body-lg)' }}>
-            {description}
+             style={{ fontSize: 'clamp(1.25rem, 2.2vw, 2rem)' }}>
+            {renderDescription(description)}
           </p>
         )}
       </FadeIn>

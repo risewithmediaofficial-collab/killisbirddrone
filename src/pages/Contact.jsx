@@ -88,7 +88,7 @@ const Contact = () => {
         eyebrow="Get In Touch"
         title="Let's Build Something"
         highlight="Extraordinary."
-        description="Whether you are ready to partner, need a custom component, or simply want to explore possibilities — we are here."
+        description="Where Precision Meets Innovation"
         watermark="CONTACT"
       />
 

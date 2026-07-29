@@ -7,6 +7,7 @@ import FadeIn from '../components/FadeIn';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
 import { categories } from '../data/products';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import LockIcon from '@mui/icons-material/Lock';
 
 const FrameArt = () => (
   <svg viewBox="0 0 320 240" className="w-full h-full" aria-hidden="true">
@@ -93,6 +94,8 @@ const artByCategory = {
 
 const ProductTile = ({ category, index }) => {
   const product = category.products[0];
+  const isAvailable = product.status === 'available';
+  const productArt = artByCategory[category.category];
 
   return (
     <FadeIn delay={index * 0.08} direction="up">
@@ -105,15 +108,33 @@ const ProductTile = ({ category, index }) => {
           {category.category}
         </h2>
 
-        <Link
-          to={`/creations/${product.id}`}
-          className="group w-full bg-white border border-neutral-200 rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden focus:outline-none focus:ring-2 focus:ring-orange-500"
-          aria-label={`View ${product.name}`}
-        >
-          <div className="aspect-square bg-white p-4 flex items-center justify-center">
-            {artByCategory[category.category]}
+        {isAvailable ? (
+          <Link
+            to={`/creations/${product.id}`}
+            className="group w-full bg-white border border-neutral-200 rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden focus:outline-none focus:ring-2 focus:ring-orange-500"
+            aria-label={`View ${product.name}`}
+          >
+            <div className="aspect-square bg-white p-4 flex items-center justify-center">
+              {productArt}
+            </div>
+          </Link>
+        ) : (
+          <div
+            className="group w-full bg-white border border-neutral-200 rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.08)] overflow-hidden opacity-75"
+            aria-label={`${product.name} coming soon`}
+          >
+            <div className="relative aspect-square bg-white p-4 flex items-center justify-center">
+              <div className="absolute inset-0 bg-white/55 z-10" aria-hidden="true" />
+              <div className="absolute left-4 top-4 z-20 inline-flex items-center gap-1.5 bg-neutral-950 text-white px-3 py-1.5 text-[0.625rem] font-bold uppercase tracking-widest">
+                <LockIcon aria-hidden="true" sx={{ fontSize: 12 }} />
+                Coming Soon
+              </div>
+              <div className="grayscale">
+                {productArt}
+              </div>
+            </div>
           </div>
-        </Link>
+        )}
 
         <div className="text-center max-w-[28ch]">
           <h3 className="font-heading font-bold text-black text-xl leading-tight">
@@ -122,13 +143,20 @@ const ProductTile = ({ category, index }) => {
           <p className="text-neutral-500 text-xs leading-relaxed mt-2">
             {product.model}
           </p>
-          <Link
-            to={`/creations/${product.id}`}
-            className="inline-flex items-center gap-1.5 mt-3 text-[0.75rem] font-bold text-orange-500 hover:text-orange-600"
-          >
-            Details
-            <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 14 }} />
-          </Link>
+          {isAvailable ? (
+            <Link
+              to={`/creations/${product.id}`}
+              className="inline-flex items-center gap-1.5 mt-3 text-[0.75rem] font-bold text-orange-500 hover:text-orange-600"
+            >
+              Details
+              <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 14 }} />
+            </Link>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 mt-3 text-[0.75rem] font-bold text-neutral-400">
+              <LockIcon aria-hidden="true" sx={{ fontSize: 13 }} />
+              Coming Soon
+            </span>
+          )}
         </div>
       </motion.article>
     </FadeIn>
@@ -138,6 +166,11 @@ const ProductTile = ({ category, index }) => {
 const Creations = () => {
   const pageRef = useRef(null);
   useBookScrollEffects(pageRef);
+  const orderedCategories = [...categories].sort((a, b) => {
+    const aAvailable = a.products[0]?.status === 'available';
+    const bAvailable = b.products[0]?.status === 'available';
+    return Number(bAvailable) - Number(aAvailable);
+  });
 
   return (
     <div ref={pageRef} className="bg-white overflow-hidden">
@@ -156,7 +189,7 @@ const Creations = () => {
       <section className="section bg-white divide-top" aria-label="Killis Bird creations">
         <div className="container">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-14">
-            {categories.map((category, index) => (
+            {orderedCategories.map((category, index) => (
               <ProductTile key={category.num} category={category} index={index} />
             ))}
           </div>

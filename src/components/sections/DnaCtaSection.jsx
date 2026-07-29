@@ -30,12 +30,8 @@ const DnaCtaSection = () => (
               className="font-heading font-bold text-white leading-[1.05] mb-4"
               style={{ fontSize: 'clamp(1.8rem, 3vw, 3rem)', letterSpacing: '-0.025em' }}
             >
-              Shape the future of<br />
-              <span className="text-orange-400">Indian aviation.</span>
+              Looking for passionate engineers, innovators, and dreamers to shape the future of flight.
             </h2>
-            <p className="text-white/55 text-sm leading-relaxed max-w-[44ch]">
-              We are always looking for engineers, researchers, and innovators who share our passion for precision and purpose.
-            </p>
           </div>
         </FadeIn>
 

@@ -8,8 +8,6 @@ import ScrollToTop    from './components/ScrollToTop';
 import SEO            from './components/SEO';
 import ScrollStack    from './components/ScrollStack';
 
-const Company     = lazy(() => import('./components/sections/Company'));
-const Process     = lazy(() => import('./components/sections/Process'));
 const Testimonials = lazy(() => import('./components/sections/Testimonials'));
 const FAQ         = lazy(() => import('./components/sections/FAQ'));
 const CTABanner   = lazy(() => import('./components/sections/CTABanner'));
@@ -31,12 +29,6 @@ const App = () => (
       {/* ─ Below-the-fold (smooth scroll + lazy) ─ */}
       <SmoothScroll>
         <Suspense fallback={<SectionLoader />}>
-          {/* Stats + Feature intro */}
-          <Company />
-
-          {/* 4-step process */}
-          <Process />
-
           {/* Client testimonials */}
           <Testimonials />
 

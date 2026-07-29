@@ -85,7 +85,7 @@ const Assistance = () => {
         eyebrow="Get In Touch"
         title="Assistance"
         highlight=""
-        description="For product enquiries, support, custom engineering, and partnership discussions."
+        description="Where Precision Meets Innovation"
         watermark="CONTACT"
       />
 

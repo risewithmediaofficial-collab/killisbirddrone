@@ -4,12 +4,10 @@ import SectionHeader from '../SectionHeader';
 const statements = [
   {
     label: 'Vision',
-    title: 'Trusted, Innovative UAV leadership.',
     body: "To be the most trusted and innovative leader in UAV components and solutions, recognized for empowering our partners' success through excellence and distinction.",
   },
   {
     label: 'Mission',
-    title: 'Robust, adaptable, high-performance solutions.',
     body: 'We design and deliver robust, adaptable, and high-performance UAV components and solutions through continuous innovation, precision engineering, and uncompromising quality, enabling our partners to operate with confidence and achieve lasting success.',
   },
 ];
@@ -38,12 +36,6 @@ const VisionMissionSection = () => (
                 <span className="eyebrow-line" aria-hidden="true" />
                 {item.label}
               </div>
-              <h3
-                className="font-heading font-bold text-black leading-[1.15] mb-4"
-                style={{ fontSize: 'clamp(1.4rem, 2.2vw, 1.9rem)' }}
-              >
-                {item.title}
-              </h3>
               <p className="text-neutral-500 text-sm leading-relaxed max-w-[48ch]">
                 {item.body}
               </p>

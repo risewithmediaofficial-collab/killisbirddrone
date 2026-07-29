@@ -3,9 +3,9 @@ import FadeIn from '../FadeIn';
 import SectionHeader from '../SectionHeader';
 
 const stats = [
-  { value: '2023', label: 'Born', sub: 'Founded on 19 May' },
+  { value: '2023', label: 'Born', sub: 'Founded on 19 May 2023' },
   { value: '4', label: 'Testbeds', sub: 'Quad, Hexa, Fixed-Wing, VTOL' },
-  { value: 'SPARROW', label: 'FCC', sub: 'Betaflight, INAV, ArduPilot, Pixhawk' },
+  { value: 'SPARROW', label: 'FCC', sub: 'Open firmware support' },
   { value: 'VELO', label: 'Frame', sub: 'High-speed racing frame' },
 ];
 
@@ -80,7 +80,7 @@ const Company = () => (
           id="company-heading"
         />
         <p className="mx-auto max-w-3xl text-center text-neutral-600 text-base leading-relaxed">
-          At Killis Birds, our core is precision engineered with imagination, ideation, and innovation. This DNA powers the design and delivery of next generation UAV components and solutions that expand the possibilities of aerospace and defense.
+          A quick view of the engineering markers behind Killis Bird: indigenous development, test platforms, flight-control systems, and performance-focused frames.
         </p>
       </FadeIn>
 

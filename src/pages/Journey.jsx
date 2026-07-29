@@ -68,7 +68,6 @@ const Journey = () => {
           <FadeIn direction="up">
             <div className="mb-12">
               <SectionHeader
-                title="02-07-2026"
                 highlight="Journey"
                 id="timeline-heading"
               />
