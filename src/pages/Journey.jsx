@@ -72,35 +72,31 @@ const Journey = () => {
                 highlight="Journey"
                 id="timeline-heading"
               />
-              <p className="text-neutral-500 max-w-[58ch] text-sm leading-relaxed mt-4">
-                Building advanced UAV solutions for defense, surveillance, industrial operations, and precision agriculture - Killis Bird is your trusted partner in flight.
-              </p>
             </div>
           </FadeIn>
 
-          <div className="relative hidden min-h-[430px] lg:block" role="list" aria-label="Killis Bird journey timeline">
-            <div className="absolute left-0 right-0 top-1/2 h-px bg-neutral-200" aria-hidden="true" />
-            <div className="grid grid-cols-5 gap-5">
+          <div className="relative hidden min-h-[320px] lg:block" role="list" aria-label="Killis Bird journey timeline">
+            <div className="absolute left-[10%] right-[10%] top-1/2 h-px bg-neutral-200" aria-hidden="true" />
+            <div className="grid grid-cols-5 gap-6">
               {milestones.map((m, i) => (
                 <FadeIn key={m.title} delay={i * 0.05} direction="up">
                   <div
-                    className={`relative flex min-h-[430px] ${i % 2 === 0 ? 'items-start pt-2' : 'items-end pb-2'}`}
+                    className="relative min-h-[320px]"
                     role="listitem"
                   >
                     <div
-                      className="timeline-dot absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
+                      className="absolute left-1/2 top-1/2 z-20 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-orange-500 bg-white shadow-[0_0_0_4px_rgba(255,107,0,0.08)]"
                       aria-hidden="true"
                     />
                     <div
-                      className={`absolute left-1/2 w-px bg-neutral-200 ${i % 2 === 0 ? 'top-[calc(50%-88px)] h-[88px]' : 'top-1/2 h-[88px]'}`}
+                      className={`absolute left-1/2 z-10 w-px -translate-x-1/2 bg-neutral-200 ${i % 2 === 0 ? 'top-[124px] h-[36px]' : 'top-1/2 h-[36px]'}`}
                       aria-hidden="true"
                     />
-                    <div className="w-full border border-neutral-200 bg-white p-5 shadow-xs">
+                    <div className={`absolute left-0 right-0 flex h-[124px] flex-col items-center justify-center border border-neutral-200 bg-white p-5 text-center shadow-xs ${i % 2 === 0 ? 'top-0' : 'bottom-0'}`}>
                       <div className="section-label mb-3">{m.year}</div>
-                      <h3 className="font-heading font-bold text-black text-lg leading-tight mb-2">
+                      <h3 className="font-heading font-bold text-black text-lg leading-tight">
                         {m.title}
                       </h3>
-                      <p className="text-neutral-500 text-xs leading-relaxed">{m.body}</p>
                     </div>
                   </div>
                 </FadeIn>
@@ -111,12 +107,11 @@ const Journey = () => {
           <div className="flex flex-col gap-px bg-neutral-200 border border-neutral-200 lg:hidden" role="list" aria-label="Killis Bird journey timeline">
             {milestones.map((m, i) => (
               <FadeIn key={m.title} delay={i * 0.05} direction="up">
-                <article className="bg-white p-6" role="listitem">
+                <article className="bg-white p-6 text-center" role="listitem">
                   <div className="section-label mb-3">{m.year}</div>
-                  <h3 className="font-heading font-bold text-black text-lg leading-tight mb-2">
+                  <h3 className="font-heading font-bold text-black text-lg leading-tight">
                     {m.title}
                   </h3>
-                  <p className="text-neutral-500 text-xs leading-relaxed">{m.body}</p>
                 </article>
               </FadeIn>
             ))}
