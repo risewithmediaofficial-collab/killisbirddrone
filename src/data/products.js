@@ -1,5 +1,10 @@
 // src/data/products.js
 
+import sparrowTopView from "../assets/DJS02373.jpg.jpeg";
+import sparrowConnectorView from "../assets/DJS02381.jpg.jpeg";
+import sparrowBottomAngleView from "../assets/DJS02399.jpg.jpeg";
+import sparrowTopAngleView from "../assets/DJS02402.jpg.jpeg";
+
 export const categories = [
   {
     num: "01",
@@ -75,7 +80,28 @@ export const categories = [
         ],
         firmware: ["Betaflight", "INAV", "ArduPilot", "Pixhawk"],
         price: "Get Quote",
-        images: [],
+        images: [
+          {
+            src: sparrowTopView,
+            alt: "SPARROW-V1 flight control card top view",
+            title: "Top View - Processor Side",
+          },
+          {
+            src: sparrowConnectorView,
+            alt: "SPARROW-V1 flight control card connector side",
+            title: "Connector Side - Sensor Layout",
+          },
+          {
+            src: sparrowBottomAngleView,
+            alt: "SPARROW-V1 flight control card angled component view",
+            title: "Angled View - Component Side",
+          },
+          {
+            src: sparrowTopAngleView,
+            alt: "SPARROW-V1 flight control card USB and microSD side",
+            title: "USB & MicroSD Side",
+          },
+        ],
         status: "available",
       },
     ],

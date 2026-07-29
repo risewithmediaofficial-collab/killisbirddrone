@@ -96,6 +96,9 @@ const ProductTile = ({ category, index }) => {
   const product = category.products[0];
   const isAvailable = product.status === 'available';
   const productArt = artByCategory[category.category];
+  const productImage = product.images?.[0];
+  const productImageSrc = typeof productImage === 'string' ? productImage : productImage?.src;
+  const productImageAlt = typeof productImage === 'string' ? product.name : productImage?.alt || product.name;
 
   return (
     <FadeIn delay={index * 0.08} direction="up">
@@ -115,7 +118,16 @@ const ProductTile = ({ category, index }) => {
             aria-label={`View ${product.name}`}
           >
             <div className="aspect-square bg-white p-4 flex items-center justify-center">
-              {productArt}
+              {productImageSrc ? (
+                <img
+                  src={productImageSrc}
+                  alt={productImageAlt}
+                  className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                  loading="lazy"
+                />
+              ) : (
+                productArt
+              )}
             </div>
           </Link>
         ) : (

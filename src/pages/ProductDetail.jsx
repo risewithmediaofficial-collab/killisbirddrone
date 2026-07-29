@@ -46,6 +46,32 @@ const ImageHolderFrame = ({ title = "Image Holder", className = "", height = "h-
   );
 };
 
+const ProductImageFrame = ({
+  image,
+  title,
+  className = "",
+  height = "h-64 sm:h-72",
+  priority = false,
+}) => {
+  const imageSrc = typeof image === "string" ? image : image?.src;
+  const imageAlt = typeof image === "string" ? title : image?.alt || title;
+
+  if (!imageSrc) {
+    return <ImageHolderFrame title={title} className={className} height={height} />;
+  }
+
+  return (
+    <figure className={`relative w-full ${height} bg-white border border-black/10 rounded-xl p-4 sm:p-5 flex flex-col items-center justify-center overflow-hidden shadow-xs transition-all duration-300 hover:border-[#ff6b00]/40 ${className}`}>
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        className="h-full w-full min-h-0 object-contain"
+        loading={priority ? "eager" : "lazy"}
+      />
+    </figure>
+  );
+};
+
 const ProductDetail = () => {
   const { productId } = useParams();
   const pageRef = useRef(null);
@@ -111,13 +137,13 @@ const ProductDetail = () => {
           {/* Main Top Image Frame */}
           <div className="w-full max-w-lg mb-8">
             {product.images && product.images.length > 0 ? (
-              <div className="w-full h-72 sm:h-80 bg-[#f8f9fa] border border-black/10 rounded-2xl p-6 flex items-center justify-center shadow-xs">
-                <img
-                  src={product.images[0]}
-                  alt={product.name}
-                  className="max-w-full max-h-full object-contain"
-                />
-              </div>
+              <ProductImageFrame
+                image={product.images[0]}
+                title={product.images[0]?.title || product.model || product.name}
+                height="h-72 sm:h-80"
+                className="rounded-2xl p-5 sm:p-6"
+                priority
+              />
             ) : (
               <ImageHolderFrame title={product.model || product.name} height="h-72 sm:h-80" />
             )}
@@ -168,10 +194,23 @@ const ProductDetail = () => {
           {activeTab === "Gallery" && (
             <div className="w-full">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <ImageHolderFrame title="Top View - Components" height="h-60" />
-                <ImageHolderFrame title="Bottom View - ESC Circuitry" height="h-60" />
-                <ImageHolderFrame title="Pinout & Connector Layout" height="h-60" />
-                <ImageHolderFrame title="Mounted Stack Assembly" height="h-60" />
+                {product.images?.length ? (
+                  product.images.map((image, index) => (
+                    <ProductImageFrame
+                      key={typeof image === "string" ? image : image.src}
+                      image={image}
+                      title={image.title || `SPARROW-V1 View ${index + 1}`}
+                      height="h-60"
+                    />
+                  ))
+                ) : (
+                  <>
+                    <ImageHolderFrame title="Top View - Components" height="h-60" />
+                    <ImageHolderFrame title="Bottom View - ESC Circuitry" height="h-60" />
+                    <ImageHolderFrame title="Pinout & Connector Layout" height="h-60" />
+                    <ImageHolderFrame title="Mounted Stack Assembly" height="h-60" />
+                  </>
+                )}
               </div>
             </div>
           )}
