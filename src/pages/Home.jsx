@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import {  useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
@@ -48,19 +48,16 @@ const voices = [
     quote:
       "Killis Bird components set a new benchmark for precision and reliability. Their UAV solutions transformed our operations.",
     name: "Rajiv Sharma",
-    role: "CTO, AeroVentures Ltd.",
   },
   {
     quote:
       "The attention to engineering detail is extraordinary. We have partnered with Killis Bird for three consecutive projects.",
     name: "Priya Nair",
-    role: "Director of Operations, DefenceTech Systems",
   },
   {
     quote:
       "Innovation, quality, and unmatched support — Killis Bird is truly a world-class UAV partner.",
     name: "Arjun Menon",
-    role: "Head of Procurement, SkyAgri Corp",
   },
 ];
 
@@ -252,7 +249,7 @@ const Home = () => {
             Built in India
           </p>
           <p className="font-heading font-bold text-skyroot text-xs">
-            Trusted Worldwide 
+            Trusted Worldwide
           </p>
         </div>
       </section>

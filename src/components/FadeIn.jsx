@@ -1,34 +1,70 @@
-import { motion } from 'framer-motion';
+// src/components/FadeIn.jsx
+import { useRef, useEffect } from 'react';
 
-const FadeIn = ({ children, delay = 0, direction = 'up', className = '' }) => {
-  const isUp = direction === 'up' || direction === 'none';
+/**
+ * Scroll-triggered fade-up wrapper.
+ * Props:
+ *   direction  – 'up' | 'down' | 'left' | 'right' | 'none'
+ *   delay      – animation delay in seconds
+ *   duration   – animation duration in seconds
+ *   distance   – translate distance in px
+ *   threshold  – IntersectionObserver threshold
+ *   once       – only animate once (default: true)
+ *   className  – extra class on wrapper div
+ */
+const FadeIn = ({
+  children,
+  direction = 'up',
+  delay = 0,
+  duration = 0.65,
+  distance = 28,
+  threshold = 0.15,
+  once = true,
+  className = '',
+}) => {
+  const ref = useRef(null);
 
-  const variants = {
-    hidden: {
-      clipPath: isUp ? 'inset(0 0 100% 0)' : 'inset(0 0 0% 0)',
-      opacity: 0,
-      y: direction === 'up' ? 16 : direction === 'down' ? -16 : 0,
-      x: direction === 'left' ? -24 : direction === 'right' ? 24 : 0,
-    },
-    visible: {
-      clipPath: 'inset(0 0 0% 0)',
-      opacity: 1,
-      y: 0,
-      x: 0,
-    },
+  const getTransform = (dir, dist) => {
+    switch (dir) {
+      case 'up':    return `translateY(${dist}px)`;
+      case 'down':  return `translateY(-${dist}px)`;
+      case 'left':  return `translateX(${dist}px)`;
+      case 'right': return `translateX(-${dist}px)`;
+      default:      return 'none';
+    }
   };
 
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    // Set initial state
+    el.style.opacity = '0';
+    el.style.transform = getTransform(direction, distance);
+    el.style.transition = `opacity ${duration}s cubic-bezier(0.16,1,0.3,1) ${delay}s, transform ${duration}s cubic-bezier(0.16,1,0.3,1) ${delay}s`;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          if (once) observer.disconnect();
+        } else if (!once) {
+          el.style.opacity = '0';
+          el.style.transform = getTransform(direction, distance);
+        }
+      },
+      { threshold }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [direction, delay, duration, distance, threshold, once]);
+
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
-      variants={variants}
-      className={className}
-    >
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 };
 

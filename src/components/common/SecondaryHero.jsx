@@ -1,35 +1,52 @@
-import DecorativeDots from './DecorativeDots';
-import SectionLabel from './SectionLabel';
-import SplitHeading from './SplitHeading';
+// src/components/common/SecondaryHero.jsx
+import FadeIn from '../FadeIn';
 
-const SecondaryHero = ({ eyebrow, title, highlight, description, watermark }) => (
+/**
+ * Inner-page hero banner.
+ * Used by: Creations, Assistance, Journey, Contact pages
+ */
+const SecondaryHero = ({
+  eyebrow = '',
+  title = '',
+  highlight = '',
+  description = '',
+  watermark = '',
+}) => (
   <section
-    className="relative overflow-hidden bg-[radial-gradient(circle_at_0_0,rgba(255,240,229,0.9)_0_13%,transparent_13.2%),radial-gradient(circle_at_100%_72%,rgba(253,242,232,0.72)_0_15%,transparent_15.2%),#fff] pb-[56px] pt-[100px] max-sm:pb-[44px] max-sm:pt-[88px]"
-    aria-labelledby="secondary-page-title"
+    className="page-hero overflow-hidden relative bg-white"
+    aria-label={`Page — ${title} ${highlight}`}
   >
-    <DecorativeDots className="absolute left-[7%] top-[18%] opacity-45 max-sm:hidden" />
-    <DecorativeDots className="absolute bottom-[14%] right-[7%] opacity-35 max-sm:hidden" />
-    {watermark ? (
-      <span
-        className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-heading text-[clamp(4.5rem,13vw,14rem)] font-extrabold tracking-[-0.08em] text-[#ff6b00]/[0.06]"
+    {/* Background watermark */}
+    {watermark && (
+      <div
+        className="absolute right-0 top-1/2 -translate-y-1/2 font-heading font-bold text-black/[0.03] select-none pointer-events-none leading-none"
+        style={{ fontSize: 'clamp(6rem, 16vw, 22rem)', letterSpacing: '-0.06em' }}
         aria-hidden="true"
       >
         {watermark}
-      </span>
-    ) : null}
-    <div className="relative mx-auto flex w-full max-w-[1380px] flex-col items-center px-[clamp(20px,5vw,80px)] text-center">
-      <div className="reveal-group max-w-[820px]">
-        <SectionLabel className="justify-center">{eyebrow}</SectionLabel>
-        <SplitHeading
-          as="h1"
-          id="secondary-page-title"
-          highlight={highlight}
-          className="mx-auto max-w-[820px] text-[clamp(36px,5vw,72px)] leading-[0.95] tracking-[-0.065em] max-sm:text-[clamp(28px,10vw,44px)]"
-        >
-          {title}
-        </SplitHeading>
-        {description && <p className="mx-auto max-w-[600px] text-[15px] leading-[1.8] text-[#67707d]">{description}</p>}
       </div>
+    )}
+
+    <div className="container relative z-10">
+      <FadeIn direction="up">
+
+        <h1
+          className="font-heading font-bold text-black leading-[1.05] mb-5"
+          style={{ fontSize: 'clamp(2.2rem, 4.5vw, 4rem)', letterSpacing: '-0.03em' }}
+        >
+          {title}{' '}
+          {highlight && (
+            <span className="text-orange-500">{highlight}</span>
+          )}
+        </h1>
+
+        {description && (
+          <p className="text-neutral-500 leading-relaxed max-w-[54ch]"
+             style={{ fontSize: 'var(--fs-body-lg)' }}>
+            {description}
+          </p>
+        )}
+      </FadeIn>
     </div>
   </section>
 );

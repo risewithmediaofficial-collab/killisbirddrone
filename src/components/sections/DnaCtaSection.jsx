@@ -1,20 +1,55 @@
-import OrangeButton from '../common/OrangeButton';
+// src/components/sections/DnaCtaSection.jsx
+import { Link } from 'react-router-dom';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import FadeIn from '../FadeIn';
 
 const DnaCtaSection = () => (
-  <section className="bg-white pb-[120px] pt-20 max-sm:py-[72px]" aria-labelledby="dna-cta-title">
-    <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
-      <div className="relative overflow-hidden rounded-[26px] bg-[radial-gradient(circle_at_84%_22%,rgba(255,255,255,0.18),transparent_24%),linear-gradient(135deg,#ff6b00,#e85f00)] p-[clamp(42px,7vw,76px)] text-white">
-        <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,currentColor_1px,transparent_1px),linear-gradient(to_bottom,currentColor_1px,transparent_1px)] bg-[length:46px_46px] opacity-10" aria-hidden="true" />
-        <p className="relative z-[1] mb-7 inline-flex items-center gap-3.5 text-[12px] font-extrabold uppercase leading-none tracking-[0.16em] text-white/85">
-          <span className="h-0.5 w-10 bg-white/75" aria-hidden="true" />
-          Partner With Killis Bird
-        </p>
-        <h2 id="dna-cta-title" className="relative z-[1] max-w-[820px] font-heading text-[clamp(38px,5vw,72px)] font-normal leading-[1.06] tracking-[-0.055em] text-white">Ready to Build the Future With Us?</h2>
-        <p className="relative z-[1] my-7 max-w-[620px] text-lg leading-[1.75] text-white/80">
-        </p>
-        <OrangeButton to="/contact" aria-label="Partner with Killis Bird" className="relative z-[1] bg-white text-[#070707] hover:bg-[#fff0e5] focus-visible:bg-[#fff0e5]">
-          Partner With Us
-        </OrangeButton>
+  <section
+    className="section bg-neutral-900 overflow-hidden relative"
+    aria-labelledby="dna-cta-heading"
+  >
+    {/* Watermark */}
+    <div
+      className="absolute right-0 bottom-0 font-heading font-bold text-white/[0.03] select-none pointer-events-none leading-none"
+      style={{ fontSize: 'clamp(6rem, 16vw, 18rem)', letterSpacing: '-0.06em' }}
+      aria-hidden="true"
+    >
+      JOIN
+    </div>
+
+    <div className="container relative z-10">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
+        <FadeIn direction="up">
+          <div>
+            <div className="eyebrow text-orange-400 mb-4">
+              <span className="eyebrow-line bg-orange-400" aria-hidden="true" />
+              Work With Us
+            </div>
+            <h2
+              id="dna-cta-heading"
+              className="font-heading font-bold text-white leading-[1.05] mb-4"
+              style={{ fontSize: 'clamp(1.8rem, 3vw, 3rem)', letterSpacing: '-0.025em' }}
+            >
+              Shape the future of<br />
+              <span className="text-orange-400">Indian aviation.</span>
+            </h2>
+            <p className="text-white/55 text-sm leading-relaxed max-w-[44ch]">
+              We are always looking for engineers, researchers, and innovators who share our passion for precision and purpose.
+            </p>
+          </div>
+        </FadeIn>
+
+        <FadeIn direction="up" delay={0.15}>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link to="/contact" className="btn-primary">
+              Get in Touch
+              <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 17 }} />
+            </Link>
+            <Link to="/journey" className="btn-ghost">
+              View Openings
+            </Link>
+          </div>
+        </FadeIn>
       </div>
     </div>
   </section>

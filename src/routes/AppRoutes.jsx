@@ -7,6 +7,7 @@ import SectionLoader from '../components/SectionLoader';
 
 const OurDNA = lazy(() => import('../pages/OurDNA'));
 const Creations = lazy(() => import('../pages/Creations'));
+const ProductDetail = lazy(() => import('../pages/ProductDetail'));
 const Assistance = lazy(() => import('../pages/Assistance'));
 const Blog = lazy(() => import('../pages/Blog'));
 const Journey = lazy(() => import('../pages/Journey'));
@@ -22,6 +23,7 @@ const AppRoutes = () => (
       <Route element={<MainLayout />}>
         <Route path="/our-dna" element={<Suspense fallback={<SectionLoader />}><OurDNA /></Suspense>} />
         <Route path="/creations" element={<Suspense fallback={<SectionLoader />}><Creations /></Suspense>} />
+        <Route path="/creations/:productId" element={<Suspense fallback={<SectionLoader />}><ProductDetail /></Suspense>} />
         <Route path="/assistance" element={<Suspense fallback={<SectionLoader />}><Assistance /></Suspense>} />
         <Route path="/blog" element={<Suspense fallback={<SectionLoader />}><Blog /></Suspense>} />
         <Route path="/journey" element={<Suspense fallback={<SectionLoader />}><Journey /></Suspense>} />
@@ -33,4 +35,3 @@ const AppRoutes = () => (
 );
 
 export default AppRoutes;
-

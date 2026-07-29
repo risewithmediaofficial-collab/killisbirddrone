@@ -1,47 +1,57 @@
 // src/App.jsx
 import { Suspense, lazy } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/sections/Hero';
-// import ScrollVideoCanvas from './components/ScrollVideoCanvas';
-import SmoothScroll from './components/SmoothScroll';
-import SectionLoader from './components/SectionLoader';
-import ScrollToTop from './components/ScrollToTop';
-import SEO from './components/SEO';
-import ScrollStack from './components/ScrollStack';
-import GlobalTextReveal from './components/GlobalTextReveal';
-import QuickContactBar from './components/QuickContactBar';
+import Navbar         from './components/Navbar';
+import Hero           from './components/sections/Hero';
+import SmoothScroll   from './components/SmoothScroll';
+import SectionLoader  from './components/SectionLoader';
+import ScrollToTop    from './components/ScrollToTop';
+import SEO            from './components/SEO';
+import ScrollStack    from './components/ScrollStack';
 
-// Lazy loaded below-the-fold components
-const Company = lazy(() => import('./components/sections/Company'));
-const TrustedClients = lazy(() => import('./components/sections/TrustedClients'));
-const Footer = lazy(() => import('./components/Footer'));
+const Company     = lazy(() => import('./components/sections/Company'));
+const Process     = lazy(() => import('./components/sections/Process'));
+const Testimonials = lazy(() => import('./components/sections/Testimonials'));
+const FAQ         = lazy(() => import('./components/sections/FAQ'));
+const CTABanner   = lazy(() => import('./components/sections/CTABanner'));
+const Footer      = lazy(() => import('./components/Footer'));
 
-const App = () => {
-  return (
-    <>
-      <SEO title="Home" description="Killis Bird — Precision Engineered UAV components. Built in India. Trusted Worldwide." />
-      <ScrollToTop />
-      <GlobalTextReveal />
-      <QuickContactBar />
-      
-      {/* Above-the-fold content: loaded immediately */}
-      <Navbar />
-      
-      <ScrollStack>
-        <Hero />
+const App = () => (
+  <>
+    <SEO
+      title="Home"
+      description="Killis Bird — Precision Engineered UAV components. Indigenous engineering. Built in India. Trusted Worldwide."
+    />
+    <ScrollToTop />
+    <Navbar />
 
-        {/* Below-the-fold content: lazy loaded & smooth scroll wrapper */}
-        <SmoothScroll>
-          <Suspense fallback={<SectionLoader />}>
-            <Company />
-            {/* <ScrollVideoCanvas /> */}
-            <TrustedClients />
-            <Footer />
-          </Suspense>
-        </SmoothScroll>
-      </ScrollStack>
-    </>
-  );
-};
+    <ScrollStack>
+      {/* ─ Above-the-fold ─ */}
+      <Hero />
+
+      {/* ─ Below-the-fold (smooth scroll + lazy) ─ */}
+      <SmoothScroll>
+        <Suspense fallback={<SectionLoader />}>
+          {/* Stats + Feature intro */}
+          <Company />
+
+          {/* 4-step process */}
+          <Process />
+
+          {/* Client testimonials */}
+          <Testimonials />
+
+          {/* FAQ accordion */}
+          <FAQ />
+
+          {/* Orange CTA banner */}
+          <CTABanner />
+
+          {/* Footer */}
+          <Footer />
+        </Suspense>
+      </SmoothScroll>
+    </ScrollStack>
+  </>
+);
 
 export default App;

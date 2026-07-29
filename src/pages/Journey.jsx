@@ -1,336 +1,224 @@
-import { useRef, useEffect, useState } from 'react';
-
-import WorkIcon from '@mui/icons-material/Work';
+// src/pages/Journey.jsx
+import { useRef } from 'react';
 import SEO from '../components/SEO';
-import ParallaxWatermark from '../components/ParallaxWatermark';
+import SecondaryHero from '../components/common/SecondaryHero';
+import FadeIn from '../components/FadeIn';
+import SectionHeader from '../components/SectionHeader';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
+import { Link } from 'react-router-dom';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import WorkIcon from '@mui/icons-material/Work';
 
 const milestones = [
   {
-    eyebrow: '2018',
-    text: 'The Spark',
-    desc: 'Founded with a mission to revolutionise indigenous UAV component manufacturing in India.',
+    year: '2018',
+    title: 'The Spark',
+    body: 'Founded in Krishnagiri to pioneer indigenous UAV component manufacturing.',
   },
   {
-    eyebrow: '2019',
-    text: 'First Prototype',
-    desc: 'Developed and field-tested our first precision-engineered brushless motor series for agricultural UAVs.',
+    year: '2019',
+    title: 'First Prototype',
+    body: 'Developed and field-tested our first agricultural brushless motor series.',
   },
   {
-    eyebrow: '2020',
-    text: 'Industry Recognition',
-    desc: 'Awarded "Most Innovative UAV Component Startup" at the National Aerospace Innovation Summit.',
+    year: '2020',
+    title: 'Industry Recognition',
+    body: 'Awarded Most Innovative UAV Startup at National Aerospace Summit.',
   },
   {
-    eyebrow: '2021',
-    text: 'Defence Partnerships',
-    desc: 'Secured strategic partnerships with leading defence integrators for mission-critical UAV programmes.',
+    year: '2021',
+    title: 'Defence Partnerships',
+    body: 'Secured strategic partnerships with leading defence integrators.',
   },
   {
-    eyebrow: '2022',
-    text: 'Swarm Technology',
-    desc: 'Successfully demonstrated swarm coordination modules across a 20-UAV formation flight trial.',
+    year: '2022',
+    title: 'Swarm Technology',
+    body: 'Demonstrated swarm modules across 20-UAV formation flight trials.',
   },
   {
-    eyebrow: '2023',
-    text: 'Global Reach',
-    desc: 'Expanded exports to 10+ countries, establishing Killis Bird as a globally trusted UAV component brand.',
+    year: '2023',
+    title: 'Global Reach',
+    body: 'Expanded exports to 10+ countries across Asia, Europe, and Middle East.',
   },
   {
-    eyebrow: '2024',
-    text: 'Next Chapter',
-    desc: 'Launched next-generation avionics platform — redefining reliability, adaptability, and performance standards.',
+    year: '2024',
+    title: 'Next-Gen Avionics',
+    body: 'Launched MicoAir743v2 AIO avionics platform for commercial UAVs.',
   },
   {
-    eyebrow: '2025+',
-    text: 'Shape the Future',
-    desc: 'Pioneering autonomous multi-domain aerial systems — the future belongs to those who dare to build it.',
+    year: '2025+',
+    title: 'The Future',
+    body: 'Pioneering autonomous multi-domain aerial systems.',
   },
 ];
 
 const openings = [
-  { role: 'Aerospace Systems Engineer', type: 'Full Time · Bangalore', dept: 'Engineering' },
-  { role: 'Embedded Software Developer', type: 'Full Time · Remote', dept: 'Avionics' },
-  { role: 'UAV Test Pilot & Analyst', type: 'Contract · Hyderabad', dept: 'Operations' },
-  { role: 'Supply Chain Manager', type: 'Full Time · Chennai', dept: 'Logistics' },
+  { role: 'Aerospace Systems Engineer',  type: 'Full Time · Bangalore',  dept: 'Engineering' },
+  { role: 'Embedded Software Developer', type: 'Full Time · Remote',     dept: 'Avionics' },
+  { role: 'UAV Test Pilot & Analyst',    type: 'Contract · Hyderabad',   dept: 'Operations' },
+  { role: 'Supply Chain Manager',        type: 'Full Time · Chennai',    dept: 'Logistics' },
+  { role: 'Composite Materials Engineer',type: 'Full Time · Krishnagiri',dept: 'Manufacturing' },
 ];
 
 const Journey = () => {
   const pageRef = useRef(null);
   useBookScrollEffects(pageRef);
 
-  const timelineScrollRef = useRef(null);
-  const autoScrollRef = useRef(null);
-  const isPausedRef = useRef(false);
-  const [activeIndex, setActiveIndex] = useState(null);
-
-  /* ── Auto-scroll left → right, loop ── */
-  useEffect(() => {
-    const el = timelineScrollRef.current;
-    if (!el) return;
-
-    const SPEED = 0.6; // px per frame
-
-    const tick = () => {
-      if (!isPausedRef.current && el) {
-        el.scrollLeft += SPEED;
-        // Reset to start when reaching end
-        if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 2) {
-          el.scrollLeft = 0;
-        }
-      }
-      autoScrollRef.current = requestAnimationFrame(tick);
-    };
-
-    autoScrollRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(autoScrollRef.current);
-  }, []);
-
-  const handleMilestoneEnter = (i) => {
-    isPausedRef.current = true;
-    setActiveIndex(i);
-  };
-
-  const handleMilestoneLeave = () => {
-    isPausedRef.current = false;
-    setActiveIndex(null);
-  };
-
-  /* ── Manual left/right buttons ── */
-  const scrollTimeline = (direction) => {
-    const el = timelineScrollRef.current;
-    if (!el) return;
-    el.scrollTo({
-      left: el.scrollLeft + (direction === 'left' ? -340 : 340),
-      behavior: 'smooth',
-    });
-  };
-
   return (
-    <div ref={pageRef}>
-      <SEO title="Journey" description="Killis Bird :: Imagine, IDeate, Innovate — Shape the Future With Us. Our story, milestones, and careers." />
+    <div ref={pageRef} className="bg-white overflow-hidden">
+      <SEO
+        title="Our Journey"
+        description="Killis Bird — From a small team in Tamil Nadu to a globally trusted UAV component manufacturer."
+      />
 
-      {/* ── MILESTONES: Auto-scrolling Timeline ── */}
-      <section data-stack-section className="relative overflow-hidden bg-white">
+      <SecondaryHero
+        eyebrow="Our Timeline"
+        title="The Killis Bird"
+        highlight="Journey."
+        description="Every milestone shaping our mission since 2018."
+        watermark="JOURNEY"
+      />
 
-        {/* Section header */}
-        <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)] pt-[40px] pb-[24px]">
-          <ParallaxWatermark
-            className="right-0 top-1/2 -translate-y-1/2 text-[clamp(6rem,12vw,14rem)] text-[#ff6b00]/[0.06]"
-            speed={20}
-          >
-            TIMELINE
-          </ParallaxWatermark>
-        </div>
+      {/* ─ Timeline ─ */}
+      <section
+        className="section bg-white divide-top"
+        aria-labelledby="timeline-heading"
+      >
+        <div className="container">
+          <FadeIn direction="up">
+            <SectionHeader
+              eyebrow="Milestones"
+              title="Our"
+              highlight="Story"
+              className="mb-12"
+              id="timeline-heading"
+            />
+          </FadeIn>
 
-        {/* Timeline Wrapper */}
-        <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)] py-12">
+          {/* Timeline items */}
+          <div className="relative pl-8 lg:pl-12">
+            {/* Vertical line */}
+            <div
+              className="timeline-line"
+              aria-hidden="true"
+              style={{ left: '16px' }}
+            />
 
-          {/* Left button */}
-          <button
-            onClick={() => scrollTimeline('left')}
-            className="absolute left-2 top-[180px] -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white border border-[#f1dfd1] text-[#ff6b00] flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:bg-[#fff8f1] hover:scale-105 active:scale-95 transition-all duration-300 max-lg:hidden"
-            aria-label="Scroll left"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          {/* Right button */}
-          <button
-            onClick={() => scrollTimeline('right')}
-            className="absolute right-2 top-[180px] -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white border border-[#f1dfd1] text-[#ff6b00] flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:bg-[#fff8f1] hover:scale-105 active:scale-95 transition-all duration-300 max-lg:hidden"
-            aria-label="Scroll right"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-
-          <div
-            ref={timelineScrollRef}
-            className="relative overflow-x-auto scrollbar-none py-8"
-            style={{ minHeight: '480px' }}
-          >
-            {/* Timeline track */}
-            <div className="relative flex gap-20 lg:gap-32 px-12 pb-12 w-max">
-
-              {/* Horizontal guide line */}
-              <div
-                className="absolute left-0 right-0 h-[2px] bg-[#f1dfd1]/80 top-[180px] -translate-y-1/2 z-0"
-                aria-hidden="true"
-              />
-
-              {milestones.map((m, index) => {
-                const number = index + 1 < 10 ? `0${index + 1}` : index + 1;
-                const isActive = activeIndex === index;
-
-                return (
+            <div className="flex flex-col gap-0">
+              {milestones.map((m, i) => (
+                <FadeIn key={i} delay={i * 0.05} direction="up">
                   <div
-                    key={index}
-                    className="relative flex flex-col items-center min-w-[260px] lg:min-w-[320px] z-10 select-none"
-                    onMouseEnter={() => handleMilestoneEnter(index)}
-                    onMouseLeave={handleMilestoneLeave}
+                    className={`relative flex flex-col gap-2 pb-10 ${i === milestones.length - 1 ? 'pb-0' : ''}`}
+                    role="listitem"
                   >
-                    {/* Above line: Year + Title */}
-                    <div className="absolute bottom-[calc(100%-156px)] left-1/2 -translate-x-1/2 flex flex-col items-center text-center w-[220px] pb-4">
-                      <span className="text-[#ff6b00] font-extrabold text-[13px] tracking-wider uppercase">
-                        {m.eyebrow}
-                      </span>
-                      <h3
-                        className="mt-2 text-[18px] lg:text-[20px] font-extrabold leading-snug tracking-tight transition-colors duration-200"
-                        style={{ color: isActive ? '#ff6b00' : '#111111' }}
-                      >
-                        {m.text}
-                      </h3>
-                    </div>
-
-                    {/* On line: Circle Node */}
+                    {/* Dot */}
                     <div
-                      className="absolute top-[180px] -translate-y-1/2 z-20 flex items-center justify-center w-[48px] h-[48px] rounded-full bg-white transition-all duration-250"
-                      style={{
-                        border: isActive ? '1.5px solid #ff6b00' : '1.5px solid rgba(241,223,209,0.8)',
-                        transform: `translateY(-50%) scale(${isActive ? 1.12 : 1})`,
-                        boxShadow: isActive
-                          ? '0 8px 24px rgba(255,107,0,0.18)'
-                          : '0 4px 16px rgba(255,107,0,0.06)',
-                      }}
+                      className="timeline-dot absolute -left-[24px] top-1.5"
                       aria-hidden="true"
-                    >
-                      <div className="w-7 h-7 rounded-full bg-[#ff6b00] flex items-center justify-center text-white text-[12px] font-extrabold">
-                        {number}
-                      </div>
+                      style={{ left: '-21px' }}
+                    />
+
+                    {/* Year eyebrow */}
+                    <div className="eyebrow mb-0">
+                      <span className="eyebrow-line" aria-hidden="true" />
+                      {m.year}
                     </div>
 
-                    {/* Below line: Info card — visible on hover */}
-                    <div
-                      className="absolute left-1/2 -translate-x-1/2 w-[280px] lg:w-[320px] bg-white border border-[#f1dfd1] p-6 z-30 origin-top transition-all duration-200"
-                      style={{
-                        top: '204px',
-                        opacity: isActive ? 1 : 0,
-                        transform: `translateX(-50%) scale(${isActive ? 1 : 0.95})`,
-                        pointerEvents: isActive ? 'auto' : 'none',
-                        boxShadow: '0 12px 36px rgba(17,21,26,0.09)',
-                      }}
-                    >
-                      {/* Faded year watermark */}
-                      <span
-                        className="absolute right-4 bottom-2 font-heading text-[5rem] font-extrabold tracking-tight text-[#ff6b00]/[0.04] select-none pointer-events-none z-0"
-                        aria-hidden="true"
+                    {/* Content */}
+                    <div className="max-w-xl">
+                      <h3
+                        className="font-heading font-bold text-black mb-1"
+                        style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', letterSpacing: '-0.02em' }}
                       >
-                        {m.eyebrow}
-                      </span>
-                      <div className="relative z-10 whitespace-normal">
-                        <span className="text-[#ff6b00] font-extrabold text-[11px] tracking-widest uppercase" style={{ fontFamily: 'Inter, sans-serif' }}>
-                          {m.eyebrow}
-                        </span>
-                        <h4 className="mt-2 text-[17px] font-extrabold leading-snug text-[#111111] tracking-tight">
-                          {m.text}
-                        </h4>
-                        <p className="mt-3 text-[13px] leading-[1.65] text-[#67707d]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                          {m.desc}
-                        </p>
-                      </div>
+                        {m.title}
+                      </h3>
+                      <p className="text-neutral-500 text-xs leading-relaxed">
+                        {m.body}
+                      </p>
                     </div>
                   </div>
-                );
-              })}
+                </FadeIn>
+              ))}
             </div>
-          </div>
-
-          {/* Scroll indicator — animated left arrow hint at bottom */}
-          <div className="flex items-center justify-center gap-2 mt-2 pb-2 select-none pointer-events-none">
-            <span className="flex gap-1">
-              {[0, 1, 2].map((i) => (
-                <span
-                  key={i}
-                  className="block w-1 h-1 rounded-full bg-[#ff6b00]"
-                  style={{
-                    animation: `scrollPulse 1.4s ease-in-out ${i * 0.18}s infinite`,
-                    opacity: 0.5,
-                  }}
-                />
-              ))}
-            </span>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#ff6b00]/60" style={{ fontFamily: 'Inter, sans-serif' }}>
-              Auto scrolling · hover to pause
-            </span>
-            <span className="flex gap-1">
-              {[0, 1, 2].map((i) => (
-                <span
-                  key={i}
-                  className="block w-1 h-1 rounded-full bg-[#ff6b00]"
-                  style={{
-                    animation: `scrollPulse 1.4s ease-in-out ${i * 0.18}s infinite`,
-                    opacity: 0.5,
-                  }}
-                />
-              ))}
-            </span>
           </div>
         </div>
       </section>
 
-      {/* ── CAREERS ── */}
-      <section data-stack-section data-no-global-reveal className="bg-white pb-[48px] pt-[60px] max-sm:py-[40px]">
-        <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
-          <div className="max-w-[760px]">
-            <div className="inline-flex items-center gap-3 text-[12px] font-extrabold uppercase tracking-[0.22em] text-[#ff6b00]">
-              <span className="h-px w-10 bg-[#ff6b00]" aria-hidden="true" />
-              Careers
+      {/* ─ Careers ─ */}
+      <section
+        className="section bg-white divide-top"
+        aria-labelledby="careers-heading"
+      >
+        <div className="container">
+          <FadeIn direction="up">
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
+              <SectionHeader
+                eyebrow="Join the Team"
+                title="Open"
+                highlight="Positions"
+                id="careers-heading"
+              />
+              <p className="text-neutral-500 max-w-[36ch] text-xs leading-relaxed">
+                Looking for talented engineers who share our passion for precision.
+              </p>
             </div>
-            <h2 className="mt-5 text-[clamp(42px,6vw,82px)] font-normal leading-[0.95] tracking-[-0.07em] text-[#111111]">
-              Join the <span className="text-[#ff6b00]">Mission</span>
-            </h2>
-            <p className="max-w-[640px] text-[17px] leading-[1.8] text-[#67707d]">
-              We are always looking for passionate engineers, innovators, and dreamers who want to shape the future of flight.
-            </p>
-          </div>
+          </FadeIn>
 
-          <div className="mt-10 border-y border-[#f1dfd1]">
-            {openings.map((opening, index) => (
-              <div
-                key={opening.role}
-                className="flex flex-col gap-5 py-7 md:flex-row md:items-center md:justify-between border-b border-[#f1dfd1] last:border-b-0 relative group hover:pl-3 transition-all duration-200"
-              >
-                <div className="absolute left-0 top-0 bottom-0 w-[2.5px] bg-[#ff6b00] scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-200 ease-out" />
-                <div className="flex items-start gap-5">
-                  <span className="pt-1 text-[30px] font-extrabold leading-none text-[#ff6b00]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    0{index + 1}
-                  </span>
-                  <div>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="text-[22px] font-extrabold text-[#111111]" style={{ letterSpacing: '-0.02em' }}>{opening.role}</h3>
-                      <span className="border border-[#f1dfd1] bg-[#fff8f1] px-3 py-0.5 text-[9px] font-extrabold uppercase tracking-[0.18em] text-[#ff6b00]" style={{ fontFamily: 'Inter, sans-serif' }}>{opening.dept}</span>
+          {/* Job listings */}
+          <div className="flex flex-col gap-px bg-neutral-200 border border-neutral-200" role="list" aria-label="Open positions">
+            {openings.map((o, i) => (
+              <FadeIn key={i} delay={i * 0.05} direction="up">
+                <div
+                  className="bg-white p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+                  role="listitem"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="icon-box shrink-0" aria-hidden="true">
+                      <WorkIcon sx={{ fontSize: 16 }} />
                     </div>
-                    <p className="mt-2 flex items-center gap-2 text-[14px] text-[#67707d]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                      <WorkIcon sx={{ fontSize: 16, color: '#ff6b00' }} />{opening.type}
-                    </p>
+                    <div>
+                      <h3 className="font-heading font-bold text-black text-base">
+                        {o.role}
+                      </h3>
+                      <p className="text-neutral-500 text-xs mt-0.5">{o.type}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <span className="tag">{o.dept}</span>
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center gap-1.5 text-[0.6875rem] font-semibold uppercase tracking-wide text-orange-500 hover:text-orange-600 transition-colors shrink-0"
+                      aria-label={`Apply for ${o.role}`}
+                    >
+                      Apply
+                      <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 13 }} />
+                    </Link>
                   </div>
                 </div>
-                {/* Temporarily locked: render disabled button instead of a link */}
-                <button
-                  disabled
-                  className="inline-flex items-center justify-center border border-[#ff6b00]/30 px-6 py-3 text-[13px] font-extrabold text-[#ff6b00] opacity-60 cursor-not-allowed"
-                  style={{ fontFamily: 'Inter, sans-serif' }}
-                  aria-disabled="true"
-                >
-                  Apply Now
-                </button>
-              </div>
+              </FadeIn>
             ))}
           </div>
+
+          {/* No fit / general */}
+          <FadeIn direction="up" delay={0.2}>
+            <div className="mt-8 p-6 border border-neutral-200 bg-white flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <p className="font-heading font-bold text-black text-base mb-0.5">
+                  Don't see a matching role?
+                </p>
+                <p className="text-neutral-500 text-xs">
+                  Send us your CV — we are always interested in exceptional candidates.
+                </p>
+              </div>
+              <Link to="/contact" className="btn-primary shrink-0">
+                Send Your CV
+                <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 17 }} />
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
-
-      {/* Inline keyframe for scroll pulse dots */}
-      <style>{`
-        @keyframes scrollPulse {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 0.9; transform: scale(1.4); }
-        }
-      `}</style>
     </div>
   );
 };

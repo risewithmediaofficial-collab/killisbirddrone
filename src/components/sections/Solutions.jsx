@@ -1,144 +1,128 @@
-import React from 'react';
+// src/components/sections/Solutions.jsx
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import FadeIn from '../FadeIn';
 import SectionHeader from '../SectionHeader';
-import useParallax from '../../hooks/useParallax';
-import SmartImage from '../SmartImage';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-const industries = [
-  { id: '01', title: 'Precision Agriculture', desc: 'Crop-mapping, irrigation-control, and yield-monitoring UAV solutions.' },
-  { id: '02', title: 'Industrial Inspection', desc: 'Infrastructure, pipeline, and tower inspection with real-time telemetry.' },
-  { id: '03', title: 'Defence & Surveillance', desc: 'Mission-critical surveillance and border-patrol aerial systems.', highlight: true },
-  { id: '04', title: 'Research & Aerospace', desc: 'High-altitude data collection and experimental aviation platforms.' },
+const services = [
+  {
+    num: '01',
+    category: 'Propulsion System',
+    tagline: 'Raw power, precisely engineered for every mission profile.',
+    body: 'BLDC motors, carbon-fibre propellers, and integrated propulsion stacks — built for endurance, payload capacity, and long-duration missions.',
+    tags: ['BLDC Motors', 'Propellers', 'Propulsion Stack'],
+    link: '/creations',
+    image: 'https://images.unsplash.com/photo-1578640671548-7c6e27d8d2e0?w=800&q=80&auto=format&fit=crop',
+  },
+  {
+    num: '02',
+    category: 'Airframe',
+    tagline: 'Strength and precision engineered into every carbon-fibre joint.',
+    body: 'Racing, freestyle, and swarm-optimised airframes in carbon-composite materials — built for structural rigidity in the most demanding environments.',
+    tags: ['Racing Frame', 'Freestyle Frame', 'Swarm Frame'],
+    link: '/creations',
+    image: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&q=80&auto=format&fit=crop',
+  },
+  {
+    num: '03',
+    category: 'Avionics',
+    tagline: 'Intelligence at the heart of every flight system.',
+    body: 'Flight control computers, ESCs, and communication links supporting Ardupilot, PX4, Betaflight, and more — mission-critical reliability by design.',
+    tags: ['FCC', 'ESC', 'Communication'],
+    link: '/creations',
+    image: 'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?w=800&q=80&auto=format&fit=crop',
+  },
+  {
+    num: '04',
+    category: 'Custom Integration',
+    tagline: 'Your mission. Our engineering. One complete system.',
+    body: 'End-to-end custom UAV system design — from bespoke component engineering through full-system integration, testing, and field deployment.',
+    tags: ['System Design', 'Custom Parts', 'Field Support'],
+    link: '/assistance',
+    image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&q=80&auto=format&fit=crop',
+  },
 ];
 
-const listVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.09 } },
-};
+const Solutions = () => (
+  <section
+    className="section bg-white divide-top"
+    aria-labelledby="solutions-heading"
+  >
+    <div className="container">
+      {/* Header */}
+      <FadeIn direction="up">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+          <SectionHeader
+            eyebrow="Our Creations"
+            title="What We"
+            highlight="Engineer"
+            id="solutions-heading"
+          />
+          <Link
+            to="/creations"
+            className="inline-flex items-center gap-2 font-label text-[0.6875rem] font-700 uppercase tracking-wide text-orange-500 hover:text-orange-600 transition-colors group self-start lg:self-end"
+            aria-label="View all creations"
+          >
+            View All
+            <ArrowForwardIcon sx={{ fontSize: 15 }} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+          </Link>
+        </div>
+      </FadeIn>
 
-const itemVariants = {
-  hidden: { clipPath: 'inset(0 0 100% 0)', opacity: 0, y: 10 },
-  visible: { clipPath: 'inset(0 0 0% 0)', opacity: 1, y: 0, transition: { duration: 0.52, ease: [0.16, 1, 0.3, 1] } },
-};
+      {/* Service grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-neutral-200">
+        {services.map((s, i) => (
+          <FadeIn key={i} delay={i * 0.08} direction="up">
+            <article className="group bg-white hover:bg-neutral-50 transition-colors duration-300 overflow-hidden">
+              {/* Image */}
+              <div className="img-zoom h-52 overflow-hidden" aria-hidden="true">
+                <img
+                  src={s.image}
+                  alt=""
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/20" />
+              </div>
 
-const SolutionsImage = () => {
-  const ref = useParallax(12);
-  return (
-    <div className="relative border border-black/[0.09] img-hover-mask" style={{ height: '500px' }}>
-      <SmartImage
-        ref={ref}
-        src="/assests/solutions.jpg"
-        alt="Killis Bird aerospace engineering drone"
-        className="w-full object-cover"
-        style={{ height: '120%', top: 0, position: 'absolute' }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+              {/* Content */}
+              <div className="p-8 lg:p-10">
+                <div className="flex items-start justify-between mb-4">
+                  <span
+                    className="font-heading font-bold text-neutral-100 group-hover:text-neutral-200 transition-colors leading-none"
+                    style={{ fontSize: '3.5rem', letterSpacing: '-0.06em' }}
+                    aria-hidden="true"
+                  >
+                    {s.num}
+                  </span>
+                  <Link
+                    to={s.link}
+                    className="w-9 h-9 border border-neutral-200 group-hover:border-orange-500 group-hover:bg-orange-500 flex items-center justify-center transition-all duration-200"
+                    aria-label={`Learn more about ${s.category}`}
+                    tabIndex={-1}
+                  >
+                    <ArrowForwardIcon sx={{ fontSize: 15 }} className="text-neutral-400 group-hover:text-white" aria-hidden="true" />
+                  </Link>
+                </div>
 
-      {/* Technical coordinate overlay */}
-      <span className="tech-overlay-label top-4 left-4">12.9° N · AEROSPACE STD</span>
-      <span className="tech-overlay-label bottom-4 right-4 text-right">SYS · ACTIVE</span>
-      {/* Thin corner lines */}
-      <div className="tech-overlay-line top-0 left-0 w-[40px] h-px" />
-      <div className="tech-overlay-line top-0 left-0 w-px h-[40px]" />
-      <div className="tech-overlay-line bottom-0 right-0 w-[40px] h-px" />
-      <div className="tech-overlay-line bottom-0 right-0 w-px h-[40px]" />
+                <h3 className="font-heading font-bold text-black text-2xl mb-2 group-hover:text-orange-500 transition-colors duration-200">
+                  {s.category}
+                </h3>
+                <p className="text-neutral-500 text-[0.8125rem] italic mb-4">{s.tagline}</p>
+                <p className="text-neutral-600 text-sm leading-relaxed mb-6 max-w-[44ch]">{s.body}</p>
 
-      <div className="absolute bottom-8 left-8 right-8 z-10">
-        <span className="text-[9px] font-bold text-skyroot uppercase tracking-widest block mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
-          AEROSPACE STANDARDS
-        </span>
-        <h3 className="font-heading font-bold text-white text-xl md:text-2xl leading-tight tracking-tight">
-          Fly higher, farther, and faster with Killis Bird components.
-        </h3>
+                <div className="flex flex-wrap gap-2">
+                  {s.tags.map(tag => (
+                    <span key={tag} className="tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          </FadeIn>
+        ))}
       </div>
     </div>
-  );
-};
-
-const Solutions = () => {
-  return (
-    <section data-stack-section className="bg-white relative overflow-hidden px-6 py-[72px] md:px-8 lg:py-[88px]">
-      <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
-
-        <div className="flex flex-col items-center mb-11 max-w-3xl mx-auto">
-          <SectionHeader eyebrow="" title="Industries We" orangeTitle="Empower" centered />
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-
-          {/* Left: Numbered list */}
-          <div className="lg:col-span-7">
-            <motion.div
-              variants={listVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-            >
-              {industries.map((ind) => (
-                <motion.div
-                  key={ind.id}
-                  variants={itemVariants}
-                  className="numbered-list-item group px-2 hover:px-4 transition-all duration-200"
-                >
-                  <span
-                    className="shrink-0 font-bold text-skyroot leading-none mt-0.5 w-8 text-sm"
-                    style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '0.05em' }}
-                  >
-                    {ind.id}
-                  </span>
-                  <div className="flex-1">
-                    <h4
-                      className={`font-heading font-bold text-lg leading-tight mb-1 transition-colors duration-150 ${ind.highlight ? 'text-skyroot' : 'text-black group-hover:text-skyroot'}`}
-                    >
-                      {ind.title}
-                      {ind.highlight && (
-                        <span className="ml-2 text-[9px] font-bold uppercase tracking-widest text-skyroot/70 border border-skyroot/25 px-1.5 py-0.5 align-middle" style={{ fontFamily: 'Inter, sans-serif' }}>
-                          Priority
-                        </span>
-                      )}
-                    </h4>
-                    <p className="text-sm text-black/50 leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
-                      {ind.desc}
-                    </p>
-                  </div>
-                  <ArrowForwardIcon
-                    sx={{ fontSize: 16, color: '#f97316', opacity: 0, transition: 'opacity 0.15s ease', flexShrink: 0, mt: 0.5 }}
-                    className="group-hover:!opacity-100"
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="pt-8 flex justify-center sm:justify-start"
-            >
-              <Link to="/contact" className="btn-primary">
-                Partner With Us <ArrowForwardIcon sx={{ fontSize: 18 }} />
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* Right: Parallax image with technical overlay */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5"
-          >
-            <SolutionsImage />
-          </motion.div>
-
-        </div>
-      </div>
-    </section>
-  );
-};
+  </section>
+);
 
 export default Solutions;

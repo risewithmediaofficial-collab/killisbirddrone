@@ -1,122 +1,108 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import StarIcon from '@mui/icons-material/Star';
+// src/components/sections/TrustedClients.jsx
+import FadeIn from '../FadeIn';
 import SectionHeader from '../SectionHeader';
 
-const voices = [
+/* Gallery images — Unsplash drone/UAV themed */
+const gallery = [
   {
-    quote: 'Killis Bird components set a new benchmark for precision and reliability. Their custom UAV brushless motors and SWARM control systems completely transformed our telemetry operations.',
-    name: 'Rajiv Sharma',
-    initials: 'RS',
+    src: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&q=80&auto=format&fit=crop',
+    label: 'Agricultural UAV',
+    category: 'Agri-Tech',
   },
   {
-    quote: 'The attention to aerostructural engineering detail is extraordinary. We have partnered with them for three consecutive custom drone fleet builds and achieved 100% mission success.',
-    name: 'Priya Nair',
-    initials: 'PN',
+    src: 'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?w=800&q=80&auto=format&fit=crop',
+    label: 'Defence Surveillance',
+    category: 'Defence',
   },
   {
-    quote: 'Unmatched structural integrity, lightweight carbon frames, and incredible technical support. Killis Bird is truly a world-class aerospace component partner.',
-    name: 'Arjun Menon',
-    initials: 'AM',
+    src: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&q=80&auto=format&fit=crop',
+    label: 'Aerial Inspection',
+    category: 'Inspection',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=800&q=80&auto=format&fit=crop',
+    label: 'Research Platform',
+    category: 'Research',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1581092160607-a04b3d6f5d38?w=800&q=80&auto=format&fit=crop',
+    label: 'Swarm Operations',
+    category: 'Swarm Tech',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1578640671548-7c6e27d8d2e0?w=800&q=80&auto=format&fit=crop',
+    label: 'Industrial UAV',
+    category: 'Industrial',
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.11 } },
-};
+/* Partner names */
+const partners = [
+  'AeroVentures', 'DefenceTech Systems', 'SkyAgri Corp',
+  'InspectX', 'SwarmLabs', 'AviaNXT', 'SkyDrones India', 'UAV Nexus',
+];
 
-const cardVariants = {
-  hidden: { clipPath: 'inset(0 0 100% 0)', opacity: 0, y: 14 },
-  visible: { clipPath: 'inset(0 0 0% 0)', opacity: 1, y: 0, transition: { duration: 0.58, ease: [0.16, 1, 0.3, 1] } },
-};
-
-const TrustedClients = () => {
-  return (
-    <>
-      {/* Testimonials */}
-      <section data-stack-section className="section bg-white relative overflow-hidden border-t border-b border-black/[0.07]">
-        <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
-
-          {/* Split header */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 items-end gap-8 mb-12 border-b border-black/[0.07] pb-10">
-            <div>
-              <SectionHeader eyebrow="Voices of Trust" title="Client" orangeTitle="Testimonials" centered={false} className="mb-0" />
-            </div>
-            <div className="hidden lg:flex justify-end items-end">
-              <motion.div
-                initial={{ opacity: 0, x: 12 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="text-right"
-              >
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/35" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  Verified Partners
-                </p>
-                <p className="font-heading font-bold text-3xl text-black tracking-tight mt-1">
-                  3<span className="text-skyroot">+</span>
-                </p>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Cards */}
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-black/[0.07]"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-50px' }}
-          >
-            {voices.map((v, i) => (
-              <motion.div
-                key={i}
-                variants={cardVariants}
-                className="group relative border-r border-b border-black/[0.07] p-8 transition-all duration-200 hover:bg-[rgba(249,115,22,0.02)] flex flex-col"
-              >
-                {/* Index + stars row */}
-                <div className="flex items-center justify-between mb-6">
-                  <span
-                    className="font-bold text-xs text-skyroot"
-                    style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '0.08em' }}
-                  >
-                    0{i + 1}
-                  </span>
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, si) => (
-                      <StarIcon key={si} sx={{ fontSize: 11, color: '#f97316' }} />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Quote icon */}
-                <FormatQuoteIcon sx={{ fontSize: 28, color: '#f97316', opacity: 0.22, mb: 1.5 }} />
-
-                {/* Quote text */}
-                <p className="text-black/75 text-sm leading-relaxed italic flex-grow mb-8" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  "{v.quote}"
-                </p>
-
-                {/* Author */}
-                <div className="flex items-center gap-3 border-t border-black/[0.07] pt-5 mt-auto">
-                  <div className="w-9 h-9 shrink-0 bg-skyroot text-white flex items-center justify-center font-bold text-xs" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    {v.initials}
-                  </div>
-                  <p className="font-heading font-bold text-black text-sm">{v.name}</p>
-                </div>
-
-                {/* Orange left-border reveal on hover */}
-                <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-skyroot scale-y-0 origin-bottom transition-transform duration-200 ease-out group-hover:scale-y-100" />
-              </motion.div>
-            ))}
-          </motion.div>
-
+const TrustedClients = () => (
+  <section
+    className="section bg-white divide-top"
+    aria-labelledby="gallery-heading"
+  >
+    <div className="container">
+      {/* Header */}
+      <FadeIn direction="up">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+          <SectionHeader
+            eyebrow="Field Applications"
+            title="Deployed Across"
+            highlight="Sectors"
+            id="gallery-heading"
+          />
+          <p className="text-neutral-500 max-w-[40ch] leading-relaxed text-sm">
+            Killis Bird components power operations across agriculture, defence, inspection, and research.
+          </p>
         </div>
-      </section>
-    </>
-  );
-};
+      </FadeIn>
+
+      {/* Gallery grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-200 mb-16">
+        {gallery.map((item, i) => (
+          <FadeIn key={i} delay={i * 0.07} direction="up">
+            <div className="group relative img-zoom bg-neutral-100 aspect-[4/3] overflow-hidden">
+              <img
+                src={item.src}
+                alt={item.label}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-400" />
+              {/* Label */}
+              <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                <span className="tag tag-orange mb-2 inline-flex">{item.category}</span>
+                <p className="font-heading font-bold text-white text-lg leading-tight">{item.label}</p>
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+
+      {/* Partners strip */}
+      <FadeIn direction="up">
+        <div className="border-t border-neutral-100 pt-10">
+          <p className="text-neutral-400 text-[0.625rem] font-semibold uppercase tracking-widest text-center mb-8">
+            Trusted by industry leaders
+          </p>
+          <div className="flex flex-wrap justify-center gap-0 divide-x divide-neutral-200">
+            {partners.map((p, i) => (
+              <div key={i} className="partner-logo" role="listitem" aria-label={p}>
+                {p}
+              </div>
+            ))}
+          </div>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+);
 
 export default TrustedClients;

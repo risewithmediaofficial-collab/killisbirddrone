@@ -1,437 +1,228 @@
-import { useRef, useState, useLayoutEffect } from "react";
-import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import SEO from "../components/SEO";
-import ParallaxWatermark from "../components/ParallaxWatermark";
-import SecondarySectionIntro from "../components/common/SecondarySectionIntro";
-import useBookScrollEffects from "../hooks/useBookScrollEffects";
+// src/pages/Creations.jsx
+import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import SEO from '../components/SEO';
+import SecondaryHero from '../components/common/SecondaryHero';
+import FadeIn from '../components/FadeIn';
+import useBookScrollEffects from '../hooks/useBookScrollEffects';
+import { categories } from '../data/products';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const LOGO = "/assests/KILLIS BIRD - LOGO.png";
-
-/* ── Word-split animator ── */
-const AnimatedWords = ({ children, className = "" }) => {
-  const ref = useRef(null);
-  useLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const words = el.querySelectorAll(".aw-word");
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        words,
-        { opacity: 0, y: 28, skewY: 3 },
-        {
-          opacity: 1, y: 0, skewY: 0,
-          duration: 0.65, ease: "power3.out", stagger: 0.045,
-          scrollTrigger: { trigger: el, start: "top 82%", once: true },
-        }
-      );
-    }, el);
-    return () => ctx.revert();
-  }, []);
-  return <span ref={ref} className={className}>{children}</span>;
+/* Category images */
+const categoryImages = {
+  'Propulsion System': 'https://images.unsplash.com/photo-1578640671548-7c6e27d8d2e0?w=600&q=80&auto=format&fit=crop',
+  'Airframe':          'https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600&q=80&auto=format&fit=crop',
+  'Avionics':          'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?w=600&q=80&auto=format&fit=crop',
 };
 
-const W = ({ children, highlight = false }) => (
-  <span className={`aw-word inline-block ${highlight ? "text-[#ff6b00] font-extrabold" : ""}`}>
-    {children}
-  </span>
-);
-
-/* ── Multi-image viewer ── */
-const ProductImageViewer = ({ images, name }) => {
-  const [current, setCurrent] = useState(0);
-  const hasMultiple = images.length > 1;
-
-  const prev = (e) => { e.stopPropagation(); setCurrent((c) => (c - 1 + images.length) % images.length); };
-  const next = (e) => { e.stopPropagation(); setCurrent((c) => (c + 1) % images.length); };
-
-  return (
-    <div className="relative w-full h-52 sm:h-auto sm:aspect-square bg-[#f7f7f7] border-b border-black/[0.06] flex items-center justify-center overflow-hidden group">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={current}
-          initial={{ opacity: 0, scale: 1.04 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.97 }}
-          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0 flex items-center justify-center p-6"
-        >
-          {images[current] ? (
-            <img
-              src={images[current]}
-              alt={`${name} view ${current + 1}`}
-              className="max-w-full max-h-full object-contain"
-              style={{ imageRendering: "crisp-edges" }}
-            />
-          ) : (
-            /* Logo placeholder when no image is provided */
-            <div className="flex flex-col items-center justify-center gap-3 opacity-25">
-              <img
-                src={LOGO}
-                alt="Killis Bird"
-                className="w-28 object-contain"
-              />
-              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-black" style={{ fontFamily: "Inter, sans-serif" }}>
-                Image Coming Soon
-              </span>
-            </div>
-          )}
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Image counter badge */}
-      {hasMultiple && (
-        <span className="absolute top-3 right-3 text-[9px] font-bold tracking-widest text-black/40 bg-white border border-black/[0.07] px-2 py-0.5" style={{ fontFamily: "Inter, sans-serif" }}>
-          {current + 1} / {images.length}
-        </span>
-      )}
-
-      {/* Navigation arrows */}
-      {hasMultiple && (
-        <>
-          <button
-            onClick={prev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-white border border-black/[0.08] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:border-[#ff6b00] hover:text-[#ff6b00]"
-            aria-label="Previous image"
-          >
-            <ArrowBackIosNewIcon sx={{ fontSize: 11 }} />
-          </button>
-          <button
-            onClick={next}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-white border border-black/[0.08] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:border-[#ff6b00] hover:text-[#ff6b00]"
-            aria-label="Next image"
-          >
-            <ArrowForwardIosIcon sx={{ fontSize: 11 }} />
-          </button>
-          {/* Dot indicators */}
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-            {images.map((_, i) => (
-              <button
-                key={i}
-                onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
-                className={`w-1.5 h-1.5 transition-all duration-200 ${i === current ? "bg-[#ff6b00] scale-125" : "bg-black/20 hover:bg-black/40"}`}
-                aria-label={`View image ${i + 1}`}
-              />
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  );
+const productImages = {
+  'bldc-motors':               'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?w=500&q=80&auto=format&fit=crop',
+  'propellers':                'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=500&q=80&auto=format&fit=crop',
+  'propulsion-stack':          'https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=500&q=80&auto=format&fit=crop',
+  'racing-frame':              'https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=500&q=80&auto=format&fit=crop',
+  'freestyle-frame':           'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?w=500&q=80&auto=format&fit=crop',
+  'swarm-frame':               'https://images.unsplash.com/photo-1581092160607-a04b3d6f5d38?w=500&q=80&auto=format&fit=crop',
+  'fcc-flight-control-computer': 'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?w=500&q=80&auto=format&fit=crop',
+  'esc-electronic-speed-controller': 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=500&q=80&auto=format&fit=crop',
+  'communication-system':      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80&auto=format&fit=crop',
 };
 
-/* ── Product Card ── */
+/* Product Card */
 const ProductCard = ({ product, index }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 24 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.1 }}
-    transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-    className="flex flex-col border border-black/[0.09] bg-white group hover:border-[#ff6b00]/40 transition-colors duration-200"
+  <motion.article
+    layout
+    initial={{ opacity: 0, y: 16 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -12 }}
+    transition={{ duration: 0.35, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+    className="bg-white border border-neutral-200 flex flex-col overflow-hidden"
+    aria-label={product.name}
   >
-    {/* Image viewer */}
-    <ProductImageViewer images={product.images} name={product.name} />
+    {/* Image */}
+    <div className="img-zoom aspect-[4/3] overflow-hidden bg-neutral-50 relative">
+      <img
+        src={productImages[product.id] || categoryImages['Avionics']}
+        alt={product.name}
+        className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+        loading="lazy"
+      />
+      {/* Model tag */}
+      <div className="absolute top-3 left-3">
+        <span className="tag bg-white/90 border-white/50 text-neutral-700">{product.model}</span>
+      </div>
+    </div>
 
     {/* Content */}
-    <div className="flex flex-col flex-1 p-6">
-      {/* Product name */}
-      <h3
-        className="text-[18px] font-extrabold text-[#111111] text-center mb-4 leading-tight tracking-tight"
-        style={{ letterSpacing: "-0.02em" }}
-      >
-        {product.name}
-      </h3>
+    <div className="p-6 flex flex-col flex-1 gap-3">
+      <div>
+        <h3 className="font-heading font-bold text-black text-lg mb-1.5">
+          {product.name}
+        </h3>
+        <p className="text-neutral-500 text-xs leading-relaxed line-clamp-2">
+          {product.description}
+        </p>
+      </div>
 
-      {/* Thin divider */}
-      <div className="w-full h-px bg-black/[0.06] mb-4" />
-
-      {/* Feature bullets */}
-      <ul className="flex flex-col gap-2 mb-5 flex-1">
-        {product.features.map((feat, i) => (
-          <li
-            key={i}
-            className="text-[13px] text-[#67707d] text-center leading-snug"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
-            {feat}
+      {/* Features */}
+      <ul className="flex flex-col gap-1.5" aria-label="Key features">
+        {product.features.slice(0, 3).map((f, fi) => (
+          <li key={fi} className="flex items-center gap-2 text-xs text-neutral-600">
+            <span className="w-3.5 h-3.5 border border-orange-200 bg-orange-50 flex items-center justify-center text-orange-500 flex-shrink-0" aria-hidden="true">
+              <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polyline points="20,6 9,17 4,12"/>
+              </svg>
+            </span>
+            {f}
           </li>
         ))}
       </ul>
 
-      {/* Thin divider */}
-      <div className="w-full h-px bg-black/[0.06] mb-4" />
-
-      {/* Price (hide when it's a 'Get Quote' label to avoid duplicate CTA) */}
-      {product.price && product.price !== 'Get Quote' && (
-        <p
-          className="text-[22px] font-extrabold text-[#111111] text-center mb-5 tracking-tight"
-          style={{ letterSpacing: "-0.03em" }}
-        >
-          {product.price}
-        </p>
+      {/* Firmware tags (avionics only) */}
+      {product.firmware && (
+        <div className="flex flex-wrap gap-1">
+          {product.firmware.map(fw => (
+            <span key={fw} className="tag tag-orange text-[0.625rem]">{fw}</span>
+          ))}
+        </div>
       )}
 
       {/* CTA */}
-      <Link
-        to="/contact"
-        className="btn-primary w-full justify-center !py-3 !text-[11px] !tracking-[0.12em] group/btn"
-      >
-        Get Quote
-        <ArrowRightAltIcon sx={{ fontSize: 18 }} className="transition-transform duration-200 group-hover/btn:translate-x-1" />
-      </Link>
+      <div className="mt-auto pt-3 border-t border-neutral-100 flex items-center justify-between">
+        <span className="font-label font-semibold text-orange-500 text-xs uppercase tracking-wide">
+          {product.price}
+        </span>
+        <Link
+          to={`/creations/${product.id}`}
+          className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-neutral-600 hover:text-orange-500 transition-colors"
+          aria-label={`View details for ${product.name}`}
+        >
+          Details
+          <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 13 }} />
+        </Link>
+      </div>
     </div>
-  </motion.div>
+  </motion.article>
 );
 
-/* ── Category Section ── */
-const CategorySection = ({ num, category, tagline, watermark, products, index }) => (
-  <section
-    data-stack-section
-    className={`relative py-[72px] max-sm:py-[48px] ${index % 2 === 0 ? "bg-white" : "bg-[#fff8f1]"}`}
+/* Category Tab */
+const CategoryTab = ({ cat, active, onClick }) => (
+  <button
+    role="tab"
+    aria-selected={active}
+    onClick={onClick}
+    className={`relative flex items-center gap-2.5 px-0 py-3.5 font-label font-semibold text-xs uppercase tracking-wide border-b-2 transition-all duration-200 whitespace-nowrap ${
+      active
+        ? 'text-orange-500 border-orange-500'
+        : 'text-neutral-400 border-transparent hover:text-neutral-700'
+    }`}
   >
-    <ParallaxWatermark
-      className={`top-1/2 -translate-y-1/2 text-[clamp(6rem,12vw,15rem)] ${index % 2 === 0 ? "left-0 text-[#ff6b00]/[0.06]" : "right-0 text-[#111111]/[0.05]"}`}
-      speed={22}
-    >
-      {watermark}
-    </ParallaxWatermark>
-
-    <div className="relative mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
-      {/* Section intro */}
-      <div className="mb-12">
-        <SecondarySectionIntro
-          eyebrow={`${num} ${category}`}
-          title={category}
-          description={tagline}
-          className="max-w-[640px]"
-        />
-      </div>
-
-      {/* Product cards grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products.map((product, i) => (
-          <ProductCard key={product.name} product={product} index={i} />
-        ))}
-      </div>
-    </div>
-  </section>
+    <span className="text-xs font-bold text-neutral-300" aria-hidden="true">{cat.num}</span>
+    {cat.category}
+  </button>
 );
 
-/* ── Hero Text ── */
-const CreationsHeroText = () => {
-  const bodyRef = useRef(null);
-  useLayoutEffect(() => {
-    const el = bodyRef.current;
-    if (!el) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el.querySelectorAll(".body-line"),
-        { opacity: 0, y: 22 },
-        {
-          opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12,
-          scrollTrigger: { trigger: el, start: "top 85%", once: true },
-        }
-      );
-    }, el);
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section data-stack-section className="relative overflow-hidden bg-white py-[72px] max-sm:py-[48px]">
-      <div className="mx-auto w-full max-w-[1380px] px-[clamp(20px,5vw,80px)]">
-        <h2 className="font-heading text-[clamp(22px,3.2vw,40px)] font-extrabold leading-[1.6] tracking-[-0.02em] text-[#111111] max-w-[1080px]">
-          <AnimatedWords className="flex flex-wrap gap-x-[0.32em] gap-y-1">
-            <W>Whether</W><W>you</W><W>are</W><W>building</W><W>for</W>
-            <W highlight>precision</W><W highlight>agriculture</W><W>,</W>
-            <W highlight>industrial</W><W highlight>applications</W><W>,</W>
-            <W highlight>advanced</W><W highlight>surveillance</W>
-            <W>or</W>
-            <W highlight>defense</W><W highlight>applications</W>
-            <W>—</W><W>Killis</W><W>Birds</W><W>is</W><W>your</W>
-            <W highlight>trusted</W><W highlight>collaborator</W><W highlight>in</W><W highlight>flight</W><W>.</W>
-          </AnimatedWords>
-        </h2>
-
-        <div ref={bodyRef} className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <p className="body-line text-[15px] leading-[1.85] text-[#67707d]">
-            Our <span className="font-bold text-[#111111]">UAV components and solutions</span> are designed to adapt seamlessly across industries, delivering{" "}
-            <span className="text-[#ff6b00] font-bold">accuracy for farming</span>,{" "}
-            <span className="text-[#ff6b00] font-bold">efficiency for industries</span>, and{" "}
-            <span className="text-[#ff6b00] font-bold">reliability for defense and surveillance missions</span>.
-          </p>
-          <p className="body-line text-[15px] leading-[1.85] text-[#67707d]">
-            With <span className="font-bold text-[#111111]">innovation at our core</span>, we empower{" "}
-            <span className="text-[#ff6b00] font-bold">partners worldwide</span> to achieve{" "}
-            <span className="font-bold text-[#111111]">mission success</span> through technologies that are{" "}
-            <span className="text-[#ff6b00] font-bold">robust</span>,{" "}
-            <span className="text-[#ff6b00] font-bold">adaptable</span>, and{" "}
-            <span className="text-[#ff6b00] font-bold">future ready</span>.
-          </p>
-          <p className="body-line text-[15px] leading-[1.85] text-[#67707d] flex items-start gap-2">
-            <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#ff6b00]" aria-hidden="true" />
-            <span>
-              <span className="font-extrabold text-[#111111]">"Engineered for Excellence"</span>{" "}— every component, every solution, every mission.
-            </span>
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-/* ════════════════════════════════════════════
-   PRODUCT DATA
-   Add image paths to each product's `images` array.
-   Each product supports multiple images (gallery/carousel).
-   Leave array empty [] to show the logo placeholder.
-════════════════════════════════════════════ */
-const categories = [
-  {
-    num: "01",
-    category: "Propulsion System",
-    tagline: "Raw power, precisely engineered for every mission profile.",
-    watermark: "PROPULSION",
-    products: [
-      {
-        name: "BLDC Motors",
-        features: [
-          "High-efficiency brushless design",
-          "Sustained thrust for extended endurance",
-          "Multi-rotor & fixed-wing compatible",
-        ],
-        price: "",
-        images: [], // Add image paths here e.g. ["/assests/bldc-1.jpg", "/assests/bldc-2.jpg"]
-      },
-      {
-        name: "Propellers",
-        features: [
-          "Aerodynamically optimised blades",
-          "Superior lift-to-drag ratio",
-          "Carbon fibre & composite options",
-        ],
-        price: "Get Quote",
-        images: [], // Add image paths here
-      },
-      {
-        name: "Propulsion Stack",
-        features: [
-          "Integrated motor + ESC + propeller",
-          "Seamless plug-and-fly deployment",
-          "Mission-tuned performance profiles",
-        ],
-        price: "Get Quote",
-        images: [], // Add image paths here
-      },
-    ],
-  },
-  {
-    num: "02",
-    category: "Airframe",
-    tagline: "Strength and precision engineered into every carbon fibre joint.",
-    watermark: "AIRFRAME",
-    products: [
-      {
-        name: "Racing Frame",
-        features: [
-          "Ultra-lightweight high-rigidity build",
-          "Maximum speed & agility",
-          "Competition-grade materials",
-        ],
-        price: "Get Quote",
-        images: [], // Add image paths here
-      },
-      {
-        name: "Freestyle Frame",
-        features: [
-          "Robust flexible construction",
-          "Dynamic freestyle manoeuvres",
-          "Aerial acrobatics optimised",
-        ],
-        price: "Get Quote",
-        images: [], // Add image paths here
-      },
-      {
-        name: "Swarm Frame",
-        features: [
-          "Compact modular design",
-          "Multi-UAV formation optimised",
-          "Rapid field reconfiguration",
-        ],
-        price: "Get Quote",
-        images: [], // Add image paths here
-      },
-    ],
-  },
-  {
-    num: "03",
-    category: "Avionics",
-    tagline: "Intelligence at the heart of every flight system.",
-    watermark: "AVIONICS",
-    products: [
-      {
-        name: "FCC – Flight Control Computer",
-        features: [
-          "Multi-redundant IMU arrays",
-          "Autonomous navigation ready",
-          "Mission-critical stability control",
-        ],
-        price: "Get Quote",
-        images: [], // Add image paths here
-      },
-      {
-        name: "ESC – Electronic Speed Controller",
-        features: [
-          "Real-time telemetry feedback",
-          "Precision throttle response",
-          "Integrated failsafe protocols",
-        ],
-        price: "Get Quote",
-        images: [], // Add image paths here
-      },
-      {
-        name: "Communication System",
-        features: [
-          "Encrypted long-range data links",
-          "Real-time telemetry & command relay",
-          "Minimal latency transmission",
-        ],
-        price: "Get Quote",
-        images: [], // Add image paths here
-      },
-    ],
-  },
-];
-
-/* ── Main Page ── */
 const Creations = () => {
   const pageRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   useBookScrollEffects(pageRef);
 
+  const activeCat = categories[activeIndex];
+
   return (
-    <div ref={pageRef}>
+    <div ref={pageRef} className="bg-white overflow-hidden">
       <SEO
         title="Creations"
-        description="Killis Bird :: Imagine, IDeate, Innovate — Engineered for Excellence. Precision UAV components and solutions."
+        description="Killis Bird — Precision-engineered UAV components: propulsion systems, airframes, and avionics."
       />
-      <CreationsHeroText />
-      {categories.map(({ num, category, tagline, watermark, products }, index) => (
-        <CategorySection
-          key={category}
-          num={num}
-          category={category}
-          tagline={tagline}
-          watermark={watermark}
-          products={products}
-          index={index}
-        />
-      ))}
+
+      <SecondaryHero
+        eyebrow="Our Products"
+        title="Precision"
+        highlight="Creations."
+        description="UAV component ecosystem — designed in India for demanding global missions."
+        watermark="CREATE"
+      />
+
+      {/* ─ Product catalogue ─ */}
+      <section
+        className="section bg-white divide-top"
+        aria-label="Product catalogue"
+      >
+        <div className="container">
+
+          {/* Category tabs */}
+          <div
+            className="flex gap-8 border-b border-neutral-200 mb-10 overflow-x-auto scrollbar-hide"
+            role="tablist"
+            aria-label="Product categories"
+          >
+            {categories.map((cat, i) => (
+              <CategoryTab
+                key={cat.num}
+                cat={cat}
+                active={i === activeIndex}
+                onClick={() => setActiveIndex(i)}
+              />
+            ))}
+          </div>
+
+          {/* Active category info */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {/* Category header */}
+              <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 mb-8">
+                <div>
+                  <h2
+                    className="font-heading font-bold text-black leading-tight"
+                    style={{ fontSize: 'clamp(1.5rem, 2.2vw, 1.8rem)', letterSpacing: '-0.02em' }}
+                  >
+                    {activeCat.category}
+                  </h2>
+                  <p className="text-neutral-500 text-xs mt-1 italic">{activeCat.tagline}</p>
+                </div>
+                <div className="flex items-center gap-2" aria-label={`${activeCat.products.length} products in this category`}>
+                  <span className="tag">{activeCat.products.length} Products</span>
+                </div>
+              </div>
+
+              {/* Products grid */}
+              <motion.div
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                layout
+              >
+                <AnimatePresence mode="popLayout">
+                  {activeCat.products.map((product, i) => (
+                    <ProductCard key={product.id} product={product} index={i} />
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Bottom CTA */}
+          <div className="mt-12 pt-10 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div>
+              <p className="font-heading font-bold text-black text-lg mb-0.5">
+                Need a custom component?
+              </p>
+              <p className="text-neutral-500 text-xs">
+                Designing and manufacturing to your exact mission specifications.
+              </p>
+            </div>
+            <Link to="/contact" className="btn-primary shrink-0">
+              Request a Quote
+              <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 17 }} />
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

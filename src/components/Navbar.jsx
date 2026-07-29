@@ -1,47 +1,48 @@
 // src/components/Navbar.jsx
 import { useState, useEffect, useRef } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const links = [
-  { to: '/', label: 'Space', end: true },
-  { to: '/our-dna', label: 'Our DNA' },
+  { to: '/',          label: 'Home',      end: true },
+  { to: '/our-dna',   label: 'Our DNA' },
   { to: '/creations', label: 'Creations' },
-  { to: '/assistance', label: 'Assistance' },
-  { to: '/blog', label: 'Blog' },
-  { to: '/journey', label: 'Journey' },
+  { to: '/assistance',label: 'Services' },
+  { to: '/journey',   label: 'Journey' },
+  { to: '/blog',      label: 'Blog' },
 ];
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen]         = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const navRef = useRef(null);
+  const location                = useLocation();
+  const navRef                  = useRef(null);
 
+  const isHomePage = location.pathname === '/';
+  // Light mode (dark links & original logo) is active if scrolled OR if on an inner page
+  const isLight = scrolled || !isHomePage;
+
+  // Entrance animation
   useEffect(() => {
     const nav = navRef.current;
     if (!nav) return;
-
-    gsap.fromTo(nav, {
-      y: -20,
-      opacity: 0
-    }, {
-      y: 0,
-      opacity: 1,
-      duration: 0.6,
-      ease: 'power3.out'
-    });
+    gsap.fromTo(nav,
+      { y: -8, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.55, ease: 'power3.out', delay: 0.1 }
+    );
   }, []);
 
+  // Scroll listener
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu open
+  // Lock body scroll on mobile open
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -51,27 +52,34 @@ const Navbar = () => {
     <>
       <nav
         ref={navRef}
-        className={`site-navbar ${scrolled ? 'site-navbar--scrolled' : ''}`}
+        aria-label="Main navigation"
+        className={`site-navbar ${isLight ? 'site-navbar--light' : ''}`}
       >
         <div className="site-navbar__inner">
           {/* Logo */}
-          <Link to="/" className="site-navbar__logo" onClick={() => setOpen(false)}>
+          <Link
+            to="/"
+            className="site-navbar__logo"
+            onClick={() => setOpen(false)}
+            aria-label="Killis Bird — Home"
+          >
             <img
               src="/assests/KILLIS BIRD - LOGO.png"
-              alt="Killis Bird Logo"
+              alt="Killis Bird"
               className="site-navbar__logo-img"
+              style={!isLight ? { filter: 'brightness(0) invert(1)' } : {}}
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <ul className="site-navbar__links">
+          {/* Desktop links */}
+          <ul className="site-navbar__links" role="list">
             {links.map(({ to, label, end }) => (
               <li key={to}>
                 <NavLink
                   to={to}
                   end={end}
                   className={({ isActive }) =>
-                    `site-navbar__link nav-link-premium ${isActive ? 'site-navbar__link--active' : ''}`
+                    `site-navbar__link ${isLight ? 'site-navbar__link--light' : ''} ${isActive ? 'site-navbar__link--active' : ''}`
                   }
                 >
                   {({ isActive }) => (
@@ -81,7 +89,7 @@ const Navbar = () => {
                         <motion.div
                           layoutId="nav-underline"
                           className="site-navbar__active-underline"
-                          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                          transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                         />
                       )}
                     </>
@@ -93,10 +101,9 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="site-navbar__cta-wrap">
-            <Link to="/contact" className="site-navbar__cta group relative overflow-hidden">
-              <span className="relative z-10 transition-colors duration-200 group-hover:text-white">Request Quote</span>
-              <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 22 }} className="relative z-10 transition-transform duration-200 group-hover:translate-x-1" />
-              <span className="absolute inset-0 bg-[var(--primary-orange-dark)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]" />
+            <Link to="/contact" className="site-navbar__cta" aria-label="Request a quote">
+              <span>Request Quote</span>
+              <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 16 }} />
             </Link>
           </div>
 
@@ -104,73 +111,96 @@ const Navbar = () => {
           <button
             className={`site-navbar__menu ${open ? 'site-navbar__menu--open' : ''}`}
             onClick={() => setOpen(o => !o)}
-            aria-label="Toggle navigation menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
+            aria-controls="mobile-menu"
           >
-            <span />
-            <span />
-            <span />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu — full screen clip-path reveal */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
             key="mobile-menu"
             initial={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
             animate={{ opacity: 1, clipPath: 'inset(0 0 0% 0)' }}
             exit={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
-            transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-white lg:hidden flex flex-col"
+            transition={{ duration: 0.36, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[90] bg-white flex flex-col lg:hidden"
           >
-            <div className="h-[82px]" />
-            <ul className="flex flex-col px-8 py-6 gap-0 flex-1 bg-[var(--background-soft)]">
-              {links.map(({ to, label, end }, i) => (
-                <motion.li
-                  key={to}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 + i * 0.055, ease: [0.16, 1, 0.3, 1], duration: 0.38 }}
-                >
-                  {to === '/assistance' || to === '/blog' ? (
-                    <div className="block py-4 px-2 font-sans font-medium text-2xl tracking-tight transition-colors border-b border-[#f1dfd1] text-black/50">
-                      {label} <em className="ml-2 text-[14px] text-black/30">Coming soon</em>
-                    </div>
-                  ) : (
+            {/* Top bar */}
+            <div className="flex items-center justify-between px-6 h-16 border-b border-neutral-100">
+              <Link to="/" onClick={() => setOpen(false)} className="flex items-center">
+                <img
+                  src="/assests/KILLIS BIRD - LOGO.png"
+                  alt="Killis Bird"
+                  className="h-8 w-auto object-contain"
+                />
+              </Link>
+              <button
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
+                className="w-9 h-9 flex items-center justify-center text-neutral-600 hover:text-black transition-colors"
+              >
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M1 1l16 16M17 1L1 17"/>
+                </svg>
+              </button>
+            </div>
+
+            {/* Links */}
+            <nav className="flex-1 overflow-y-auto px-6 pt-6" aria-label="Mobile navigation">
+              <ul className="space-y-1" role="list">
+                {links.map(({ to, label, end }, i) => (
+                  <motion.li
+                    key={to}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.04 + i * 0.05, ease: [0.16, 1, 0.3, 1], duration: 0.36 }}
+                  >
                     <NavLink
                       to={to}
                       end={end}
                       onClick={() => setOpen(false)}
                       className={({ isActive }) =>
-                        `block py-4 px-2 font-sans font-medium text-2xl tracking-tight transition-colors border-b border-[#f1dfd1] ${isActive
-                          ? 'text-[#ff6b00]'
-                          : 'text-black hover:text-skyroot'
+                        `block py-4 font-heading font-bold text-2xl tracking-tight border-b border-neutral-100 transition-colors ${
+                          isActive ? 'text-orange-500' : 'text-black hover:text-orange-500'
                         }`
                       }
                     >
                       {label}
                     </NavLink>
-                  )}
-                </motion.li>
-              ))}
-              <motion.li
-                className="pt-6"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                  </motion.li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* Bottom CTA */}
+            <motion.div
+              className="p-6 border-t border-neutral-100"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.36, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Link
+                to="/contact"
+                onClick={() => setOpen(false)}
+                className="site-navbar__mobile-cta"
+                aria-label="Request a quote"
               >
-                <Link
-                  to="/contact"
-                  onClick={() => setOpen(false)}
-                  className="site-navbar__mobile-cta"
-                >
-                  <span>Request Quote</span>
-                  <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 22 }} />
-                </Link>
-              </motion.li>
-            </ul>
+                <span>Request Quote</span>
+                <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 18 }} />
+              </Link>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
