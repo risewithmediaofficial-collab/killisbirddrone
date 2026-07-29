@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/assests/KILLIS BIRD - LOGO.png" />
   <title>Killis Bird Technologies — Precision UAV Components</title>
   <meta name="description" content="Killis Bird Technologies — Precision-engineered UAV components. Propulsion systems, airframes, and avionics. Built in India. Trusted Worldwide." />
   <meta name="theme-color" content="#ff6b00" />
@@ -21,9 +20,33 @@
   <meta name="twitter:title"       content="Killis Bird Technologies" />
   <meta name="twitter:description" content="Precision-engineered UAV components. Built in India. Trusted Worldwide." />
 
-  <!-- Preconnect to Google Fonts for fast loading -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- ── Critical preloads ─────────────────────────────────────────────── -->
+  <!-- Logo: always above-fold, preload so it never blocks navbar render -->
+  <link rel="preload" as="image" href="/assests/KILLIS BIRD - LOGO.png" fetchpriority="high" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assests/KILLIS BIRD - LOGO.png" />
+
+  <!-- ── DNS prefetch / preconnect ─────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+  <!-- ── Non-blocking Google Fonts (print → all swap trick) ────────────── -->
+  <!-- Loading fonts with media="print" + onload prevents render-blocking  -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+    media="print"
+    onload="this.media='all'"
+  />
+  <!-- Fallback for no-JS / SSR -->
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+    />
+  </noscript>
 </head>
 
 <body>

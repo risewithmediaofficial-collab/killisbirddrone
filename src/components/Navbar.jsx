@@ -53,6 +53,10 @@ const Navbar = () => {
               src="/assests/KILLIS BIRD - LOGO.png"
               alt="Killis Bird"
               className="site-navbar__logo-img"
+              width="160"
+              height="40"
+              fetchPriority="high"
+              decoding="async"
             />
           </Link>
 
@@ -129,6 +133,9 @@ const Navbar = () => {
                   src="/assests/KILLIS BIRD - LOGO.png"
                   alt="Killis Bird"
                   className="h-8 w-auto object-contain"
+                  width="128"
+                  height="32"
+                  decoding="async"
                 />
               </Link>
               <button

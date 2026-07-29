@@ -1,18 +1,38 @@
+// src/components/SmartImage.jsx
 import { forwardRef, useState, useEffect } from 'react';
 
+/**
+ * SmartImage
+ * ─────────────────────────────────────────────────────────────────
+ * Wraps <img> with:
+ *  - Error fallback placeholder (no broken image icons)
+ *  - Lazy loading + async decoding by default
+ *  - width/height props → avoids CLS (Cumulative Layout Shift)
+ *  - fetchpriority → pass "high" for above-fold LCP images
+ *  - sizes → responsive image hints for srcset support
+ *  - blur-up loading effect while the image loads
+ */
 const SmartImage = forwardRef(({
   src,
   alt,
   className = '',
   loading = 'lazy',
   decoding = 'async',
+  fetchpriority,
+  width,
+  height,
+  sizes,
+  srcSet,
+  blurUp = false,   // enable subtle blur-fade effect on load
   ...props
 }, ref) => {
   const [hasError, setHasError] = useState(!src);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Reset error state if src changes
+  // Reset state when src changes
   useEffect(() => {
     setHasError(!src);
+    setIsLoaded(false);
   }, [src]);
 
   if (hasError) {
@@ -20,6 +40,8 @@ const SmartImage = forwardRef(({
       <div
         className={`flex flex-col items-center justify-center bg-[#fcfcfc] border border-dashed border-[#ff6b00]/25 min-h-[inherit] select-none text-center ${className}`}
         style={{ minHeight: 'inherit' }}
+        role="img"
+        aria-label={alt || 'Image unavailable'}
       >
         <svg
           className="w-10 h-10 text-[#ff6b00]/35 mb-1.5"
@@ -49,7 +71,13 @@ const SmartImage = forwardRef(({
       alt={alt}
       loading={loading}
       decoding={decoding}
-      className={className}
+      fetchPriority={fetchpriority}
+      width={width}
+      height={height}
+      sizes={sizes}
+      srcSet={srcSet}
+      className={`${className}${blurUp ? ` transition-[filter,opacity] duration-500 ${isLoaded ? 'blur-0 opacity-100' : 'blur-sm opacity-80'}` : ''}`}
+      onLoad={() => setIsLoaded(true)}
       onError={() => setHasError(true)}
       {...props}
     />
@@ -59,3 +87,4 @@ const SmartImage = forwardRef(({
 SmartImage.displayName = 'SmartImage';
 
 export default SmartImage;
+

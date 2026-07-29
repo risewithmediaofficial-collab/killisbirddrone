@@ -4,6 +4,8 @@ import sparrowTopView from "../assets/DJS02373.jpg.jpeg";
 import sparrowConnectorView from "../assets/DJS02381.jpg.jpeg";
 import sparrowBottomAngleView from "../assets/DJS02399.jpg.jpeg";
 import sparrowTopAngleView from "../assets/DJS02402.jpg.jpeg";
+import sparrowFingerView from "../assets/finger.png";
+
 
 export const categories = [
   {
@@ -100,6 +102,11 @@ export const categories = [
             src: sparrowTopAngleView,
             alt: "SPARROW-V1 flight control card USB and microSD side",
             title: "USB & MicroSD Side",
+          },
+          {
+            src: sparrowFingerView,
+            alt: "SPARROW-V1 held between fingers showing its compact 36mm form factor",
+            title: "Scale — 36mm × 36mm",
           },
         ],
         status: "available",

@@ -1,11 +1,13 @@
+﻿// src/components/ScrollStack.jsx
 import { useLayoutEffect, useRef } from 'react';
 
 export const ScrollStackItem = ({ children, itemClassName = '' }) => (
   <div
-    className={`scroll-stack-card relative w-full box-border origin-top will-change-transform ${itemClassName}`.trim()}
+    className={`scroll-stack-card relative w-full box-border origin-top ${itemClassName}`.trim()}
     style={{
       backfaceVisibility: 'hidden',
       transformStyle: 'preserve-3d'
+      // will-change is set lazily via IntersectionObserver — not on all cards upfront
     }}
   >
     {children}
@@ -41,11 +43,24 @@ const ScrollStack = ({
 
       section.classList.add('scroll-stack-section');
       panel.classList.add('scroll-stack-card');
-      panel.style.willChange = 'transform, filter';
+      // will-change set lazily via IntersectionObserver below — not on all cards upfront
       section.style.zIndex = String(sections.length - index);
 
       return { section, panel, index };
     });
+
+    // Only activate GPU compositing when section is near the viewport
+    const willChangeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(({ target, isIntersecting }) => {
+          const card = cards.find(c => c.section === target);
+          if (!card) return;
+          card.panel.style.willChange = isIntersecting ? 'transform' : 'auto';
+        });
+      },
+      { rootMargin: '200px 0px', threshold: 0 }
+    );
+    cards.forEach(({ section }) => willChangeObserver.observe(section));
 
     const update = () => {
       if (window.innerWidth < minWidth || prefersReducedMotion) {
@@ -89,6 +104,7 @@ const ScrollStack = ({
     return () => {
       window.removeEventListener('scroll', requestTick);
       window.removeEventListener('resize', requestTick);
+      willChangeObserver.disconnect();
 
       if (frameRef.current) {
         cancelAnimationFrame(frameRef.current);

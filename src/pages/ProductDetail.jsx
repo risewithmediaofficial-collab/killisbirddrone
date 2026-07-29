@@ -9,18 +9,12 @@ import useBookScrollEffects from "../hooks/useBookScrollEffects";
 
 const LOGO = "/assests/KILLIS BIRD - LOGO.png";
 
-/* ── Technical Image Holder Frame ── */
-const ImageHolderFrame = ({ title = "Image Holder", className = "", height = "h-64 sm:h-72" }) => {
+/* ── Technical Image Holder Frame (no image available) ── */
+const ImageHolderFrame = ({ title = "Image Holder", className = "", height = "h-80 sm:h-96" }) => {
   return (
-    <div className={`relative w-full ${height} bg-gradient-to-b from-[#fafafa] to-[#f2f3f5] border border-black/10 rounded-xl p-6 flex flex-col items-center justify-center overflow-hidden group transition-all duration-300 hover:border-[#ff6b00]/40 ${className}`}>
-      {/* Technical corner brackets */}
-      <div className="absolute top-3 left-3 text-black/25 font-mono text-[12px] leading-none select-none">┌</div>
-      <div className="absolute top-3 right-3 text-black/25 font-mono text-[12px] leading-none select-none">┐</div>
-      <div className="absolute bottom-3 left-3 text-black/25 font-mono text-[12px] leading-none select-none">└</div>
-      <div className="absolute bottom-3 right-3 text-black/25 font-mono text-[12px] leading-none select-none">┘</div>
-
+    <div className={`relative w-full ${height} bg-gradient-to-b from-[#fafafa] to-[#f2f3f5] flex flex-col items-center justify-center overflow-hidden group ${className}`}>
       {/* Grid overlay pattern */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.035] pointer-events-none"
         style={{
           backgroundImage: `radial-gradient(#000 1px, transparent 1px)`,
@@ -33,11 +27,11 @@ const ImageHolderFrame = ({ title = "Image Holder", className = "", height = "h-
         <div className="w-14 h-14 rounded-full bg-white border border-black/10 flex items-center justify-center shadow-xs p-2.5 group-hover:scale-105 transition-transform duration-300">
           <img src={LOGO} alt="Killis Bird" className="w-9 opacity-80 object-contain" />
         </div>
-        
+
         <span className="text-[13px] font-extrabold uppercase tracking-widest text-[#111111]">
           {title}
         </span>
-        
+
         <span className="text-[9.5px] font-extrabold uppercase tracking-[0.2em] bg-[#ff6b00]/10 text-[#ff6b00] border border-[#ff6b00]/30 px-3.5 py-0.5 rounded-full mt-1">
           Coming Soon
         </span>
@@ -50,7 +44,8 @@ const ProductImageFrame = ({
   image,
   title,
   className = "",
-  height = "h-64 sm:h-72",
+  height = "h-80 sm:h-96",
+  objectFit = "contain",
   priority = false,
 }) => {
   const imageSrc = typeof image === "string" ? image : image?.src;
@@ -61,16 +56,17 @@ const ProductImageFrame = ({
   }
 
   return (
-    <figure className={`relative w-full ${height} bg-white border border-black/10 rounded-xl p-4 sm:p-5 flex flex-col items-center justify-center overflow-hidden shadow-xs transition-all duration-300 hover:border-[#ff6b00]/40 ${className}`}>
+    <figure className={`relative w-full ${height} overflow-hidden ${className}`}>
       <img
         src={imageSrc}
         alt={imageAlt}
-        className="h-full w-full min-h-0 object-contain"
+        className={`h-full w-full object-${objectFit}`}
         loading={priority ? "eager" : "lazy"}
       />
     </figure>
   );
 };
+
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -135,17 +131,17 @@ const ProductDetail = () => {
           className="flex flex-col items-center text-center mb-12"
         >
           {/* Main Top Image Frame */}
-          <div className="w-full max-w-lg mb-8">
+          <div className="w-full max-w-xl mb-8">
             {product.images && product.images.length > 0 ? (
               <ProductImageFrame
                 image={product.images[0]}
                 title={product.images[0]?.title || product.model || product.name}
-                height="h-72 sm:h-80"
-                className="rounded-2xl p-5 sm:p-6"
+                height="h-[400px] sm:h-[480px]"
+                objectFit="contain"
                 priority
               />
             ) : (
-              <ImageHolderFrame title={product.model || product.name} height="h-72 sm:h-80" />
+              <ImageHolderFrame title={product.model || product.name} height="h-[400px] sm:h-[480px]" />
             )}
           </div>
 
@@ -169,11 +165,10 @@ const ProductDetail = () => {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-5 sm:px-6 py-2.5 text-[13px] sm:text-[14px] font-bold tracking-wide rounded-xl transition-all duration-200 ${
-                    isActive
+                  className={`px-5 sm:px-6 py-2.5 text-[13px] sm:text-[14px] font-bold tracking-wide rounded-xl transition-all duration-200 ${isActive
                       ? "bg-[#111111] text-white shadow-sm scale-105"
                       : "text-[#67707d] hover:text-[#111111] hover:bg-black/5"
-                  }`}
+                    }`}
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
                   {tab}
@@ -193,25 +188,31 @@ const ProductDetail = () => {
         >
           {activeTab === "Gallery" && (
             <div className="w-full">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {product.images?.length ? (
-                  product.images.map((image, index) => (
-                    <ProductImageFrame
-                      key={typeof image === "string" ? image : image.src}
-                      image={image}
-                      title={image.title || `SPARROW-V1 View ${index + 1}`}
-                      height="h-60"
-                    />
-                  ))
-                ) : (
-                  <>
-                    <ImageHolderFrame title="Top View - Components" height="h-60" />
-                    <ImageHolderFrame title="Bottom View - ESC Circuitry" height="h-60" />
-                    <ImageHolderFrame title="Pinout & Connector Layout" height="h-60" />
-                    <ImageHolderFrame title="Mounted Stack Assembly" height="h-60" />
-                  </>
-                )}
-              </div>
+              {product.images?.length ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {product.images.map((image, index) => {
+                    // Finger image (last one) spans full width at taller portrait height
+                    const isFingerImage = index === product.images.length - 1 && product.images.length === 5;
+                    return (
+                      <ProductImageFrame
+                        key={typeof image === "string" ? image : image.src}
+                        image={image}
+                        title={image.title || `SPARROW-V1 View ${index + 1}`}
+                        height={isFingerImage ? "h-[520px] sm:h-[600px]" : "h-[320px] sm:h-[380px]"}
+                        objectFit={isFingerImage ? "cover" : "contain"}
+                        className={isFingerImage ? "col-span-1 sm:col-span-2" : ""}
+                      />
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <ImageHolderFrame title="Top View - Components" height="h-[320px] sm:h-[380px]" />
+                  <ImageHolderFrame title="Bottom View - ESC Circuitry" height="h-[320px] sm:h-[380px]" />
+                  <ImageHolderFrame title="Pinout & Connector Layout" height="h-[320px] sm:h-[380px]" />
+                  <ImageHolderFrame title="Mounted Stack Assembly" height="h-[320px] sm:h-[380px]" />
+                </div>
+              )}
             </div>
           )}
 
@@ -352,7 +353,6 @@ const ProductDetail = () => {
         <div className="mt-16 max-w-4xl mx-auto bg-[#111111] text-white rounded-2xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
           <div>
             <h4 className="text-[18px] font-extrabold mb-1">
-              Interested in custom integration or fleet supply?
             </h4>
             <p className="text-[13px] text-white/70">
               Get in touch with our team for technical consultations and customized drone solutions.

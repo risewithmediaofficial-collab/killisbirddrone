@@ -1,12 +1,12 @@
 // src/App.jsx
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import Navbar         from './components/Navbar';
 import Hero           from './components/sections/Hero';
 import SmoothScroll   from './components/SmoothScroll';
-import SectionLoader  from './components/SectionLoader';
 import ScrollToTop    from './components/ScrollToTop';
 import SEO            from './components/SEO';
 import ScrollStack    from './components/ScrollStack';
+import LazySection    from './components/LazySection';
 
 const Testimonials = lazy(() => import('./components/sections/Testimonials'));
 const FAQ         = lazy(() => import('./components/sections/FAQ'));
@@ -23,27 +23,30 @@ const App = () => (
     <Navbar />
 
     <ScrollStack>
-      {/* ─ Above-the-fold ─ */}
+      {/* ─ Above-the-fold — renders immediately ─ */}
       <Hero />
 
-      {/* ─ Below-the-fold (smooth scroll + lazy) ─ */}
+      {/* ─ Below-the-fold — each section lazy-mounts when near viewport ─ */}
       <SmoothScroll>
-        <Suspense fallback={<SectionLoader />}>
-          {/* Client testimonials */}
+        <LazySection rootMargin="300px 0px" minHeight="400px">
           <Testimonials />
+        </LazySection>
 
-          {/* FAQ accordion */}
+        <LazySection rootMargin="300px 0px" minHeight="300px">
           <FAQ />
+        </LazySection>
 
-          {/* Orange CTA banner */}
+        <LazySection rootMargin="200px 0px" minHeight="200px">
           <CTABanner />
+        </LazySection>
 
-          {/* Footer */}
+        <LazySection rootMargin="200px 0px" minHeight="300px">
           <Footer />
-        </Suspense>
+        </LazySection>
       </SmoothScroll>
     </ScrollStack>
   </>
 );
 
 export default App;
+

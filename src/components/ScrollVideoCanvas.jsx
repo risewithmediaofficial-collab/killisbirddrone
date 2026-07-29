@@ -1,7 +1,8 @@
-// src/components/ScrollVideoCanvas.jsx
+﻿// src/components/ScrollVideoCanvas.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import useNetworkAware from '../hooks/useNetworkAware';
 import './ScrollVideoCanvas.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -27,44 +28,119 @@ const drawImageCover = (ctx, img, width, height) => {
   ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
 };
 
+// ── Slow-network static fallback ──────────────────────────────────────────────
+const SlowNetworkFallback = () => (
+  <div
+    className="w-full flex flex-col items-center justify-center bg-white py-20 px-6"
+    aria-label="UAV Experience"
+  >
+    <div className="max-w-content w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="lg:col-span-5 text-center lg:text-left">
+        <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-3">AERODYNAMICS</span>
+        <h2 className="font-heading font-bold text-black leading-tight text-3xl md:text-4xl lg:text-5xl mb-4">IMAGINATION IN FLIGHT</h2>
+        <p className="text-muted text-sm md:text-base font-medium mb-6">Indigenous Aerodynamics &amp; Propulsion Systems</p>
+        <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2">STRUCTURE</span>
+        <h3 className="font-heading font-bold text-black text-xl mb-2">CARBON COMPOSITE STRENGTH</h3>
+        <p className="text-muted text-sm mb-6">Ultra-lightweight structural integrity</p>
+        <span className="text-xs font-heading font-bold text-skyroot uppercase tracking-widest block mb-2">AVIONICS</span>
+        <h3 className="font-heading font-bold text-black text-xl mb-2">AUTONOMOUS SWARM CONTROL</h3>
+        <p className="text-muted text-sm">Next generation mission management avionics</p>
+      </div>
+      <div className="lg:col-span-7 flex items-center justify-center">
+        <div className="relative w-full max-w-[480px] aspect-square rounded-none overflow-hidden border border-border bg-navy-50 flex items-center justify-center">
+          <svg viewBox="0 0 200 200" className="w-2/3 h-2/3 text-skyroot/30" fill="currentColor" aria-hidden="true">
+            <circle cx="100" cy="100" r="18" />
+            <rect x="88" y="60" width="24" height="6" rx="3" />
+            <rect x="88" y="134" width="24" height="6" rx="3" />
+            <rect x="60" y="88" width="6" height="24" rx="3" />
+            <rect x="134" y="88" width="6" height="24" rx="3" />
+            <circle cx="66" cy="66" r="10" fill="none" stroke="currentColor" strokeWidth="3" />
+            <circle cx="134" cy="66" r="10" fill="none" stroke="currentColor" strokeWidth="3" />
+            <circle cx="66" cy="134" r="10" fill="none" stroke="currentColor" strokeWidth="3" />
+            <circle cx="134" cy="134" r="10" fill="none" stroke="currentColor" strokeWidth="3" />
+          </svg>
+          <div className="absolute bottom-4 left-0 right-0 text-center">
+            <span className="text-[10px] font-heading font-bold text-muted uppercase tracking-widest">Killis Bird UAV</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const ScrollVideoCanvas = () => {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const canvasContainerRef = useRef(null);
   const [loaded, setLoaded] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const [progress, setProgress] = useState(0);
   const imagesRef = useRef([]);
   const currentFrameIndexRef = useRef(211);
 
-  // Preload all 211 frames
-  useEffect(() => {
-    let loadedCount = 0;
-    const totalFrames = 211;
-    const imgs = [];
+  // Detect slow network / data-saver mode
+  const { isSlow } = useNetworkAware();
 
-    for (let i = 1; i <= totalFrames; i++) {
-      const img = new Image();
-      const numStr = String(i).padStart(4, '0');
-      img.src = `/frames/frame_${numStr}.png`;
-      img.onload = () => {
-        loadedCount++;
-        setProgress(Math.round((loadedCount / totalFrames) * 100));
-        if (loadedCount === totalFrames) {
-          imagesRef.current = imgs;
-          setLoaded(true);
+  // IntersectionObserver: only start loading when section is near viewport
+  useEffect(() => {
+    if (isSlow) return; // Skip — show the fallback
+
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
         }
-      };
-      img.onerror = () => {
-        console.warn(`Failed to load frame ${numStr}. Trying to bypass to keep experience running.`);
-        loadedCount++;
-        if (loadedCount === totalFrames) {
-          imagesRef.current = imgs;
-          setLoaded(true);
-        }
-      };
-      imgs.push(img);
+      },
+      // Start loading when 300 px away from viewport
+      { rootMargin: '300px 0px', threshold: 0 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isSlow]);
+
+  // Preload all 211 frames (only when near viewport and on fast network)
+  useEffect(() => {
+    if (!shouldLoad) return;
+
+    const startLoad = () => {
+      let loadedCount = 0;
+      const totalFrames = 211;
+      const imgs = [];
+
+      for (let i = 1; i <= totalFrames; i++) {
+        const img = new Image();
+        const numStr = String(i).padStart(4, '0');
+        img.src = `/frames/frame_${numStr}.png`;
+        img.onload = () => {
+          loadedCount++;
+          setProgress(Math.round((loadedCount / totalFrames) * 100));
+          if (loadedCount === totalFrames) {
+            imagesRef.current = imgs;
+            setLoaded(true);
+          }
+        };
+        img.onerror = () => {
+          loadedCount++;
+          if (loadedCount === totalFrames) {
+            imagesRef.current = imgs;
+            setLoaded(true);
+          }
+        };
+        imgs.push(img);
+      }
+    };
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(startLoad, { timeout: 2000 });
+    } else {
+      startLoad();
     }
-  }, []);
+  }, [shouldLoad]);
 
   const drawFrame = (index) => {
     const img = imagesRef.current[index - 1];
@@ -73,7 +149,7 @@ const ScrollVideoCanvas = () => {
     const ctx = canvas.getContext('2d');
     const width = canvas.width / (window.devicePixelRatio || 1);
     const height = canvas.height / (window.devicePixelRatio || 1);
-    
+
     drawImageCover(ctx, img, width, height);
   };
 
@@ -81,12 +157,12 @@ const ScrollVideoCanvas = () => {
     if (!canvasRef.current || !canvasContainerRef.current) return;
     const canvas = canvasRef.current;
     const container = canvasContainerRef.current;
-    
+
     const rect = container.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
     const dpr = window.devicePixelRatio || 1;
-    
+
     canvas.width = width * dpr;
     canvas.height = height * dpr;
     canvas.style.width = `${width}px`;
@@ -94,7 +170,7 @@ const ScrollVideoCanvas = () => {
 
     const ctx = canvas.getContext('2d');
     ctx.scale(dpr, dpr);
-    
+
     drawFrame(currentFrameIndexRef.current);
   };
 
@@ -131,12 +207,11 @@ const ScrollVideoCanvas = () => {
         }
       });
 
-      // Keep the first drone frame visible immediately as the section enters.
       tl.set(canvasContainerRef.current, { scale: 1, opacity: 1 });
 
-      // ── Slide 1 Reveal ──
+      // Slide 1 Reveal
       tl.to('.slide-1', { opacity: 1, duration: 0.2 })
-        .fromTo('.slide-1 span', 
+        .fromTo('.slide-1 span',
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
           '-=0.1'
@@ -153,15 +228,14 @@ const ScrollVideoCanvas = () => {
         )
         .to(canvasContainerRef.current, { scale: 1.05, duration: 1.5, ease: 'power1.inOut' }, '-=1.2')
         .to({}, { duration: isMobile ? 0.35 : 0.55 })
-        // Slide 1 Exit
         .to('.slide-1 span', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.in' })
         .to('.slide-1 h2', { opacity: 0, scale: 1.15, y: -30, duration: 0.7, ease: 'power2.in' }, '-=0.4')
         .to('.slide-1 p', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.in' }, '-=0.4')
         .to('.slide-1', { opacity: 0, duration: 0.15 }, '-=0.15')
 
-      // ── Slide 2 Reveal ──
+      // Slide 2 Reveal
       tl.to('.slide-2', { opacity: 1, duration: 0.2 })
-        .fromTo('.slide-2 span', 
+        .fromTo('.slide-2 span',
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
           '-=0.1'
@@ -178,15 +252,14 @@ const ScrollVideoCanvas = () => {
         )
         .to(canvasContainerRef.current, { scale: 0.97, rotate: -1, duration: 1.5, ease: 'power1.inOut' }, '-=1.2')
         .to({}, { duration: isMobile ? 0.35 : 0.55 })
-        // Slide 2 Exit
         .to('.slide-2 span', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.in' })
         .to('.slide-2 h2', { opacity: 0, scale: 1.15, y: -30, duration: 0.7, ease: 'power2.in' }, '-=0.4')
         .to('.slide-2 p', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.in' }, '-=0.4')
         .to('.slide-2', { opacity: 0, duration: 0.15 }, '-=0.15')
 
-      // ── Slide 3 Reveal ──
+      // Slide 3 Reveal
       tl.to('.slide-3', { opacity: 1, duration: 0.2 })
-        .fromTo('.slide-3 span', 
+        .fromTo('.slide-3 span',
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
           '-=0.1'
@@ -203,13 +276,10 @@ const ScrollVideoCanvas = () => {
         )
         .to(canvasContainerRef.current, { scale: 1.02, rotate: 0, duration: 1.5, ease: 'power1.inOut' }, '-=1.2')
         .to({}, { duration: isMobile ? 0.35 : 0.55 })
-        // Slide 3 Exit
         .to('.slide-3 span', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.in' })
         .to('.slide-3 h2', { opacity: 0, scale: 1.15, y: -30, duration: 0.7, ease: 'power2.in' }, '-=0.4')
         .to('.slide-3 p', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.in' }, '-=0.4')
         .to('.slide-3', { opacity: 0, duration: 0.15 }, '-=0.15')
-        
-        // Final Canvas settle
         .to(canvasContainerRef.current, { scale: 0.98, opacity: 1, duration: 0.45, ease: 'power2.out' }, '-=0.15');
 
     }, containerRef);
@@ -220,9 +290,21 @@ const ScrollVideoCanvas = () => {
     };
   }, [loaded]);
 
+  // On slow networks: show static fallback instead of the canvas
+  if (isSlow) {
+    return <SlowNetworkFallback />;
+  }
+
+  // On fast networks: show loading bar while frames load
   if (!loaded) {
     return (
-      <div className="canvas-preloader">
+      <div
+        ref={containerRef}
+        className="canvas-preloader"
+        aria-label="Loading UAV animation"
+        aria-busy="true"
+        role="status"
+      >
         <div className="preloader-spinner" />
         <span className="preloader-text">Loading UAV Experience</span>
         <div className="preloader-bar-bg">
@@ -239,14 +321,10 @@ const ScrollVideoCanvas = () => {
     <div ref={containerRef} className="scroll-video-container bg-white relative overflow-hidden">
       {/* Background dot pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#f97316_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03] pointer-events-none" />
-      
+
       <div className="sticky-canvas-wrapper max-w-content mx-auto px-4 sm:px-6 md:px-8">
-        {/* 
-          Mobile: column layout — canvas on top, text below
-          Desktop: 12-col grid — text left, canvas right
-        */}
         <div className="flex w-full flex-col-reverse items-center justify-center gap-6 text-center lg:grid lg:grid-cols-12 lg:gap-12 lg:text-left">
-        
+
           {/* Text Side */}
           <div className="relative z-10 flex w-full flex-col items-center justify-center lg:col-span-5 lg:items-start">
             <div className="canvas-text-overlay w-full relative">
