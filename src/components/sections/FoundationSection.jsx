@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import FadeIn from '../FadeIn';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-const IMG = 'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?w=900&q=85&auto=format&fit=crop';
-
 const highlights = [
   'Imagine',
   'Ideate',
@@ -11,7 +9,7 @@ const highlights = [
   'Built in India. Trusted worldwide.',
 ];
 
-const FoundationSection = ({ image }) => (
+const FoundationSection = () => (
   <section
     className="section bg-white divide-bottom"
     aria-labelledby="foundation-heading"
@@ -20,14 +18,10 @@ const FoundationSection = ({ image }) => (
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <FadeIn direction="left" duration={0.8}>
           <div className="relative">
-            <div className="img-zoom aspect-[4/3] overflow-hidden bg-neutral-100 rounded-lg">
-              <img
-                src={image || IMG}
-                alt="Killis Bird UAV engineering"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
+            <div
+              className="img-zoom aspect-[4/3] overflow-hidden bg-neutral-100 rounded-lg"
+              aria-hidden="true"
+            />
             <div
               className="absolute -bottom-4 -right-4 bg-orange-500 px-6 py-4 z-10"
               aria-hidden="true"

@@ -6,10 +6,6 @@ import VisionMissionSection from '../components/sections/VisionMissionSection';
 import DnaCtaSection from '../components/sections/DnaCtaSection';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
 
-const IMG = {
-  dna: 'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?w=900&q=85&auto=format&fit=crop',
-};
-
 const OurDNA = () => {
   const pageRef = useRef(null);
   useBookScrollEffects(pageRef);
@@ -28,7 +24,7 @@ const OurDNA = () => {
         watermark="DNA"
       />
 
-      <FoundationSection image={IMG.dna} />
+      <FoundationSection />
 
       <VisionMissionSection />
 

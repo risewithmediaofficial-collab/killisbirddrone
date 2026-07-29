@@ -4,7 +4,7 @@ import SectionHeader from '../SectionHeader';
 const statements = [
   {
     label: 'Vision',
-    title: 'Trusted, innovative UAV leadership.',
+    title: 'Trusted, Innovative UAV leadership.',
     body: "To be the most trusted and innovative leader in UAV components and solutions, recognized for empowering our partners' success through excellence and distinction.",
   },
   {
