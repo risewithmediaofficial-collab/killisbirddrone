@@ -265,17 +265,18 @@ const Blog = () => {
         description="Killis Bird technical blogs, product insights, and UAV engineering perspectives."
       />
 
-      <SecondaryHero
-        title={selected ? 'SPARROW-V1' : 'Blogs'}
-        highlight={selected ? 'Flight Control Card' : ''}
-        description="Where Precision Meets Innovation"
-        watermark="BLOG"
-      />
+      {selected && (
+        <SecondaryHero
+          title="SPARROW-V1"
+          highlight="Flight Control Card"
+          watermark="BLOG"
+        />
+      )}
 
       {selected ? (
         <BlogArticle onBack={closeArticle} />
       ) : (
-        <section className="section bg-white">
+        <section className="bg-white py-8 lg:py-10">
           <div className="container">
             <BlogCard onOpen={openArticle} />
           </div>

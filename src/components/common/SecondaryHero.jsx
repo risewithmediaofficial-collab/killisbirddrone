@@ -12,7 +12,7 @@ const renderDescription = (description) => {
 
   return (
     <>
-      <span className="text-orange-500 font-bold">{description}</span>
+      <span className="text-orange-500 font-bold">"{description}"</span>
     </>
   );
 };

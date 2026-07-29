@@ -61,13 +61,14 @@ const Journey = () => {
       />
 
       <section
-        className="section bg-white divide-top"
+        className="bg-white divide-top py-14 lg:py-16"
         aria-labelledby="timeline-heading"
       >
         <div className="container">
           <FadeIn direction="up">
-            <div className="mb-12">
+            <div className="mb-10">
               <SectionHeader
+                title="Our"
                 highlight="Journey"
                 id="timeline-heading"
               />
@@ -77,46 +78,48 @@ const Journey = () => {
             </div>
           </FadeIn>
 
-          <div className="relative pl-8 lg:pl-12">
-            <div
-              className="timeline-line"
-              aria-hidden="true"
-              style={{ left: '16px' }}
-            />
-
-            <div className="flex flex-col gap-0">
+          <div className="relative hidden min-h-[430px] lg:block" role="list" aria-label="Killis Bird journey timeline">
+            <div className="absolute left-0 right-0 top-1/2 h-px bg-neutral-200" aria-hidden="true" />
+            <div className="grid grid-cols-5 gap-5">
               {milestones.map((m, i) => (
                 <FadeIn key={m.title} delay={i * 0.05} direction="up">
                   <div
-                    className={`relative flex flex-col gap-2 pb-10 ${i === milestones.length - 1 ? 'pb-0' : ''}`}
+                    className={`relative flex min-h-[430px] ${i % 2 === 0 ? 'items-start pt-2' : 'items-end pb-2'}`}
                     role="listitem"
                   >
                     <div
-                      className="timeline-dot absolute -left-[24px] top-1.5"
+                      className="timeline-dot absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
                       aria-hidden="true"
-                      style={{ left: '-21px' }}
                     />
-
-                    <div className="eyebrow mb-0">
-                      <span className="eyebrow-line" aria-hidden="true" />
-                      {m.year}
-                    </div>
-
-                    <div className="max-w-2xl">
-                      <h3
-                        className="font-heading font-bold text-black mb-1"
-                        style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)' }}
-                      >
+                    <div
+                      className={`absolute left-1/2 w-px bg-neutral-200 ${i % 2 === 0 ? 'top-[calc(50%-88px)] h-[88px]' : 'top-1/2 h-[88px]'}`}
+                      aria-hidden="true"
+                    />
+                    <div className="w-full border border-neutral-200 bg-white p-5 shadow-xs">
+                      <div className="section-label mb-3">{m.year}</div>
+                      <h3 className="font-heading font-bold text-black text-lg leading-tight mb-2">
                         {m.title}
                       </h3>
-                      <p className="text-neutral-500 text-xs leading-relaxed">
-                        {m.body}
-                      </p>
+                      <p className="text-neutral-500 text-xs leading-relaxed">{m.body}</p>
                     </div>
                   </div>
                 </FadeIn>
               ))}
             </div>
+          </div>
+
+          <div className="flex flex-col gap-px bg-neutral-200 border border-neutral-200 lg:hidden" role="list" aria-label="Killis Bird journey timeline">
+            {milestones.map((m, i) => (
+              <FadeIn key={m.title} delay={i * 0.05} direction="up">
+                <article className="bg-white p-6" role="listitem">
+                  <div className="section-label mb-3">{m.year}</div>
+                  <h3 className="font-heading font-bold text-black text-lg leading-tight mb-2">
+                    {m.title}
+                  </h3>
+                  <p className="text-neutral-500 text-xs leading-relaxed">{m.body}</p>
+                </article>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </section>

@@ -862,8 +862,8 @@
   .page-hero {
     background: var(--bg);
     border-bottom: 1px solid var(--border);
-    padding-top: calc(72px + 56px);
-    padding-bottom: 56px;
+    padding-top: clamp(28px, 4vw, 48px);
+    padding-bottom: clamp(28px, 4vw, 48px);
   }
 
   /* ── Section label (small caps label) ────── */
@@ -879,6 +879,24 @@
 
   /* ── Nav link premium (legacy compat) ────── */
   .nav-link-premium {}
+
+  /* Inner page content typography normalization */
+  main section:not(.page-hero) h2,
+  main section:not(.page-hero) h3,
+  main section:not(.page-hero) h4 {
+    font-size: 18px !important;
+    line-height: 1.35 !important;
+    letter-spacing: 0 !important;
+  }
+
+  main section:not(.page-hero) p,
+  main section:not(.page-hero) li,
+  main section:not(.page-hero) dt,
+  main section:not(.page-hero) dd,
+  main section:not(.page-hero) address {
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+  }
 
 }
 

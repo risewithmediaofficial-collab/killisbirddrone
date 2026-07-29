@@ -35,7 +35,6 @@ const CTABanner = () => (
             <div className="flex items-center gap-2 mb-5" aria-hidden="true">
               <span className="w-5 h-px bg-white/40" />
               <span className="text-white/60 text-[0.625rem] font-semibold uppercase tracking-widest font-label">
-                Join Us
               </span>
             </div>
             <h2
@@ -48,7 +47,6 @@ const CTABanner = () => (
             </h2>
             <p className="text-white/65 leading-relaxed max-w-[46ch]"
                style={{ fontSize: 'var(--fs-body-lg)' }}>
-              Shape the future of flight with Killis Bird.
             </p>
           </div>
         </FadeIn>

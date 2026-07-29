@@ -40,15 +40,14 @@ const nextItems = [
 ];
 
 const DnaJourneySection = () => (
-  <section className="section bg-white divide-bottom" aria-labelledby="dna-journey-heading">
+  <section className="bg-white divide-bottom py-14 lg:py-16" aria-labelledby="dna-journey-heading">
     <div className="container">
       <FadeIn direction="up">
-        <div className="mb-12">
+        <div className="mb-7">
           <SectionHeader
             title="Building Advanced"
             highlight="UAV Solutions"
             id="dna-journey-heading"
-            body="Building advanced UAV solutions for defense, surveillance, industrial operations, and precision agriculture — Killis Bird is your trusted partner in flight."
           />
         </div>
       </FadeIn>
@@ -72,12 +71,9 @@ const DnaJourneySection = () => (
       <FadeIn direction="up" delay={0.12}>
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-[0.7fr_1.3fr] gap-8 lg:gap-12 border border-neutral-200 bg-neutral-50 p-7 lg:p-10">
           <div>
-            <div className="eyebrow mb-4">
-              <span className="eyebrow-line" aria-hidden="true" />
-              What's Next
-            </div>
+            
             <h3 className="font-heading font-bold text-black text-[clamp(1.5rem,2.4vw,2.2rem)] leading-tight">
-              The next engineering frontier.
+              What's Next?
             </h3>
           </div>
 

@@ -1,10 +1,10 @@
-// src/components/sections/Hero.jsx
+﻿// src/components/sections/Hero.jsx
 import { useRef, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import heroImage from '../../assets/hero.png';
+
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -29,14 +29,7 @@ const Hero = () => {
       aria-label="Hero - Killis Bird"
     >
       <div className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover object-center opacity-70"
-          loading="eager"
-          fetchPriority="high"
-        />
+        
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/35" />
       </div>
 

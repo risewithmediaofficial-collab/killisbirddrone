@@ -31,11 +31,6 @@ const FoundationSection = () => (
 
         <FadeIn direction="right" duration={0.8} delay={0.1}>
           <div className="flex flex-col gap-5">
-            <div className="eyebrow">
-              <span className="eyebrow-line" aria-hidden="true" />
-              The DNA of Killis Bird
-            </div>
-
             <h2
               id="foundation-heading"
               className="font-heading font-bold text-black leading-[1.1]"
