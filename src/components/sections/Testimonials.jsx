@@ -33,9 +33,8 @@ const Testimonials = () => (
       {/* Header */}
       <FadeIn direction="up">
         <SectionHeader
-          eyebrow="Client Voices"
-          title="Trusted by"
-          highlight="Industry Leaders"
+          title="Voices of"
+          highlight="Trust"
           centered
           className="mb-12"
           id="testimonials-heading"
@@ -43,10 +42,10 @@ const Testimonials = () => (
       </FadeIn>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-neutral-200 border border-neutral-200">
         {testimonials.map((t, i) => (
           <FadeIn key={i} delay={i * 0.08} direction="up">
-            <article className="bg-white border border-neutral-200 p-8 flex flex-col gap-4 h-full" aria-label={`Testimonial from ${t.name}`}>
+            <article className="bg-white p-8 flex flex-col gap-4 h-full transition-colors duration-300 hover:bg-neutral-50" aria-label={`Testimonial from ${t.name}`}>
               {/* Stars */}
               <div className="flex gap-0.5" aria-label="5 out of 5 stars">
                 {[...Array(5)].map((_, si) => (

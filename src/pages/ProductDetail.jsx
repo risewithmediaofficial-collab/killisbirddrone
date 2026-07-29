@@ -63,7 +63,7 @@ const ProductDetail = () => {
   }, [productId]);
 
   // Retrieve product details or default to Flight Control Computer if not matched
-  const product = getProductById(productId) || getAllProducts().find(p => p.id === "fcc-flight-control-computer") || {
+  const product = getProductById(productId) || getAllProducts().find(p => p.id === "sparrow") || {
     name: "FCC – Flight Control Computer",
     model: "MicoAir743v2-AIO-35A",
     description: "A high-performance H743 FC and Bluejay ESC All-In-One, supports multiple firmware: Ardupilot/Skybrush/PX4/INAV/Betaflight/",
@@ -80,7 +80,7 @@ const ProductDetail = () => {
   const [activeTab, setActiveTab] = useState("Gallery");
 
   // Explicitly excluded "Pinout" and "Buy Now" as requested by user
-  const tabs = ["Gallery", "Specifications", "Ports", "Diagram", "Firmware"];
+  const tabs = ["Gallery", "Specifications", "Ports", "Diagram", "Pinout", "Firmware", "Buy Now"];
 
   return (
     <div ref={pageRef} className="min-h-screen bg-white pt-24 pb-20 text-[#111111]">
@@ -196,20 +196,50 @@ const ProductDetail = () => {
                 ))}
               </ul>
 
-              <div className="bg-white border border-black/10 rounded-xl p-5 text-center shadow-2xs">
-                <p className="text-[13px] text-[#67707d] italic">
-                  Detailed component datasheets, power benchmarks, and thermal performance logs coming soon.
-                </p>
-              </div>
+              {product.specifications ? (
+                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-black/10 border border-black/10 overflow-hidden rounded-xl">
+                  {product.specifications.map((spec) => (
+                    <div key={spec.label} className="bg-white p-4 text-left">
+                      <dt className="text-[10px] font-extrabold uppercase tracking-widest text-[#ff6b00] mb-1">
+                        {spec.label}
+                      </dt>
+                      <dd className="text-[13px] font-bold text-[#111111]">
+                        {spec.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : (
+                <div className="bg-white border border-black/10 rounded-xl p-5 text-center shadow-2xs">
+                  <p className="text-[13px] text-[#67707d] italic">
+                    Detailed component datasheets, power benchmarks, and thermal performance logs coming soon.
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
           {activeTab === "Ports" && (
             <div className="w-full">
               <ImageHolderFrame title="Ports & Interface Diagram" height="h-80" />
-              <p className="text-center text-[13px] text-[#67707d] mt-4 italic">
-                Port assignment, UART allocations, and connector wiring diagrams coming soon.
-              </p>
+              {product.ports ? (
+                <dl className="mt-5 grid grid-cols-3 gap-px bg-black/10 border border-black/10 rounded-xl overflow-hidden">
+                  {product.ports.map((port) => (
+                    <div key={port.label} className="bg-white p-5 text-center">
+                      <dt className="text-[10px] font-extrabold uppercase tracking-widest text-[#ff6b00] mb-1">
+                        {port.label}
+                      </dt>
+                      <dd className="text-[20px] font-extrabold text-[#111111]">
+                        {port.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : (
+                <p className="text-center text-[13px] text-[#67707d] mt-4 italic">
+                  Port assignment, UART allocations, and connector wiring diagrams coming soon.
+                </p>
+              )}
             </div>
           )}
 
@@ -248,6 +278,33 @@ const ProductDetail = () => {
               <p className="text-[13px] text-[#67707d] italic">
                 Official target hex files, custom firmware builds, and flashing guides coming soon.
               </p>
+            </div>
+          )}
+
+          {activeTab === "Pinout" && (
+            <div className="w-full">
+              <ImageHolderFrame title="Pinout & Connector Layout" height="h-80" />
+              <p className="text-center text-[13px] text-[#67707d] mt-4 italic">
+                Pinout diagrams and connector layouts coming soon.
+              </p>
+            </div>
+          )}
+
+          {activeTab === "Buy Now" && (
+            <div className="w-full bg-[#fafafa] border border-black/10 rounded-2xl p-6 sm:p-10 text-center shadow-xs">
+              <h3 className="text-[18px] font-extrabold text-[#111111] mb-3">
+                Request supply or integration support
+              </h3>
+              <p className="text-[13px] text-[#67707d] mb-6">
+                Contact Killis Bird for availability, customization, and fleet supply.
+              </p>
+              <Link
+                to="/contact"
+                className="btn-primary !bg-[#ff6b00] hover:!bg-[#e05e00] !text-white !py-3.5 !px-8 !text-[12px]"
+              >
+                Contact Us
+                <ArrowRightAltIcon sx={{ fontSize: 18 }} />
+              </Link>
             </div>
           )}
         </motion.div>

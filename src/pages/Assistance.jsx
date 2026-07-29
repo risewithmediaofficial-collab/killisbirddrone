@@ -1,238 +1,249 @@
 // src/pages/Assistance.jsx
-import { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
 import SecondaryHero from '../components/common/SecondaryHero';
 import FadeIn from '../components/FadeIn';
-import SectionHeader from '../components/SectionHeader';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import CheckIcon from '@mui/icons-material/Check';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import SendIcon from '@mui/icons-material/Send';
 
-const services = [
+const contactInfo = [
   {
-    num: '01',
-    title: 'UAV Integration Support',
-    tagline: 'Full-system integration from components to mission-ready.',
-    body: 'Assisting your team in component selection, assembly, commissioning, and field validation.',
-    benefits: [
-      'On-site integration assistance',
-      'System architecture review',
-      'Performance testing & validation',
-      'Documentation & compliance support',
-    ],
-    image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&q=80&auto=format&fit=crop',
-    reverse: false,
+    Icon: LocationOnIcon,
+    label: 'Address',
+    value: 'Plot No.107, Pollupalli SIDCO Industrial Estate, Near Govt. Medical College, Gangasandiram, Billanakuppam Post, Krishnagiri - 635115, Tamil Nadu, India',
+    isAddress: true,
   },
   {
-    num: '02',
-    title: 'After-Sales & Maintenance',
-    tagline: 'Long-term reliability starts with dedicated support.',
-    body: 'Scheduled maintenance visits, spare parts supply, and emergency field support.',
-    benefits: [
-      'Scheduled maintenance contracts',
-      'Emergency field service response',
-      'Spare parts supply — same-day dispatch',
-      'Component upgrade pathways',
-    ],
-    image: 'https://images.unsplash.com/photo-1581092160607-a04b3d6f5d38?w=800&q=80&auto=format&fit=crop',
-    reverse: true,
+    Icon: EmailIcon,
+    label: 'Email',
+    value: 'info@killisbird.com',
+    href: 'mailto:info@killisbird.com',
   },
   {
-    num: '03',
-    title: 'Custom Engineering',
-    tagline: 'Your requirements. Our precision. One complete solution.',
-    body: 'Bespoke design and manufacturing tailored to exact mission specs from prototype to production.',
-    benefits: [
-      'Bespoke component design & prototyping',
-      'Material and process engineering',
-      'Rapid iteration: concept to delivery',
-      'Full lifecycle technical partnership',
-    ],
-    image: 'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?w=800&q=80&auto=format&fit=crop',
-    reverse: false,
+    Icon: PhoneIcon,
+    label: 'Phone',
+    value: '+91 80151 22126',
+    href: 'tel:+918015122126',
+  },
+  {
+    Icon: AccessTimeIcon,
+    label: 'Office Hours',
+    value: 'Monday - Saturday: 9:00 AM - 6:00 PM IST',
   },
 ];
 
-const ServiceBlock = ({ service }) => (
-  <div
-    className={`grid grid-cols-1 lg:grid-cols-2 gap-0 border border-neutral-200 overflow-hidden bg-white ${service.reverse ? 'lg:flex lg:flex-row-reverse' : ''}`}
-  >
-    {/* Image */}
-    <div className="img-zoom aspect-video lg:aspect-auto overflow-hidden bg-neutral-100">
-      <img
-        src={service.image}
-        alt={service.title}
-        className="w-full h-full object-cover"
-        loading="lazy"
-      />
-    </div>
-
-    {/* Content */}
-    <div className="p-8 lg:p-10 flex flex-col justify-center gap-5">
-      <div className="flex items-center gap-3">
-        <span className="tag">{service.num}</span>
-      </div>
-
-      <div>
-        <h3
-          className="font-heading font-bold text-black mb-1.5 leading-tight"
-          style={{ fontSize: 'clamp(1.2rem, 1.8vw, 1.5rem)', letterSpacing: '-0.02em' }}
-        >
-          {service.title}
-        </h3>
-        <p className="text-orange-500 text-xs italic mb-3">{service.tagline}</p>
-        <p className="text-neutral-600 text-xs leading-relaxed max-w-[42ch]">
-          {service.body}
-        </p>
-      </div>
-
-      {/* Benefits */}
-      <ul className="flex flex-col gap-2" aria-label={`${service.title} benefits`}>
-        {service.benefits.map((b, i) => (
-          <li key={i} className="flex items-center gap-2.5 text-xs text-neutral-700 font-medium">
-            <span
-              className="w-4 h-4 border border-orange-200 bg-orange-50 flex items-center justify-center flex-shrink-0"
-              aria-hidden="true"
-            >
-              <CheckIcon sx={{ fontSize: 10, color: '#ff6b00' }} />
-            </span>
-            {b}
-          </li>
-        ))}
-      </ul>
-
-      <Link to="/contact" className="btn-primary self-start mt-1" aria-label={`Request ${service.title}`}>
-        Get Started
-        <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 16 }} />
-      </Link>
-    </div>
-  </div>
-);
+const inquiryTypes = [
+  'Product Enquiry',
+  'Custom Engineering',
+  'Defence Partnership',
+  'After-Sales Support',
+  'Research Collaboration',
+  'General Enquiry',
+];
 
 const Assistance = () => {
   const pageRef = useRef(null);
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    company: '',
+    inquiryType: '',
+    message: '',
+  });
+  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
   useBookScrollEffects(pageRef);
+
+  const handleChange = e => {
+    setForm(cur => ({ ...cur, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setLoading(false);
+    setSent(true);
+  };
 
   return (
     <div ref={pageRef} className="bg-white overflow-hidden">
       <SEO
-        title="Services"
-        description="Killis Bird — UAV integration support, after-sales maintenance, and custom engineering services."
+        title="Assistance"
+        description="Contact Killis Bird for product enquiries, after-sales support, custom engineering, partnerships, and UAV component assistance."
       />
 
       <SecondaryHero
-        eyebrow="Our Services"
-        title="Engineering"
-        highlight="Assistance."
-        description="Full spectrum engineering services ensuring peak UAV system performance."
-        watermark="ASSIST"
+        eyebrow="Get In Touch"
+        title="Assistance"
+        highlight=""
+        description="For product enquiries, support, custom engineering, and partnership discussions."
+        watermark="CONTACT"
       />
 
-      {/* ─ Services ─ */}
-      <section className="section bg-white divide-top" aria-labelledby="services-heading">
+      <section className="section bg-white divide-top" aria-labelledby="assistance-form-heading">
         <div className="container">
-          <FadeIn direction="up">
-            <SectionHeader
-              eyebrow="What We Offer"
-              title="Our Service"
-              highlight="Capabilities"
-              centered
-              className="mb-12"
-              id="services-heading"
-            />
-          </FadeIn>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <FadeIn direction="up">
+                <div className="flex flex-col gap-6 mb-10">
+                  {contactInfo.map(({ Icon, label, value, href, isAddress }) => (
+                    <div key={label} className="flex items-start gap-4">
+                      <div className="icon-box shrink-0" aria-label={label}>
+                        <Icon sx={{ fontSize: 18 }} aria-hidden="true" />
+                      </div>
+                      <div>
+                        <p className="text-[0.625rem] font-bold uppercase tracking-widest text-neutral-400 mb-1">
+                          {label}
+                        </p>
+                        {href ? (
+                          <a href={href} className="text-sm text-neutral-700 hover:text-orange-500 transition-colors">
+                            {value}
+                          </a>
+                        ) : isAddress ? (
+                          <address className="text-sm text-neutral-700 not-italic leading-relaxed">
+                            {value}
+                          </address>
+                        ) : (
+                          <p className="text-sm text-neutral-700">{value}</p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
-          <div className="flex flex-col gap-6">
-            {services.map((service, i) => (
-              <FadeIn key={i} delay={i * 0.08} direction="up">
-                <ServiceBlock service={service} />
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─ Why choose our services ─ */}
-      <section className="section bg-white divide-top" aria-labelledby="service-why-heading">
-        <div className="container">
-          <FadeIn direction="up">
-            <SectionHeader
-              eyebrow="Our Commitment"
-              title="What Makes Our Support"
-              highlight="Different"
-              centered
-              className="mb-10"
-              id="service-why-heading"
-            />
-          </FadeIn>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-neutral-200 border border-neutral-200">
-            {[
-              {
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  </svg>
-                ),
-                title: 'Mission-First Mindset',
-                body: 'Treating every support request as mission-critical.',
-              },
-              {
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12,6 12,12 16,14"/>
-                  </svg>
-                ),
-                title: 'Rapid Response',
-                body: '24-hour response SLA for emergency field support across India.',
-              },
-              {
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
-                  </svg>
-                ),
-                title: 'Data-Driven',
-                body: 'Tracking performance metrics to prevent failures proactively.',
-              },
-            ].map((item, i) => (
-              <FadeIn key={i} delay={i * 0.08} direction="up">
-                <div className="bg-white p-8 flex flex-col gap-3 h-full">
-                  <div className="icon-box" aria-hidden="true">{item.icon}</div>
-                  <h3 className="font-heading font-bold text-black text-lg">{item.title}</h3>
-                  <p className="text-neutral-500 text-xs leading-relaxed max-w-[32ch]">{item.body}</p>
+                <div className="w-full aspect-[4/3] bg-neutral-100 overflow-hidden border border-neutral-200">
+                  <iframe
+                    title="Killis Bird location"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.4!2d78.21!3d12.51!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDMwJzM2LjAiTiA3OMKwMTInMzYuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
                 </div>
               </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─ Bottom CTA ─ */}
-      <section className="section-cta py-14 lg:py-16" aria-labelledby="assist-cta-heading">
-        <div className="container flex flex-col lg:flex-row items-center justify-between gap-6">
-          <FadeIn direction="up">
-            <div>
-              <h2
-                id="assist-cta-heading"
-                className="font-heading font-bold text-white leading-tight mb-1"
-                style={{ fontSize: 'clamp(1.4rem, 2.2vw, 1.8rem)', letterSpacing: '-0.02em' }}
-              >
-                Ready to discuss your requirements?
-              </h2>
-              <p className="text-white/70 text-xs max-w-[42ch]">
-                Our engineering team will respond within one business day.
-              </p>
             </div>
-          </FadeIn>
-          <FadeIn direction="up" delay={0.1}>
-            <Link to="/contact" className="btn-white shrink-0">
-              Contact Our Team
-              <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 16 }} />
-            </Link>
-          </FadeIn>
+
+            <div className="lg:col-span-8">
+              <FadeIn direction="up" delay={0.1}>
+                {sent ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="flex flex-col items-center justify-center text-center py-20 border border-neutral-200 bg-neutral-50"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    <CheckCircleIcon sx={{ fontSize: 56, color: '#ff6b00' }} aria-hidden="true" />
+                    <h2 className="font-heading font-bold text-black text-2xl mt-5 mb-3">
+                      Message Received
+                    </h2>
+                    <p className="text-neutral-500 text-sm max-w-[38ch] leading-relaxed">
+                      Thank you for reaching out. Our team will review your enquiry and respond within one business day.
+                    </p>
+                    <button onClick={() => setSent(false)} className="btn-secondary mt-8">
+                      Send Another Message
+                    </button>
+                  </motion.div>
+                ) : (
+                  <form
+                    onSubmit={handleSubmit}
+                    className="flex flex-col gap-6"
+                    aria-label="Assistance enquiry form"
+                    id="assistance-form"
+                    noValidate
+                  >
+                    <div>
+                      <h2
+                        id="assistance-form-heading"
+                        className="font-heading font-bold text-black mb-2"
+                        style={{ fontSize: 'clamp(1.3rem, 2vw, 1.75rem)' }}
+                      >
+                        Send an Enquiry
+                      </h2>
+                      <p className="text-neutral-500 text-sm">All fields marked * are required.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="firstName" className="form-label">First Name *</label>
+                        <input id="firstName" name="firstName" type="text" required autoComplete="given-name" className="form-input" value={form.firstName} onChange={handleChange} />
+                      </div>
+                      <div>
+                        <label htmlFor="lastName" className="form-label">Last Name *</label>
+                        <input id="lastName" name="lastName" type="text" required autoComplete="family-name" className="form-input" value={form.lastName} onChange={handleChange} />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="email" className="form-label">Email Address *</label>
+                        <input id="email" name="email" type="email" required autoComplete="email" className="form-input" value={form.email} onChange={handleChange} />
+                      </div>
+                      <div>
+                        <label htmlFor="phone" className="form-label">Phone Number</label>
+                        <input id="phone" name="phone" type="tel" autoComplete="tel" className="form-input" value={form.phone} onChange={handleChange} />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="company" className="form-label">Company / Organisation</label>
+                        <input id="company" name="company" type="text" autoComplete="organization" className="form-input" value={form.company} onChange={handleChange} />
+                      </div>
+                      <div>
+                        <label htmlFor="inquiryType" className="form-label">Enquiry Type *</label>
+                        <select id="inquiryType" name="inquiryType" required className="form-select" value={form.inquiryType} onChange={handleChange}>
+                          <option value="">Select enquiry type</option>
+                          {inquiryTypes.map(type => (
+                            <option key={type} value={type}>{type}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="message" className="form-label">Message *</label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        required
+                        rows={6}
+                        className="form-input resize-none"
+                        value={form.message}
+                        onChange={handleChange}
+                      />
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                      <p className="text-neutral-400 text-xs max-w-[36ch] leading-relaxed">
+                        We will use your details only to respond to your enquiry.
+                      </p>
+                      <button type="submit" disabled={loading} className="btn-primary shrink-0">
+                        {loading ? 'Sending...' : (
+                          <>
+                            Send Enquiry
+                            <SendIcon aria-hidden="true" sx={{ fontSize: 16 }} />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </FadeIn>
+            </div>
+          </div>
         </div>
       </section>
     </div>

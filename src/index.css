@@ -101,7 +101,7 @@
   --shadow-md:    0 4px 20px rgba(0,0,0,0.09);
   --shadow-lg:    0 8px 40px rgba(0,0,0,0.12);
   --shadow-card:  0 2px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03);
-  --shadow-orange: 0 4px 20px rgba(255,107,0,0.28);
+  --shadow-orange: none;
 
   /* Transitions */
   --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
@@ -135,7 +135,7 @@
     color: var(--black);
     background: var(--bg);
     line-height: var(--lh-body);
-    letter-spacing: var(--tracking-normal);
+    letter-spacing: 0;
     overflow-x: hidden;
   }
 
@@ -144,7 +144,7 @@
     font-weight: 700;
     color: var(--black);
     line-height: var(--lh-heading);
-    letter-spacing: var(--tracking-heading);
+    letter-spacing: 0;
   }
 
   img { max-width: 100%; height: auto; display: block; }
@@ -243,7 +243,7 @@
     border: none;
     cursor: pointer;
     transition: all var(--dur-med) var(--ease-out);
-    border-radius: 0;
+    border-radius: 2px;
     white-space: nowrap;
     position: relative;
     overflow: hidden;
@@ -257,12 +257,12 @@
     @apply btn;
     background: var(--orange);
     color: #fff;
-    box-shadow: var(--shadow-orange);
+    box-shadow: none;
   }
   .btn-primary:hover {
     background: var(--orange-dark);
     transform: translateY(-1px);
-    box-shadow: 0 6px 28px rgba(255,107,0,0.35);
+    box-shadow: none;
   }
 
   /* Secondary — outline */
@@ -604,7 +604,8 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    background: rgba(255,255,255,0.0);
+    background: rgba(255,255,255,0.98);
+    border-bottom: 1px solid var(--border);
     transition:
       background var(--dur-med) ease,
       box-shadow var(--dur-med) ease,
@@ -621,9 +622,9 @@
 
   .site-navbar__inner {
     display: grid;
-    grid-template-columns: minmax(160px, 1fr) auto minmax(160px, 1fr);
+    grid-template-columns: minmax(132px, 0.75fr) minmax(0, auto) minmax(132px, 0.75fr);
     align-items: center;
-    height: 72px;
+    height: 76px;
     max-width: 1280px;
     margin: 0 auto;
     width: 100%;
@@ -649,7 +650,7 @@
   .site-navbar__links {
     display: flex;
     align-items: center;
-    gap: clamp(16px, 2vw, 36px);
+    gap: clamp(12px, 1.45vw, 24px);
     list-style: none;
     justify-content: center;
   }
@@ -659,9 +660,9 @@
     font-family: var(--font-label);
     font-size: 0.6875rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.85);
+    color: var(--gray-700);
     text-decoration: none;
     padding: 4px 0;
     transition: color var(--dur-fast) ease;
@@ -711,10 +712,10 @@
     font-family: var(--font-label);
     font-size: 0.625rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0;
     text-transform: uppercase;
     padding: 0 24px;
-    height: 42px;
+    height: 40px;
     text-decoration: none;
     transition: background var(--dur-fast) ease, transform var(--dur-fast) ease;
     white-space: nowrap;
@@ -905,8 +906,37 @@
   50%       { transform: scale(1.4); }
 }
 
+@keyframes heroComponentFloatOne {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-10px, 12px, 0); }
+}
+
+@keyframes heroComponentFloatTwo {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(12px, 10px, 0); }
+}
+
+@keyframes heroComponentFloatThree {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-8px, -12px, 0); }
+}
+
+@keyframes heroComponentFloatFour {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(8px, 10px, 0) rotate(4deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
 .animate-fade-up { animation: fadeUp 0.65s var(--ease-out) both; }
 .animate-fade-in { animation: fadeIn 0.5s ease both; }
+.hero-comp-float-1 { animation: heroComponentFloatOne 11s ease-in-out infinite; }
+.hero-comp-float-2 { animation: heroComponentFloatTwo 13s ease-in-out infinite; }
+.hero-comp-float-3 { animation: heroComponentFloatThree 12s ease-in-out infinite; }
+.hero-comp-float-4 { animation: heroComponentFloatFour 15s ease-in-out infinite; }
 
 /* ═══════════════════════════════════════════
    RESPONSIVE HELPERS

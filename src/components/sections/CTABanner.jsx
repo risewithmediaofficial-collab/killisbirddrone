@@ -35,7 +35,7 @@ const CTABanner = () => (
             <div className="flex items-center gap-2 mb-5" aria-hidden="true">
               <span className="w-5 h-px bg-white/40" />
               <span className="text-white/60 text-[0.625rem] font-semibold uppercase tracking-widest font-label">
-                Let's Build Together
+                Join Us
               </span>
             </div>
             <h2
@@ -43,12 +43,12 @@ const CTABanner = () => (
               className="font-heading font-bold text-white leading-[1.05] mb-4"
               style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', letterSpacing: '-0.03em' }}
             >
-              Ready to Build Your<br />
-              <span className="text-white/70">Next UAV System?</span>
+              Looking for passionate engineers,<br />
+              <span className="text-white/70">innovators, and dreamers.</span>
             </h2>
             <p className="text-white/65 leading-relaxed max-w-[46ch]"
                style={{ fontSize: 'var(--fs-body-lg)' }}>
-              From single components to complete system integration — our engineers are ready to collaborate.
+              Shape the future of flight with Killis Bird.
             </p>
           </div>
         </FadeIn>
@@ -57,11 +57,11 @@ const CTABanner = () => (
         <FadeIn direction="up" delay={0.15}>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              to="/contact"
+              to="/journey"
               className="btn-white"
-              aria-label="Request a quote from Killis Bird"
+              aria-label="Join the Killis Bird journey"
             >
-              Request a Quote
+              Join the Journey
               <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 17 }} />
             </Link>
             <Link
@@ -69,7 +69,7 @@ const CTABanner = () => (
               className="btn-ghost"
               aria-label="Explore Killis Bird creations"
             >
-              Explore Creations
+              Creations
             </Link>
           </div>
         </FadeIn>

@@ -1,4 +1,3 @@
-// src/pages/Journey.jsx
 import { useRef } from 'react';
 import SEO from '../components/SEO';
 import SecondaryHero from '../components/common/SecondaryHero';
@@ -11,53 +10,36 @@ import WorkIcon from '@mui/icons-material/Work';
 
 const milestones = [
   {
-    year: '2018',
-    title: 'The Spark',
-    body: 'Founded in Krishnagiri to pioneer indigenous UAV component manufacturing.',
+    year: '19 May 2023',
+    title: 'Born',
+    body: 'Founded on 19 May 2023, to build indigenous UAV components for the world.',
   },
   {
-    year: '2019',
-    title: 'First Prototype',
-    body: 'Developed and field-tested our first agricultural brushless motor series.',
+    year: 'Testbeds',
+    title: 'Quadcopter, Hexacopter, Fixed-Wing, and VTOL',
+    body: 'Testing platforms were successfully developed and deployed to validate our indigenous UAV components.',
   },
   {
-    year: '2020',
-    title: 'Industry Recognition',
-    body: 'Awarded Most Innovative UAV Startup at National Aerospace Summit.',
+    year: 'SPARROW',
+    title: 'Indigenous Flight Control Card',
+    body: 'Successfully developed SPARROW, an indigenous Flight Control Card (FCC), with support for Betaflight, INAV, ArduPilot, and Pixhawk firmware platforms.',
   },
   {
-    year: '2021',
-    title: 'Defence Partnerships',
-    body: 'Secured strategic partnerships with leading defence integrators.',
+    year: 'VELO',
+    title: 'High-Speed Racing Drone Frame',
+    body: 'VELO, an indigenous high-speed racing drone frame, was successfully designed and developed to meet the demanding performance requirements of competitive drone racing.',
   },
   {
-    year: '2022',
-    title: 'Swarm Technology',
-    body: 'Demonstrated swarm modules across 20-UAV formation flight trials.',
-  },
-  {
-    year: '2023',
-    title: 'Global Reach',
-    body: 'Expanded exports to 10+ countries across Asia, Europe, and Middle East.',
-  },
-  {
-    year: '2024',
-    title: 'Next-Gen Avionics',
-    body: 'Launched MicoAir743v2 AIO avionics platform for commercial UAVs.',
-  },
-  {
-    year: '2025+',
-    title: 'The Future',
-    body: 'Pioneering autonomous multi-domain aerial systems.',
+    year: 'What Next',
+    title: 'The next engineering frontier',
+    body: 'FCC - FALCON and EAGLE. Thrust Stand - ALTAIR. Frame - Free style frame, Swarm Frame. SWARM - Decentralized Algorithm, GCS. ELRS and ESC.',
   },
 ];
 
 const openings = [
-  { role: 'Aerospace Systems Engineer',  type: 'Full Time · Bangalore',  dept: 'Engineering' },
-  { role: 'Embedded Software Developer', type: 'Full Time · Remote',     dept: 'Avionics' },
-  { role: 'UAV Test Pilot & Analyst',    type: 'Contract · Hyderabad',   dept: 'Operations' },
-  { role: 'Supply Chain Manager',        type: 'Full Time · Chennai',    dept: 'Logistics' },
-  { role: 'Composite Materials Engineer',type: 'Full Time · Krishnagiri',dept: 'Manufacturing' },
+  { role: 'Passionate Engineers', type: 'Shape the future of flight', dept: 'Engineering' },
+  { role: 'Innovators', type: 'Build indigenous UAV components', dept: 'R&D' },
+  { role: 'Dreamers', type: 'Imagine, Ideate, Innovate', dept: 'Future Team' },
 ];
 
 const Journey = () => {
@@ -67,37 +49,36 @@ const Journey = () => {
   return (
     <div ref={pageRef} className="bg-white overflow-hidden">
       <SEO
-        title="Our Journey"
-        description="Killis Bird — From a small team in Tamil Nadu to a globally trusted UAV component manufacturer."
+        title="Journey"
+        description="Killis Bird - Imagine, Ideate, Innovate. Shape the Future With Us."
       />
 
       <SecondaryHero
-        eyebrow="Our Timeline"
-        title="The Killis Bird"
-        highlight="Journey."
-        description="Every milestone shaping our mission since 2018."
+        title="Killis Bird :: Imagine, Ideate, Innovate"
+        highlight=""
+        description="Shape the Future With Us"
         watermark="JOURNEY"
       />
 
-      {/* ─ Timeline ─ */}
       <section
         className="section bg-white divide-top"
         aria-labelledby="timeline-heading"
       >
         <div className="container">
           <FadeIn direction="up">
-            <SectionHeader
-              eyebrow="Milestones"
-              title="Our"
-              highlight="Story"
-              className="mb-12"
-              id="timeline-heading"
-            />
+            <div className="mb-12">
+              <SectionHeader
+                title="02-07-2026"
+                highlight="Journey"
+                id="timeline-heading"
+              />
+              <p className="text-neutral-500 max-w-[58ch] text-sm leading-relaxed mt-4">
+                Building advanced UAV solutions for defense, surveillance, industrial operations, and precision agriculture - Killis Bird is your trusted partner in flight.
+              </p>
+            </div>
           </FadeIn>
 
-          {/* Timeline items */}
           <div className="relative pl-8 lg:pl-12">
-            {/* Vertical line */}
             <div
               className="timeline-line"
               aria-hidden="true"
@@ -106,29 +87,26 @@ const Journey = () => {
 
             <div className="flex flex-col gap-0">
               {milestones.map((m, i) => (
-                <FadeIn key={i} delay={i * 0.05} direction="up">
+                <FadeIn key={m.title} delay={i * 0.05} direction="up">
                   <div
                     className={`relative flex flex-col gap-2 pb-10 ${i === milestones.length - 1 ? 'pb-0' : ''}`}
                     role="listitem"
                   >
-                    {/* Dot */}
                     <div
                       className="timeline-dot absolute -left-[24px] top-1.5"
                       aria-hidden="true"
                       style={{ left: '-21px' }}
                     />
 
-                    {/* Year eyebrow */}
                     <div className="eyebrow mb-0">
                       <span className="eyebrow-line" aria-hidden="true" />
                       {m.year}
                     </div>
 
-                    {/* Content */}
-                    <div className="max-w-xl">
+                    <div className="max-w-2xl">
                       <h3
                         className="font-heading font-bold text-black mb-1"
-                        style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', letterSpacing: '-0.02em' }}
+                        style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)' }}
                       >
                         {m.title}
                       </h3>
@@ -144,7 +122,6 @@ const Journey = () => {
         </div>
       </section>
 
-      {/* ─ Careers ─ */}
       <section
         className="section bg-white divide-top"
         aria-labelledby="careers-heading"
@@ -153,21 +130,19 @@ const Journey = () => {
           <FadeIn direction="up">
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
               <SectionHeader
-                eyebrow="Join the Team"
-                title="Open"
-                highlight="Positions"
+                title="Join the"
+                highlight="Journey"
                 id="careers-heading"
               />
-              <p className="text-neutral-500 max-w-[36ch] text-xs leading-relaxed">
-                Looking for talented engineers who share our passion for precision.
+              <p className="text-neutral-500 max-w-[44ch] text-sm leading-relaxed">
+                Looking for passionate engineers, innovators, and dreamers to shape the future of flight.
               </p>
             </div>
           </FadeIn>
 
-          {/* Job listings */}
-          <div className="flex flex-col gap-px bg-neutral-200 border border-neutral-200" role="list" aria-label="Open positions">
+          <div className="flex flex-col gap-px bg-neutral-200 border border-neutral-200" role="list" aria-label="Join us">
             {openings.map((o, i) => (
-              <FadeIn key={i} delay={i * 0.05} direction="up">
+              <FadeIn key={o.role} delay={i * 0.05} direction="up">
                 <div
                   className="bg-white p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
                   role="listitem"
@@ -188,10 +163,10 @@ const Journey = () => {
                     <span className="tag">{o.dept}</span>
                     <Link
                       to="/contact"
-                      className="inline-flex items-center gap-1.5 text-[0.6875rem] font-semibold uppercase tracking-wide text-orange-500 hover:text-orange-600 transition-colors shrink-0"
-                      aria-label={`Apply for ${o.role}`}
+                      className="inline-flex items-center gap-1.5 text-[0.6875rem] font-semibold uppercase text-orange-500 hover:text-orange-600 transition-colors shrink-0"
+                      aria-label={`Contact Killis Bird about ${o.role}`}
                     >
-                      Apply
+                      Connect
                       <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 13 }} />
                     </Link>
                   </div>
@@ -199,24 +174,6 @@ const Journey = () => {
               </FadeIn>
             ))}
           </div>
-
-          {/* No fit / general */}
-          <FadeIn direction="up" delay={0.2}>
-            <div className="mt-8 p-6 border border-neutral-200 bg-white flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div>
-                <p className="font-heading font-bold text-black text-base mb-0.5">
-                  Don't see a matching role?
-                </p>
-                <p className="text-neutral-500 text-xs">
-                  Send us your CV — we are always interested in exceptional candidates.
-                </p>
-              </div>
-              <Link to="/contact" className="btn-primary shrink-0">
-                Send Your CV
-                <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 17 }} />
-              </Link>
-            </div>
-          </FadeIn>
         </div>
       </section>
     </div>

@@ -12,21 +12,21 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const navLinks = [
-  { to: '/',          label: 'Home' },
+  { to: '/',          label: 'Space' },
   { to: '/our-dna',   label: 'Our DNA' },
   { to: '/creations', label: 'Creations' },
-  { to: '/assistance',label: 'Services' },
+  { to: '/blog',      label: 'Blogs' },
+  { to: '/assistance',label: 'Assistance' },
   { to: '/journey',   label: 'Journey' },
-  { to: '/blog',      label: 'Blog' },
   { to: '/contact',   label: 'Contact' },
 ];
 
 const productLinks = [
-  { label: 'Propulsion Systems', href: '/creations' },
-  { label: 'Airframe Solutions', href: '/creations' },
-  { label: 'Avionics & FCC',     href: '/creations' },
-  { label: 'Custom Integration', href: '/assistance' },
-  { label: 'Request a Quote',    href: '/contact' },
+  { label: 'Frame', href: '/creations' },
+  { label: 'FCC', href: '/creations' },
+  { label: 'ESC', href: '/creations' },
+  { label: 'Propeller', href: '/creations' },
+  { label: 'Care', href: '/assistance' },
 ];
 
 const socials = [

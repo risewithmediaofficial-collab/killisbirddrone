@@ -1,30 +1,25 @@
 // src/components/Navbar.jsx
 import { useState, useEffect, useRef } from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const links = [
-  { to: '/',          label: 'Home',      end: true },
-  { to: '/our-dna',   label: 'Our DNA' },
-  { to: '/creations', label: 'Creations' },
-  { to: '/assistance',label: 'Services' },
-  { to: '/journey',   label: 'Journey' },
-  { to: '/blog',      label: 'Blog' },
+  { to: '/',          label: 'SPACE',       end: true },
+  { to: '/our-dna',   label: 'OUR DNA' },
+  { to: '/creations', label: 'CREATIONS' },
+  { to: '/blog',      label: 'BLOGS' },
+  { to: '/assistance',label: 'ASSISTANCE' },
+  { to: '/journey',   label: 'JOURNEY' },
 ];
 
 const Navbar = () => {
   const [open, setOpen]         = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const location                = useLocation();
   const navRef                  = useRef(null);
 
-  const isHomePage = location.pathname === '/';
-  // Light mode (dark links & original logo) is active if scrolled OR if on an inner page
-  const isLight = scrolled || !isHomePage;
+  const isLight = true;
 
-  // Entrance animation
   useEffect(() => {
     const nav = navRef.current;
     if (!nav) return;
@@ -34,15 +29,6 @@ const Navbar = () => {
     );
   }, []);
 
-  // Scroll listener
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  // Lock body scroll on mobile open
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -67,7 +53,6 @@ const Navbar = () => {
               src="/assests/KILLIS BIRD - LOGO.png"
               alt="Killis Bird"
               className="site-navbar__logo-img"
-              style={!isLight ? { filter: 'brightness(0) invert(1)' } : {}}
             />
           </Link>
 
