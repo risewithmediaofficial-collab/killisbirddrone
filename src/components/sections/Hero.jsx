@@ -6,7 +6,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const HERO_BG = 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=1800&q=85&auto=format&fit=crop';
-const DRONE_PNG = '/assests/DRONE1-removebg-preview.png';
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -19,40 +18,26 @@ const Hero = () => {
         { opacity: 0, x: -35 },
         { opacity: 1, x: 0, duration: 0.8 }, 0.3
       )
-      .fromTo('.hero-h1-right',
-        { opacity: 0, x: 35 },
-        { opacity: 1, x: 0, duration: 0.8 }, 0.4
-      )
-      .fromTo('.hero-body',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6 }, 0.7
-      )
-      .fromTo('.hero-btns',
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.6 }, 0.85
-      )
-      .fromTo('.hero-drone',
-        { opacity: 0, y: 30, scale: 0.94 },
-        { opacity: 1, y: 0, scale: 1, duration: 1.1, ease: 'power2.out' }, 0.5
-      )
-      .fromTo('.hero-badges',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6 }, 0.95
-      )
-      .fromTo('.hero-scroll',
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 }, 1.1
-      );
-
-      // Drone float loop
-      gsap.to('.hero-drone-img', {
-        y: -12,
-        duration: 3.5,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1,
-        delay: 1.8,
-      });
+        .fromTo('.hero-h1-right',
+          { opacity: 0, x: 35 },
+          { opacity: 1, x: 0, duration: 0.8 }, 0.4
+        )
+        .fromTo('.hero-body',
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6 }, 0.7
+        )
+        .fromTo('.hero-btns',
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.6 }, 0.85
+        )
+        .fromTo('.hero-badges',
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6 }, 0.95
+        )
+        .fromTo('.hero-scroll',
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5 }, 1.1
+        );
     }, heroRef);
 
     return () => ctx.revert();
@@ -61,7 +46,7 @@ const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[75vh] md:min-h-[78vh] lg:min-h-[82vh] bg-neutral-900 overflow-hidden flex flex-col justify-between pt-[72px]"
+      className="relative min-h-[72vh] md:min-h-[76vh] lg:min-h-[80vh] bg-neutral-900 overflow-hidden flex flex-col justify-between pt-[72px]"
       aria-label="Hero — Killis Bird"
     >
       {/* Background image */}
@@ -87,9 +72,15 @@ const Hero = () => {
         />
       </div>
 
+      {/* Glow orb in center background */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-[120px] opacity-20 bg-orange-500 pointer-events-none z-0"
+        aria-hidden="true"
+      />
+
       {/* ─ Main Content Container ─ */}
       <div className="relative z-10 flex flex-col flex-1 max-w-[1280px] w-full mx-auto px-6 md:px-12 py-6 justify-between">
-        
+
         {/* Top Section: Left-aligned "Precision Engineered." */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-4 md:pt-8">
           <div className="lg:col-span-7 text-left hero-h1-left z-20">
@@ -113,25 +104,9 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Center Floating Drone PNG */}
-        <div className="hero-drone absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-          {/* Glow orb */}
-          <div
-            className="absolute w-72 h-72 rounded-full blur-[100px] opacity-25 bg-orange-500 pointer-events-none"
-            aria-hidden="true"
-          />
-          <img
-            src={DRONE_PNG}
-            alt="Killis Bird precision UAV drone"
-            className="hero-drone-img w-full max-w-sm sm:max-w-md lg:max-w-xl h-auto object-contain drop-shadow-2xl opacity-90"
-            style={{ maxHeight: '280px' }}
-            loading="eager"
-          />
-        </div>
-
         {/* Bottom Section: Left-aligned Badges & Right-aligned "Innovation Delivered." */}
         <div className="relative z-20 mt-auto pt-8 flex flex-col sm:flex-row items-end sm:items-end justify-between gap-6">
-          
+
           {/* Left Bottom: Badges */}
           <div className="hero-badges flex items-center gap-3">
             <div className="bg-white/10 backdrop-blur-sm border border-white/15 px-4 py-2.5">

@@ -227,8 +227,6 @@ const Home = () => {
           </h1>
 
           <p className="hero-body text-white/80 text-body-lg max-w-2xl mb-10 leading-relaxed text-center">
-            Redefining unmanned aerial systems through innovative, indigenous
-            solutions designed to elevate performance and reliability.
           </p>
 
           <div className="hero-btns flex flex-wrap gap-4 justify-center">
