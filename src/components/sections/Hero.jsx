@@ -15,35 +15,43 @@ const Hero = () => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      tl.fromTo('.hero-h1-line',
-        { opacity: 0, y: 40, skewY: 1.5 },
-        { opacity: 1, y: 0, skewY: 0, duration: 0.75, stagger: 0.12 }, 0.35
+      tl.fromTo('.hero-h1-left',
+        { opacity: 0, x: -35 },
+        { opacity: 1, x: 0, duration: 0.8 }, 0.3
+      )
+      .fromTo('.hero-h1-right',
+        { opacity: 0, x: 35 },
+        { opacity: 1, x: 0, duration: 0.8 }, 0.4
       )
       .fromTo('.hero-body',
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.65 }, 0.85
+        { opacity: 1, y: 0, duration: 0.6 }, 0.7
       )
       .fromTo('.hero-btns',
         { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.6 }, 1.0
+        { opacity: 1, y: 0, duration: 0.6 }, 0.85
       )
       .fromTo('.hero-drone',
-        { opacity: 0, y: 40, scale: 0.92 },
-        { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power2.out' }, 0.7
+        { opacity: 0, y: 30, scale: 0.94 },
+        { opacity: 1, y: 0, scale: 1, duration: 1.1, ease: 'power2.out' }, 0.5
+      )
+      .fromTo('.hero-badges',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6 }, 0.95
       )
       .fromTo('.hero-scroll',
         { opacity: 0 },
-        { opacity: 1, duration: 0.6 }, 1.3
+        { opacity: 1, duration: 0.5 }, 1.1
       );
 
       // Drone float loop
-      gsap.to('.hero-drone', {
-        y: -14,
+      gsap.to('.hero-drone-img', {
+        y: -12,
         duration: 3.5,
         ease: 'sine.inOut',
         yoyo: true,
         repeat: -1,
-        delay: 2,
+        delay: 1.8,
       });
     }, heroRef);
 
@@ -53,7 +61,7 @@ const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen bg-neutral-900 overflow-hidden flex flex-col"
+      className="relative min-h-[75vh] md:min-h-[78vh] lg:min-h-[82vh] bg-neutral-900 overflow-hidden flex flex-col justify-between pt-[72px]"
       aria-label="Hero — Killis Bird"
     >
       {/* Background image */}
@@ -66,8 +74,8 @@ const Hero = () => {
           loading="eager"
           fetchPriority="high"
         />
-        {/* Dark gradient overlay — stronger at top for nav legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/75" />
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/80" />
         {/* Subtle grid texture */}
         <div
           className="absolute inset-0 opacity-[0.025]"
@@ -79,40 +87,21 @@ const Hero = () => {
         />
       </div>
 
-      {/* ─ Content layer ─ */}
-      <div className="relative z-10 flex flex-col flex-1 pt-[72px]">
-        <div
-          className="flex flex-col flex-1"
-          style={{ maxWidth: '1280px', margin: '0 auto', width: '100%', padding: '0 clamp(24px, 5vw, 80px)' }}
-        >
-
-          {/* ─ Top: centred copy ─ */}
-          <div className="flex flex-col items-center text-center pt-16 md:pt-20 lg:pt-24">
-
-
-
-            {/* Heading */}
-            <h1
-              className="font-heading font-bold text-white leading-[1.0] mb-8"
-              style={{ fontSize: 'clamp(2.8rem, 7vw, 5.5rem)', letterSpacing: '-0.04em' }}
-            >
-              <span className="hero-h1-line block">Precision</span>
-              <span className="hero-h1-line block text-orange-500">Engineered.</span>
-              <span className="hero-h1-line block">Innovation</span>
-              <span className="hero-h1-line block text-white/45">Delivered.</span>
+      {/* ─ Main Content Container ─ */}
+      <div className="relative z-10 flex flex-col flex-1 max-w-[1280px] w-full mx-auto px-6 md:px-12 py-6 justify-between">
+        
+        {/* Top Section: Left-aligned "Precision Engineered." */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-4 md:pt-8">
+          <div className="lg:col-span-7 text-left hero-h1-left z-20">
+            <h1 className="font-heading font-bold leading-[0.98] text-[clamp(2.5rem,5.2vw,4.5rem)] tracking-tight">
+              <span className="block text-white">Precision</span>
+              <span className="block text-orange-500">Engineered.</span>
             </h1>
-
-            {/* Body text */}
-            <p
-              className="hero-body text-white/65 leading-relaxed mb-10 mx-auto"
-              style={{ fontSize: 'var(--fs-body-lg)', maxWidth: '52ch' }}
-            >
+            <p className="hero-body text-white/75 text-sm md:text-base leading-relaxed mt-4 max-w-md">
               Redefining unmanned aerial systems through indigenous engineering —
               designed for performance, built for reliability, trusted worldwide.
             </p>
-
-            {/* CTAs */}
-            <div className="hero-btns flex flex-wrap items-center justify-center gap-3 mb-12">
+            <div className="hero-btns flex flex-wrap items-center gap-3 mt-6">
               <Link to="/creations" className="btn-primary" aria-label="View our creations">
                 Explore Creations
                 <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 17 }} />
@@ -122,48 +111,62 @@ const Hero = () => {
               </Link>
             </div>
           </div>
+        </div>
 
-          {/* ─ Drone image ─ */}
-          <div className="hero-drone flex items-end justify-center flex-1 relative">
-            {/* Glow orb */}
-            <div
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full blur-[100px] opacity-25 bg-orange-500 pointer-events-none"
-              aria-hidden="true"
-            />
+        {/* Center Floating Drone PNG */}
+        <div className="hero-drone absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          {/* Glow orb */}
+          <div
+            className="absolute w-72 h-72 rounded-full blur-[100px] opacity-25 bg-orange-500 pointer-events-none"
+            aria-hidden="true"
+          />
+          <img
+            src={DRONE_PNG}
+            alt="Killis Bird precision UAV drone"
+            className="hero-drone-img w-full max-w-sm sm:max-w-md lg:max-w-xl h-auto object-contain drop-shadow-2xl opacity-90"
+            style={{ maxHeight: '280px' }}
+            loading="eager"
+          />
+        </div>
 
-            {/* Floating stat badges */}
-            <div className="absolute left-0 bottom-24 sm:left-8 lg:left-16 bg-white/10 backdrop-blur-sm border border-white/15 px-5 py-3 z-10">
-              <div className="font-heading font-bold text-white text-xl leading-none">4K+</div>
-              <div className="text-white/55 text-[0.625rem] font-medium uppercase tracking-wider mt-1">Flight Hours</div>
+        {/* Bottom Section: Left-aligned Badges & Right-aligned "Innovation Delivered." */}
+        <div className="relative z-20 mt-auto pt-8 flex flex-col sm:flex-row items-end sm:items-end justify-between gap-6">
+          
+          {/* Left Bottom: Badges */}
+          <div className="hero-badges flex items-center gap-3">
+            <div className="bg-white/10 backdrop-blur-sm border border-white/15 px-4 py-2.5">
+              <div className="font-heading font-bold text-white text-lg leading-none">4K+</div>
+              <div className="text-white/55 text-[0.6rem] font-medium uppercase tracking-wider mt-1">Flight Hours</div>
             </div>
-            <div className="absolute right-0 bottom-40 sm:right-8 lg:right-16 bg-orange-500/90 backdrop-blur-sm px-4 py-2.5 z-10">
+            <div className="bg-orange-500/90 backdrop-blur-sm px-4 py-2.5">
               <div className="font-heading font-bold text-white text-sm leading-none">100%</div>
-              <div className="text-white/80 text-[0.5625rem] font-medium uppercase tracking-wider mt-0.5">Indigenous</div>
+              <div className="text-white/80 text-[0.55rem] font-medium uppercase tracking-wider mt-0.5">Indigenous</div>
             </div>
+          </div>
 
-            <img
-              src={DRONE_PNG}
-              alt="Killis Bird precision UAV drone"
-              className="w-full max-w-lg lg:max-w-2xl h-auto object-contain drop-shadow-2xl relative z-10"
-              style={{ maxHeight: '340px', objectPosition: 'bottom' }}
-              loading="eager"
-            />
+          {/* Right Bottom: Right-aligned "Innovation Delivered." */}
+          <div className="hero-h1-right text-right">
+            <div className="font-heading font-bold leading-[0.98] text-[clamp(2.5rem,5.2vw,4.5rem)] tracking-tight">
+              <span className="block text-white">Innovation</span>
+              <span className="block text-white/40">Delivered.</span>
+            </div>
           </div>
         </div>
 
-        {/* ─ Scroll indicator ─ */}
-        <div className="hero-scroll relative z-10 flex justify-center pb-6 pt-2">
-          <button
-            onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}
-            className="flex flex-col items-center gap-1.5 text-white/35 hover:text-white/65 transition-colors duration-300"
-            aria-label="Scroll down"
-          >
-            <span className="text-[0.5625rem] font-medium uppercase tracking-widest">Scroll</span>
-            <KeyboardArrowDownIcon sx={{ fontSize: 18 }}
-              style={{ animation: 'float 2s ease-in-out infinite' }}
-            />
-          </button>
-        </div>
+      </div>
+
+      {/* ─ Scroll indicator ─ */}
+      <div className="hero-scroll relative z-20 flex justify-center pb-4 pt-1">
+        <button
+          onClick={() => window.scrollBy({ top: window.innerHeight * 0.7, behavior: 'smooth' })}
+          className="flex flex-col items-center gap-1 text-white/35 hover:text-white/65 transition-colors duration-300"
+          aria-label="Scroll down"
+        >
+          <span className="text-[0.5625rem] font-medium uppercase tracking-widest">Scroll</span>
+          <KeyboardArrowDownIcon sx={{ fontSize: 18 }}
+            style={{ animation: 'float 2s ease-in-out infinite' }}
+          />
+        </button>
       </div>
     </section>
   );
