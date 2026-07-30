@@ -1,4 +1,4 @@
-﻿// src/components/sections/Hero.jsx
+// src/components/sections/Hero.jsx
 import { useRef, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -35,9 +35,9 @@ const Hero = () => {
 
       <div className="relative z-20 flex flex-col flex-1 max-w-[1280px] w-full mx-auto px-6 md:px-12 py-6 justify-between">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-4 md:pt-8">
-          <div className="lg:col-span-6 text-left hero-h1-left">
-            <h1 className="font-heading font-bold leading-[0.98] text-[clamp(3rem,7.2vw,6.8rem)] tracking-tight">
-              <span className="block text-black">Precision Engineered.</span>
+          <div className="lg:col-span-12 text-left hero-h1-left">
+            <h1 className="font-heading font-bold leading-[0.98] text-[clamp(1.8rem,5.2vw,5.5rem)] tracking-tight">
+              <span className="block text-black sm:whitespace-nowrap">Precision Engineered.</span>
             </h1>
             <div className="hero-btns flex flex-wrap items-center gap-3 mt-6">
               <Link to="/creations" className="btn-primary" aria-label="View our products">

@@ -211,18 +211,16 @@ const Home = () => {
             ref={heroHeadingRef}
             className="hero-heading font-heading font-bold text-white leading-[1.1] mb-6 overflow-hidden text-center"
             style={{
-              fontSize: "clamp(2.5rem, 5.5vw, 4.8rem)",
+              fontSize: "clamp(2.2rem, 5vw, 4.8rem)",
               letterSpacing: "-0.02em",
             }}
           >
-            <span className="reveal-line inline-block">Precision</span>{" "}
-            <span className="reveal-line inline-block text-skyroot">
-              Engineered.
+            <span className="reveal-line inline-block sm:whitespace-nowrap">
+              Precision <span className="text-skyroot">Engineered.</span>
             </span>
             <br />
-            <span className="reveal-line inline-block">Innovation</span>{" "}
-            <span className="reveal-line inline-block text-white/70">
-              Delivered.
+            <span className="reveal-line inline-block sm:whitespace-nowrap">
+              Innovation <span className="text-white/70">Delivered.</span>
             </span>
           </h1>
 
