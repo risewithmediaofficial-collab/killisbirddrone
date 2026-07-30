@@ -18,15 +18,6 @@ const navLinks = [
   { to: '/blog',      label: 'Blogs' },
   { to: '/assistance',label: 'Assistance' },
   { to: '/journey',   label: 'Journey' },
-  { to: '/contact',   label: 'Contact' },
-];
-
-const productLinks = [
-  { label: 'Frame', href: '/creations' },
-  { label: 'FCC', href: '/creations' },
-  { label: 'ESC', href: '/creations' },
-  { label: 'Propeller', href: '/creations' },
-  { label: 'Care', href: '/assistance' },
 ];
 
 const socials = [
@@ -55,10 +46,10 @@ const Footer = () => (
     <div className="max-w-content mx-auto px-6 md:px-8 relative z-10">
 
       {/* ─ Main grid ─ */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 border-t border-white/[0.07] pt-14 pb-10 gap-0">
+      <div className="grid grid-cols-1 md:grid-cols-12 border-t border-white/[0.07] pt-14 pb-10 gap-8 md:gap-0">
 
-        {/* Brand — col 4 */}
-        <div className="lg:col-span-4 lg:pr-12 lg:border-r border-white/[0.07] pb-10 lg:pb-0">
+        {/* Brand — col 5 */}
+        <div className="md:col-span-5 lg:col-span-5 md:pr-8 lg:pr-12 md:border-r border-white/[0.07] pb-8 md:pb-0">
           <Link to="/" className="inline-flex mb-6 group" aria-label="Killis Bird — Home">
             <span className="bg-white/90 group-hover:bg-white inline-flex p-2 transition-colors duration-200">
               <img
@@ -94,8 +85,8 @@ const Footer = () => (
           </div>
         </div>
 
-        {/* Navigate — col 2 */}
-        <div className="lg:col-span-2 lg:px-10 lg:border-r border-white/[0.07] pb-8 lg:pb-0 mt-10 lg:mt-0">
+        {/* Navigate — col 3 */}
+        <div className="md:col-span-3 lg:col-span-3 md:px-6 lg:px-10 md:border-r border-white/[0.07] pb-8 md:pb-0">
           <h4 className="text-[0.625rem] font-bold uppercase tracking-[0.2em] text-white/30 mb-6">
             Navigate
           </h4>
@@ -114,28 +105,8 @@ const Footer = () => (
           </ul>
         </div>
 
-        {/* Products — col 2 */}
-        <div className="lg:col-span-2 lg:px-10 lg:border-r border-white/[0.07] pb-8 lg:pb-0 mt-0">
-          <h4 className="text-[0.625rem] font-bold uppercase tracking-[0.2em] text-white/30 mb-6">
-            Products
-          </h4>
-          <ul className="space-y-3" role="list">
-            {productLinks.map(({ label, href }) => (
-              <li key={label} role="listitem">
-                <Link
-                  to={href}
-                  className="text-white/55 hover:text-orange-400 text-sm transition-colors duration-200 flex items-center gap-2 group"
-                >
-                  <span className="w-0 group-hover:w-3 h-px bg-orange-400 transition-all duration-200 shrink-0" aria-hidden="true" />
-                  {label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
         {/* Contact — col 4 */}
-        <div className="lg:col-span-4 lg:pl-10 mt-0">
+        <div className="md:col-span-4 lg:col-span-4 md:pl-6 lg:pl-10">
           <h4 className="text-[0.625rem] font-bold uppercase tracking-[0.2em] text-white/30 mb-6">
             Get in Touch
           </h4>

@@ -5,12 +5,14 @@ import SEO from '../components/SEO';
 import FadeIn from '../components/FadeIn';
 import SecondaryHero from '../components/common/SecondaryHero';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
+import sparrowTopView from '../assets/DJS02373.png';
 
 const blog = {
   title: 'Built for Advanced FPV: A High-Performance SPARROW-V1 Flight Control Card',
   category: 'Product Engineering',
   readTime: '7 min read',
   date: 'Technical Blog',
+  image: sparrowTopView,
   excerpt:
     'A compact Betaflight-ready flight control card engineered for fast processing, precise sensing, flexible connectivity, reliable power protection, and modern FPV builds.',
   highlights: [
@@ -127,24 +129,36 @@ const blog = {
 
 const BlogCard = ({ onOpen }) => (
   <FadeIn direction="up">
-    <article className="card group grid grid-cols-1 lg:grid-cols-[0.9fr_1.4fr] min-h-[360px]">
-      <div className="relative overflow-hidden bg-neutral-950 p-8 flex flex-col justify-between">
-        <div className="absolute inset-0 grid-pattern text-white/25" aria-hidden="true" />
-        <div className="absolute right-6 top-6 text-[clamp(4rem,9vw,8rem)] font-heading font-bold leading-none text-white/[0.06]" aria-hidden="true">
+    <article className="card group grid grid-cols-1 lg:grid-cols-[1.1fr_1.4fr] min-h-[380px] overflow-hidden border border-neutral-200 bg-white">
+      <div className="relative overflow-hidden bg-white p-7 sm:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-neutral-200">
+        <div className="absolute right-6 top-6 text-[clamp(4rem,9vw,8rem)] font-heading font-bold leading-none text-neutral-900/[0.04] select-none" aria-hidden="true">
           FC
         </div>
+
+        {/* Tag */}
         <div className="relative z-10">
-          <span className="tag tag-orange bg-white/10 border-white/15 text-orange-300">
+          <span className="tag tag-orange">
             {blog.category}
           </span>
         </div>
+
+        {/* Product Card Image */}
+        <div className="relative z-10 my-6 flex items-center justify-center p-2">
+          <img
+            src={blog.image}
+            alt="SPARROW-V1 Flight Control Card"
+            className="h-48 sm:h-56 max-w-full object-contain filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-500 ease-out"
+          />
+        </div>
+
+        {/* Title */}
         <div className="relative z-10">
-          <p className="font-heading font-bold text-white text-4xl leading-none">SPARROW-V1</p>
-          <p className="mt-2 text-white/55 text-xs uppercase tracking-widest">Flight Control Card</p>
+          <p className="font-heading font-bold text-black text-3xl sm:text-4xl leading-none">SPARROW-V1</p>
+          <p className="mt-2 text-neutral-500 text-xs uppercase tracking-widest font-semibold">Flight Control Card</p>
         </div>
       </div>
 
-      <div className="p-7 sm:p-9 lg:p-10 flex flex-col justify-between">
+      <div className="p-7 sm:p-9 lg:p-10 flex flex-col justify-between bg-white">
         <div>
           <div className="flex flex-wrap gap-3 text-[0.6875rem] uppercase tracking-widest font-semibold text-neutral-400 mb-5">
             <span>{blog.date}</span>
@@ -187,16 +201,25 @@ const BlogArticle = ({ onBack }) => (
       </button>
 
       <article className="grid grid-cols-1 lg:grid-cols-[280px_minmax(0,760px)] gap-10 lg:gap-16 items-start">
-        <aside className="lg:sticky lg:top-28 border border-neutral-200 bg-neutral-50 p-6">
-          <p className="section-label mb-4">Key Features</p>
-          <ul className="space-y-3">
-            {blog.highlights.map((item) => (
-              <li key={item} className="flex gap-3 text-sm text-neutral-600 leading-relaxed">
-                <span className="mt-2 h-1.5 w-1.5 bg-orange-500 flex-shrink-0" aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
+        <aside className="lg:sticky lg:top-28 border border-neutral-200 bg-neutral-50 p-6 flex flex-col gap-6">
+          <div className="bg-white p-4 rounded border border-neutral-200 flex items-center justify-center shadow-sm">
+            <img
+              src={blog.image}
+              alt="SPARROW-V1 Flight Control Card"
+              className="h-40 w-auto object-contain drop-shadow-sm"
+            />
+          </div>
+          <div>
+            <p className="section-label mb-4">Key Features</p>
+            <ul className="space-y-3">
+              {blog.highlights.map((item) => (
+                <li key={item} className="flex gap-3 text-sm text-neutral-600 leading-relaxed">
+                  <span className="mt-2 h-1.5 w-1.5 bg-orange-500 flex-shrink-0" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </aside>
 
         <div>
