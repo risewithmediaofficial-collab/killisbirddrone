@@ -56,7 +56,7 @@ const ProductImageFrame = ({
   }
 
   return (
-    <figure className={`relative w-full ${height} overflow-hidden ${className}`}>
+    <figure className={`relative flex w-full items-center justify-center bg-white ${height} overflow-hidden ${className}`}>
       <img
         src={imageSrc}
         alt={imageAlt}
@@ -103,6 +103,7 @@ const ProductDetail = () => {
 
   // Explicitly excluded "Pinout" and "Buy Now" as requested by user
   const tabs = ["Gallery", "Specifications", "Ports", "Diagram", "Pinout", "Firmware", "Buy Now"];
+  const featuredProductImage = product.images?.[0];
 
   return (
     <div ref={pageRef} className="min-h-screen bg-white pt-24 pb-20 text-[#111111]">
@@ -132,10 +133,10 @@ const ProductDetail = () => {
         >
           {/* Main Top Image Frame */}
           <div className="w-full max-w-xl mb-8">
-            {product.images && product.images.length > 0 ? (
+            {featuredProductImage ? (
               <ProductImageFrame
-                image={product.images[0]}
-                title={product.images[0]?.title || product.model || product.name}
+                image={featuredProductImage}
+                title={featuredProductImage?.title || product.model || product.name}
                 height="h-[400px] sm:h-[480px]"
                 objectFit="contain"
                 priority
@@ -189,18 +190,18 @@ const ProductDetail = () => {
           {activeTab === "Gallery" && (
             <div className="w-full">
               {product.images?.length ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
                   {product.images.map((image, index) => {
-                    // Finger image (last one) spans full width at taller portrait height
-                    const isFingerImage = index === product.images.length - 1 && product.images.length === 5;
+                    const isCenteredLastImage = index === product.images.length - 1 && product.images.length % 2 === 1;
+
                     return (
                       <ProductImageFrame
                         key={typeof image === "string" ? image : image.src}
                         image={image}
                         title={image.title || `SPARROW-V1 View ${index + 1}`}
-                        height={isFingerImage ? "h-[520px] sm:h-[600px]" : "h-[320px] sm:h-[380px]"}
-                        objectFit={isFingerImage ? "cover" : "contain"}
-                        className={isFingerImage ? "col-span-1 sm:col-span-2" : ""}
+                        height="aspect-square h-auto"
+                        objectFit="contain"
+                        className={`p-4 ${isCenteredLastImage ? "sm:col-span-2 sm:mx-auto sm:w-[calc(50%-0.5rem)]" : ""}`}
                       />
                     );
                   })}

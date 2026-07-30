@@ -1,9 +1,9 @@
 // src/data/products.js
 
-import sparrowTopView from "../assets/DJS02373.jpg.jpeg";
-import sparrowConnectorView from "../assets/DJS02381.jpg.jpeg";
-import sparrowBottomAngleView from "../assets/DJS02399.jpg.jpeg";
-import sparrowTopAngleView from "../assets/DJS02402.jpg.jpeg";
+import sparrowTopView from "../assets/DJS02373.png";
+import sparrowConnectorView from "../assets/DJS02381.png";
+import sparrowBottomAngleView from "../assets/DJS02399.png";
+import sparrowTopAngleView from "../assets/DJS02402.png";
 import sparrowFingerView from "../assets/finger.png";
 
 
