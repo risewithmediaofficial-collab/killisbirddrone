@@ -29,8 +29,9 @@ const drawImageCover = (ctx, img, width, height) => {
 };
 
 // ── Slow-network static fallback ──────────────────────────────────────────────
-const SlowNetworkFallback = () => (
+const StaticCanvasFallback = ({ containerRef }) => (
   <div
+    ref={containerRef}
     className="w-full flex flex-col items-center justify-center bg-white py-20 px-6"
     aria-label="UAV Experience"
   >
@@ -74,16 +75,13 @@ const ScrollVideoCanvas = () => {
   const canvasContainerRef = useRef(null);
   const [loaded, setLoaded] = useState(false);
   const [shouldLoad, setShouldLoad] = useState(false);
-  const [progress, setProgress] = useState(0);
   const imagesRef = useRef([]);
   const currentFrameIndexRef = useRef(211);
 
-  // Detect slow network / data-saver mode
   const { isSlow } = useNetworkAware();
 
-  // IntersectionObserver: only start loading when section is near viewport
   useEffect(() => {
-    if (isSlow) return; // Skip — show the fallback
+    if (isSlow) return;
 
     const el = containerRef.current;
     if (!el) return;
@@ -95,7 +93,6 @@ const ScrollVideoCanvas = () => {
           observer.disconnect();
         }
       },
-      // Start loading when 300 px away from viewport
       { rootMargin: '300px 0px', threshold: 0 }
     );
 
@@ -103,7 +100,6 @@ const ScrollVideoCanvas = () => {
     return () => observer.disconnect();
   }, [isSlow]);
 
-  // Preload all 211 frames (only when near viewport and on fast network)
   useEffect(() => {
     if (!shouldLoad) return;
 
@@ -118,7 +114,6 @@ const ScrollVideoCanvas = () => {
         img.src = `/frames/frame_${numStr}.png`;
         img.onload = () => {
           loadedCount++;
-          setProgress(Math.round((loadedCount / totalFrames) * 100));
           if (loadedCount === totalFrames) {
             imagesRef.current = imgs;
             setLoaded(true);
@@ -292,29 +287,11 @@ const ScrollVideoCanvas = () => {
 
   // On slow networks: show static fallback instead of the canvas
   if (isSlow) {
-    return <SlowNetworkFallback />;
+    return <StaticCanvasFallback />;
   }
 
-  // On fast networks: show loading bar while frames load
   if (!loaded) {
-    return (
-      <div
-        ref={containerRef}
-        className="canvas-preloader"
-        aria-label="Loading UAV animation"
-        aria-busy="true"
-        role="status"
-      >
-        <div className="preloader-spinner" />
-        <span className="preloader-text">Loading UAV Experience</span>
-        <div className="preloader-bar-bg">
-          <div className="preloader-bar-fill" style={{ width: `${progress}%` }} />
-        </div>
-        <span style={{ fontSize: '11px', marginTop: '10px', color: '#f97316', fontFamily: 'Space Grotesk' }}>
-          {progress}%
-        </span>
-      </div>
-    );
+    return <StaticCanvasFallback containerRef={containerRef} />;
   }
 
   return (

@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar';
 import ScrollToTop from '../components/ScrollToTop';
 import ScrollStack from '../components/ScrollStack';
 import GlobalTextReveal from '../components/GlobalTextReveal';
-import SectionLoader from '../components/SectionLoader';
 
 const Footer = lazy(() => import('../components/Footer'));
 
@@ -17,7 +16,7 @@ const MainLayout = () => (
     <main style={{ paddingTop: '82px' }}>
       <ScrollStack>
         <Outlet />
-        <Suspense fallback={<SectionLoader />}>
+        <Suspense fallback={null}>
           <Footer />
         </Suspense>
       </ScrollStack>
