@@ -116,7 +116,7 @@ const Footer = () => (
               <div className="flex items-start gap-3">
                 <LocationOnIcon aria-hidden="true" sx={{ fontSize: 13, color: '#ff6b00', mt: 0.4, flexShrink: 0 }} />
                 <address className="text-white/50 text-xs leading-relaxed not-italic">
-                  Killis Bird Technologies Pvt. Ltd.<br />
+                  Killis Bird<br />
                   Plot No.107, Pollupalli SIDCO Industrial Estate,<br />
                   Near Government Medical College<br />
                   Gangasandiram, Billanakuppam Post<br />
@@ -175,7 +175,7 @@ const Footer = () => (
       {/* ─ Bottom bar ─ */}
       <div className="border-t border-white/[0.07] py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
         <p className="text-white/25 text-xs">
-          © {new Date().getFullYear()} Killis Bird Technologies Pvt. Ltd. All rights reserved.
+          © {new Date().getFullYear()} Killis Bird All rights reserved.
         </p>
         <div className="flex items-center gap-4">
           <p className="text-white/40 text-xs font-semibold uppercase tracking-widest">
