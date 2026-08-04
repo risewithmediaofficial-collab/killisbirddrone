@@ -101,8 +101,7 @@ const ProductDetail = () => {
 
   const [activeTab, setActiveTab] = useState("Gallery");
 
-  // Explicitly excluded "Pinout" and "Buy Now" as requested by user
-  const tabs = ["Gallery", "Specifications", "Ports", "Diagram", "Pinout", "Firmware", "Buy Now"];
+  const tabs = ["Gallery", "Ports", "Diagram", "User Manual", "Firmware", "Own It"];
   const featuredProductImage = product.images?.[0];
 
   return (
@@ -157,7 +156,7 @@ const ProductDetail = () => {
           </p>
         </motion.div>
 
-        {/* Tab Navigation (Gallery, Specifications, Ports, Diagram, Firmware) */}
+        {/* Tab Navigation */}
         <div className="w-full max-w-4xl mx-auto border-b border-black/10 mb-10">
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 pb-3">
             {tabs.map((tab) => {
@@ -210,51 +209,8 @@ const ProductDetail = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <ImageHolderFrame title="Top View - Components" height="h-[320px] sm:h-[380px]" />
                   <ImageHolderFrame title="Bottom View - ESC Circuitry" height="h-[320px] sm:h-[380px]" />
-                  <ImageHolderFrame title="Pinout & Connector Layout" height="h-[320px] sm:h-[380px]" />
+                  <ImageHolderFrame title="User Manual" height="h-[320px] sm:h-[380px]" />
                   <ImageHolderFrame title="Mounted Stack Assembly" height="h-[320px] sm:h-[380px]" />
-                </div>
-              )}
-            </div>
-          )}
-
-          {activeTab === "Specifications" && (
-            <div className="w-full bg-[#fafafa] border border-black/10 rounded-2xl p-6 sm:p-10 shadow-xs">
-              <div className="flex items-center justify-between mb-6 border-b border-black/10 pb-4">
-                <h3 className="text-[16px] font-extrabold uppercase tracking-wide text-[#111111]">
-                  Technical Specifications
-                </h3>
-                <span className="text-[10px] font-extrabold uppercase tracking-widest bg-[#ff6b00]/10 text-[#ff6b00] border border-[#ff6b00]/30 px-3 py-1 rounded-full">
-                  Coming Soon
-                </span>
-              </div>
-
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                {product.features.map((feat, i) => (
-                  <li key={i} className="flex items-start gap-3 text-[14px] text-[#4a5568]">
-                    <span className="w-2 h-2 rounded-full bg-[#ff6b00] mt-2 shrink-0" />
-                    <span className="font-medium">{feat}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {product.specifications ? (
-                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-black/10 border border-black/10 overflow-hidden rounded-xl">
-                  {product.specifications.map((spec) => (
-                    <div key={spec.label} className="bg-white p-4 text-left">
-                      <dt className="text-[10px] font-extrabold uppercase tracking-widest text-[#ff6b00] mb-1">
-                        {spec.label}
-                      </dt>
-                      <dd className="text-[13px] font-bold text-[#111111]">
-                        {spec.value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              ) : (
-                <div className="bg-white border border-black/10 rounded-xl p-5 text-center shadow-2xs">
-                  <p className="text-[13px] text-[#67707d] italic">
-                    Detailed component datasheets, power benchmarks, and thermal performance logs coming soon.
-                  </p>
                 </div>
               )}
             </div>
@@ -322,16 +278,16 @@ const ProductDetail = () => {
             </div>
           )}
 
-          {activeTab === "Pinout" && (
+          {activeTab === "User Manual" && (
             <div className="w-full">
-              <ImageHolderFrame title="Pinout & Connector Layout" height="h-80" />
+              <ImageHolderFrame title="User Manual" height="h-80" />
               <p className="text-center text-[13px] text-[#67707d] mt-4 italic">
-                Pinout diagrams and connector layouts coming soon.
+                User manual, setup guide, and connector references coming soon.
               </p>
             </div>
           )}
 
-          {activeTab === "Buy Now" && (
+          {activeTab === "Own It" && (
             <div className="w-full bg-[#fafafa] border border-black/10 rounded-2xl p-6 sm:p-10 text-center shadow-xs">
               <h3 className="text-[18px] font-extrabold text-[#111111] mb-3">
                 Request supply or integration support

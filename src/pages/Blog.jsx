@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import SEO from '../components/SEO';
 import FadeIn from '../components/FadeIn';
-import SecondaryHero from '../components/common/SecondaryHero';
 import useBookScrollEffects from '../hooks/useBookScrollEffects';
 import sparrowTopView from '../assets/DJS02373.png';
 
@@ -127,144 +127,194 @@ const blog = {
   ],
 };
 
-const BlogCard = ({ onOpen }) => (
-  <FadeIn direction="up">
-    <article className="card group grid grid-cols-1 lg:grid-cols-[1.1fr_1.4fr] min-h-[380px] overflow-hidden border border-neutral-200 bg-white">
-      <div className="relative overflow-hidden bg-white p-7 sm:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-neutral-200">
-        <div className="absolute right-6 top-6 text-[clamp(4rem,9vw,8rem)] font-heading font-bold leading-none text-neutral-900/[0.04] select-none" aria-hidden="true">
-          FC
-        </div>
-
-        {/* Tag */}
-        <div className="relative z-10">
-          <span className="tag tag-orange">
-            {blog.category}
-          </span>
-        </div>
-
-        {/* Product Card Image */}
-        <div className="relative z-10 my-6 flex items-center justify-center p-2">
-          <img
-            src={blog.image}
-            alt="SPARROW-V1 Flight Control Card"
-            className="h-48 sm:h-56 max-w-full object-contain filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-500 ease-out"
-          />
-        </div>
-
-        {/* Title */}
-        <div className="relative z-10">
-          <p className="font-heading font-bold text-black text-3xl sm:text-4xl leading-none">SPARROW-V1</p>
-          <p className="mt-2 text-neutral-500 text-xs uppercase tracking-widest font-semibold">Flight Control Card</p>
-        </div>
-      </div>
-
-      <div className="p-7 sm:p-9 lg:p-10 flex flex-col justify-between bg-white">
-        <div>
-          <div className="flex flex-wrap gap-3 text-[0.6875rem] uppercase tracking-widest font-semibold text-neutral-400 mb-5">
-            <span>{blog.date}</span>
-            <span className="text-orange-500">/</span>
-            <span>{blog.readTime}</span>
-          </div>
-          <h2 className="font-heading font-bold text-black leading-[1.08] text-[clamp(1.8rem,3vw,2.8rem)] max-w-3xl">
-            {blog.title}
-          </h2>
-          <p className="mt-5 text-neutral-500 leading-relaxed max-w-2xl">
-            {blog.excerpt}
-          </p>
-        </div>
-
-        <button
-          type="button"
-          onClick={onOpen}
-          className="btn-primary self-start mt-8"
-          aria-label={`Read ${blog.title}`}
-        >
-          Read Article
-          <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 17 }} />
-        </button>
-      </div>
-    </article>
-  </FadeIn>
-);
-
-const BlogArticle = ({ onBack }) => (
-  <section className="section bg-white divide-top">
+const BlogCarousel = ({ onOpen }) => (
+  <section className="bg-white py-10 lg:py-14">
     <div className="container">
-      <button
-        type="button"
-        onClick={onBack}
-        className="btn-secondary btn-sm mb-10"
-        aria-label="Back to blog list"
-      >
-        <ArrowBackIcon aria-hidden="true" sx={{ fontSize: 16 }} />
-        Back
-      </button>
-
-      <article className="grid grid-cols-1 lg:grid-cols-[280px_minmax(0,760px)] gap-10 lg:gap-16 items-start">
-        <aside className="lg:sticky lg:top-28 border border-neutral-200 bg-neutral-50 p-6 flex flex-col gap-6">
-          <div className="bg-white p-4 rounded border border-neutral-200 flex items-center justify-center shadow-sm">
-            <img
-              src={blog.image}
-              alt="SPARROW-V1 Flight Control Card"
-              className="h-40 w-auto object-contain drop-shadow-sm"
-            />
-          </div>
+      <FadeIn direction="up">
+        <div className="flex items-end justify-between gap-6 mb-8">
           <div>
-            <p className="section-label mb-4">Key Features</p>
-            <ul className="space-y-3">
-              {blog.highlights.map((item) => (
-                <li key={item} className="flex gap-3 text-sm text-neutral-600 leading-relaxed">
-                  <span className="mt-2 h-1.5 w-1.5 bg-orange-500 flex-shrink-0" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <div className="section-label mb-3">Blogs</div>
+            <h1 className="font-heading font-bold text-black leading-tight text-[clamp(2rem,4vw,3.5rem)]">
+            </h1>
           </div>
-        </aside>
-
-        <div>
-          <div className="eyebrow">
-            <span className="eyebrow-line" aria-hidden="true" />
-            {blog.category}
-          </div>
-          <h1 className="font-heading font-bold text-black leading-[1.05] text-[clamp(2rem,4.5vw,4rem)]">
-            {blog.title}
-          </h1>
-          <div className="mt-5 flex flex-wrap gap-3 text-[0.6875rem] uppercase tracking-widest font-semibold text-neutral-400">
-            <span>{blog.date}</span>
-            <span className="text-orange-500">/</span>
-            <span>{blog.readTime}</span>
-          </div>
-
-          <div className="mt-12 space-y-12">
-            {blog.sections.map((section) => (
-              <section key={section.heading} className="border-t border-neutral-200 pt-8">
-                <h2 className="font-heading font-bold text-black text-[clamp(1.35rem,2vw,1.85rem)] leading-tight mb-5">
-                  {section.heading}
-                </h2>
-                <div className="space-y-4 text-neutral-600 leading-relaxed">
-                  {section.body.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                  {section.bullets && (
-                    <ul className="grid gap-2 pt-2">
-                      {section.bullets.map((item) => (
-                        <li key={item} className="flex gap-3">
-                          <span className="mt-3 h-1.5 w-1.5 bg-orange-500 flex-shrink-0" aria-hidden="true" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </section>
-            ))}
+          <div className="hidden sm:flex gap-2" aria-label="Blog carousel controls">
+            <button type="button" className="w-11 h-11 border border-neutral-200 flex items-center justify-center text-neutral-400" aria-label="Previous blog">
+              <ArrowBackIcon aria-hidden="true" sx={{ fontSize: 18 }} />
+            </button>
+            <button type="button" className="w-11 h-11 border border-neutral-200 flex items-center justify-center text-neutral-400" aria-label="Next blog">
+              <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 18 }} />
+            </button>
           </div>
         </div>
-      </article>
+      </FadeIn>
+
+      <FadeIn direction="up" delay={0.08}>
+        <div className="overflow-hidden border border-neutral-200 bg-neutral-100">
+          <article className="group grid grid-cols-1 lg:grid-cols-[0.9fr_1.25fr] bg-white">
+            <div className="relative min-h-[300px] bg-neutral-50 p-8 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-neutral-200">
+              <div className="absolute left-6 top-6 tag tag-orange">{blog.category}</div>
+              <img
+                src={blog.image}
+                alt="SPARROW-V1 Flight Control Card"
+                className="h-56 sm:h-72 max-w-full object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.16)] transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+            </div>
+
+            <div className="p-7 sm:p-10 lg:p-12 flex flex-col justify-center">
+              <div className="flex flex-wrap gap-3 text-[0.6875rem] uppercase tracking-widest font-semibold text-neutral-400 mb-5">
+                <span>{blog.date}</span>
+                <span className="text-orange-500">/</span>
+                <span>{blog.readTime}</span>
+              </div>
+              <h2 className="font-heading font-bold text-black leading-[1.08] text-[clamp(1.8rem,3.4vw,3.6rem)] max-w-4xl">
+                {blog.title}
+              </h2>
+              <p className="mt-5 text-neutral-500 leading-relaxed max-w-2xl">
+                {blog.excerpt}
+              </p>
+              <button
+                type="button"
+                onClick={onOpen}
+                className="btn-primary self-start mt-8"
+                aria-label={`Read more about ${blog.title}`}
+              >
+                Read More
+                <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 17 }} />
+              </button>
+            </div>
+          </article>
+        </div>
+      </FadeIn>
     </div>
   </section>
 );
+
+const BlogArticle = ({ onBack }) => {
+  const pages = [
+    {
+      heading: blog.title,
+      body: [blog.excerpt],
+      cover: true,
+    },
+    ...blog.sections.flatMap((section) => {
+      const bodyPages = section.body.map((paragraph) => ({
+        heading: section.heading,
+        body: [paragraph],
+      }));
+
+      if (!section.bullets) {
+        return bodyPages;
+      }
+
+      return [
+        ...bodyPages,
+        {
+          heading: section.heading,
+          body: [],
+          bullets: section.bullets,
+        },
+      ];
+    }),
+  ];
+  const [page, setPage] = useState(0);
+  const activePage = pages[page];
+  const isFirst = page === 0;
+  const isLast = page === pages.length - 1;
+
+  const goPrev = () => setPage((current) => Math.max(0, current - 1));
+  const goNext = () => setPage((current) => Math.min(pages.length - 1, current + 1));
+
+  return (
+    <section className="h-screen overflow-hidden bg-white pt-[84px] pb-5">
+      <div className="container h-full flex flex-col">
+        <div className="flex items-center justify-between gap-4 mb-4 shrink-0">
+          <button
+            type="button"
+            onClick={onBack}
+            className="btn-secondary btn-sm"
+            aria-label="Back to blog list"
+          >
+            <ArrowBackIcon aria-hidden="true" sx={{ fontSize: 16 }} />
+            Back
+          </button>
+          <div className="text-[0.6875rem] uppercase tracking-widest font-semibold text-neutral-400">
+            {page + 1} / {pages.length}
+          </div>
+        </div>
+
+        <article className="min-h-0 flex-1 border border-neutral-200 bg-white grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="hidden lg:flex bg-neutral-50 border-r border-neutral-200 p-8 items-center justify-center overflow-hidden">
+            <img
+              src={blog.image}
+              alt="SPARROW-V1 Flight Control Card"
+              className="max-h-[54vh] max-w-full w-auto object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.16)]"
+            />
+          </div>
+
+          <div className="min-h-0 p-6 sm:p-8 lg:p-9 flex flex-col">
+            <div className="flex flex-wrap gap-3 text-[0.6875rem] uppercase tracking-widest font-semibold text-neutral-400 mb-4 shrink-0">
+              <span>{blog.date}</span>
+              <span className="text-orange-500">/</span>
+              <span>{blog.readTime}</span>
+            </div>
+
+            <div className="min-h-0 flex-1 flex flex-col justify-center overflow-hidden">
+              {activePage.cover && (
+                <div className="section-label mb-3">
+                  {blog.category}
+                </div>
+              )}
+              <h1 className="font-heading font-bold text-black leading-[1.08] text-[clamp(1.55rem,2.45vw,2.8rem)] max-w-4xl">
+                {activePage.heading}
+              </h1>
+              <div className="mt-5 space-y-3 text-neutral-600 leading-[1.55] text-[clamp(0.92rem,1.05vw,1.05rem)] max-w-3xl">
+                {activePage.body.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+                {activePage.bullets && (
+                  <ul className="grid gap-2 pt-1">
+                    {activePage.bullets.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span className="mt-3 h-1.5 w-1.5 bg-orange-500 flex-shrink-0" aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between gap-4 pt-5 shrink-0">
+              <button
+                type="button"
+                onClick={goPrev}
+                disabled={isFirst}
+                className="w-12 h-12 border border-neutral-200 flex items-center justify-center text-neutral-500 disabled:opacity-30 disabled:cursor-not-allowed hover:border-orange-500 hover:text-orange-500 transition-colors"
+                aria-label="Previous article section"
+              >
+                <ArrowBackIcon aria-hidden="true" sx={{ fontSize: 18 }} />
+              </button>
+              <button
+                type="button"
+                onClick={goNext}
+                disabled={isLast}
+                className="group relative w-14 h-14 bg-orange-500 text-white flex items-center justify-center overflow-hidden disabled:bg-neutral-300 disabled:cursor-not-allowed"
+                aria-label={isLast ? 'Article complete' : 'Next article section'}
+              >
+                <span className="absolute inset-0 bg-orange-600 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" aria-hidden="true" />
+                <KeyboardDoubleArrowRightIcon
+                  aria-hidden="true"
+                  className={`relative z-10 ${isLast ? '' : 'animate-[articleArrowPulse_1.2s_ease-in-out_infinite]'}`}
+                  sx={{ fontSize: 25 }}
+                />
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  );
+};
 
 const Blog = () => {
   const pageRef = useRef(null);
@@ -288,22 +338,10 @@ const Blog = () => {
         description="Killis Bird technical blogs, product insights, and UAV engineering perspectives."
       />
 
-      {selected && (
-        <SecondaryHero
-          title="SPARROW-V1"
-          highlight="Flight Control Card"
-          watermark="BLOG"
-        />
-      )}
-
       {selected ? (
         <BlogArticle onBack={closeArticle} />
       ) : (
-        <section className="bg-white py-8 lg:py-10">
-          <div className="container">
-            <BlogCard onOpen={openArticle} />
-          </div>
-        </section>
+        <BlogCarousel onOpen={openArticle} />
       )}
     </div>
   );

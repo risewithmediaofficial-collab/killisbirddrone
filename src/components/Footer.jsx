@@ -10,6 +10,7 @@ import EmailIcon      from '@mui/icons-material/Email';
 import PhoneIcon      from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import footerLogo from '../assets/killis bird footer logo.png';
 
 const navLinks = [
   { to: '/',          label: 'Space' },
@@ -51,9 +52,9 @@ const Footer = () => (
         {/* Brand — col 5 */}
         <div className="md:col-span-5 lg:col-span-5 md:pr-8 lg:pr-12 md:border-r border-white/[0.07] pb-8 md:pb-0">
           <Link to="/" className="inline-flex mb-6 group" aria-label="Killis Bird — Home">
-            <span className="bg-white/90 group-hover:bg-white inline-flex p-2 transition-colors duration-200">
+            <span className="inline-flex transition-opacity duration-200 group-hover:opacity-80">
               <img
-                src="/assests/KILLIS BIRD - LOGO.png"
+                src={footerLogo}
                 alt="Killis Bird"
                 className="h-10 w-auto object-contain"
               />
@@ -63,7 +64,7 @@ const Footer = () => (
             Imagine. Ideate. Innovate.
           </p>
           <p className="text-orange-400 font-semibold text-sm mb-8">
-            🇮🇳 Built in India. Trusted Worldwide.
+            Built in India. Trusted Worldwide.
           </p>
 
           {/* Social links */}
@@ -117,7 +118,9 @@ const Footer = () => (
                 <address className="text-white/50 text-xs leading-relaxed not-italic">
                   Killis Bird Technologies Pvt. Ltd.<br />
                   Plot No.107, Pollupalli SIDCO Industrial Estate,<br />
-                  Billanakuppam Post, Krishnagiri – 635115,<br />
+                  Near Government Medical College<br />
+                  Gangasandiram, Billanakuppam Post<br />
+                  Krishnagiri District-635115<br />
                   Tamil Nadu, India
                 </address>
               </div>
@@ -176,7 +179,7 @@ const Footer = () => (
         </p>
         <div className="flex items-center gap-4">
           <p className="text-white/40 text-xs font-semibold uppercase tracking-widest">
-            Precision Engineered · Innovation Delivered
+            Built in India. Trusted Worldwide.
           </p>
         </div>
       </div>

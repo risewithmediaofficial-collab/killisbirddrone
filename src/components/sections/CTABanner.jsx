@@ -62,13 +62,6 @@ const CTABanner = () => (
               Join the Journey
               <ArrowForwardIcon aria-hidden="true" sx={{ fontSize: 17 }} />
             </Link>
-            <Link
-              to="/creations"
-              className="btn-ghost"
-              aria-label="Explore Killis Bird creations"
-            >
-              Creations
-            </Link>
           </div>
         </FadeIn>
       </div>

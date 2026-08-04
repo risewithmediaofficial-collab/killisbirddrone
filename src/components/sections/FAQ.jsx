@@ -3,10 +3,8 @@ import SectionHeader from '../SectionHeader';
 
 const partners = [
   'Defense',
-  'Surveillance',
   'Industrial Operations',
   'Precision Agriculture',
-  'Aerospace',
   'UAV Integrators',
 ];
 
@@ -26,7 +24,7 @@ const FAQ = () => (
         />
       </FadeIn>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-neutral-200 border border-neutral-200">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-neutral-200 border border-neutral-200">
         {partners.map((partner, i) => (
           <FadeIn key={partner} delay={i * 0.05} direction="up">
             <div className="bg-white min-h-[112px] px-5 py-5 text-neutral-500 hover:text-orange-500 font-heading font-bold text-sm uppercase transition-colors duration-300 flex items-center justify-center text-center">

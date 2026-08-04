@@ -20,7 +20,7 @@ const contactInfo = [
   {
     Icon: LocationOnIcon,
     label: 'Address',
-    value: 'Plot No.107, Pollupalli SIDCO Industrial Estate, Near Govt. Medical College, Gangasandiram, Billanakuppam Post, Krishnagiri – 635115, Tamil Nadu, India',
+    value: 'Plot No.107, Pollupalli SIDCO Industrial Estate\nNear Government Medical College\nGangasandiram, Billanakuppam Post\nKrishnagiri District-635115\nTamil Nadu, India',
     isAddress: true,
   },
   {
@@ -122,7 +122,7 @@ const Contact = () => {
                             {value}
                           </a>
                         ) : isAddress ? (
-                          <address className="text-sm text-neutral-700 not-italic leading-relaxed">
+                          <address className="text-sm text-neutral-700 not-italic leading-relaxed whitespace-pre-line">
                             {value}
                           </address>
                         ) : (
