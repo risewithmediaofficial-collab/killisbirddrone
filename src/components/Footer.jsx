@@ -22,11 +22,11 @@ const navLinks = [
 ];
 
 const socials = [
-  { Icon: InstagramIcon, href: 'https://www.instagram.com/killisbird?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', label: 'Instagram' },
-  { Icon: FacebookIcon,  href: '#', label: 'Facebook' },
-  { Icon: TwitterIcon,   href: '#', label: 'Twitter / X' },
   { Icon: LinkedInIcon,  href: '#', label: 'LinkedIn' },
   { Icon: YouTubeIcon,   href: '#', label: 'YouTube' },
+  { Icon: TwitterIcon,   href: '#', label: 'Twitter / X' },
+  { Icon: InstagramIcon, href: 'https://www.instagram.com/killisbird?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', label: 'Instagram' },
+  { Icon: FacebookIcon,  href: '#', label: 'Facebook' },
 ];
 
 const Footer = () => (
